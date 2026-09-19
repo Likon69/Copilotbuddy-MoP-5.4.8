@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+*.user
+
+.claude/
+CLAUDE.md
+agent.agent.md
+
+offsets mop.txt
