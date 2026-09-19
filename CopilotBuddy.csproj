@@ -14,7 +14,16 @@
     <AssemblyName>CopilotBuddy</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>CopilotBuddy.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MahApps.Metro" Version="2.4.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="CopilotBuddy.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="Lib\FASM.DLL" Link="FASM.DLL" CopyToOutputDirectory="PreserveNewest" />
