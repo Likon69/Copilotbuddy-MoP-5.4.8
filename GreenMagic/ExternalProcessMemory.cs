@@ -22,6 +22,15 @@ namespace GreenMagic
                 _hThread = Imports.OpenThread(AccessRights.THREAD_ALL_ACCESS, false, (uint)_proc.Threads[0].Id);
                 _hWnd = _proc.MainWindowHandle;
                 _fasm = new ManagedFasm(_hProc);
+                if (startupExecutor)
+                {
+                    IntPtr hookLocation = new DirectX(this, dx9).HookLocation;
+                    if (hookFunc != IntPtr.Zero)
+                    {
+                        hookLocation = hookFunc;
+                    }
+                    _exec = new Executor(this, hookLocation, copyBytes, veh);
+                }
             }
         }
 
@@ -61,6 +70,126 @@ namespace GreenMagic
                 }
             }
             numRead = low;
+        }
+
+        public IEnumerable<string> GenerateAsm(IntPtr address, CallingConvention callingConvention, params object[] args)
+        {
+            bool extendedMem;
+            return GenerateAsm(address, callingConvention, args, typeof(uint), out extendedMem);
+        }
+
+        private IEnumerable<string> GenerateAsm(IntPtr address, CallingConvention callingConvention, object[] args, Type returnType, out bool extendedMem)
+        {
+            List<string> list = new List<string>();
+            int startArg = 0;
+            if (callingConvention == CallingConvention.ThisCall)
+            {
+                if (args.Length <= 0)
+                {
+                    throw new Exception("First argument when specifying ThisCall must be > 0");
+                }
+                list.Add("mov ecx, " + args[0]);
+                startArg = 1;
+            }
+            else if (callingConvention == CallingConvention.FastCall)
+            {
+                if (args.Length <= 0)
+                {
+                    throw new Exception("First argument when specifying FastCall must be > 0");
+                }
+                list.Add("mov ecx, " + args[0]);
+                startArg = 1;
+                if (args.Length > 1)
+                {
+                    list.Add("mov edx, " + args[1]);
+                    startArg = 2;
+                }
+            }
+            int stackClean = 0;
+            for (int index = args.Length - 1; index >= startArg; index--)
+            {
+                switch (Type.GetTypeCode(args[index].GetType()))
+                {
+                    case TypeCode.SByte:
+                    case TypeCode.Byte:
+                    case TypeCode.Int16:
+                    case TypeCode.UInt16:
+                    case TypeCode.Int32:
+                    case TypeCode.UInt32:
+                        list.Add("push " + args[index]);
+                        stackClean += 4;
+                        break;
+                    case TypeCode.Int64:
+                        list.Add("push " + ((long)args[index] >> 32));
+                        list.Add("push " + ((long)args[index] & 4294967295L));
+                        stackClean += 8;
+                        break;
+                    case TypeCode.UInt64:
+                        list.Add("push " + ((ulong)args[index] >> 32));
+                        list.Add("push " + ((ulong)args[index] & 4294967295UL));
+                        stackClean += 8;
+                        break;
+                    default:
+                        if (args[index].GetType() != typeof(IntPtr))
+                        {
+                            throw new ArgumentException(string.Format("Argument of type {0} can not be pushed onto the argument stack", args[index].GetType().Name));
+                        }
+                        list.Add("push " + args[index]);
+                        stackClean += 4;
+                        break;
+                }
+            }
+            list.Add("call " + address);
+            if (callingConvention == CallingConvention.Cdecl || callingConvention == CallingConvention.FastCall)
+            {
+                list.Add("add esp, " + stackClean);
+            }
+            switch (Type.GetTypeCode(returnType))
+            {
+                case TypeCode.SByte:
+                case TypeCode.Byte:
+                case TypeCode.Int16:
+                case TypeCode.UInt16:
+                case TypeCode.Int32:
+                case TypeCode.UInt32:
+                    extendedMem = false;
+                    break;
+                case TypeCode.Int64:
+                case TypeCode.UInt64:
+                    extendedMem = true;
+                    AllocateExtendedMemory();
+                    list.Add(string.Format("mov dword [{0}], eax", _returnData.Address));
+                    IntPtr edxAddress = _returnData.Address + 4;
+                    list.Add(string.Format("mov dword [{0}], edx", edxAddress));
+                    break;
+                case TypeCode.Single:
+                    extendedMem = true;
+                    AllocateExtendedMemory();
+                    list.Add(string.Format("fstp dword [{0}]", _returnData.Address));
+                    break;
+                case TypeCode.Double:
+                    extendedMem = true;
+                    AllocateExtendedMemory();
+                    list.Add(string.Format("fstp qword [{0}]", _returnData.Address));
+                    break;
+                default:
+                    if (returnType != typeof(IntPtr))
+                    {
+                        throw new Exception("Cannot generate ASM for return type " + returnType.FullName);
+                    }
+                    extendedMem = false;
+                    break;
+            }
+            list.Add("retn");
+            return list;
+        }
+
+        private void AllocateExtendedMemory()
+        {
+            if (_returnData == null)
+            {
+                _returnData = new AllocatedMemory(this, 8);
+            }
         }
 
         public ExternalProcessMemory(Process p, bool startupExecutor, bool dx9, bool startupRasm)
@@ -121,11 +250,21 @@ namespace GreenMagic
 
         private void DisposeManagedResources()
         {
+            if (_returnData != null)
+            {
+                _returnData.Dispose();
+            }
+            _returnData = null;
             if (_fasm != null)
             {
                 _fasm.Dispose();
             }
             _fasm = null;
+            if (_exec != null)
+            {
+                _exec.Dispose();
+            }
+            _exec = null;
         }
 
         #region Overrides of MemoryBase
@@ -303,6 +442,42 @@ namespace GreenMagic
 
         #endregion
 
+        public FrameLock AcquireFrame(bool isHardLock)
+        {
+            FrameLock frameLock = new FrameLock(_exec);
+            try
+            {
+                if (isHardLock)
+                {
+                    _exec.GrabFrame();
+                }
+                return frameLock;
+            }
+            catch (Exception)
+            {
+                if (frameLock != null)
+                {
+                    frameLock.Dispose();
+                }
+                throw;
+            }
+        }
+
+        public FrameLock AcquireFrame()
+        {
+            return AcquireFrame(false);
+        }
+
+        public FrameLockRelease ReleaseFrame(bool reacquireAsHardLock)
+        {
+            return new FrameLockRelease(_exec, reacquireAsHardLock);
+        }
+
+        public FrameLockRelease ReleaseFrame()
+        {
+            return new FrameLockRelease(_exec, false);
+        }
+
         #region Alloc
 
         public AllocatedMemory CreateAllocatedMemory(int bytes)
@@ -315,6 +490,11 @@ namespace GreenMagic
         public ManagedFasm Asm
         {
             get { return _fasm; }
+        }
+
+        public Executor Executor
+        {
+            get { return _exec; }
         }
 
         public bool IsThreadOpen
@@ -352,6 +532,38 @@ namespace GreenMagic
             get { return _cacheEnabled.Value; }
         }
 
+        public void CallInjected(IntPtr address, CallingConvention callingConvention, params object[] args)
+        {
+            CallInjected<uint>(address, callingConvention, args);
+        }
+
+        public T CallInjected<T>(IntPtr address, CallingConvention callingConvention, params object[] args) where T : struct
+        {
+            using (new ExternalReadCache(this, false))
+            {
+                Executor exec = _exec;
+                if (exec == null)
+                {
+                    throw new InvalidOperationException("Executor cannot be null");
+                }
+                lock (exec.AssemblyLock)
+                {
+                    exec.Clear();
+                    bool extendedMem;
+                    foreach (string line in GenerateAsm(address, callingConvention, args, typeof(T), out extendedMem))
+                    {
+                        exec.AddRandomLine(line);
+                    }
+                    exec.Execute();
+                    if (extendedMem)
+                    {
+                        return Read<T>(_returnData.Address);
+                    }
+                    return Read<T>(exec.ReturnPointer);
+                }
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -375,10 +587,14 @@ namespace GreenMagic
 
         private ThreadLocal<bool> _cacheEnabled;
 
+        private AllocatedMemory _returnData;
+
         private ManagedFasm _fasm;
 
         private IntPtr _hThread;
 
         private IntPtr _hWnd;
+
+        private Executor _exec;
     }
 }
