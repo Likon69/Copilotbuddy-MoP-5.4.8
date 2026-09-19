@@ -42,5 +42,12 @@ namespace GreenMagic.Native
 
         [DllImport("kernel32", CharSet = CharSet.Ansi)]
         public static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
+
+        [DllImport("kernel32")]
+        public static extern IntPtr LoadLibrary(string lpFileName);
+
+        [SuppressUnmanagedCodeSecurity]
+        [DllImport("kernel32.dll")]
+        public static extern bool FreeLibrary(IntPtr h);
     }
 }
