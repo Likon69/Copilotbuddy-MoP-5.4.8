@@ -68,6 +68,14 @@ namespace Styx.Resources
             }
         }
 
+        public static string BlackMagic_was_not_Initialized_
+        {
+            get
+            {
+                return ResourceManager.GetString("BlackMagic_was_not_Initialized_", resourceCulture);
+            }
+        }
+
         private static ResourceManager resourceMan;
 
         private static CultureInfo resourceCulture;

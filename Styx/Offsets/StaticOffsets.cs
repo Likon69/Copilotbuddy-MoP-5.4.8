@@ -6,7 +6,9 @@ namespace Styx.Offsets
     internal struct StaticOffsets
     {
         public IntPtr LuaState;
+        public IntPtr GxApi;
         public IntPtr IsInGame;
         public IntPtr ClientConnection;
+        public IntPtr LocalPlayerName;
     }
 }

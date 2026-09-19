@@ -126,4 +126,7 @@
   <data name="Cannot_run_injection_routines_while_not_in_game___Crash_Prevention_" xml:space="preserve">
     <value>Cannot run injection routines while not in game! (Crash Prevention)</value>
   </data>
+  <data name="BlackMagic_was_not_Initialized_" xml:space="preserve">
+    <value>BlackMagic was not Initialized!</value>
+  </data>
 </root>

@@ -29,8 +29,10 @@ namespace Styx
             Misc.ClientConnectionOffset = (IntPtr)0x462C;
 
             Statics.LuaState = newBase + 0xBA6178;
+            Statics.GxApi = newBase + 0xC85C3C;
             Statics.IsInGame = newBase + 0xD65B16;
             Statics.ClientConnection = newBase + 0xEC4628;
+            Statics.LocalPlayerName = newBase + 0xEC4668;
 
             VFTableIndex.GetName = (IntPtr)0x4D;
         }
