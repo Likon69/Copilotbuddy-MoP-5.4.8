@@ -29,6 +29,15 @@ namespace GreenMagic.Native
         public static extern IntPtr OpenThread(uint dwDesiredAccess, bool bInheritHandle, uint dwThreadId);
 
         [DllImport("kernel32")]
+        public static extern IntPtr CreateRemoteThread(IntPtr hProcess, IntPtr lpThreadAttributes, uint dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, out IntPtr lpThreadId);
+
+        [DllImport("kernel32")]
+        public static extern uint WaitForSingleObject(IntPtr hObject, uint dwMilliseconds);
+
+        [DllImport("kernel32")]
+        public static extern bool GetExitCodeThread(IntPtr hThread, out uint lpExitCode);
+
+        [DllImport("kernel32")]
         public static extern IntPtr GetModuleHandleW([MarshalAs(UnmanagedType.LPWStr)] string lpModuleName);
 
         [DllImport("kernel32", CharSet = CharSet.Ansi)]

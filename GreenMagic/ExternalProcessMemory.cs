@@ -6,6 +6,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using GreenMagic.Fasm;
 using GreenMagic.Native;
 
 namespace GreenMagic
@@ -20,6 +21,7 @@ namespace GreenMagic
             {
                 _hThread = Imports.OpenThread(AccessRights.THREAD_ALL_ACCESS, false, (uint)_proc.Threads[0].Id);
                 _hWnd = _proc.MainWindowHandle;
+                _fasm = new ManagedFasm(_hProc);
             }
         }
 
@@ -119,6 +121,11 @@ namespace GreenMagic
 
         private void DisposeManagedResources()
         {
+            if (_fasm != null)
+            {
+                _fasm.Dispose();
+            }
+            _fasm = null;
         }
 
         #region Overrides of MemoryBase
@@ -305,6 +312,11 @@ namespace GreenMagic
 
         #endregion
 
+        public ManagedFasm Asm
+        {
+            get { return _fasm; }
+        }
+
         public bool IsThreadOpen
         {
             get { return _hThread != IntPtr.Zero; }
@@ -362,6 +374,8 @@ namespace GreenMagic
         private ThreadLocal<Dictionary<IntPtr, byte[]>> _cache;
 
         private ThreadLocal<bool> _cacheEnabled;
+
+        private ManagedFasm _fasm;
 
         private IntPtr _hThread;
 
