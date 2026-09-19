@@ -2,6 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 using GreenMagic;
+using Styx.Helpers;
 
 namespace Styx.WoWInternals.WoWObjects
 {
@@ -28,6 +29,8 @@ namespace Styx.WoWInternals.WoWObjects
 
         private ulong _guid;
 
+        private PerFrameCachedValue<WoWPoint> _locationCache;
+
         public virtual ulong Guid
         {
             get
@@ -39,6 +42,38 @@ namespace Styx.WoWInternals.WoWObjects
 
                 return _guid;
             }
+        }
+
+        public virtual WoWPoint Location
+        {
+            get
+            {
+                EnsureValid("Location");
+                if (_locationCache == null)
+                {
+                    _locationCache = new PerFrameCachedValue<WoWPoint>(() =>
+                    {
+                        using (AllocatedMemory allocatedMemory = StyxWoW.Memory.CreateAllocatedMemory(12))
+                        {
+                            IntPtr getPosition = StyxWoW.Memory.Read<IntPtr>(false, BaseAddress, (IntPtr)((int)StyxWoW.Offsets.VFTableIndex.GetPosition * 4));
+                            StyxWoW.CallInjected<uint>(getPosition, CallingConvention.ThisCall, (uint)(int)BaseAddress, allocatedMemory.Address);
+                            return allocatedMemory.Read<WoWPoint>(0);
+                        }
+                    });
+                }
+
+                return _locationCache;
+            }
+        }
+
+        public WoWPoint WorldLocation
+        {
+            get { return Location; }
+        }
+
+        public virtual WoWPoint RelativeLocation
+        {
+            get { return WoWPoint.Empty; }
         }
 
         protected void EnsureValid(string funcName)

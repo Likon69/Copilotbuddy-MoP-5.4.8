@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Media;
@@ -14,6 +15,11 @@ namespace Styx
     public static class StyxWoW
     {
         public static ExternalProcessMemory Memory { get; private set; }
+
+        internal static T CallInjected<T>(IntPtr address, CallingConvention callingConvention, params object[] args) where T : struct
+        {
+            return Memory.CallInjected<T>(address, callingConvention, args);
+        }
 
         internal static OffsetManager Offsets { get; private set; }
 

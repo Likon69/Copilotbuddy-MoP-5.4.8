@@ -34,6 +34,7 @@ namespace Styx
             Statics.ClientConnection = newBase + 0xEC4628;
             Statics.LocalPlayerName = newBase + 0xEC4668;
 
+            VFTableIndex.GetPosition = (IntPtr)0x27;
             VFTableIndex.GetName = (IntPtr)0x4D;
         }
 
