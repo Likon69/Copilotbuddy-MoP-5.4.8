@@ -17,6 +17,7 @@ namespace Styx
             Functions.FrameScript__SetTop = newBase + 0xD5E95;
             Functions._lua_tolstring = newBase + 0xD6404;
             Functions._lua_pcall = newBase + 0xD6EFC;
+            Functions._lua_load = newBase + 0xD6F62;
             Functions._luaL_loadbuffer = newBase + 0xD7962;
             Functions.ClntObjMgrObjectPtr = newBase + 0x39BA5B;
 

@@ -10,6 +10,7 @@ namespace Styx.Offsets
         public IntPtr FrameScript__SetTop;
         public IntPtr _lua_tolstring;
         public IntPtr _lua_pcall;
+        public IntPtr _lua_load;
         public IntPtr _luaL_loadbuffer;
         public IntPtr ClntObjMgrObjectPtr;
     }
