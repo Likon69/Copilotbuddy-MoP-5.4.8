@@ -44,6 +44,7 @@ namespace Styx
             Functions.CGQuestLog__IsQuestCompleted_2 = newBase + 0x57D3FF;
             Functions.CGQuestLog__IsQuestCompleted = newBase + 0x57F810;
             Functions.CGPartyMemberStateRepository__GetState = newBase + 0x5AF528;
+            Functions.CGDoor_C__CanOpenNow = newBase + 0x3E314A;
             Functions.SetRaidTargetMarker = newBase + 0x4DE099;
             Functions.CGWorldFrame__Intersect = newBase + 0x5EEF7B;
             Functions.GetCurrentMapAreaID = newBase + 0x510B32;
