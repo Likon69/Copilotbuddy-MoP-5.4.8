@@ -189,6 +189,9 @@ namespace Styx
             Statics.NumMapLandmarks = newBase + 0xDC31B8;
             Statics.LandMarksArray = newBase + 0xDC31E4;
             Statics.BattlefieldStatusMapId = newBase + 0xDC3024;
+            Statics.GossipActiveQuestsArray = newBase + 0xDD9B28;
+            Statics.GossipAvaibleQuestsArray = newBase + 0xDDEEE8;
+            Statics.GossipQuestsForObjectsArray = newBase + 0xDE9F48;
 
             VFTableIndex.GetPosition = (IntPtr)0x27;
             VFTableIndex.GetScale = (IntPtr)0x2E;

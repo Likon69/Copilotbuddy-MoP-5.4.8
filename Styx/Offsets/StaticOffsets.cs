@@ -77,5 +77,8 @@ namespace Styx.Offsets
         public IntPtr NumMapLandmarks;
         public IntPtr LandMarksArray;
         public IntPtr BattlefieldStatusMapId;
+        public IntPtr GossipActiveQuestsArray;
+        public IntPtr GossipAvaibleQuestsArray;
+        public IntPtr GossipQuestsForObjectsArray;
     }
 }
