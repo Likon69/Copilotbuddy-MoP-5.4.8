@@ -77,7 +77,11 @@ namespace Styx.Helpers
                 using (var cs = new CryptoStream(new MemoryStream(cipherText), _myRijndael.CreateDecryptor(), CryptoStreamMode.Read))
                 {
                     var buffer = new byte[cipherText.Length];
-                    int decryptedCount = cs.Read(buffer, 0, buffer.Length);
+                    // CryptoStream.Read returns as soon as it has data, so a single call truncates
+                    // anything longer than the first block. .NET Framework filled the buffer outright.
+                    int decryptedCount = 0, read;
+                    while ((read = cs.Read(buffer, decryptedCount, buffer.Length - decryptedCount)) > 0)
+                        decryptedCount += read;
                     var decryptedBytes = new byte[decryptedCount];
                     Buffer.BlockCopy(buffer, 0, decryptedBytes, 0, decryptedCount);
                     return Encoding.ASCII.GetString(decryptedBytes);
