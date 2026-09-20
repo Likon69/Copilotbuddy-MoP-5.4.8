@@ -66,5 +66,6 @@ namespace Styx.Offsets
         public IntPtr RaidMemberInfoListPtr2;
         public IntPtr RaidMemberInfoListPtr;
         public IntPtr QuestsFlaggedCompletedList;
+        public IntPtr PlayerCurrentQuests;
     }
 }

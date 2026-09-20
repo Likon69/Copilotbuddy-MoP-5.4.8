@@ -40,6 +40,10 @@ namespace Styx
             Functions.CGItem_C__CreateItemLink2 = newBase + 0x4C2B16;
             Functions.GetItemDps = newBase + 0x4BAA47;
             Functions.GetItemSellPrice = newBase + 0x8600FC;
+            Functions.CGQuestLog__GetLuaQuestIndexByID = newBase + 0x57B060;
+            Functions.CGQuestLog__IsQuestCompleted_2 = newBase + 0x57D3FF;
+            Functions.CGQuestLog__IsQuestCompleted = newBase + 0x57F810;
+            Functions.CGPartyMemberStateRepository__GetState = newBase + 0x5AF528;
             Functions.SetRaidTargetMarker = newBase + 0x4DE099;
             Functions.CGWorldFrame__Intersect = newBase + 0x5EEF7B;
             Functions.GetCurrentMapAreaID = newBase + 0x510B32;
@@ -168,6 +172,7 @@ namespace Styx
             Statics.RaidMemberInfoListPtr2 = newBase + 0xDC28EC;
             Statics.RaidMemberInfoListPtr = newBase + 0xDC28F0;
             Statics.QuestsFlaggedCompletedList = newBase + 0xE054B0;
+            Statics.PlayerCurrentQuests = newBase + 0xE06778;
 
             VFTableIndex.GetPosition = (IntPtr)0x27;
             VFTableIndex.GetScale = (IntPtr)0x2E;

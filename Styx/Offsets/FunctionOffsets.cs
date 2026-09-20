@@ -33,6 +33,10 @@ namespace Styx.Offsets
         public IntPtr CGItem_C__CreateItemLink2;
         public IntPtr GetItemDps;
         public IntPtr GetItemSellPrice;
+        public IntPtr CGQuestLog__GetLuaQuestIndexByID;
+        public IntPtr CGQuestLog__IsQuestCompleted_2;
+        public IntPtr CGQuestLog__IsQuestCompleted;
+        public IntPtr CGPartyMemberStateRepository__GetState;
         public IntPtr SetRaidTargetMarker;
         public IntPtr CGWorldFrame__Intersect;
         public IntPtr GetCurrentMapAreaID;
