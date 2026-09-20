@@ -67,5 +67,15 @@ namespace Styx.Offsets
         public IntPtr RaidMemberInfoListPtr;
         public IntPtr QuestsFlaggedCompletedList;
         public IntPtr PlayerCurrentQuests;
+        public IntPtr CurrentQueuedBGs;
+        public IntPtr ClickToMove_Base;
+        public IntPtr ActiveMover;
+        public IntPtr ActiveInputControl;
+        public IntPtr BattlefieldInstanceStartTime;
+        public IntPtr BattlefieldEnded;
+        public IntPtr BattlefieldWinner;
+        public IntPtr NumMapLandmarks;
+        public IntPtr LandMarksArray;
+        public IntPtr BattlefieldStatusMapId;
     }
 }

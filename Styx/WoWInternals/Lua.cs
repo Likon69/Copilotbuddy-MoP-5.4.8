@@ -6,6 +6,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using GreenMagic;
 using Styx.Common;
+using Styx.Common.Helpers;
+using Styx.Resources;
 
 namespace Styx.WoWInternals
 {
@@ -375,6 +377,16 @@ namespace Styx.WoWInternals
             get { return new LuaState(StyxWoW.Memory.Read<IntPtr>(StyxWoW.Offsets.Statics.LuaState)); }
         }
 
+        public static LuaEvents Events
+        {
+            get { return _events ?? (_events = new LuaEvents()); }
+        }
+
+        internal static void Pulse()
+        {
+            Events.Pulse();
+        }
+
         private const int LuaMultret = -1;
 
         private const int ArgsBytesAllocate = 4000;
@@ -391,5 +403,8 @@ namespace Styx.WoWInternals
         private static AllocatedMemory _pRetArgs;
 
         private static readonly byte[] _clearBytes = Enumerable.Repeat<byte>(0, ArgsBytesAllocate).ToArray();
+
+        private static LuaEvents _events;
+
     }
 }

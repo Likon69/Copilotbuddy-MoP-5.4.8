@@ -38,6 +38,10 @@ namespace Styx.Offsets
         public IntPtr CGQuestLog__IsQuestCompleted;
         public IntPtr CGPartyMemberStateRepository__GetState;
         public IntPtr CGDoor_C__CanOpenNow;
+        public IntPtr PerformanceCounter;
+        public IntPtr CGInputControl__ToggleControlBit;
+        public IntPtr CGPlayer_C__ClickToMove;
+        public IntPtr CGPlayer_C__ClickToMoveStop;
         public IntPtr SetRaidTargetMarker;
         public IntPtr CGWorldFrame__Intersect;
         public IntPtr GetCurrentMapAreaID;

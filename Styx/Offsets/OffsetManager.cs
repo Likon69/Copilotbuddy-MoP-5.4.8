@@ -45,6 +45,10 @@ namespace Styx
             Functions.CGQuestLog__IsQuestCompleted = newBase + 0x57F810;
             Functions.CGPartyMemberStateRepository__GetState = newBase + 0x5AF528;
             Functions.CGDoor_C__CanOpenNow = newBase + 0x3E314A;
+            Functions.PerformanceCounter = newBase + 0x111DB3;
+            Functions.CGInputControl__ToggleControlBit = newBase + 0x49BFB8;
+            Functions.CGPlayer_C__ClickToMove = newBase + 0x41FB57;
+            Functions.CGPlayer_C__ClickToMoveStop = newBase + 0x418660;
             Functions.SetRaidTargetMarker = newBase + 0x4DE099;
             Functions.CGWorldFrame__Intersect = newBase + 0x5EEF7B;
             Functions.GetCurrentMapAreaID = newBase + 0x510B32;
@@ -174,6 +178,16 @@ namespace Styx
             Statics.RaidMemberInfoListPtr = newBase + 0xDC28F0;
             Statics.QuestsFlaggedCompletedList = newBase + 0xE054B0;
             Statics.PlayerCurrentQuests = newBase + 0xE06778;
+            Statics.CurrentQueuedBGs = newBase + 0xB6335C;
+            Statics.ClickToMove_Base = newBase + 0xD0F390;
+            Statics.ActiveMover = newBase + 0xD0F3E8;
+            Statics.ActiveInputControl = newBase + 0xD2623C;
+            Statics.BattlefieldInstanceStartTime = newBase + 0xDC3030;
+            Statics.BattlefieldEnded = newBase + 0xDC3050;
+            Statics.BattlefieldWinner = newBase + 0xDC3054;
+            Statics.NumMapLandmarks = newBase + 0xDC31B8;
+            Statics.LandMarksArray = newBase + 0xDC31E4;
+            Statics.BattlefieldStatusMapId = newBase + 0xDC3024;
 
             VFTableIndex.GetPosition = (IntPtr)0x27;
             VFTableIndex.GetScale = (IntPtr)0x2E;
