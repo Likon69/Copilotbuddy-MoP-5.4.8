@@ -19,6 +19,8 @@ namespace Styx
 
         public static WoWClient WoWClient { get; private set; }
 
+        public static WoWDb Db { get; private set; }
+
         internal static T CallInjected<T>(IntPtr address, CallingConvention callingConvention, params object[] args) where T : struct
         {
             return Memory.CallInjected<T>(address, callingConvention, args);
@@ -66,6 +68,8 @@ namespace Styx
             Logging.Write("Attaching to {0}", api);
 
             Memory = new ExternalProcessMemory(process, true, api == GraphicsApi.D3D9, true, IntPtr.Zero, false, 0, true);
+
+            Db = new WoWDb();
 
             ObjectManager.Update();
         }

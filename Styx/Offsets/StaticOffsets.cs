@@ -10,6 +10,11 @@ namespace Styx.Offsets
         public IntPtr LuaState;
         public IntPtr TimerStruct;
         public IntPtr GxApi;
+        public IntPtr Base_DbCache;
+        public IntPtr Base_DbGameObjectCache;
+        public IntPtr QuestCache;
+        public IntPtr DbItemCache;
+        public IntPtr DbItemSparseCache;
         public IntPtr SpellReagentsCacheObj;
         public IntPtr SpellCacheMaxId;
         public IntPtr SpellCacheBase;

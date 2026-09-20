@@ -44,6 +44,19 @@ namespace Styx
             Functions.CGQuestLog__AbandonSelectedQuest = newBase + 0x580E4F;
             Functions.CGGameUI__SetFocus = newBase + 0x8CC3AB;
             Functions.CGGameUI__Target = newBase + 0x8CE510;
+            Functions.WoWClientDb__GetRow = newBase + 0x203D64;
+            Functions.DbCreatureCache_GetInfoBlockById = newBase + 0x22E1B8;
+            Functions.DbGameObjectCache_GetInfoBlockById = newBase + 0x22E1DA;
+            Functions.DbNpcCache_GetInfoBlockById = newBase + 0x22E1FC;
+            Functions.DbNameCache_GetInfoBlockById = newBase + 0x22E21E;
+            Functions.DbGuildCache_GetInfoBlockById = newBase + 0x22E6CF;
+            Functions.DbQuestCache_GetInfoBlockById = newBase + 0x22E6F1;
+            Functions.DbPageTextCache_GetInfoBlockById = newBase + 0x22E713;
+            Functions.DbPetNameCache_GetInfoBlockById = newBase + 0x22E735;
+            Functions.DbPetitionCache_GetInfoBlockById = newBase + 0x22EB8B;
+            Functions.DbItemTextCache_GetInfoBlockById = newBase + 0x22EBAD;
+            Functions.DBItemCache_GetInfoBlockByID = newBase + 0x24250B;
+            Functions.DBItemCache_GetClassInfoBlockByID = newBase + 0x3CE9E4;
 
             Misc.WoWObjDescriptorFieldsOffset = (IntPtr)0x4;
             Misc.LuaStateGlobals = (IntPtr)0x50;
@@ -90,6 +103,11 @@ namespace Styx
             Statics.LuaState = newBase + 0xBA6178;
             Statics.TimerStruct = newBase + 0xBBE928;
             Statics.GxApi = newBase + 0xC85C3C;
+            Statics.Base_DbCache = newBase + 0xC86520;
+            Statics.Base_DbGameObjectCache = newBase + 0xC86628;
+            Statics.QuestCache = newBase + 0xC86A48;
+            Statics.DbItemCache = newBase + 0xC88348;
+            Statics.DbItemSparseCache = newBase + 0xC88408;
             Statics.SpellReagentsCacheObj = newBase + 0xC89608;
             Statics.SpellCacheMaxId = newBase + 0xC872C4;
             Statics.SpellCacheBase = newBase + 0xC872C8;

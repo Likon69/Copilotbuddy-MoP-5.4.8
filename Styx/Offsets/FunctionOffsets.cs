@@ -37,5 +37,18 @@ namespace Styx.Offsets
         public IntPtr CGQuestLog__AbandonSelectedQuest;
         public IntPtr CGGameUI__SetFocus;
         public IntPtr CGGameUI__Target;
+        public IntPtr WoWClientDb__GetRow;
+        public IntPtr DbCreatureCache_GetInfoBlockById;
+        public IntPtr DbGameObjectCache_GetInfoBlockById;
+        public IntPtr DbNpcCache_GetInfoBlockById;
+        public IntPtr DbNameCache_GetInfoBlockById;
+        public IntPtr DbGuildCache_GetInfoBlockById;
+        public IntPtr DbQuestCache_GetInfoBlockById;
+        public IntPtr DbPageTextCache_GetInfoBlockById;
+        public IntPtr DbPetNameCache_GetInfoBlockById;
+        public IntPtr DbPetitionCache_GetInfoBlockById;
+        public IntPtr DbItemTextCache_GetInfoBlockById;
+        public IntPtr DBItemCache_GetInfoBlockByID;
+        public IntPtr DBItemCache_GetClassInfoBlockByID;
     }
 }
