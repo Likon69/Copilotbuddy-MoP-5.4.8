@@ -726,7 +726,7 @@ namespace Styx.WoWInternals.WoWObjects
             EnsureValid("CanUseItem");
             using (AllocatedMemory allocated = StyxWoW.Memory.CreateAllocatedMemory(4))
             {
-                WoWCache.InfoBlock infoBlock = StyxWoW.Cache[CacheDb.Item].GetInfoBlockById(itemId);
+                Styx.WoWInternals.WoWCache.WoWCache.InfoBlock infoBlock = StyxWoW.Cache[CacheDb.Item].GetInfoBlockById(itemId);
                 if (infoBlock == null)
                 {
                     reason = GameError.None;
@@ -835,11 +835,11 @@ namespace Styx.WoWInternals.WoWObjects
         {
             get
             {
-                uint field = (uint)WoWPlayerFields.Researching;
+                uint researchingField = (uint)WoWPlayerFields.Researching;
                 List<uint> ids = new List<uint>();
                 for (uint i = 0; i < 16; i++)
                 {
-                    ushort id = GetStorageField<ushort>(field + i * 2);
+                    ushort id = GetStorageField<ushort>(researchingField + i * 2);
                     if (id > 0)
                     {
                         ids.Add(id);

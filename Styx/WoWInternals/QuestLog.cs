@@ -6,6 +6,7 @@ using System.IO;
 using GreenMagic;
 using Styx.Common;
 using Styx.Patchables;
+using Styx.Offsets;
 
 namespace Styx.WoWInternals
 {

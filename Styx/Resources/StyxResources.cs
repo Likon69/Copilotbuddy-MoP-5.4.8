@@ -108,6 +108,14 @@ namespace Styx.Resources
             }
         }
 
+        public static string This_function_only_takes_vaues_from_0_5
+        {
+            get
+            {
+                return ResourceManager.GetString("This_function_only_takes_vaues_from_0_5", resourceCulture);
+            }
+        }
+
         public static string Unknown
         {
             get

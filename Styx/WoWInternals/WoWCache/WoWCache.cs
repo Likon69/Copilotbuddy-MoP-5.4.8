@@ -5,6 +5,7 @@ using System.Text;
 using GreenMagic;
 using Styx.Common;
 using Styx.Patchables;
+using Styx.Helpers;
 
 namespace Styx.WoWInternals.WoWCache
 {

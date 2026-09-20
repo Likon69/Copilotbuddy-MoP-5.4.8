@@ -147,4 +147,7 @@
   <data name="GetGuidByKeyword_failed_" xml:space="preserve">
     <value>GetGuidByKeyword failed!</value>
   </data>
+  <data name="This_function_only_takes_vaues_from_0_5" xml:space="preserve">
+    <value>This function only takes vaues from 0-5</value>
+  </data>
 </root>

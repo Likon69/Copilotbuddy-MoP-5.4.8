@@ -234,7 +234,7 @@ namespace Styx.WoWInternals.WoWObjects
                     return 100.0;
                 }
 
-                return Math.Round(Durability * 100U / maxDurability);
+                return Math.Round((double)(Durability * 100U / maxDurability));
             }
         }
 

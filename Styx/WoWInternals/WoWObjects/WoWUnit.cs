@@ -1998,17 +1998,17 @@ namespace Styx.WoWInternals.WoWObjects
                     return WoWCreatureSkinType.None;
                 }
 
-                if ((entry.TypeFlags[0] & WoWCache.CreatureCacheTypeFlags.HerbSkin) != 0)
+                if ((entry.TypeFlags[0] & Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheTypeFlags.HerbSkin) != 0)
                 {
                     return WoWCreatureSkinType.Herb;
                 }
 
-                if ((entry.TypeFlags[0] & WoWCache.CreatureCacheTypeFlags.MineSkin) != 0)
+                if ((entry.TypeFlags[0] & Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheTypeFlags.MineSkin) != 0)
                 {
                     return WoWCreatureSkinType.Rock;
                 }
 
-                if ((entry.TypeFlags[0] & WoWCache.CreatureCacheTypeFlags.Salvageable) != 0)
+                if ((entry.TypeFlags[0] & Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheTypeFlags.Salvageable) != 0)
                 {
                     return WoWCreatureSkinType.Bolts;
                 }
@@ -2110,7 +2110,7 @@ namespace Styx.WoWInternals.WoWObjects
             get
             {
                 Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry entry;
-                return GetCachedInfo(out entry) && (entry.TypeFlags[0] & WoWCache.CreatureCacheTypeFlags.Tameable) != 0;
+                return GetCachedInfo(out entry) && (entry.TypeFlags[0] & Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheTypeFlags.Tameable) != 0;
             }
         }
 
@@ -2119,7 +2119,7 @@ namespace Styx.WoWInternals.WoWObjects
             get
             {
                 Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry entry;
-                return GetCachedInfo(out entry) && (entry.TypeFlags[0] & WoWCache.CreatureCacheTypeFlags.GhostVisible) != 0;
+                return GetCachedInfo(out entry) && (entry.TypeFlags[0] & Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheTypeFlags.GhostVisible) != 0;
             }
         }
 
@@ -2128,7 +2128,7 @@ namespace Styx.WoWInternals.WoWObjects
             get
             {
                 Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry entry;
-                return GetCachedInfo(out entry) && (entry.TypeFlags[0] & WoWCache.CreatureCacheTypeFlags.Exotic) != 0;
+                return GetCachedInfo(out entry) && (entry.TypeFlags[0] & Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheTypeFlags.Exotic) != 0;
             }
         }
 
