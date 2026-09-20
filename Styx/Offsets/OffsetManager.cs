@@ -83,13 +83,55 @@ namespace Styx
             Misc.InventoryOffset = (IntPtr)0x3BC8;
             Misc.ClientConnectionOffset = (IntPtr)0x462C;
 
+            Statics.GameObjectDataSlots = newBase + 0xB578B0;
             Statics.LuaState = newBase + 0xBA6178;
             Statics.GxApi = newBase + 0xC85C3C;
+            Statics.SpellReagentsCacheObj = newBase + 0xC89608;
+            Statics.SpellCacheMaxId = newBase + 0xC872C4;
+            Statics.SpellCacheBase = newBase + 0xC872C8;
+            Statics.LocalPlayerAutoRepeatingSpell = newBase + 0xC99108;
+            Statics.LocalPlayerPendingCursorSpell = newBase + 0xCA2514;
+            Statics.HomeBindAreaId = newBase + 0xCFF0BC;
+            Statics.LocalPlayerDualWieldSpellId = newBase + 0xCFF460;
+            Statics.UnitPowerIndices = newBase + 0xD0F01C;
+            Statics.MinimapZoneText = newBase + 0xD65B04;
+            Statics.SubZoneText = newBase + 0xD65B08;
+            Statics.ZoneText = newBase + 0xD65B0C;
+            Statics.RealZoneText = newBase + 0xD65B0C;
             Statics.IsInGame = newBase + 0xD65B16;
+            Statics.LocalPlayerFocusGuid = newBase + 0xD65B60;
+            Statics.LocalPlayerCurrentTargetGuid = newBase + 0xD65B40;
+            Statics.LocalPlayerCurrentZoneId = newBase + 0xD65BB4;
+            Statics.LocalPlayerCurrentSubZoneId = newBase + 0xD65BB8;
+            Statics.LocalPlayerCurrentContinentId = newBase + 0xD65C40;
+            Statics.LocalPlayerCorpsePoint = newBase + 0xD65ED8;
+            Statics.LocalPlayerCorpseMapId = newBase + 0xD65BC8;
+            Statics.TotemInfos = newBase + 0xD65EF8;
+            Statics.MirrorTimers = newBase + 0xD65F98;
+            Statics.NonPartyRaidMarkTargets = newBase + 0xDC1CB8;
+            Statics.LocalPlayerNumKnownSpells = newBase + 0xDC25E0;
+            Statics.LocalPlayerKnownSpells = newBase + 0xDC25E4;
+            Statics.LocalPlayerTotemBars = newBase + 0xDC26D8;
+            Statics.LocalPlayerBattlefieldInstanceType = newBase + 0xDC3028;
+            Statics.LocalPlayerComboPoints = newBase + 0xD65BF9;
+            Statics.LocalPlayerComboPointsTarget = newBase + 0xD65C68;
+            Statics.PetSpells = newBase + 0xDD4A30;
+            Statics.StabledPets = newBase + 0xDD4B68;
+            Statics.LocalPlayerBagArray = newBase + 0xDD7328;
+            Statics.LocalPlayerRuneTypes = newBase + 0xDD7388;
+            Statics.LocalPlayerRunes = newBase + 0xDD73EC;
+            Statics.NumQuestsInQuestFrame = newBase + 0xE06740;
+            Statics.AbandoningQuest = newBase + 0xE06750;
+            Statics.FactionStandings = newBase + 0xE0B988;
+            Statics.NumForcedReactions = newBase + 0xE0CBA4;
+            Statics.ForcedReactions = newBase + 0xE0CBA8;
             Statics.ClientConnection = newBase + 0xEC4628;
             Statics.LocalPlayerName = newBase + 0xEC4668;
 
             VFTableIndex.GetPosition = (IntPtr)0x27;
+            VFTableIndex.GetScale = (IntPtr)0x2E;
+            VFTableIndex.OnRightClick = (IntPtr)0x45;
+            VFTableIndex.GetMatrix = (IntPtr)0x47;
             VFTableIndex.GetName = (IntPtr)0x4D;
         }
 

@@ -7,6 +7,12 @@ namespace Styx.Offsets
     {
         public IntPtr GetPosition;
 
+        public IntPtr GetScale;
+
+        public IntPtr OnRightClick;
+
+        public IntPtr GetMatrix;
+
         public IntPtr GetName;
     }
 }
