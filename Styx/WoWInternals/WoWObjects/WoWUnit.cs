@@ -1957,7 +1957,7 @@ namespace Styx.WoWInternals.WoWObjects
         {
             get
             {
-                WoWCache.CreatureCacheEntry entry;
+                Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry entry;
                 if (!GetCachedInfo(out entry))
                 {
                     return null;
@@ -1973,7 +1973,7 @@ namespace Styx.WoWInternals.WoWObjects
             {
                 try
                 {
-                    WoWCache.CreatureCacheEntry entry;
+                    Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry entry;
                     if (!GetCachedInfo(out entry) || entry.SubName.PtrStr == IntPtr.Zero)
                     {
                         return null;
@@ -1992,7 +1992,7 @@ namespace Styx.WoWInternals.WoWObjects
         {
             get
             {
-                WoWCache.CreatureCacheEntry entry;
+                Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry entry;
                 if (!GetCachedInfo(out entry))
                 {
                     return WoWCreatureSkinType.None;
@@ -2021,7 +2021,7 @@ namespace Styx.WoWInternals.WoWObjects
         {
             get
             {
-                WoWCache.CreatureCacheEntry entry;
+                Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry entry;
                 if (GetCachedInfo(out entry))
                 {
                     return (WoWCreatureType)entry.TypeID;
@@ -2095,7 +2095,7 @@ namespace Styx.WoWInternals.WoWObjects
         {
             get
             {
-                WoWCache.CreatureCacheEntry entry;
+                Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry entry;
                 if (GetCachedInfo(out entry))
                 {
                     return (WoWUnitClassificationType)entry.Rank;
@@ -2109,7 +2109,7 @@ namespace Styx.WoWInternals.WoWObjects
         {
             get
             {
-                WoWCache.CreatureCacheEntry entry;
+                Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry entry;
                 return GetCachedInfo(out entry) && (entry.TypeFlags[0] & WoWCache.CreatureCacheTypeFlags.Tameable) != 0;
             }
         }
@@ -2118,7 +2118,7 @@ namespace Styx.WoWInternals.WoWObjects
         {
             get
             {
-                WoWCache.CreatureCacheEntry entry;
+                Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry entry;
                 return GetCachedInfo(out entry) && (entry.TypeFlags[0] & WoWCache.CreatureCacheTypeFlags.GhostVisible) != 0;
             }
         }
@@ -2127,14 +2127,14 @@ namespace Styx.WoWInternals.WoWObjects
         {
             get
             {
-                WoWCache.CreatureCacheEntry entry;
+                Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry entry;
                 return GetCachedInfo(out entry) && (entry.TypeFlags[0] & WoWCache.CreatureCacheTypeFlags.Exotic) != 0;
             }
         }
 
-        private static readonly Dictionary<ulong, WoWCache.CreatureCacheEntry> _creatureCacheBuffer = new Dictionary<ulong, WoWCache.CreatureCacheEntry>();
+        private static readonly Dictionary<ulong, Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry> _creatureCacheBuffer = new Dictionary<ulong, Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry>();
 
-        public bool GetCachedInfo(out WoWCache.CreatureCacheEntry info)
+        public bool GetCachedInfo(out Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry info)
         {
             ulong guid = Guid;
             if (_creatureCacheBuffer.TryGetValue(guid, out info))
@@ -2148,7 +2148,7 @@ namespace Styx.WoWInternals.WoWObjects
                 return false;
             }
 
-            info = StyxWoW.Memory.Read<WoWCache.CreatureCacheEntry>(ptr);
+            info = StyxWoW.Memory.Read<Styx.WoWInternals.WoWCache.WoWCache.CreatureCacheEntry>(ptr);
             _creatureCacheBuffer.Add(guid, info);
             return true;
         }

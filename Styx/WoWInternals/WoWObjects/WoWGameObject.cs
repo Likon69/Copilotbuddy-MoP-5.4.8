@@ -408,16 +408,16 @@ namespace Styx.WoWInternals.WoWObjects
             return _model;
         }
 
-        public bool GetCachedInfo(out WoWCache.GameObjectCacheEntry inf)
+        public bool GetCachedInfo(out Styx.WoWInternals.WoWCache.WoWCache.GameObjectCacheEntry inf)
         {
             IntPtr ptr = StyxWoW.Memory.Read<IntPtr>(BaseAddress + (int)StyxWoW.Offsets.Misc.GObjectCachedInfo);
             if (ptr != IntPtr.Zero)
             {
-                inf = StyxWoW.Memory.Read<WoWCache.GameObjectCacheEntry>(ptr);
+                inf = StyxWoW.Memory.Read<Styx.WoWInternals.WoWCache.WoWCache.GameObjectCacheEntry>(ptr);
                 return true;
             }
 
-            inf = default(WoWCache.GameObjectCacheEntry);
+            inf = default(Styx.WoWInternals.WoWCache.WoWCache.GameObjectCacheEntry);
             return false;
         }
 
@@ -436,7 +436,7 @@ namespace Styx.WoWInternals.WoWObjects
 
         public bool GetDataSlot(uint dataSlot, out int value)
         {
-            WoWCache.GameObjectCacheEntry cachedInfo;
+            Styx.WoWInternals.WoWCache.WoWCache.GameObjectCacheEntry cachedInfo;
             if (!GetCachedInfo(out cachedInfo))
             {
                 value = 0;
