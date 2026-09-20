@@ -391,5 +391,37 @@ namespace Styx.Resources
                 return ResourceManager.GetString("You_did_not_specify_the_ID_of_the_mob_in_the_KillMob_objective_", resourceCulture);
             }
         }
+
+        public static string No_points_in_list_
+        {
+            get
+            {
+                return ResourceManager.GetString("No_points_in_list_", resourceCulture);
+            }
+        }
+
+        public static string Unknown_tag___0____Input____1____in___2____3_
+        {
+            get
+            {
+                return ResourceManager.GetString("Unknown_tag___0____Input____1____in___2____3_", resourceCulture);
+            }
+        }
+
+        public static string Valid_tags_are__
+        {
+            get
+            {
+                return ResourceManager.GetString("Valid_tags_are__", resourceCulture);
+            }
+        }
+
+        public static string You_did_not_specify_the_ID_of_the_game_object_in_the_UseObject_element_
+        {
+            get
+            {
+                return ResourceManager.GetString("You_did_not_specify_the_ID_of_the_game_object_in_the_UseObject_element_", resourceCulture);
+            }
+        }
 }
 }

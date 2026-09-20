@@ -246,4 +246,16 @@
   <data name="You_did_not_specify_the_ID_of_the_mob_in_the_KillMob_objective_" xml:space="preserve">
     <value>You did not specify the ID of the mob in the KillMob objective!</value>
   </data>
+  <data name="No_points_in_list_" xml:space="preserve">
+    <value>No points in list!</value>
+  </data>
+  <data name="Unknown_tag___0____Input____1____in___2____3_" xml:space="preserve">
+    <value>Unknown tag "{0}" (Input: "{1}") in "{2}"!{3}</value>
+  </data>
+  <data name="Valid_tags_are__" xml:space="preserve">
+    <value>Valid tags are: </value>
+  </data>
+  <data name="You_did_not_specify_the_ID_of_the_game_object_in_the_UseObject_element_" xml:space="preserve">
+    <value>You did not specify the ID of the game object in the UseObject element!</value>
+  </data>
 </root>
