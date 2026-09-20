@@ -144,4 +144,7 @@
   <data name="FactionStringPrintOut" xml:space="preserve">
     <value>{0}, Parent: {1}</value>
   </data>
+  <data name="GetGuidByKeyword_failed_" xml:space="preserve">
+    <value>GetGuidByKeyword failed!</value>
+  </data>
 </root>

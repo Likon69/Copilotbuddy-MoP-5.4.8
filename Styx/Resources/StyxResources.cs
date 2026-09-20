@@ -100,6 +100,14 @@ namespace Styx.Resources
             }
         }
 
+        public static string GetGuidByKeyword_failed_
+        {
+            get
+            {
+                return ResourceManager.GetString("GetGuidByKeyword_failed_", resourceCulture);
+            }
+        }
+
         public static string Unknown
         {
             get

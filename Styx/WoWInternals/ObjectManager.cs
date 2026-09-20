@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using GreenMagic;
+using Styx.Common;
 using Styx.Resources;
 using Styx.WoWInternals.WoWObjects;
 
@@ -14,7 +17,16 @@ namespace Styx.WoWInternals
 
         public static ulong LocalGuid
         {
-            get { return StyxWoW.Memory.Read<ulong>(CurMgrPtr + (int)StyxWoW.Offsets.Misc.LocalGuidOffset); }
+            get
+            {
+                IntPtr curMgrPtr = CurMgrPtr;
+                if (curMgrPtr == IntPtr.Zero)
+                {
+                    return 0UL;
+                }
+
+                return StyxWoW.Memory.Read<ulong>(curMgrPtr + (int)StyxWoW.Offsets.Misc.LocalGuidOffset);
+            }
         }
 
         private static IntPtr CurMgrPtr
@@ -132,6 +144,8 @@ namespace Styx.WoWInternals
             {
                 case WoWObjectType.Item:
                     return new WoWItem(baseAddress);
+                case WoWObjectType.Container:
+                    return new WoWContainer(baseAddress);
                 case WoWObjectType.Unit:
                     return new WoWUnit(baseAddress);
                 case WoWObjectType.Player:
@@ -152,8 +166,6 @@ namespace Styx.WoWInternals
                     return new WoWPlayer(baseAddress);
                 case WoWObjectType.GameObject:
                     return new WoWGameObject(baseAddress);
-                case WoWObjectType.Container:
-                    return new WoWContainer(baseAddress);
                 case WoWObjectType.DynamicObject:
                     return new WoWDynamicObject(baseAddress);
                 case WoWObjectType.Corpse:
@@ -163,6 +175,150 @@ namespace Styx.WoWInternals
                 default:
                     return new WoWObject(baseAddress);
             }
+        }
+
+        public static List<T> GetObjectsOfType<T>() where T : WoWObject
+        {
+            return GetObjectsOfType<T>(false, false);
+        }
+
+        public static List<T> GetObjectsOfType<T>(bool allowInheritance) where T : WoWObject
+        {
+            return GetObjectsOfType<T>(allowInheritance, false);
+        }
+
+        public static List<T> GetObjectsOfType<T>(bool allowInheritance, bool includeMeIfFound) where T : WoWObject
+        {
+            return EnumerateObjectsOfType<T>(allowInheritance, includeMeIfFound).ToList();
+        }
+
+        public static List<T> GetObjectsOfTypeFast<T>() where T : WoWObject
+        {
+            return EnumerateObjectsOfType<T>(true, true).ToList();
+        }
+
+        internal static IEnumerable<T> EnumerateObjectsOfType<T>(bool allowInheritance = false, bool includeMeIfFound = false) where T : WoWObject
+        {
+            if (allowInheritance)
+            {
+                if (includeMeIfFound)
+                {
+                    return _cachedObjects.Values.OfType<T>();
+                }
+
+                return _cachedObjects.Values.Where(o => !ReferenceEquals(o, Me)).OfType<T>();
+            }
+
+            Type type = typeof(T);
+            if (!includeMeIfFound && type == typeof(WoWPlayer))
+            {
+                return _cachedObjects.Values.Where(o => o.GetType() == type && !ReferenceEquals(o, Me)).Select(o => (T)(object)o);
+            }
+
+            return _cachedObjects.Values.Where(o => o.GetType() == type).Select(o => (T)(object)o);
+        }
+
+        private static bool GetGuidByKeyword(string keyword, out ulong guid, int unk)
+        {
+            Guard.AgainstInvalidExecutor();
+
+            IntPtr pGuid = StyxWoW.Memory.Executor.Memory.AllocateMemory(8);
+            IntPtr pszString = StyxWoW.Memory.Executor.Memory.AllocateMemory(512);
+            StyxWoW.Memory.Executor.Memory.WriteString(pszString, keyword, Encoding.ASCII);
+
+            bool success = false;
+            try
+            {
+                Executor executor = StyxWoW.Memory.Executor;
+                lock (executor.AssemblyLock)
+                {
+                    executor.Clear();
+                    executor.AddRandomLine("call {0}", StyxWoW.Offsets.Functions.ClntObjMgrGetActivePlayerObj);
+                    executor.AddRandomLine("test eax, eax");
+                    executor.AddRandomLine("jz @OUT");
+                    executor.AddRandomLine("push {0}", unk);
+                    executor.AddRandomLine("push {0}", pGuid);
+                    executor.AddRandomLine("push {0}", pszString);
+                    executor.AddRandomLine("call {0}", StyxWoW.Offsets.Functions.GetGUIDByKeyword);
+                    executor.AddRandomLine("add esp, 0xC");
+                    executor.AddRandomLine("@OUT:");
+                    executor.AddRandomLine("retn");
+                    executor.Execute();
+
+                    using (StyxWoW.Memory.TemporaryCacheState(false))
+                    {
+                        success = StyxWoW.Memory.Executor.Memory.Read<bool>(StyxWoW.Memory.Executor.ReturnPointer);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logging.WriteDiagnostic(StyxResources.GetGuidByKeyword_failed_);
+                Logging.WriteException(ex);
+            }
+            finally
+            {
+                using (StyxWoW.Memory.TemporaryCacheState(false))
+                {
+                    guid = StyxWoW.Memory.Executor.Memory.Read<ulong>(pGuid);
+                }
+
+                if (pGuid != IntPtr.Zero)
+                {
+                    StyxWoW.Memory.Executor.Memory.FreeMemory(pGuid);
+                }
+
+                if (pszString != IntPtr.Zero)
+                {
+                    StyxWoW.Memory.Executor.Memory.FreeMemory(pszString);
+                }
+            }
+
+            return success;
+        }
+
+        internal static T GetUnitByKeyword<T>(string unit) where T : WoWUnit
+        {
+            ulong guid;
+            if (GetGuidByKeyword(unit, out guid, 0) && guid != 0 && guid != 0xFFFFFFFFFFFFFFFE)
+            {
+                return GetObjectByGuid<T>(guid);
+            }
+
+            return default(T);
+        }
+
+        internal static WoWObject GetObjectByGuid(ulong guid)
+        {
+            if (guid == 0)
+            {
+                return null;
+            }
+
+            WoWObject obj;
+            if (!_cachedObjects.TryGetValue(guid, out obj))
+            {
+                obj = null;
+            }
+
+            if (obj != null && obj.BaseAddress != IntPtr.Zero && obj.IsValid)
+            {
+                return obj;
+            }
+
+            return null;
+        }
+
+        [Obsolete("Use GetObjectByGuid instead")]
+        public static T GetAnyObjectByGuid<T>(ulong guid) where T : WoWObject
+        {
+            return GetObjectByGuid<T>(guid);
+        }
+
+        public static T GetObjectByGuid<T>(ulong guid) where T : WoWObject
+        {
+            WoWObject obj = GetObjectByGuid(guid);
+            return obj as T;
         }
 
         private static readonly Dictionary<ulong, WoWObject> _cachedObjects = new Dictionary<ulong, WoWObject>();
