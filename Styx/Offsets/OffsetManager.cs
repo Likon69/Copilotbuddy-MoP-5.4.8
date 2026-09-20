@@ -165,6 +165,9 @@ namespace Styx
             Statics.SpellOverrideListStart = newBase + 0xDC2794;
             Statics.LastHardwareAction = newBase + 0xBB2C74;
             Statics.CurrencyInfo = newBase + 0xB64D98;
+            Statics.RaidMemberInfoListPtr2 = newBase + 0xDC28EC;
+            Statics.RaidMemberInfoListPtr = newBase + 0xDC28F0;
+            Statics.QuestsFlaggedCompletedList = newBase + 0xE054B0;
 
             VFTableIndex.GetPosition = (IntPtr)0x27;
             VFTableIndex.GetScale = (IntPtr)0x2E;

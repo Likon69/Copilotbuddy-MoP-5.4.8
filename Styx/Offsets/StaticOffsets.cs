@@ -63,5 +63,8 @@ namespace Styx.Offsets
         public IntPtr SpellOverrideListStart;
         public IntPtr LastHardwareAction;
         public IntPtr CurrencyInfo;
+        public IntPtr RaidMemberInfoListPtr2;
+        public IntPtr RaidMemberInfoListPtr;
+        public IntPtr QuestsFlaggedCompletedList;
     }
 }
