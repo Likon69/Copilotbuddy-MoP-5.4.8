@@ -28,12 +28,7 @@ namespace Styx.WoWInternals.DBC
 
         public static ResearchSite FromId(uint id)
         {
-            WoWDb.Row row = StyxWoW.Db[ClientDb.ResearchSite].GetRow(id);
-            if (row == null)
-            {
-                return null;
-            }
-            return new ResearchSite(id, row);
+            return DbcCache<ResearchSite>.GetOrAdd(ClientDb.ResearchSite, id, row => new ResearchSite(id, row));
         }
 
         private readonly ResearchSiteEntry _entry;

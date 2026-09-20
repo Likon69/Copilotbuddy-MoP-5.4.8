@@ -127,12 +127,7 @@ namespace Styx.WoWInternals.DBC
 
         public static Map FromId(uint id)
         {
-            WoWDb.Row row = StyxWoW.Db[ClientDb.Map].GetRow(id);
-            if (row == null)
-            {
-                return null;
-            }
-            return new Map(id, row);
+            return DbcCache<Map>.GetOrAdd(ClientDb.Map, id, row => new Map(id, row));
         }
 
         public override string ToString()

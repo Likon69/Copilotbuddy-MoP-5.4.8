@@ -95,12 +95,7 @@ namespace Styx.WoWInternals.DBC
 
         public static SkillLineAbility FromId(uint id)
         {
-            WoWDb.Row row = StyxWoW.Db[ClientDb.SkillLineAbility].GetRow(id);
-            if (row == null)
-            {
-                return null;
-            }
-            return new SkillLineAbility(id, row);
+            return DbcCache<SkillLineAbility>.GetOrAdd(ClientDb.SkillLineAbility, id, row => new SkillLineAbility(id, row));
         }
 
         public static IEnumerable<SkillLineAbility> FromSpellId(int spellId)

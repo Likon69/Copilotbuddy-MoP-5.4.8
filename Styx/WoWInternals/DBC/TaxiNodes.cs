@@ -62,12 +62,7 @@ namespace Styx.WoWInternals.DBC
 
         public static TaxiNodes FromId(uint id)
         {
-            WoWDb.Row row = StyxWoW.Db[ClientDb.TaxiNodes].GetRow(id);
-            if (row == null)
-            {
-                return null;
-            }
-            return new TaxiNodes(id, row);
+            return DbcCache<TaxiNodes>.GetOrAdd(ClientDb.TaxiNodes, id, row => new TaxiNodes(id, row));
         }
 
         public override string ToString()

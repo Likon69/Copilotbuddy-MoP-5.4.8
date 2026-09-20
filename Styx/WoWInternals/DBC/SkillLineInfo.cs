@@ -50,12 +50,7 @@ namespace Styx.WoWInternals.DBC
 
         public static SkillLineInfo FromId(uint id)
         {
-            WoWDb.Row row = StyxWoW.Db[ClientDb.SkillLine].GetRow(id);
-            if (row == null)
-            {
-                return null;
-            }
-            return new SkillLineInfo(id, row);
+            return DbcCache<SkillLineInfo>.GetOrAdd(ClientDb.SkillLine, id, row => new SkillLineInfo(id, row));
         }
 
         public static SkillLineInfo FromId(SkillLine skillLine)

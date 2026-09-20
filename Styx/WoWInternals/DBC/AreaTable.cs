@@ -49,12 +49,7 @@ namespace Styx.WoWInternals.DBC
 
         public static AreaTable FromId(uint id)
         {
-            WoWDb.Row row = StyxWoW.Db[ClientDb.AreaTable].GetRow(id);
-            if (row == null)
-            {
-                return null;
-            }
-            return new AreaTable(id, row);
+            return DbcCache<AreaTable>.GetOrAdd(ClientDb.AreaTable, id, row => new AreaTable(id, row));
         }
 
         private readonly AreaTableEntry _entry;

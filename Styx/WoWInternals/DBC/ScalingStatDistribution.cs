@@ -26,12 +26,7 @@ namespace Styx.WoWInternals.DBC
 
         public static ScalingStatDistribution FromId(uint id)
         {
-            WoWDb.Row row = StyxWoW.Db[ClientDb.ScalingStatDistribution].GetRow(id);
-            if (row == null)
-            {
-                return null;
-            }
-            return new ScalingStatDistribution(id, row);
+            return DbcCache<ScalingStatDistribution>.GetOrAdd(ClientDb.ScalingStatDistribution, id, row => new ScalingStatDistribution(id, row));
         }
 
         private readonly ScalingStatDistributionEntry _entry;

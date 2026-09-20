@@ -77,12 +77,7 @@ namespace Styx.WoWInternals.DBC
 
         public static CreatureFamily FromId(uint id)
         {
-            WoWDb.Row row = StyxWoW.Db[ClientDb.CreatureFamily].GetRow(id);
-            if (row == null)
-            {
-                return null;
-            }
-            return new CreatureFamily(id, row);
+            return DbcCache<CreatureFamily>.GetOrAdd(ClientDb.CreatureFamily, id, row => new CreatureFamily(id, row));
         }
 
         private readonly CreatureFamilyEntry _entry;

@@ -68,12 +68,7 @@ namespace Styx.WoWInternals.DBC
 
         public static AreaPoi FromId(uint id)
         {
-            WoWDb.Row row = StyxWoW.Db[ClientDb.AreaPOI].GetRow(id);
-            if (row == null)
-            {
-                return null;
-            }
-            return new AreaPoi(id, row);
+            return DbcCache<AreaPoi>.GetOrAdd(ClientDb.AreaPOI, id, row => new AreaPoi(id, row));
         }
 
         private readonly AreaPoiEntry _entry;

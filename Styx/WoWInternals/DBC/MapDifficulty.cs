@@ -44,12 +44,7 @@ namespace Styx.WoWInternals.DBC
 
         public static MapDifficulty FromId(uint id)
         {
-            WoWDb.Row row = StyxWoW.Db[ClientDb.MapDifficulty].GetRow(id);
-            if (row == null)
-            {
-                return null;
-            }
-            return new MapDifficulty(id, row);
+            return DbcCache<MapDifficulty>.GetOrAdd(ClientDb.MapDifficulty, id, row => new MapDifficulty(id, row));
         }
 
         private readonly MapDifficultyEntry _entry;
