@@ -7,7 +7,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
-using Microsoft.CSharp;
+using System.Text;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Emit;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Styx.Common.Compiler
 {
@@ -243,34 +247,94 @@ namespace Styx.Common.Compiler
 
             if (SourceFilePaths.Count != 0)
             {
-                using (
-                    var cc =
-                        new CSharpCodeProvider(new Dictionary<string, string>
-                                                   {
-                                                       {
-                                                           "CompilerVersion",
-                                                           string.Format(CultureInfo.InvariantCulture.NumberFormat,
-                                                                         "v{0:N1}", CompilerVersion)
-                                                           }
-                                                   }))
+                var parseOptions = new CSharpParseOptions(preprocessorSymbols: ParsePreprocessorSymbols(Options.CompilerOptions));
+
+                var syntaxTrees = SourceFilePaths
+                    .Select(path => CSharpSyntaxTree.ParseText(SourceText.From(File.ReadAllText(path), Encoding.UTF8), parseOptions, path))
+                    .ToList();
+
+                var references = Options.ReferencedAssemblies
+                    .Cast<string>()
+                    .Where(reference => !string.IsNullOrEmpty(reference) && File.Exists(reference))
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .Select(reference => (MetadataReference)MetadataReference.CreateFromFile(reference))
+                    .ToList();
+
+                var compilationOptions = new CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary,
+                    allowUnsafe: Options.CompilerOptions != null && Options.CompilerOptions.Contains("/unsafe"),
+                    optimizationLevel: Options.IncludeDebugInformation ? OptimizationLevel.Debug : OptimizationLevel.Release);
+
+                var compilation = CSharpCompilation.Create(
+                    Path.GetFileNameWithoutExtension(Options.OutputAssembly),
+                    syntaxTrees,
+                    references,
+                    compilationOptions);
+
+                CompilerResults ret = new CompilerResults(Options.TempFiles) { PathToAssembly = Options.OutputAssembly };
+
+                EmitResult emitResult;
+                if (Options.IncludeDebugInformation)
                 {
-                    if (!cc.Supports(GeneratorSupport.Resources))
-                    {
-                        // Do nothing
-                    }
-                    CompilerResults ret = cc.CompileAssemblyFromFile(Options, SourceFilePaths.ToArray());
-                    if (!ret.Errors.HasErrors)
-                        CompiledAssembly = ret.CompiledAssembly;
-
-                    // Clean up after ourselves.
-                    ret.TempFiles.Delete();
-
-                    // Only return the errors. The 'outside world' is scary, and we don't want them to know our sekretz!
-                    return ret;
+                    string pdbPath = Path.ChangeExtension(Options.OutputAssembly, ".pdb");
+                    using (FileStream assemblyStream = File.Create(Options.OutputAssembly))
+                    using (FileStream pdbStream = File.Create(pdbPath))
+                        emitResult = compilation.Emit(assemblyStream, pdbStream);
                 }
+                else
+                {
+                    using (FileStream assemblyStream = File.Create(Options.OutputAssembly))
+                        emitResult = compilation.Emit(assemblyStream);
+                }
+
+                foreach (Diagnostic diagnostic in emitResult.Diagnostics)
+                {
+                    if (diagnostic.Severity != DiagnosticSeverity.Error && diagnostic.Severity != DiagnosticSeverity.Warning)
+                        continue;
+
+                    FileLinePositionSpan span = diagnostic.Location.GetLineSpan();
+                    ret.Errors.Add(
+                        new CompilerError(
+                            span.Path ?? string.Empty,
+                            span.StartLinePosition.Line + 1,
+                            span.StartLinePosition.Character + 1,
+                            diagnostic.Id,
+                            diagnostic.GetMessage(CultureInfo.InvariantCulture))
+                        {
+                            IsWarning = diagnostic.Severity == DiagnosticSeverity.Warning
+                        });
+                }
+
+                if (emitResult.Success)
+                {
+                    CompiledAssembly = Assembly.LoadFrom(Options.OutputAssembly);
+                    ret.CompiledAssembly = CompiledAssembly;
+                }
+
+                // Clean up after ourselves.
+                ret.TempFiles.Delete();
+
+                // Only return the errors. The 'outside world' is scary, and we don't want them to know our sekretz!
+                return ret;
             }
 
             return null;
+        }
+
+        private static IEnumerable<string> ParsePreprocessorSymbols(string compilerOptions)
+        {
+            if (string.IsNullOrEmpty(compilerOptions))
+                yield break;
+
+            foreach (string token in compilerOptions.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                if (!token.StartsWith("/d:", StringComparison.OrdinalIgnoreCase) &&
+                    !token.StartsWith("/define:", StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                foreach (string symbol in token.Substring(token.IndexOf(':') + 1).Split(new[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries))
+                    yield return symbol;
+            }
         }
 
         #region FileStructureType enum
