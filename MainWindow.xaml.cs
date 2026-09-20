@@ -35,14 +35,6 @@ namespace CopilotBuddy
             if (FindAndAttachToWoW(out found64Bits) && StyxWoW.Me != null && StyxWoW.Memory != null)
             {
                 Title = string.Format(Globalization.MainWindowTitleFormat, Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location), StyxWoW.Memory.Process.Id);
-
-                // TEMPORARY MILESTONE 1 TEST - remove before the next step
-                Logging.Write("Local player: {0}", StyxWoW.Me.Name);
-                Logging.Write("Position: {0}", StyxWoW.Me.Location);
-
-                string locale = Lua.GetReturnVal<string>("return GetLocale()", 0U);
-                Logging.WriteDiagnostic("GetLocale() = {0}", locale);
-                // END TEMPORARY MILESTONE 1 TEST
             }
             else if (found64Bits)
             {
