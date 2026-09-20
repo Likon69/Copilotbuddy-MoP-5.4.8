@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Styx.Offsets;
 
 namespace Styx
@@ -46,6 +46,7 @@ namespace Styx
             Functions.CGGameUI__Target = newBase + 0x8CE510;
 
             Misc.WoWObjDescriptorFieldsOffset = (IntPtr)0x4;
+            Misc.LuaStateGlobals = (IntPtr)0x50;
             Misc.WoWObjType = (IntPtr)0xC;
             Misc.WoWObjGUID = (IntPtr)0x28;
             Misc.WoWObjNextObject = (IntPtr)0x34;
@@ -84,6 +85,7 @@ namespace Styx
             Misc.InventoryOffset = (IntPtr)0x3BC8;
             Misc.ClientConnectionOffset = (IntPtr)0x462C;
 
+            Statics.LuaDummyNode = newBase + 0x941D80;
             Statics.GameObjectDataSlots = newBase + 0xB578B0;
             Statics.LuaState = newBase + 0xBA6178;
             Statics.TimerStruct = newBase + 0xBBE928;

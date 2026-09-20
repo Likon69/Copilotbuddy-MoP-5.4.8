@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Styx.Offsets
 {
@@ -9,6 +9,7 @@ namespace Styx.Offsets
         public IntPtr WoWObjType;
         public IntPtr WoWObjGUID;
         public IntPtr WoWObjNextObject;
+        public IntPtr LuaStateGlobals;
         public IntPtr AreaTrigger_Timestamp;
         public IntPtr AreaTriggerMovementData;
         public IntPtr WoWObjQuestGiverStatus;

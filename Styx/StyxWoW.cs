@@ -8,6 +8,7 @@ using GreenMagic;
 using Styx.Common;
 using Styx.Resources;
 using Styx.WoWInternals;
+using Styx.WoWInternals.Misc;
 using Styx.WoWInternals.WoWObjects;
 
 namespace Styx
@@ -15,6 +16,8 @@ namespace Styx
     public static class StyxWoW
     {
         public static ExternalProcessMemory Memory { get; private set; }
+
+        public static WoWClient WoWClient { get; private set; }
 
         internal static T CallInjected<T>(IntPtr address, CallingConvention callingConvention, params object[] args) where T : struct
         {

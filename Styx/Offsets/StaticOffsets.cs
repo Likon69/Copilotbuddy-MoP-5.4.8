@@ -1,10 +1,11 @@
-using System;
+﻿using System;
 
 namespace Styx.Offsets
 {
     [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
     internal struct StaticOffsets
     {
+        public IntPtr LuaDummyNode;
         public IntPtr GameObjectDataSlots;
         public IntPtr LuaState;
         public IntPtr TimerStruct;
