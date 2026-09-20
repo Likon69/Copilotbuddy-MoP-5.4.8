@@ -258,4 +258,7 @@
   <data name="You_did_not_specify_the_ID_of_the_game_object_in_the_UseObject_element_" xml:space="preserve">
     <value>You did not specify the ID of the game object in the UseObject element!</value>
   </data>
+  <data name="Expected_object_type__Mob_or_GameObject_" xml:space="preserve">
+    <value>Expected object type; Mob or GameObject.</value>
+  </data>
 </root>

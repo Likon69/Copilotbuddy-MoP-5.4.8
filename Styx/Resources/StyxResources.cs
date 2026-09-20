@@ -423,5 +423,13 @@ namespace Styx.Resources
                 return ResourceManager.GetString("You_did_not_specify_the_ID_of_the_game_object_in_the_UseObject_element_", resourceCulture);
             }
         }
+
+        public static string Expected_object_type__Mob_or_GameObject_
+        {
+            get
+            {
+                return ResourceManager.GetString("Expected_object_type__Mob_or_GameObject_", resourceCulture);
+            }
+        }
 }
 }
