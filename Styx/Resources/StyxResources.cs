@@ -76,6 +76,22 @@ namespace Styx.Resources
             }
         }
 
+        public static string Unknown
+        {
+            get
+            {
+                return ResourceManager.GetString("Unknown", resourceCulture);
+            }
+        }
+
+        public static string Inventory
+        {
+            get
+            {
+                return ResourceManager.GetString("Inventory", resourceCulture);
+            }
+        }
+
         private static ResourceManager resourceMan;
 
         private static CultureInfo resourceCulture;

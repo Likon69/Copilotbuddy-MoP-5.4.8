@@ -62,6 +62,7 @@ namespace Styx
             Misc.GObjectCachedInfo = (IntPtr)0x1C0;
             Misc.GObjectWorldMatrix = (IntPtr)0x1C4;
             Misc.ContainerBagOffset = (IntPtr)0x7A8;
+            Misc.NetStatsStart = (IntPtr)0x534;
             Misc.WoWUnitMovementDataDirect = (IntPtr)0x828;
             Misc.WoWUnitBoundingHeight = (IntPtr)0x8F8;
             Misc.WoWUnitCursorOverride = (IntPtr)0x9B4;
@@ -85,6 +86,7 @@ namespace Styx
 
             Statics.GameObjectDataSlots = newBase + 0xB578B0;
             Statics.LuaState = newBase + 0xBA6178;
+            Statics.TimerStruct = newBase + 0xBBE928;
             Statics.GxApi = newBase + 0xC85C3C;
             Statics.SpellReagentsCacheObj = newBase + 0xC89608;
             Statics.SpellCacheMaxId = newBase + 0xC872C4;
@@ -126,6 +128,7 @@ namespace Styx
             Statics.NumForcedReactions = newBase + 0xE0CBA4;
             Statics.ForcedReactions = newBase + 0xE0CBA8;
             Statics.ClientConnection = newBase + 0xEC4628;
+            Statics.CurrentNetClient = newBase + 0xEC463C;
             Statics.LocalPlayerName = newBase + 0xEC4668;
 
             VFTableIndex.GetPosition = (IntPtr)0x27;

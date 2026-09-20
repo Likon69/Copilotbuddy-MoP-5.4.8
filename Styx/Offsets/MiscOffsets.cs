@@ -22,6 +22,7 @@ namespace Styx.Offsets
         public IntPtr GObjectCachedInfo;
         public IntPtr GObjectWorldMatrix;
         public IntPtr ContainerBagOffset;
+        public IntPtr NetStatsStart;
         public IntPtr WoWUnitMovementDataDirect;
         public IntPtr WoWUnitBoundingHeight;
         public IntPtr WoWUnitCursorOverride;

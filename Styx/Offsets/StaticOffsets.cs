@@ -7,6 +7,7 @@ namespace Styx.Offsets
     {
         public IntPtr GameObjectDataSlots;
         public IntPtr LuaState;
+        public IntPtr TimerStruct;
         public IntPtr GxApi;
         public IntPtr SpellReagentsCacheObj;
         public IntPtr SpellCacheMaxId;
@@ -48,6 +49,7 @@ namespace Styx.Offsets
         public IntPtr NumForcedReactions;
         public IntPtr ForcedReactions;
         public IntPtr ClientConnection;
+        public IntPtr CurrentNetClient;
         public IntPtr LocalPlayerName;
     }
 }

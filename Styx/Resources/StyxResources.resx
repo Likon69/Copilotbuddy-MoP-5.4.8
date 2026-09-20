@@ -129,4 +129,10 @@
   <data name="BlackMagic_was_not_Initialized_" xml:space="preserve">
     <value>BlackMagic was not Initialized!</value>
   </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
 </root>
