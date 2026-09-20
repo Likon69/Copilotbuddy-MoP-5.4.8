@@ -359,5 +359,37 @@ namespace Styx.Resources
                 return ResourceManager.GetString("positive_integral", resourceCulture);
             }
         }
+
+        public static string Expected_objective_type_
+        {
+            get
+            {
+                return ResourceManager.GetString("Expected_objective_type_", resourceCulture);
+            }
+        }
+
+        public static string Objective_info_is_missing_type_
+        {
+            get
+            {
+                return ResourceManager.GetString("Objective_info_is_missing_type_", resourceCulture);
+            }
+        }
+
+        public static string You_did_not_specify_the_ID_of_the_item_in_the_CollectItem_objective_
+        {
+            get
+            {
+                return ResourceManager.GetString("You_did_not_specify_the_ID_of_the_item_in_the_CollectItem_objective_", resourceCulture);
+            }
+        }
+
+        public static string You_did_not_specify_the_ID_of_the_mob_in_the_KillMob_objective_
+        {
+            get
+            {
+                return ResourceManager.GetString("You_did_not_specify_the_ID_of_the_mob_in_the_KillMob_objective_", resourceCulture);
+            }
+        }
 }
 }

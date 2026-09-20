@@ -234,4 +234,16 @@
   <data name="positive_integral" xml:space="preserve">
     <value>positive integral</value>
   </data>
+  <data name="Expected_objective_type_" xml:space="preserve">
+    <value>Expected objective type!</value>
+  </data>
+  <data name="Objective_info_is_missing_type_" xml:space="preserve">
+    <value>Objective info is missing type!</value>
+  </data>
+  <data name="You_did_not_specify_the_ID_of_the_item_in_the_CollectItem_objective_" xml:space="preserve">
+    <value>You did not specify the ID of the item in the CollectItem objective!</value>
+  </data>
+  <data name="You_did_not_specify_the_ID_of_the_mob_in_the_KillMob_objective_" xml:space="preserve">
+    <value>You did not specify the ID of the mob in the KillMob objective!</value>
+  </data>
 </root>
