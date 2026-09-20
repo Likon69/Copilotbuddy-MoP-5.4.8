@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -135,5 +135,229 @@ namespace Styx.Resources
         private static ResourceManager resourceMan;
 
         private static CultureInfo resourceCulture;
-    }
+    
+        public static string Activity___0_
+        {
+            get
+            {
+                return ResourceManager.GetString("Activity___0_", resourceCulture);
+            }
+        }
+
+        public static string Attribute__0__of__1__type_was_missing_in___2___tag_
+        {
+            get
+            {
+                return ResourceManager.GetString("Attribute__0__of__1__type_was_missing_in___2___tag_", resourceCulture);
+            }
+        }
+
+        public static string BotIsNotPresent
+        {
+            get
+            {
+                return ResourceManager.GetString("BotIsNotPresent", resourceCulture);
+            }
+        }
+
+        public static string Can_t_start___No_combat_class_is_loaded_
+        {
+            get
+            {
+                return ResourceManager.GetString("Can_t_start___No_combat_class_is_loaded_", resourceCulture);
+            }
+        }
+
+        public static string Could_not_find_the_settings_path_
+        {
+            get
+            {
+                return ResourceManager.GetString("Could_not_find_the_settings_path_", resourceCulture);
+            }
+        }
+
+        public static string Entry_in__0_
+        {
+            get
+            {
+                return ResourceManager.GetString("Entry_in__0_", resourceCulture);
+            }
+        }
+
+        public static string Error_trying_to_save_the_settings_file___0_
+        {
+            get
+            {
+                return ResourceManager.GetString("Error_trying_to_save_the_settings_file___0_", resourceCulture);
+            }
+        }
+
+        public static string Invalid_Routine
+        {
+            get
+            {
+                return ResourceManager.GetString("Invalid_Routine", resourceCulture);
+            }
+        }
+
+        public static string Missing_attribute__0__in___1____2_
+        {
+            get
+            {
+                return ResourceManager.GetString("Missing_attribute__0__in___1____2_", resourceCulture);
+            }
+        }
+
+        public static string NewBotAdded
+        {
+            get
+            {
+                return ResourceManager.GetString("NewBotAdded", resourceCulture);
+            }
+        }
+
+        public static string NotInGame
+        {
+            get
+            {
+                return ResourceManager.GetString("NotInGame", resourceCulture);
+            }
+        }
+
+        public static string Setting__0__has_invalid_value___1___
+        {
+            get
+            {
+                return ResourceManager.GetString("Setting__0__has_invalid_value___1___", resourceCulture);
+            }
+        }
+
+        public static string The_settings_file_does_not_match_the_type_that_is_being_loaded__Root_name_is___0____expected___1___
+        {
+            get
+            {
+                return ResourceManager.GetString("The_settings_file_does_not_match_the_type_that_is_being_loaded__Root_name_is___0____expected___1___", resourceCulture);
+            }
+        }
+
+        public static string Unknown_attribute___0____Input____1____in___2____3_
+        {
+            get
+            {
+                return ResourceManager.GetString("Unknown_attribute___0____Input____1____in___2____3_", resourceCulture);
+            }
+        }
+
+        public static string Valid_attributes_are__
+        {
+            get
+            {
+                return ResourceManager.GetString("Valid_attributes_are__", resourceCulture);
+            }
+        }
+
+        public static string Valid_values_are__
+        {
+            get
+            {
+                return ResourceManager.GetString("Valid_values_are__", resourceCulture);
+            }
+        }
+
+        public static string Value___0___in___1___attribute_is_not_supported__Expected__2__type__3_
+        {
+            get
+            {
+                return ResourceManager.GetString("Value___0___in___1___attribute_is_not_supported__Expected__2__type__3_", resourceCulture);
+            }
+        }
+
+        public static string Value___0___in___1___is_not_supported__2_
+        {
+            get
+            {
+                return ResourceManager.GetString("Value___0___in___1___is_not_supported__2_", resourceCulture);
+            }
+        }
+
+        public static string Waiting_on_taxi___
+        {
+            get
+            {
+                return ResourceManager.GetString("Waiting_on_taxi___", resourceCulture);
+            }
+        }
+
+        public static string WoW_cannot_be_minimized_while_running_Honorbuddy_
+        {
+            get
+            {
+                return ResourceManager.GetString("WoW_cannot_be_minimized_while_running_Honorbuddy_", resourceCulture);
+            }
+        }
+
+        public static string Wow_exited__Honorbuddy_stopped_
+        {
+            get
+            {
+                return ResourceManager.GetString("Wow_exited__Honorbuddy_stopped_", resourceCulture);
+            }
+        }
+
+        public static string You_have_placed_the__Z__attribute_before_the__X__and__Y__attribute_
+        {
+            get
+            {
+                return ResourceManager.GetString("You_have_placed_the__Z__attribute_before_the__X__and__Y__attribute_", resourceCulture);
+            }
+        }
+
+        public static string _EVENT___0___Args___1_
+        {
+            get
+            {
+                return ResourceManager.GetString("_EVENT___0___Args___1_", resourceCulture);
+            }
+        }
+
+        public static string _Valid_values_are__
+        {
+            get
+            {
+                return ResourceManager.GetString("_Valid_values_are__", resourceCulture);
+            }
+        }
+
+        public static string boolean
+        {
+            get
+            {
+                return ResourceManager.GetString("boolean", resourceCulture);
+            }
+        }
+
+        public static string floating
+        {
+            get
+            {
+                return ResourceManager.GetString("floating", resourceCulture);
+            }
+        }
+
+        public static string integral
+        {
+            get
+            {
+                return ResourceManager.GetString("integral", resourceCulture);
+            }
+        }
+
+        public static string positive_integral
+        {
+            get
+            {
+                return ResourceManager.GetString("positive_integral", resourceCulture);
+            }
+        }
+}
 }

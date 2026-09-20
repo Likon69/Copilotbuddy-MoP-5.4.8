@@ -150,4 +150,88 @@
   <data name="This_function_only_takes_vaues_from_0_5" xml:space="preserve">
     <value>This function only takes vaues from 0-5</value>
   </data>
+  <data name="Activity___0_" xml:space="preserve">
+    <value>Activity: {0}</value>
+  </data>
+  <data name="Attribute__0__of__1__type_was_missing_in___2___tag_" xml:space="preserve">
+    <value>Attribute {0} of {1} type was missing in "{2}" tag.</value>
+  </data>
+  <data name="BotIsNotPresent" xml:space="preserve">
+    <value>{0} Is not present in the current list of bots</value>
+  </data>
+  <data name="Can_t_start___No_combat_class_is_loaded_" xml:space="preserve">
+    <value>Can't start - No combat class is loaded!</value>
+  </data>
+  <data name="Could_not_find_the_settings_path_" xml:space="preserve">
+    <value>Could not find the settings path!</value>
+  </data>
+  <data name="Entry_in__0_" xml:space="preserve">
+    <value>Entry in {0}</value>
+  </data>
+  <data name="Error_trying_to_save_the_settings_file___0_" xml:space="preserve">
+    <value>Error trying to save the settings file: {0}</value>
+  </data>
+  <data name="Invalid_Routine" xml:space="preserve">
+    <value>Invalid Routine</value>
+  </data>
+  <data name="Missing_attribute__0__in___1____2_" xml:space="preserve">
+    <value>Missing attribute {0} in "{1}".{2}</value>
+  </data>
+  <data name="NewBotAdded" xml:space="preserve">
+    <value>New bot added!: {0}</value>
+  </data>
+  <data name="NotInGame" xml:space="preserve">
+    <value>Not in game</value>
+  </data>
+  <data name="Setting__0__has_invalid_value___1___" xml:space="preserve">
+    <value>Setting {0} has invalid value "{1}"!</value>
+  </data>
+  <data name="The_settings_file_does_not_match_the_type_that_is_being_loaded__Root_name_is___0____expected___1___" xml:space="preserve">
+    <value>The settings file does not match the type that is being loaded! Root name is "{0}", expected "{1}".</value>
+  </data>
+  <data name="Unknown_attribute___0____Input____1____in___2____3_" xml:space="preserve">
+    <value>Unknown attribute "{0}" (Input: "{1}") in "{2}"!{3}</value>
+  </data>
+  <data name="Valid_attributes_are__" xml:space="preserve">
+    <value>Valid attributes are: </value>
+  </data>
+  <data name="Valid_values_are__" xml:space="preserve">
+    <value>Valid values are: </value>
+  </data>
+  <data name="Value___0___in___1___attribute_is_not_supported__Expected__2__type__3_" xml:space="preserve">
+    <value>Value "{0}" in "{1}" attribute is not supported! Expected {2} type.{3}</value>
+  </data>
+  <data name="Value___0___in___1___is_not_supported__2_" xml:space="preserve">
+    <value>Value "{0}" in "{1}" is not supported!{2}</value>
+  </data>
+  <data name="Waiting_on_taxi___" xml:space="preserve">
+    <value>Waiting on taxi...</value>
+  </data>
+  <data name="WoW_cannot_be_minimized_while_running_Honorbuddy_" xml:space="preserve">
+    <value>WoW cannot be minimized while running Honorbuddy!</value>
+  </data>
+  <data name="Wow_exited__Honorbuddy_stopped_" xml:space="preserve">
+    <value>Wow exited, Honorbuddy stopped!</value>
+  </data>
+  <data name="You_have_placed_the__Z__attribute_before_the__X__and__Y__attribute_" xml:space="preserve">
+    <value>You have placed the 'Z' attribute before the 'X' and 'Y' attribute!</value>
+  </data>
+  <data name="_EVENT___0___Args___1_" xml:space="preserve">
+    <value>[EVENT] {0}: Args: {1}</value>
+  </data>
+  <data name="_Valid_values_are__" xml:space="preserve">
+    <value> Valid values are: </value>
+  </data>
+  <data name="boolean" xml:space="preserve">
+    <value>boolean</value>
+  </data>
+  <data name="floating" xml:space="preserve">
+    <value>floating</value>
+  </data>
+  <data name="integral" xml:space="preserve">
+    <value>integral</value>
+  </data>
+  <data name="positive_integral" xml:space="preserve">
+    <value>positive integral</value>
+  </data>
 </root>
