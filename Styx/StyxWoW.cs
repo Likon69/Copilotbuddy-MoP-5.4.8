@@ -21,9 +21,16 @@ namespace Styx
 
         public static WoWDb Db { get; private set; }
 
+        public static Styx.WoWInternals.WoWCache.WoWCache Cache { get; private set; }
+
         internal static T CallInjected<T>(IntPtr address, CallingConvention callingConvention, params object[] args) where T : struct
         {
             return Memory.CallInjected<T>(address, callingConvention, args);
+        }
+
+        internal static void CallInjected(IntPtr address, CallingConvention callingConvention, params object[] args)
+        {
+            CallInjected<int>(address, callingConvention, args);
         }
 
         internal static OffsetManager Offsets { get; private set; }
@@ -41,6 +48,31 @@ namespace Styx
         public static bool IsInGame
         {
             get { return !WowExited && Memory.Read<byte>(Offsets.Statics.IsInGame) != 0; }
+        }
+
+        public static void ResetAfk()
+        {
+            if (!IsInGame || Me == null)
+            {
+                return;
+            }
+            uint num = (uint)WoWClient.PerformanceCounter();
+            LastHardwareAction = num;
+            if (Memory.Read<uint>(Offsets.Statics.LocalPlayerIsAfk) == 0U)
+            {
+                return;
+            }
+            CallInjected(Offsets.Functions.CGPlayer_C__ClearAFK, CallingConvention.ThisCall, new object[]
+            {
+                Me.BaseAddress,
+                1
+            });
+        }
+
+        public static uint LastHardwareAction
+        {
+            get { return Memory.Read<uint>(Offsets.Statics.LastHardwareAction); }
+            private set { Memory.Write<uint>(Offsets.Statics.LastHardwareAction, value); }
         }
 
         internal static void InitOffsets()
@@ -70,6 +102,7 @@ namespace Styx
             Memory = new ExternalProcessMemory(process, true, api == GraphicsApi.D3D9, true, IntPtr.Zero, false, 0, true);
 
             Db = new WoWDb();
+            Cache = new Styx.WoWInternals.WoWCache.WoWCache();
 
             ObjectManager.Update();
         }

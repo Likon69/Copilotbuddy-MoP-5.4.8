@@ -57,5 +57,11 @@ namespace Styx.Offsets
         public IntPtr ClientConnection;
         public IntPtr CurrentNetClient;
         public IntPtr LocalPlayerName;
+        public IntPtr LocalPlayerSpellsOnCooldown;
+        public IntPtr LocalPlayerIsAfk;
+        public IntPtr SpellOverrideListNext;
+        public IntPtr SpellOverrideListStart;
+        public IntPtr LastHardwareAction;
+        public IntPtr CurrencyInfo;
     }
 }

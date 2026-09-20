@@ -135,4 +135,13 @@
   <data name="Inventory" xml:space="preserve">
     <value>Inventory</value>
   </data>
+  <data name="_0__Distance___1_" xml:space="preserve">
+    <value>{0} Distance: {1}</value>
+  </data>
+  <data name="CannotReadDescriptorOnInvalidObject" xml:space="preserve">
+    <value>Cannot read a descriptor on an invalid object.</value>
+  </data>
+  <data name="FactionStringPrintOut" xml:space="preserve">
+    <value>{0}, Parent: {1}</value>
+  </data>
 </root>

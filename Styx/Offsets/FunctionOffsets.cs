@@ -31,6 +31,8 @@ namespace Styx.Offsets
         public IntPtr CGPlayer_C__CanInteract;
         public IntPtr GetGUIDByKeyword;
         public IntPtr CGItem_C__CreateItemLink2;
+        public IntPtr GetItemDps;
+        public IntPtr GetItemSellPrice;
         public IntPtr SetRaidTargetMarker;
         public IntPtr CGWorldFrame__Intersect;
         public IntPtr GetCurrentMapAreaID;
@@ -50,5 +52,12 @@ namespace Styx.Offsets
         public IntPtr DbItemTextCache_GetInfoBlockById;
         public IntPtr DBItemCache_GetInfoBlockByID;
         public IntPtr DBItemCache_GetClassInfoBlockByID;
+        public IntPtr Spell_C__CastSpell2;
+        public IntPtr Spell_C_HandleSpriteClick;
+        public IntPtr CGPlayer_C__ClearAFK;
+        public IntPtr GetKnownSpellIndex;
+        public IntPtr GetSpellOverrideId;
+        public IntPtr Spell_C__CastSpell;
+        public IntPtr Spell_C__HandleTerrainClick;
     }
 }

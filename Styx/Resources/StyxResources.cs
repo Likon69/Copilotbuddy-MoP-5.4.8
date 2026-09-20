@@ -76,6 +76,30 @@ namespace Styx.Resources
             }
         }
 
+        public static string _0__Distance___1_
+        {
+            get
+            {
+                return ResourceManager.GetString("_0__Distance___1_", resourceCulture);
+            }
+        }
+
+        public static string CannotReadDescriptorOnInvalidObject
+        {
+            get
+            {
+                return ResourceManager.GetString("CannotReadDescriptorOnInvalidObject", resourceCulture);
+            }
+        }
+
+        public static string FactionStringPrintOut
+        {
+            get
+            {
+                return ResourceManager.GetString("FactionStringPrintOut", resourceCulture);
+            }
+        }
+
         public static string Unknown
         {
             get

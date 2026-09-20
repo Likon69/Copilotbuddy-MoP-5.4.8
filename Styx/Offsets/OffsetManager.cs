@@ -38,6 +38,8 @@ namespace Styx
             Functions.CGPlayer_C__CanInteract = newBase + 0x417889;
             Functions.GetGUIDByKeyword = newBase + 0x49E653;
             Functions.CGItem_C__CreateItemLink2 = newBase + 0x4C2B16;
+            Functions.GetItemDps = newBase + 0x4BAA47;
+            Functions.GetItemSellPrice = newBase + 0x8600FC;
             Functions.SetRaidTargetMarker = newBase + 0x4DE099;
             Functions.CGWorldFrame__Intersect = newBase + 0x5EEF7B;
             Functions.GetCurrentMapAreaID = newBase + 0x510B32;
@@ -57,6 +59,13 @@ namespace Styx
             Functions.DbItemTextCache_GetInfoBlockById = newBase + 0x22EBAD;
             Functions.DBItemCache_GetInfoBlockByID = newBase + 0x24250B;
             Functions.DBItemCache_GetClassInfoBlockByID = newBase + 0x3CE9E4;
+            Functions.Spell_C__CastSpell2 = newBase + 0x38EE1C;
+            Functions.Spell_C_HandleSpriteClick = newBase + 0x38F129;
+            Functions.CGPlayer_C__ClearAFK = newBase + 0x3ABEA7;
+            Functions.GetKnownSpellIndex = newBase + 0x4F5A33;
+            Functions.GetSpellOverrideId = newBase + 0x4F6E09;
+            Functions.Spell_C__CastSpell = newBase + 0x4F781E;
+            Functions.Spell_C__HandleTerrainClick = newBase + 0x53D65D;
 
             Misc.WoWObjDescriptorFieldsOffset = (IntPtr)0x4;
             Misc.LuaStateGlobals = (IntPtr)0x50;
@@ -150,6 +159,12 @@ namespace Styx
             Statics.ClientConnection = newBase + 0xEC4628;
             Statics.CurrentNetClient = newBase + 0xEC463C;
             Statics.LocalPlayerName = newBase + 0xEC4668;
+            Statics.LocalPlayerSpellsOnCooldown = newBase + 0xCA2600;
+            Statics.LocalPlayerIsAfk = newBase + 0xDC1084;
+            Statics.SpellOverrideListNext = newBase + 0xDC278C;
+            Statics.SpellOverrideListStart = newBase + 0xDC2794;
+            Statics.LastHardwareAction = newBase + 0xBB2C74;
+            Statics.CurrencyInfo = newBase + 0xB64D98;
 
             VFTableIndex.GetPosition = (IntPtr)0x27;
             VFTableIndex.GetScale = (IntPtr)0x2E;
