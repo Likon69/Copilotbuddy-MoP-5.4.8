@@ -49,6 +49,7 @@ namespace Styx
             Functions.CGInputControl__ToggleControlBit = newBase + 0x49BFB8;
             Functions.CGPlayer_C__ClickToMove = newBase + 0x41FB57;
             Functions.CGPlayer_C__ClickToMoveStop = newBase + 0x418660;
+            Functions.GetWorldState = newBase + 0x50C755;
             Functions.SetRaidTargetMarker = newBase + 0x4DE099;
             Functions.CGWorldFrame__Intersect = newBase + 0x5EEF7B;
             Functions.GetCurrentMapAreaID = newBase + 0x510B32;

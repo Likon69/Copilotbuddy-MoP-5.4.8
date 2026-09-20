@@ -42,6 +42,7 @@ namespace Styx.Offsets
         public IntPtr CGInputControl__ToggleControlBit;
         public IntPtr CGPlayer_C__ClickToMove;
         public IntPtr CGPlayer_C__ClickToMoveStop;
+        public IntPtr GetWorldState;
         public IntPtr SetRaidTargetMarker;
         public IntPtr CGWorldFrame__Intersect;
         public IntPtr GetCurrentMapAreaID;
