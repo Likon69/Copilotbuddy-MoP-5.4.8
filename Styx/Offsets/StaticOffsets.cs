@@ -81,5 +81,6 @@ namespace Styx.Offsets
         public IntPtr GossipAvaibleQuestsArray;
         public IntPtr GossipQuestsForObjectsArray;
         public IntPtr CurrentShownQuest;
+        public IntPtr LootFrame;
     }
 }
