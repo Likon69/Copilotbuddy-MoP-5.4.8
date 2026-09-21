@@ -1,11 +1,15 @@
-using System;
-using System.CodeDom.Compiler;
+﻿using System;
+using System.Globalization;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using Microsoft.CSharp;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Emit;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Styx.CommonBot.Profiles.Quest.Order
 {
@@ -144,60 +148,63 @@ namespace Styx.CommonBot.Profiles.Quest.Order
 
         public bool Compile(out ExpressionError[] errors)
         {
-            using (CSharpCodeProvider provider = new CSharpCodeProvider())
+            List<MetadataReference> references = new List<MetadataReference>();
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                CompilerParameters parameters = new CompilerParameters
+                try
                 {
-                    GenerateInMemory = true
-                };
-
-                foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
-                {
-                    try
-                    {
-                        if (!assembly.IsDynamic)
-                            parameters.ReferencedAssemblies.Add(assembly.Location);
-                    }
-                    catch (NotSupportedException)
-                    {
-                    }
+                    if (!assembly.IsDynamic && !string.IsNullOrEmpty(assembly.Location))
+                        references.Add(MetadataReference.CreateFromFile(assembly.Location));
                 }
-
-                List<ExpressionEntry> entries;
-                lock (_syncLock)
+                catch (NotSupportedException)
                 {
-                    entries = _entries.ToList();
-                    _entries.Clear();
-                    IsCompiled = true;
                 }
+            }
 
-                if (entries.Count <= 0)
+            List<ExpressionEntry> entries;
+            lock (_syncLock)
+            {
+                entries = _entries.ToList();
+                _entries.Clear();
+                IsCompiled = true;
+            }
+
+            if (entries.Count <= 0)
+            {
+                errors = new ExpressionError[0];
+                return true;
+            }
+
+            string typeName;
+            string source = BuildSource(out typeName, entries).ToString();
+
+            CSharpCompilation compilation = CSharpCompilation.Create(
+                "DynamicExpressions_" + Guid.NewGuid().ToString("N"),
+                new[] { CSharpSyntaxTree.ParseText(SourceText.From(source, Encoding.UTF8)) },
+                references,
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+
+            using (MemoryStream assemblyStream = new MemoryStream())
+            {
+                EmitResult emitResult = compilation.Emit(assemblyStream);
+                if (!emitResult.Success)
                 {
-                    errors = new ExpressionError[0];
-                    return true;
-                }
-
-                string typeName;
-                string source = BuildSource(out typeName, entries).ToString();
-                CompilerResults results = provider.CompileAssemblyFromSource(parameters, new string[] { source });
-
-                if (results.Errors.HasErrors)
-                {
-                    errors = new ExpressionError[results.Errors.Count];
-                    for (int i = 0; i < results.Errors.Count; i++)
+                    Diagnostic[] diagnostics = emitResult.Diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error).ToArray();
+                    errors = new ExpressionError[diagnostics.Length];
+                    for (int i = 0; i < diagnostics.Length; i++)
                     {
-                        CompilerError compilerError = results.Errors[i];
+                        int line = diagnostics[i].Location.GetLineSpan().StartLinePosition.Line + 1;
                         int entryIndex = entries.Count - 1;
-                        while (entryIndex >= 0 && compilerError.Line <= entries[entryIndex].LineStart)
+                        while (entryIndex >= 0 && line <= entries[entryIndex].LineStart)
                             entryIndex--;
 
-                        errors[i] = new ExpressionError(entries[entryIndex].Expression, compilerError.ErrorText);
+                        errors[i] = new ExpressionError(entries[entryIndex].Expression, diagnostics[i].GetMessage(CultureInfo.InvariantCulture));
                     }
 
                     return false;
                 }
 
-                Type compiledType = results.CompiledAssembly.GetType(typeName);
+                Type compiledType = Assembly.Load(assemblyStream.ToArray()).GetType(typeName);
                 object instance = Activator.CreateInstance(compiledType);
                 foreach (ExpressionEntry entry in entries)
                     entry.DelayCompiledExpression.CompiledExpression = Delegate.CreateDelegate(entry.DelayCompiledExpression.DelegateType, instance, entry.CompiledFuncName);
