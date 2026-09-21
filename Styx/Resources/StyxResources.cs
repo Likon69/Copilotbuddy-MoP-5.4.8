@@ -591,5 +591,45 @@ namespace Styx.Resources
                 return ResourceManager.GetString("ElseIf_FromXml_Could_not_parse__ElseIf__body_node___0_", resourceCulture);
             }
         }
+
+        public static string Could_not_find_item_to_use_by_ID__ID_provided___0_
+        {
+            get
+            {
+                return ResourceManager.GetString("Could_not_find_item_to_use_by_ID__ID_provided___0_", resourceCulture);
+            }
+        }
+
+        public static string Could_not_find_target_to_use_item_on_with_ID__0___ID_provided__1_
+        {
+            get
+            {
+                return ResourceManager.GetString("Could_not_find_target_to_use_item_on_with_ID__0___ID_provided__1_", resourceCulture);
+            }
+        }
+
+        public static string Could_not_parse_SetMailbox_node_
+        {
+            get
+            {
+                return ResourceManager.GetString("Could_not_parse_SetMailbox_node_", resourceCulture);
+            }
+        }
+
+        public static string Could_not_parse_SetVendor_node_
+        {
+            get
+            {
+                return ResourceManager.GetString("Could_not_parse_SetVendor_node_", resourceCulture);
+            }
+        }
+
+        public static string Could_not_parse_X_Y_and_Z_in__MoveToNode__
+        {
+            get
+            {
+                return ResourceManager.GetString("Could_not_parse_X_Y_and_Z_in__MoveToNode__", resourceCulture);
+            }
+        }
 }
 }

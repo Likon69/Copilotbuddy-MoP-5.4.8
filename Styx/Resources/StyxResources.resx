@@ -321,4 +321,19 @@
   <data name="ElseIf_FromXml_Could_not_parse__ElseIf__body_node___0_" xml:space="preserve">
     <value>Could not parse 'ElseIf' body node: {0}</value>
   </data>
+  <data name="Could_not_find_item_to_use_by_ID__ID_provided___0_" xml:space="preserve">
+    <value>Could not find item to use by ID! ID provided: {0}</value>
+  </data>
+  <data name="Could_not_find_target_to_use_item_on_with_ID__0___ID_provided__1_" xml:space="preserve">
+    <value>Could not find target to use item on with ID:{0}, ID provided:{1}</value>
+  </data>
+  <data name="Could_not_parse_SetMailbox_node_" xml:space="preserve">
+    <value>Could not parse SetMailbox node.</value>
+  </data>
+  <data name="Could_not_parse_SetVendor_node_" xml:space="preserve">
+    <value>Could not parse SetVendor node.</value>
+  </data>
+  <data name="Could_not_parse_X_Y_and_Z_in__MoveToNode__" xml:space="preserve">
+    <value>Could not parse X Y and Z in 'MoveToNode'.</value>
+  </data>
 </root>
