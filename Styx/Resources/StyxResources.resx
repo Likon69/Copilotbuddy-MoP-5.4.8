@@ -261,4 +261,16 @@
   <data name="Expected_object_type__Mob_or_GameObject_" xml:space="preserve">
     <value>Expected object type; Mob or GameObject.</value>
   </data>
+  <data name="No_grind_or_quest_hotspots_have_been_defined_" xml:space="preserve">
+    <value>No grind or quest hotspots have been defined!</value>
+  </data>
+  <data name="No_suitable_grind_or_quest_hotspots_in__0__" xml:space="preserve">
+    <value>No suitable grind or quest hotspots in {0}.</value>
+  </data>
+  <data name="Warning__Max_polygon_count_exceeded_while_applying_blackspot__0__with_radius__1___2_" xml:space="preserve">
+    <value>Warning: Max polygon count exceeded while applying blackspot {0} with radius {1}.{2}</value>
+  </data>
+  <data name="_Consider_using_multiple_blackspots_instead_of_one_very_large_blackspot_" xml:space="preserve">
+    <value> Consider using multiple blackspots instead of one very large blackspot.</value>
+  </data>
 </root>

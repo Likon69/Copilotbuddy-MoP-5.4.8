@@ -431,5 +431,37 @@ namespace Styx.Resources
                 return ResourceManager.GetString("Expected_object_type__Mob_or_GameObject_", resourceCulture);
             }
         }
+
+        public static string No_grind_or_quest_hotspots_have_been_defined_
+        {
+            get
+            {
+                return ResourceManager.GetString("No_grind_or_quest_hotspots_have_been_defined_", resourceCulture);
+            }
+        }
+
+        public static string No_suitable_grind_or_quest_hotspots_in__0__
+        {
+            get
+            {
+                return ResourceManager.GetString("No_suitable_grind_or_quest_hotspots_in__0__", resourceCulture);
+            }
+        }
+
+        public static string Warning__Max_polygon_count_exceeded_while_applying_blackspot__0__with_radius__1___2_
+        {
+            get
+            {
+                return ResourceManager.GetString("Warning__Max_polygon_count_exceeded_while_applying_blackspot__0__with_radius__1___2_", resourceCulture);
+            }
+        }
+
+        public static string _Consider_using_multiple_blackspots_instead_of_one_very_large_blackspot_
+        {
+            get
+            {
+                return ResourceManager.GetString("_Consider_using_multiple_blackspots_instead_of_one_very_large_blackspot_", resourceCulture);
+            }
+        }
 }
 }
