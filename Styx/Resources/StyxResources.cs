@@ -471,5 +471,37 @@ namespace Styx.Resources
                 return ResourceManager.GetString("_0__Dist___1_", resourceCulture);
             }
         }
+
+        public static string Error_getting_mount_info_for_mount_slot__0___Exception___1_
+        {
+            get
+            {
+                return ResourceManager.GetString("Error_getting_mount_info_for_mount_slot__0___Exception___1_", resourceCulture);
+            }
+        }
+
+        public static string Mounting___0_
+        {
+            get
+            {
+                return ResourceManager.GetString("Mounting___0_", resourceCulture);
+            }
+        }
+
+        public static string Stop_and_dismount___
+        {
+            get
+            {
+                return ResourceManager.GetString("Stop_and_dismount___", resourceCulture);
+            }
+        }
+
+        public static string You_can_t_mount_here_
+        {
+            get
+            {
+                return ResourceManager.GetString("You_can_t_mount_here_", resourceCulture);
+            }
+        }
 }
 }

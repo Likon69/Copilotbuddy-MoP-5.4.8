@@ -276,4 +276,16 @@
   <data name="_0__Dist___1_" xml:space="preserve">
     <value>{0} Dist: {1}</value>
   </data>
+  <data name="Error_getting_mount_info_for_mount_slot__0___Exception___1_" xml:space="preserve">
+    <value>Error getting mount info for mount slot {0}. Exception: {1}</value>
+  </data>
+  <data name="Mounting___0_" xml:space="preserve">
+    <value>Mounting: {0}</value>
+  </data>
+  <data name="Stop_and_dismount___" xml:space="preserve">
+    <value>Stop and dismount...</value>
+  </data>
+  <data name="You_can_t_mount_here_" xml:space="preserve">
+    <value>You can't mount here.</value>
+  </data>
 </root>
