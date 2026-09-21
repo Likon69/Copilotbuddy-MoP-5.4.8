@@ -503,5 +503,61 @@ namespace Styx.Resources
                 return ResourceManager.GetString("You_can_t_mount_here_", resourceCulture);
             }
         }
+
+        public static string Changing_current_profile_to__0_
+        {
+            get
+            {
+                return ResourceManager.GetString("Changing_current_profile_to__0_", resourceCulture);
+            }
+        }
+
+        public static string Could_not_parse__Else__body_node_
+        {
+            get
+            {
+                return ResourceManager.GetString("Could_not_parse__Else__body_node_", resourceCulture);
+            }
+        }
+
+        public static string Missing_subelement__0__in___1___
+        {
+            get
+            {
+                return ResourceManager.GetString("Missing_subelement__0__in___1___", resourceCulture);
+            }
+        }
+
+        public static string Value___0___in___1___tag_is_not_supported__Expected__2__type__3_
+        {
+            get
+            {
+                return ResourceManager.GetString("Value___0___in___1___tag_is_not_supported__Expected__2__type__3_", resourceCulture);
+            }
+        }
+
+        public static string Warning___0_
+        {
+            get
+            {
+                return ResourceManager.GetString("Warning___0_", resourceCulture);
+            }
+        }
+
+        public static string We_either_outleveled_the_currently_loaded_profile__or_something_has_gone_terribly_wrong__Can_t_find_a_new__sub_profile_to_use_
+        {
+            get
+            {
+                return ResourceManager.GetString("We_either_outleveled_the_currently_loaded_profile__or_something_has_gone_terribly_wrong__Can_t_find_a_new__sub_profile_to_use_", resourceCulture);
+            }
+        }
+
+        public static string We_leveled_up__Checking_if_we_need_to_switch_profiles_
+        {
+            get
+            {
+                return ResourceManager.GetString("We_leveled_up__Checking_if_we_need_to_switch_profiles_", resourceCulture);
+            }
+        }
 }
 }

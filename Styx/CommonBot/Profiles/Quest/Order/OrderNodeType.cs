@@ -1,0 +1,34 @@
+namespace Styx.CommonBot.Profiles.Quest.Order
+{
+    public enum OrderNodeType
+    {
+        Checkpoint,
+        If,
+        While,
+        PickUp,
+        TurnIn,
+        Objective,
+        SetGrindArea,
+        ClearGrindArea,
+        SetMailbox,
+        ClearMailbox,
+        SetVendor,
+        ClearVendor,
+        SetBlacklist,
+        ClearBlacklist,
+        SetAvoidMobs,
+        ClearAvoidMobs,
+        DisableRepair,
+        EnableRepair,
+        GrindTo,
+        AbandonQuest,
+        MoveTo,
+        UseItem,
+        Code,
+        ToggleBehavior,
+        SetTargetingDistance,
+        SetUseMount,
+        SetLootMobs,
+        SetLootRadius
+    }
+}

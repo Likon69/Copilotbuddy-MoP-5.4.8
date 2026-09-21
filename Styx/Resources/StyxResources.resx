@@ -288,4 +288,25 @@
   <data name="You_can_t_mount_here_" xml:space="preserve">
     <value>You can't mount here.</value>
   </data>
+  <data name="Changing_current_profile_to__0_" xml:space="preserve">
+    <value>Changing current profile to {0}</value>
+  </data>
+  <data name="Could_not_parse__Else__body_node_" xml:space="preserve">
+    <value>Could not parse 'Else' body node!</value>
+  </data>
+  <data name="Missing_subelement__0__in___1___" xml:space="preserve">
+    <value>Missing subelement {0} in "{1}".</value>
+  </data>
+  <data name="Value___0___in___1___tag_is_not_supported__Expected__2__type__3_" xml:space="preserve">
+    <value>Value "{0}" in "{1}" tag is not supported! Expected {2} type.{3}</value>
+  </data>
+  <data name="Warning___0_" xml:space="preserve">
+    <value>Warning: {0}</value>
+  </data>
+  <data name="We_either_outleveled_the_currently_loaded_profile__or_something_has_gone_terribly_wrong__Can_t_find_a_new__sub_profile_to_use_" xml:space="preserve">
+    <value>We either outleveled the currently loaded profile, or something has gone terribly wrong. Can't find a new (sub)profile to use!</value>
+  </data>
+  <data name="We_leveled_up__Checking_if_we_need_to_switch_profiles_" xml:space="preserve">
+    <value>We leveled up! Checking if we need to switch profiles.</value>
+  </data>
 </root>
