@@ -273,4 +273,7 @@
   <data name="_Consider_using_multiple_blackspots_instead_of_one_very_large_blackspot_" xml:space="preserve">
     <value> Consider using multiple blackspots instead of one very large blackspot.</value>
   </data>
+  <data name="_0__Dist___1_" xml:space="preserve">
+    <value>{0} Dist: {1}</value>
+  </data>
 </root>

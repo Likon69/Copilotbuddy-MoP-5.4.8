@@ -463,5 +463,13 @@ namespace Styx.Resources
                 return ResourceManager.GetString("_Consider_using_multiple_blackspots_instead_of_one_very_large_blackspot_", resourceCulture);
             }
         }
+
+        public static string _0__Dist___1_
+        {
+            get
+            {
+                return ResourceManager.GetString("_0__Dist___1_", resourceCulture);
+            }
+        }
 }
 }
