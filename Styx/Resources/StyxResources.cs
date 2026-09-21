@@ -631,5 +631,45 @@ namespace Styx.Resources
                 return ResourceManager.GetString("Could_not_parse_X_Y_and_Z_in__MoveToNode__", resourceCulture);
             }
         }
+
+        public static string Error_in_ForceMail_XML_file_at__0____1_
+        {
+            get
+            {
+                return ResourceManager.GetString("Error_in_ForceMail_XML_file_at__0____1_", resourceCulture);
+            }
+        }
+
+        public static string Error_in_ProtectedItems_XML_file_at__0____1_
+        {
+            get
+            {
+                return ResourceManager.GetString("Error_in_ProtectedItems_XML_file_at__0____1_", resourceCulture);
+            }
+        }
+
+        public static string No_hotspots_have_been_defined_
+        {
+            get
+            {
+                return ResourceManager.GetString("No_hotspots_have_been_defined_", resourceCulture);
+            }
+        }
+
+        public static string No_profile_is_loaded_
+        {
+            get
+            {
+                return ResourceManager.GetString("No_profile_is_loaded_", resourceCulture);
+            }
+        }
+
+        public static string No_suitable_hotspots_in__0__
+        {
+            get
+            {
+                return ResourceManager.GetString("No_suitable_hotspots_in__0__", resourceCulture);
+            }
+        }
 }
 }

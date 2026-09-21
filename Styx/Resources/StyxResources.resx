@@ -336,4 +336,19 @@
   <data name="Could_not_parse_X_Y_and_Z_in__MoveToNode__" xml:space="preserve">
     <value>Could not parse X Y and Z in 'MoveToNode'.</value>
   </data>
+  <data name="Error_in_ForceMail_XML_file_at__0____1_" xml:space="preserve">
+    <value>Error in ForceMail XML file at {0}: {1}</value>
+  </data>
+  <data name="Error_in_ProtectedItems_XML_file_at__0____1_" xml:space="preserve">
+    <value>Error in ProtectedItems XML file at {0}: {1}</value>
+  </data>
+  <data name="No_hotspots_have_been_defined_" xml:space="preserve">
+    <value>No hotspots have been defined!</value>
+  </data>
+  <data name="No_profile_is_loaded_" xml:space="preserve">
+    <value>No profile is loaded!</value>
+  </data>
+  <data name="No_suitable_hotspots_in__0__" xml:space="preserve">
+    <value>No suitable hotspots in {0}.</value>
+  </data>
 </root>
