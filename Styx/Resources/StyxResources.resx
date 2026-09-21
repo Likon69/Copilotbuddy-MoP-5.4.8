@@ -309,4 +309,16 @@
   <data name="We_leveled_up__Checking_if_we_need_to_switch_profiles_" xml:space="preserve">
     <value>We leveled up! Checking if we need to switch profiles.</value>
   </data>
+  <data name="Could_not_parse__ElseIf___Condition_code___0___could_not_be_compiled_into_C__code_" xml:space="preserve">
+    <value>Could not parse 'ElseIf'. Condition code "{0}" could not be compiled into C# code.</value>
+  </data>
+  <data name="Could_not_parse__If___Condition_code___0___could_not_be_compiled_into_C__code_" xml:space="preserve">
+    <value>Could not parse 'If'. Condition code "{0}" could not be compiled into C# code.</value>
+  </data>
+  <data name="Could_not_parse__If__body_node_" xml:space="preserve">
+    <value>Could not parse 'If' body node!</value>
+  </data>
+  <data name="ElseIf_FromXml_Could_not_parse__ElseIf__body_node___0_" xml:space="preserve">
+    <value>Could not parse 'ElseIf' body node: {0}</value>
+  </data>
 </root>

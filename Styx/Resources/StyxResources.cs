@@ -559,5 +559,37 @@ namespace Styx.Resources
                 return ResourceManager.GetString("We_leveled_up__Checking_if_we_need_to_switch_profiles_", resourceCulture);
             }
         }
+
+        public static string Could_not_parse__ElseIf___Condition_code___0___could_not_be_compiled_into_C__code_
+        {
+            get
+            {
+                return ResourceManager.GetString("Could_not_parse__ElseIf___Condition_code___0___could_not_be_compiled_into_C__code_", resourceCulture);
+            }
+        }
+
+        public static string Could_not_parse__If___Condition_code___0___could_not_be_compiled_into_C__code_
+        {
+            get
+            {
+                return ResourceManager.GetString("Could_not_parse__If___Condition_code___0___could_not_be_compiled_into_C__code_", resourceCulture);
+            }
+        }
+
+        public static string Could_not_parse__If__body_node_
+        {
+            get
+            {
+                return ResourceManager.GetString("Could_not_parse__If__body_node_", resourceCulture);
+            }
+        }
+
+        public static string ElseIf_FromXml_Could_not_parse__ElseIf__body_node___0_
+        {
+            get
+            {
+                return ResourceManager.GetString("ElseIf_FromXml_Could_not_parse__ElseIf__body_node___0_", resourceCulture);
+            }
+        }
 }
 }
