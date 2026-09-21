@@ -82,5 +82,6 @@ namespace Styx.Offsets
         public IntPtr GossipQuestsForObjectsArray;
         public IntPtr CurrentShownQuest;
         public IntPtr LootFrame;
+        public IntPtr C_PetBattles__IsInBattle;
     }
 }

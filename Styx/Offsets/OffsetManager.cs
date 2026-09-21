@@ -194,6 +194,7 @@ namespace Styx
             Statics.GossipQuestsForObjectsArray = newBase + 0xDE9F48;
             Statics.CurrentShownQuest = newBase + 0xDE7B9C;
             Statics.LootFrame = newBase + 0xDD3280;
+            Statics.C_PetBattles__IsInBattle = newBase + 0xB61B20;
 
             VFTableIndex.GetPosition = (IntPtr)0x27;
             VFTableIndex.GetScale = (IntPtr)0x2E;
