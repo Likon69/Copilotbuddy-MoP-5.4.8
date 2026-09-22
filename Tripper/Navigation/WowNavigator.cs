@@ -19,7 +19,7 @@ namespace Tripper.Navigation
 	/// caller of this port against every WowNavigator/Nav.* call site) — HB's
 	/// MeshProvider/IMeshProvider, the named-filter store (HasQueryFilter/
 	/// StoreQueryFilter/GetStoredQueryFilter/SetQueryFilterByStored), the
-	/// OnTileLoaded/OnSubTileLoaded/OnMapLoaded events and the static
+	/// OnSubTileLoaded/OnMapLoaded events and the static
 	/// GetNewDefaultQueryFilter/GetNewFactionQueryFilter helpers are all intentionally
 	/// left out; every method body below is rewired onto Navigation.dll via
 	/// Styx.Pathing.NavigationApi.
@@ -66,6 +66,47 @@ namespace Tripper.Navigation
 		public event EventHandler<PathFindProgressEventArgs> OnPathFindProgress;
 
 		public event NavigatorLogMessage OnNavigatorLogMessage;
+
+		/// <summary>
+		/// HB raised this from Tripper's own tile loader. Navigation.dll instead offers a
+		/// single process-wide callback (SetTileLoadedCallback_C), so the thunk is installed
+		/// on first subscription and kept in a static field — a local delegate would be
+		/// collected while native code still holds the pointer. HB's OnSubTileLoaded has no
+		/// native counterpart and is not reproduced.
+		/// </summary>
+		public event EventHandler<TileLoadedEventArgs> OnTileLoaded
+		{
+			add
+			{
+				this._onTileLoaded += value;
+				if (_tileLoadedThunk == null)
+				{
+					_tileLoadedThunk = NativeTileLoaded;
+					NavigationApi.SetTileLoadedCallback(_tileLoadedThunk);
+				}
+				_tileLoadedOwner = this;
+			}
+			remove { this._onTileLoaded -= value; }
+		}
+
+		private static NavTileLoadedCallback _tileLoadedThunk;
+		private static WowNavigator _tileLoadedOwner;
+		private EventHandler<TileLoadedEventArgs> _onTileLoaded;
+
+		private static void NativeTileLoaded(uint mapId, int x, int y)
+		{
+			WowNavigator owner = _tileLoadedOwner;
+			if (owner == null)
+			{
+				return;
+			}
+
+			EventHandler<TileLoadedEventArgs> handler = owner._onTileLoaded;
+			if (handler != null)
+			{
+				handler(owner, new TileLoadedEventArgs { Tile = new Tripper.MeshMisc.TileIdentifier(x, y) });
+			}
+		}
 
 		public WowQueryFilter QueryFilter
 		{

@@ -12,7 +12,7 @@ namespace Tripper.RecastManaged.Detour
     /// native Navigation.dll export declared in Styx.Pathing.NativeMethods, reached via
     /// P/Invoke instead of a C++/CLI pointer.
     ///
-    /// Only the one member any caller in Styx/Pathing or Bots actually uses is ported; the
+    /// Only the members any caller in Styx/Pathing or Bots actually uses are ported; the
     /// rest of HB's surface is intentionally not reproduced.
     ///
     /// Map identity: HB's dtNavMesh instance was implicitly bound to one map. Every
@@ -41,6 +41,26 @@ namespace Tripper.RecastManaged.Detour
         public Status GetPolyArea(PolygonReference @ref, out byte area)
         {
             uint status = NativeMethods.GetPolyArea_C(MapId, @ref.Id, out area);
+            return new Status(status);
+        }
+
+        /// <summary>
+        /// Wraps Navigation.dll's <c>SetPolyArea_C(uint mapId, ulong polyRef, byte area)</c>.
+        /// Same status round-trip as <see cref="GetPolyArea"/>.
+        /// </summary>
+        public Status SetPolyArea(PolygonReference @ref, byte area)
+        {
+            uint status = NativeMethods.SetPolyArea_C(MapId, @ref.Id, area);
+            return new Status(status);
+        }
+
+        /// <summary>
+        /// Wraps Navigation.dll's <c>GetPolyFlags_C(uint mapId, ulong polyRef, out ushort
+        /// outFlags)</c>. Same status round-trip as <see cref="GetPolyArea"/>.
+        /// </summary>
+        public Status GetPolyFlags(PolygonReference @ref, out ushort flags)
+        {
+            uint status = NativeMethods.GetPolyFlags_C(MapId, @ref.Id, out flags);
             return new Status(status);
         }
     }
