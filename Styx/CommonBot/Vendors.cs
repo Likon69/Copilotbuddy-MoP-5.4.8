@@ -17,44 +17,6 @@ using Styx.WoWInternals.WoWObjects;
 
 namespace Styx.CommonBot
 {
-    public delegate void BuyItemsEventHandler(BuyItemsEventArgs e);
-
-    public delegate void VendorItemsEventHandler(SellItemsEventArgs e);
-
-    public delegate void MailItemsEventHandler(MailItemsEventArgs e);
-
-    public class BuyItemsEventArgs
-    {
-        public BuyItemsEventArgs()
-        {
-            BuyItemsIds = new Dictionary<uint, int>();
-        }
-
-        public Dictionary<uint, int> BuyItemsIds { get; private set; }
-    }
-
-    public class SellItemsEventArgs
-    {
-        public SellItemsEventArgs()
-        {
-            NameExceptions = new List<string>();
-            IdExceptions = new List<uint>();
-        }
-
-        public List<string> NameExceptions { get; private set; }
-        public List<uint> IdExceptions { get; private set; }
-    }
-
-    public class MailItemsEventArgs
-    {
-        public MailItemsEventArgs()
-        {
-            AdditionalItems = new List<WoWItem>();
-        }
-
-        public List<WoWItem> AdditionalItems { get; private set; }
-    }
-
     public static class Vendors
     {
         private static readonly TrainerFrame TrainerFrame = new TrainerFrame();
