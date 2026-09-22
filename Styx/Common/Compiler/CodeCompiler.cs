@@ -92,6 +92,16 @@ namespace Styx.Common.Compiler
             }
 
             AddReference(Path.Combine(Utilities.AssemblyDirectory, "Tripper.Tools.dll"));
+
+            string trustedPlatformAssemblies = AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") as string;
+            if (trustedPlatformAssemblies != null)
+            {
+                foreach (string reference in trustedPlatformAssemblies.Split(Path.PathSeparator))
+                {
+                    if (!string.IsNullOrEmpty(reference))
+                        AddReference(reference);
+                }
+            }
         }
 
         /// <summary>
