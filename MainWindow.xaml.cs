@@ -42,6 +42,8 @@ namespace CopilotBuddy
         {
             InitializeComponent();
 
+            StyxWoW.InitOffsets();
+
             SetStaticLabels();
 
             Logging.OnLogMessage += OnLogMessage;

@@ -212,7 +212,7 @@ namespace Styx.Helpers
 
         private byte _ticksPerSecond;
         [Setting]
-        [DefaultValue(15)]
+        [DefaultValue((byte)15)]
         public byte TicksPerSecond
         {
             get { return _ticksPerSecond; }
