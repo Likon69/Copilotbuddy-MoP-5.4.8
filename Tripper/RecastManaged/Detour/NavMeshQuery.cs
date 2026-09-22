@@ -75,6 +75,54 @@ namespace Tripper.RecastManaged.Detour
             _appliedMapId = MapId;
         }
 
+        // ------------------------------------------------------------------
+        // Coordinate space. Honorbuddy callers speak Detour space: MeshNavigator
+        // runs points through NavHelper.ToNav (GraphicalHelper.ToDetour, which is
+        // WoW(X,Y,Z) -> (-Y, Z, -X)) before handing them to the query.
+        //
+        // Navigation.dll does NOT take Detour coordinates. Its exports take raw WoW
+        // coordinates and do their own conversion internally, with a different
+        // convention and no sign flips -- "PathFinder.cpp:652":
+        //     float point[VERTEX_SIZE] = { y, z, x }; // WoW (X,Y,Z) -> Detour (Y,Z,X)
+        // and it hands results back in WoW space too (Navigation.cpp, DetourToWoW).
+        // The two conventions are each self-consistent because HB's meshes and this
+        // extractor's mmaps were built with their own matching transforms.
+        //
+        // So the shim converts at the boundary: Detour in -> WoW to the DLL, WoW out
+        // -> Detour back to the caller. Passing the vectors through untouched would
+        // query a mirrored position and silently return nonsense paths.
+        // ------------------------------------------------------------------
+
+        /// <summary>Detour-space position from a caller -> WoW-space for Navigation.dll.</summary>
+        private static NativeMethods.XYZ_C ToWowPos(Vector3 detour)
+        {
+            Vector3 wow;
+            Tripper.MeshMisc.GraphicalHelper.ToWow(ref detour, out wow);
+            return new NativeMethods.XYZ_C(wow.X, wow.Y, wow.Z);
+        }
+
+        /// <summary>WoW-space position from Navigation.dll -> Detour space for the caller.</summary>
+        private static Vector3 ToDetourPos(NativeMethods.XYZ_C wowPoint)
+        {
+            Vector3 wow = new Vector3(wowPoint.x, wowPoint.y, wowPoint.z);
+            Vector3 detour;
+            Tripper.MeshMisc.GraphicalHelper.ToDetour(ref wow, out detour);
+            return detour;
+        }
+
+        /// <summary>
+        /// Search-box half-extents are magnitudes, not a position: running them through
+        /// ToWow would flip signs and produce a negative box. Only the axis mapping
+        /// applies. Detour X/Y/Z correspond to WoW Y/Z/X, so the WoW-space extents the
+        /// DLL expects are (detour.Z, detour.X, detour.Y) -- which its own
+        /// <c>{ extents.Y, extents.Z, extents.X }</c> permutation
+        /// ("Navigation.cpp", FindNearestPolyRef) turns back into the caller's box.
+        /// </summary>
+        private static NativeMethods.XYZ_C ToWowExtents(Vector3 detour)
+        {
+            return new NativeMethods.XYZ_C(detour.Z, detour.X, detour.Y);
+        }
+
         /// <summary>
         /// Wraps Navigation.dll's <c>FindNearestPolyRef_C(uint mapId, XYZ_C position,
         /// XYZ_C extents, out ulong outPolyRef, out XYZ_C nearestPoint)</c>. That export
@@ -87,13 +135,13 @@ namespace Tripper.RecastManaged.Detour
         {
             ApplyFilter(filter);
 
-            var centerC = new NativeMethods.XYZ_C(center.X, center.Y, center.Z);
-            var extentsC = new NativeMethods.XYZ_C(extents.X, extents.Y, extents.Z);
+            var centerC = ToWowPos(center);
+            var extentsC = ToWowExtents(extents);
 
             bool ok = NativeMethods.FindNearestPolyRef_C(MapId, centerC, extentsC,
                 out ulong outPolyRef, out NativeMethods.XYZ_C nearest);
 
-            nearestPt = ok ? new Vector3(nearest.x, nearest.y, nearest.z) : default;
+            nearestPt = ok ? ToDetourPos(nearest) : default;
             result = new PolygonReference(outPolyRef);
             return ok ? Status.Success : Status.Failure;
         }
@@ -112,8 +160,8 @@ namespace Tripper.RecastManaged.Detour
         {
             ApplyFilter(filter);
 
-            var centerC = new NativeMethods.XYZ_C(center.X, center.Y, center.Z);
-            var extentsC = new NativeMethods.XYZ_C(extents.X, extents.Y, extents.Z);
+            var centerC = ToWowPos(center);
+            var extentsC = ToWowExtents(extents);
 
             if (maxPolys <= 0)
             {
@@ -153,8 +201,8 @@ namespace Tripper.RecastManaged.Detour
         {
             ApplyFilter(filter);
 
-            var startC = new NativeMethods.XYZ_C(startPos.X, startPos.Y, startPos.Z);
-            var endC = new NativeMethods.XYZ_C(endPos.X, endPos.Y, endPos.Z);
+            var startC = ToWowPos(startPos);
+            var endC = ToWowPos(endPos);
 
             if (maxPolys <= 0)
                 maxPolys = 1;
@@ -163,7 +211,9 @@ namespace Tripper.RecastManaged.Detour
             uint status = NativeMethods.Raycast_HB_C(MapId, startRef.Id, startC, endC,
                 out t, out NativeMethods.XYZ_C hitNormalC, pathBuf, out int pathCount, maxPolys);
 
-            hitNormal = new Vector3(hitNormalC.x, hitNormalC.y, hitNormalC.z);
+            // A normal is a direction: ToDetour is a permutation plus sign flips with no
+            // translation, so it applies to directions exactly as it does to positions.
+            hitNormal = ToDetourPos(hitNormalC);
 
             if (pathCount > 0)
             {
