@@ -1,134 +1,206 @@
-# Prompt de reprise — CopilotBuddy MoP
+# Reprise — CopilotBuddy MoP
 
-Colle ce message tel quel au début du nouveau chat.
+Colle ce fichier au début d'un nouveau chat. Lis ensuite `.github/agents/agent.agent.md` sur le disque (git-ignoré, donc absent du dépôt, mais il est là).
 
 ---
 
-Tu reprends le portage de **CopilotBuddy MoP** : portage 1:1 de Honorbuddy 5.4.8 (WoW MoP, build 18414, x86) vers .NET 10.
+## 1. Ce qu'est le projet
 
-**Projet** : `C:\Users\Texy6\Desktop\newhcb\Copilotbuddy MoP`
-**Règles du projet** : lis `.github\agents\agent.agent.md` en premier (git-ignoré mais présent sur le disque). Tout y est : architecture, style ApocDev, règle 18 (RemoteASM différé), règle 19 (offsets), règle 20 (ne jamais nettoyer `bin`).
+Port **1:1 strict** de Honorbuddy 5.4.8 (WoW MoP, build 18414, x86) vers **.NET 10 / WPF / x86**.
+Racine : `C:\Users\Texy6\Desktop\newhcb\Copilotbuddy MoP`, branche `master`.
 
-Ces deux fichiers suffisent. Tout le reste est sur le disque.
+Je suis **superviseur**. Je ne porte pas moi-même les gros fichiers : je délègue, puis je **contrôle chaque résultat** avant de le garder. J'ai attrapé une douzaine d'erreurs ainsi — code inventé, offsets sautés, justifications fausses, une récursion infinie. Le contrôle n'est pas optionnel, c'est la valeur ajoutée.
 
-## Références (lecture seule, ne jamais modifier)
+---
 
-`..\hb decompile\` contient **six** versions de HB. Leur autorité respective a été mesurée, ne la redécouvre pas :
+## 2. Comment Texy veut qu'on travaille
 
-| Version | Chemin | Rôle |
-|---|---|---|
-| 5.3 | `.hb 5.3\` | **Seule source non obfusquée.** Autorité pour les noms, commentaires XML, `#region`, style. |
-| 5.4.8 | `.hb 5.4.8\Honorbuddy\`, `.hb 5.4.8\GreyMagic\` | **Cible.** Autorité pour la logique, les membres, l'ordre, les valeurs. **Gagne toujours** en cas d'écart. |
-| 6.2.3 (WoD) | `.hb 6.2.3\Honorbuddy\` | Obfusqué. Seulement si un membre est dans 5.4.8 mais pas en 5.3. **Ne jamais reprendre une forme 6.2.3 que la 5.4.8 n'a pas** (pièges rencontrés : `Else`/`IXmlObject`, `DelayCompiledExpression<T>` générique, `HealTargeting` par HashSet de GUIDs). |
-| 4.3.4, 3.3.5a, Legion 3.0.904 | `.hb 4.3.4\`, `.hb 3.3.5a\`, `.hb legion 3.0.904 for wow 7.3.2\` | Même obfuscateur que la 5.4.8 : **ne récupèrent jamais un nom privé**. Seule exception utile : **`.hb 3.3.5a` conserve les vrais noms de paramètres**. |
+- **Réponses en français.** Code, journaux et commits en anglais.
+- **Économiser les tokens.** Pas de dispersion, pas de vérification redondante, pas de relecture d'un fichier déjà lu. Grouper les commandes shell.
+- **Un seul sous-agent à la fois.** J'en ai lancé deux en parallèle une fois, il m'a repris. Modèle : Sonnet.
+- **Déléguer une partie du travail à ChatGPT** (voir §6). Il a le projet et les arbres décompilés, mais **il ne compile pas** — c'est moi qui vérifie et compile.
+- **Ne jamais inventer.** Ni code, ni chaîne de ressource, ni valeur d'offset. Un trou déclaré vaut mieux qu'un comblement inventé.
+- **Ne jamais corriger les bugs de HB.** Les reproduire et les signaler.
+- **Jamais de `dotnet clean`, ne jamais supprimer `bin`** — il contient la charge utile runtime de HB, git-ignorée.
+- **Ne pas toucher à `offsets mop.txt`** (git-ignoré, choix du joueur).
+- Rien ne sort du disque : pas d'artefact, pas de gist, pas de partage.
 
-Autres : release HB MoP `C:\Users\Texy6\Downloads\Honorbuddy-MoP-5.4.8-18414-main\` (binaire + `auth\Offsets\HB2_18414.dat`), IDA via le serveur MCP `ida-pro-mcp` (base `Wow mop.exe`), navigation C++ `..\Navigation C++\`, extracteur de tuiles `..\Navigation View3D\Extractor_projects-master\extractor-csharp\`.
+### Commits
 
-## Règles absolues
+Une seule ligne, en anglais, format `Composant: ce qui change, pourquoi`.
+Auteur **obligatoire** :
 
-1. **Ne jamais rien inventer.** Logique = décompilé 5.4.8, noms = source réelle 5.3. Non résolvable → on s'arrête et on signale.
-2. **Fichiers complets.** Pas de stub, pas de TODO, pas de version simplifiée.
-3. **Ne jamais « corriger » un bug de HB.** Les signaler, jamais les réparer.
-4. **Ne jamais recopier un artefact du décompilateur.**
-5. Code et commentaires **en anglais**, conversation **en français**.
-6. **Économiser les tokens.** Une étape à la fois, pas de build non demandé.
+```
+git -c user.name=Likon69 -c user.email=50536335+Likon69@users.noreply.github.com commit -q -m "..."
+```
 
-## Méthode de travail (imposée par l'utilisateur)
+Jamais Claude comme auteur, **aucun trailer**, pas de `Co-Authored-By`. Un commit par étape vérifiée. **Ne jamais pousser sans demander.**
+Les branches sont pour le dépôt `Navigation C++`, **pas** pour le port MoP — ici tout va sur `master`.
 
-- Tu **supervises**. Les workers sont des sous-agents **Sonnet**, **un seul à la fois**.
-- Tu **relis systématiquement** chaque retour. **Plusieurs erreurs réelles ont été interceptées ainsi** — voir « Erreurs déjà commises par des workers » plus bas.
-- **Commiter chaque étape relue**, sans attendre le build vert (on a failli perdre 16 000 lignes une fois).
+---
 
-### Le patron de briefing qui marche (réutilise-le)
+## 3. État au 22/09/2026
 
-Donner au worker : le **mapping A→B déjà résolu** fichier par fichier ; les **pièges d'homonymes** nommés ; la liste de ce qui est **déjà porté** ; la liste des types **pas encore portés** présentée comme « normal et attendu, ne crée aucun stub, le build reste rouge, c'est assumé par l'utilisateur » ; et l'exigence d'un rapport listant **chaque écart 5.4.8 vs 5.3**.
+**Build : 0 erreur.** 167 commits, 899 fichiers `.cs` portés.
 
-Arrêts durs à répéter dans chaque brief :
-- `UNRECOVERABLE: <fichier> <méthode>` — **jamais** de `throw new NotImplementedException()`.
-- `CODEDOM:` / `API-MORTE:` pour une API .NET Framework absente de .NET 10 — porter fidèlement, ne jamais adapter de sa propre initiative.
-- **Branche Buddy Store / `nsNN`** : la retirer, porter le reste, la signaler ligne par ligne.
-- **Helper obfusqué** (`ClassNNN.smethod_N()`) : **jamais deviner**, lire le corps réel dans `..\hb decompile\.hb 5.4.8\Honorbuddy\nsNN\ClassNNN.cs`.
-- **Offset brut** : ne pas l'inventer, signaler bloc + index + nom réel 5.3, ne pas toucher `Styx\Offsets\*`.
-- Demander **la liste des balises/attributs XML** ou **les valeurs d'enum** quand le fichier en contient — c'est le contrôle le plus rentable.
+### Terminé
+- **`Styx` — le noyau entier.** Mémoire, objets WoW, Lua, offsets, profils, comportements, frames, inventaire, coroutines.
+- **Navigation complète** : `MeshNavigator`, `WowNavigator`, `Flightor` + navigation aérienne, évitement, `FlightPaths`, `WoWTaxi`.
+- **UI** : `MainWindow`, `SettingsWindow` (avec bouton Discord), `PluginsWindow`, `RoutineSettingsWindow` — style MahApps Dark.Amber repris de CopilotBuddy WotLK, **logique de HB 5.4.8**.
+- **Overlay** `Buddy.Overlay` porté de HB 6.2.3 (absent de MoP, ajout voulu).
+- **Chargeurs** : `BotManager`, `PluginManager`, `RoutineManager`, `AssemblyLoader` → `CodeCompiler` sur **Roslyn**.
+- **`LevelBot`** (botbase grind), 1950 lignes, corps `async` récupérés.
 
-## Les trois outils construits (à reconstruire dans le scratchpad, ils valent leur poids)
+### Reste — 289 fichiers hors `nsNN`
+| Zone | Manquants |
+|---|---|
+| `Bots.Professionbuddy*` | 77 |
+| `Bots.DungeonBuddy*` | 65 |
+| `Bots.Quest*` | 25 |
+| `Bots.BGBuddy*` | 13 |
+| `Honorbuddy` racine (`DevTools`, `Error`, `Login`, `Update`, `WebProfile`) | 16 |
+| `SevenZip*` | 17 |
+| Gatherbuddy, ArchaeologyBuddy, divers, bibliothèques | ~76 |
 
-1. **Décodeur d'offsets** — `HB2_18414.dat`, 2756 `uint`, XOR par octet roulant `b=(i+1)&0xFF` → `v ^ (b<<24|b<<16|b<<8|b)`. Blocs : 205 fonctions (0), 206 misc (2579), **207 statiques (2633)**, 208 vtable (2742). Relatif = `v - 0x400000`. **Puis vérifier dans IDA** : `xrefs_to` prouve que c'est une statique référencée ; des tableaux frères référencés par la **même fonction** corroborent la sémantique. Ajoutés ainsi cette session : `GossipActiveQuestsArray` (79, 0xDD9B28), `GossipAvaibleQuestsArray` (80, 0xDDEEE8), `GossipQuestsForObjectsArray` (82, 0xDE9F48), `CurrentShownQuest` (81, 0xDE7B9C), `LootFrame` (68, 0xDD3280), `C_PetBattles__IsInBattle` (3, 0xB61B20).
-2. **Extracteur de ressources** — `System.Resources.ResourceReader` sur `.hb 5.4.8\Honorbuddy\Styx\Resources\StyxResources.resources` → **232 vraies chaînes de HB**. Un script compare les `StyxResources.X` utilisés dans le code porté au `.resx` du projet et ajoute les `<data>` manquants **plus** les propriétés typées dans `StyxResources.cs`. **~50 chaînes restaurées ainsi — n'invente jamais une chaîne de ressource, elle est dans ce blob.**
-3. **Lecteur d'IL** — `PEReader` + `GetMethodBody` + décodage d'opcodes sur `Honorbuddy.exe`, en résolvant les tokens. **C'est ainsi qu'on récupère les corps d'itérateurs qu'ILSpy abandonne.** Utilisé avec succès sur `BlackspotManager.GetBlackspotsForFlags` et `IfNode.GetNodes` (les classes d'état `Class698`/`Class788` sont absentes du décompilé mais présentes dans le binaire).
+Plus **408 fichiers dans les namespaces obfusqués `nsNN`** (52 namespaces). Beaucoup sont des classes de fermeture qui disparaissent à la déobfuscation ; `Buddy.Auth` et `Buddy.Store` en font partie et sont **hors périmètre**.
 
-Piège d'environnement : `dotnet run -- "$arg"` mange les arguments sous Git-Bash. Compiler avec `-o out` et lancer l'exe directement.
+**Prochain jalon suggéré : `Bots.Quest`** — objectif déclaré de Texy, et il hérite de `LevelBot` déjà en place.
 
-## Les vérifications qui tranchent
+Texy **ne veut pas tester en jeu avant 100 %**. Ne pas proposer de test partiel.
 
-- **Diff des littéraux de chaînes, fichier par fichier**, entre décompilé et portage. C'est le contrôle le plus décisif : sur un parseur XML, des ensembles identiques prouvent que **chaque nom de balise et d'attribut est exact**. Résultats obtenus : `Profile` 119 chaînes identiques, les 8 nœuds d'action 102, `Vendor` 39, `Chat` toutes.
-- **Diff des littéraux numériques.** Attrape les IDs de sorts/mobs/quêtes faux. Écarts normaux et explicables : `new string[0]` omis sur un `params`, `0U`/`1L`/`4f` contre `0`/`1`/`4.0`, `+= 1U` contre `++`, valeurs d'enum implicites rendues explicites, `new Composite[3]` de ILSpy devant un appel `params`, et **un grand `switch` de chaînes compilé en `Dictionary<string,int>` + `case N:`** (d'où des entiers 1..49 en double).
-- **Diff ordonné des `RunStatus`** par fichier pour l'arbre de comportement.
-- **Comptage des champs de struct** quand c'est une disposition mémoire lue par `Memory.Read<T>` — un champ de travers décale tout.
-- **Compilation isolée** dans le scratchpad (csproj `EnableDefaultCompileItems=false` + les fichiers voulus + des bouchons) : valide la syntaxe sans toucher au projet ni à `bin`.
+---
 
-## Erreurs déjà commises par des workers (à intercepter)
+## 4. LA chose à savoir — l'arbre décompilé
 
-- Un worker a remplacé un appel obfusqué `state.smethod_0()` par un `Enum.IsDefined` **supposé** équivalent ; le corps réel était un contrôle d'intervalle.
-- Un worker a supposé que ILSpy répartit `Foo`/`Foo<T>` de la même façon dans `X.cs` et `X.2.cs` — **ce n'est pas symétrique d'une exception à l'autre**, il faut vérifier laquelle est où.
-- Un worker a laissé `throw new NotImplementedException()` sur un itérateur. Récupéré par lecture de l'IL.
-- Un worker a justifié une omission par un raisonnement **faux** (« la propriété existe en 5.3 ») alors qu'elle n'existait nulle part. L'action était bonne, la raison inventée : **vérifier l'affirmation, pas seulement le code**.
-- Deux fois, **mes propres listes « déjà porté » étaient fausses** ; les workers l'ont signalé au lieu de contourner. Bon réflexe à encourager.
+**Autorité pour la logique 5.4.8 : `hb decompile\.hb 5.4.8 fresh\`** (disposition **plate**, par namespace).
 
-## Ce qui est fait
+L'ancien arbre `hb decompile\.hb 5.4.8\Honorbuddy\` vient d'un ILSpy périmé qui **supprimait silencieusement les machines à états** : 198 types `ClassNNN`/`StructNNN` y étaient référencés sans jamais être déclarés, sur 62 fichiers. Tous les corps `async` et les itérateurs en sortaient vides. J'ai cru pendant des heures que la logique était irrécupérable.
 
-**Jalon 1 validé en jeu** (attache, ASLR, hook EndScene/Present D3D9+D3D11, injection FASM, gestionnaire d'objets, appel Lua). **GreenMagic** complet. **Modèle objet complet**, **couche sorts**, **caches et données** (`WoWCache`, `ClientDb` 357 tables, 20 lecteurs DBC), `WoWMovement`, `Blacklist`, `Battlegrounds`, `Landmarks`, `LuaEvents`, SDK LZMA. **181 offsets** nommés et vérifiés dans IDA, **plus aucun identifiant obfusqué** dans le projet.
+Régénéré avec `ilspycmd` 11 (`scratchpad/tools/ilspycmd.exe`) :
 
-**Cette session : 34 commits**, de `e8d17aa` à `fd7ebd4`, ~14 000 lignes.
+```
+ilspycmd.exe -p -o "<dossier>" "C:\Users\Texy6\Downloads\Honorbuddy-MoP-5.4.8-18414-main\Honorbuddy.exe"
+ilspycmd.exe -t <Namespace.TypeName> "<...>\Honorbuddy.exe"   # un seul type
+```
 
-- **Cœur du bot** : tout `Styx\TreeSharp` (24 fichiers), système de hooks, `BotEvents`, `TreeRoot`, `BotBase`, `BotManager`, `BotPoi`, `Pulsator`, façade `Navigator`.
-- **Routines** : `CombatRoutine`, `RoutineManager`, `ICombatRoutine`, `CapabilityFlags/State`, `AssemblyLoader`, `TypeOnlyLoader`, `CodeCompiler`, `Arguments`, `CommandLine`.
-- **Settings** : `Settings` + ses 3 attributs, `GlobalSettings`, `CharacterSettings`.
-- **Ciblage** : `Targeting`, `HealTargeting`, `LootTargeting`, `LootPredictor`, les 4 delegates.
-- **Divers CommonBot** : `Chat` (30 événements Lua), `Mount`, `GameStats`, `PluginManager`, `CharacterManager`, `GrindArea`, `Area`, `Hotspot`, `AreaManager`, `BlackspotManager`, `Blackspot`, `GossipFrame`, `QuestFrame`, `WoWPetBattle`.
-- **Système de profils** : `Profile` (2242 L de décompilé), `ProfileManager`, les 8 exceptions, `ProfileHelper`, `ProfileExceptionHelper`, `HotspotCollection`, `Vendor`/`VendorManager`, `Mailbox`/`MailboxManager`, `XmlUtils`, tout `Quest\*`.
-- **`Styx\CommonBot\Profiles\Quest\Order` : 41 fichiers sur 41**, le moteur d'interprétation des profils de quêtes.
+→ **0 type orphelin**, itérateurs en `yield return`, corps `async` complets, **`.resx` extraits** (plus besoin de lire les blobs compilés).
 
-### Deux déviations de plateforme assumées (validées par l'utilisateur, prouvées par test)
+Deux fichiers échouent à la décompilation — utiliser l'**ancien** arbre pour eux seulement :
+`Bots.Professionbuddy.BehaviorTree\Action.cs`, `CommonBehaviors.Actions\ActionRunCoroutine.cs`.
 
-1. **CodeDom → Roslyn.** `CodeCompiler` (commit `6519861`) et `ExpressionSet` (commit `45f18f6`). Fait crucial : **seul le moteur est mort, les types CodeDom sont vivants** en .NET 10 — `CompilerParameters`, `CompilerResults`, `CompilerError` se construisent normalement et `CompilerResults.CompiledAssembly` a un setter. L'API publique de HB est donc **inchangée** et aucun appelant ne bouge. Paquets ajoutés : `Microsoft.CodeAnalysis.CSharp` 4.14.0, `System.CodeDom` 9.0.0. Correspondance : `/d:A;B` → `preprocessorSymbols`, `/unsafe` → `WithAllowUnsafe`, `ReferencedAssemblies` → `MetadataReference.CreateFromFile`, diagnostics → `CompilerError` (lignes 1-basées des deux côtés). **Piège trouvé par le test : `CSharpSyntaxTree.ParseText(string)` crée un texte sans encodage et l'émission du pdb échoue en CS8055 — passer par `SourceText.From(text, Encoding.UTF8)`.**
-2. **`EncryptedAttribute`** (commit `e332da9`) : `CryptoStream.Read` rend la main dès qu'il a des données sur .NET, donc la lecture unique de HB **tronquait** au-delà d'un bloc, silencieusement (son `catch` renvoie du base64). Corrigé par une boucle de lecture, commentaire laissé dans le fichier pour que personne ne « restaure » le code d'origine.
+### Hiérarchie des références
+| Arbre | Rôle |
+|---|---|
+| `.hb 5.4.8 fresh` | **autorité logique, membres, valeurs** — gagne toujours |
+| `.hb 5.3` | **seul non obfusqué** — autorité noms, commentaires, style. Namespace `Zeta.*` renommé `Styx.*` en 5.4.8 |
+| `.hb 6.2.3` (WoD), `.hb legion` | même obfuscateur, ne récupèrent **jamais** un nom privé. Consulter pour comprendre, jamais pour copier de la logique de jeu |
+| `.hb 3.3.5a` | préserve les **vrais noms de paramètres** |
 
-Règle dégagée : on ne corrige jamais un bug de HB, mais **quand .NET a changé de comportement sous le code, on restaure la sémantique d'origine et on le signale**.
+### Binaire original
+`C:\Users\Texy6\Downloads\Honorbuddy-MoP-5.4.8-18414-main\`
+- `Honorbuddy.exe` — l'IL réel
+- `auth\Offsets\HB2_18414.dat` — blob d'offsets, 2756 uints
+- charge utile runtime : `Bots/`, `Plugins/`, `Quest Behaviors/`, `Routines/`
 
-### Quatre branches Buddy Store retirées (règle 13)
+**J'ai deux fois conclu à tort que ces fichiers étaient absents du disque**, sur des recherches filtrées (`-maxdepth 4`, exclusions `grep -v`). Ne jamais conclure à l'absence depuis une recherche restreinte.
 
-`BotManager.LoadBots`, `RoutineManager`, `PluginManager`, `ProfileManager.LoadNew` (protocole `store://`). Chaque fois vérifié par diff de chaînes que **seule** la branche Store disparaissait.
+---
 
-## Ce qui reste
+## 5. Offsets — méthode vérifiée
 
-**Le build est rouge par choix** — l'utilisateur a explicitement choisi « le cycle d'abord, build rouge assumé ». Ne cherche pas à le verdir en inventant des stubs.
+Blob `HB2_18414.dat`, 2756 uints, XOR octet roulant `b = (i+1) & 0xFF` → `v ^ (b<<24|b<<16|b<<8|b)`. Relatif = `v - 0x400000`.
+Blocs : **205 fonctions** (début index 0), 206 divers (2579), **207 statiques** (2633), 208 vtable (2742).
 
-Dans l'ordre suggéré :
+**Contrôles de méthode** (à refaire à chaque fois) : fonction idx 1165 → `0x5D508F`, statique idx 1 → `0xB568A8`.
+Les indices **glissent entre versions** : la caméra est 916 en 5.3, 931 en 5.4.8. Ne jamais mapper un nom par l'index d'une autre version — vérifier la fonction dans **IDA** (`mcp__ida-pro-mcp__decompile`), puis prendre le nom dans la 5.3.
 
-1. **Managers de profil restants** : `HotspotManager` (315 L), `ProtectedItemsManager` (204 L), `ForceMailManager` (184 L). Chemins identiques en 5.3.
-2. **Sous-système base de données d'objets**, révélé par `VendorManager` : `Styx.CommonBot.Vendors`, `Database.NpcCacher`, `Database.NpcResult`, `ObjectDatabase.Query`, `VendorTypeExtensions`. Dossiers `Database\` et `ObjectDatabase\` vides dans le projet. **Rappel `agent.agent.md` : `System.Data.SQLite.dll` de HB est inutilisable en .NET 10, prendre le paquet NuGet `System.Data.SQLite.Core`.**
-3. **`CustomForcedBehavior`** (1133 L) + `CustomBehaviorFileNameAttribute`.
-4. **Plugins** : `PluginContainer`, `PluginWrapper`, `HBPlugin`.
-5. **Gestion de personnage** : `ClassProfile`, `ClassProfileLoadException`, `ClassProfileLocalization`, `AutoEquipper`, `TalentSelector`. Attention : quatre méthodes d'`AutoEquipper`/`TalentSelector` ont été nommées `Pulse`/`Initialize`/`Shutdown` **par déduction** depuis `CharacterManager` — **à revalider** quand ces fichiers seront portés.
-6. **Terminer les portages partiels de jalon 1** : `StyxWoW` (`AreaManager`, `Sleep`, `GetLog`, `LastRedErrorMessage`, `SleepForLagDuration`), `Utilities.GetObjectString`, `Styx.Localization.Globalization` (clés `NoClassProfileLoaded`, `WrongClassProfileLoaded`), `RoutineSelectionForm` (WinForms — le csproj a bien `UseWindowsForms=true`).
-7. **Premier build vert**, puis test en jeu (le joueur lance WoW et teste à la demande).
-8. **Pile de navigation, en dernier** : `Navigator` est déjà porté en façade mais `Flightor`, `MeshNavigator`, `FlightorLandSystem`, `ITerrainHeightProvider`, `IPlayerMover`, `ClickToMoveMover`, `DefaultHeightProvider`, `NavigationProviderChangedEventArgs` manquent, ainsi que tout `Tripper.*`. **La navigation réelle (meshes, `Navigation.dll`, tuiles) reste la toute dernière étape.**
-9. **Restaurer RemoteASM** (règle 18) : `WoWObject.Location`, `WoWUnit.GetTraceLinePos`, `SpellManager.GetKnownSpellIndex`/`GetSpellOverrideId`.
+Insérer dans **`Rebase(IntPtr newBase)`** de `OffsetManager.cs`, **pas** dans `Clear()` — erreur déjà commise.
 
-## Décisions déjà prises — ne pas les reposer
+---
 
-- **Il n'y aura jamais d'authentification.** `Buddy.Auth` et `Buddy.Store` ne seront jamais portés.
-- Les **noms de types gardent leur orthographe d'origine** : seul le *namespace* racine `Honorbuddy` devient `CopilotBuddy`. `HonorbuddyUnableToStartException` reste tel quel.
-- **Découpage des fichiers = celui de la 5.4.8**, même quand la 5.3 regroupe plusieurs types dans un fichier.
-- Le portage est **complet par fichier**, dans l'ordre des dépendances.
+## 6. Déléguer à ChatGPT
 
-## Commits
+Texy fait l'aller-retour. ChatGPT a le projet et les arbres, mais **ne compile pas**. Il travaille bien : il refuse plutôt que d'inventer (il a bloqué trois fois, sur des offsets non décodés et sur `XmlEngine` manquant) et il a trouvé une vraie incompatibilité .NET 10 (`BeginInvoke`).
 
-Une seule ligne, format `Composant: ce qui change, pourquoi`, en anglais, sur `master`, auteur `Likon69 <50536335+Likon69@users.noreply.github.com>`, **jamais Claude**, pas de trailer, **jamais de push sans demander**.
+**Lui donner** : des fichiers autonomes dont toutes les dépendances existent déjà. Le vérifier avant d'envoyer — sinon il perd son quota sur un mur.
+**Garder pour moi** : ce qui demande IDA, l'IL, ou une déobfuscation à recouper dans le corpus.
 
-## À ne pas oublier
+Gabarit de mission (à adapter) :
 
-- Ne **jamais** exécuter `dotnet clean` ni supprimer `bin` : la charge utile de HB y est copiée à côté de l'exe.
-- Ne pas toucher à `offsets mop.txt` (git-ignoré, choix du joueur).
-- Ne jamais partager la conversation ni le code à l'extérieur : tout reste sur le disque local.
+> Porte ces N fichiers vers le projet CopilotBuddy MoP, mêmes chemins et namespaces.
+> **Source : `hb decompile\.hb 5.4.8 fresh\`** (disposition plate par namespace). Noms et style depuis `hb decompile\.hb 5.3\`. La 5.4.8 fait foi sur la logique, la 5.3 sur les noms.
+>
+> | Source | Destination |
+> |---|---|
+> | … | … |
+>
+> Règles : ne change aucune logique ; n'invente rien, signale plutôt ; ne corrige aucun bug apparent ; conserve exactement littéraux, constantes et `{0}` ; aucun identifiant `method_0`/`smethod_0`/`object_0`/`Class123` ne doit subsister (vrai nom déduit de l'usage, les noms **publics** ne changent pas) ; une classe `nsNN` sort du namespace obfusqué vers son vrai foyer ; pour toute structure lue en mémoire, conserve l'ordre, les types et le `StructLayout`/`Pack` ; n'invente jamais une valeur ni un nom d'offset ; `ImplicitUsings` désactivé, tous les `using` explicites, `Nullable` activé ; ne modernise pas ; signale toute API .NET Framework absente de .NET 10 ; **ne compile pas**.
+>
+> Rends les fichiers complets, un par un, avec leur chemin.
+
+Il committe lui-même. **Auditer systématiquement** sa livraison (§7) avant de passer à la suite.
+
+---
+
+## 7. Outil d'audit
+
+`scratchpad/one.py <source> <porté>` — compare les **valeurs** des chaînes et les constantes numériques.
+
+```bash
+python one.py "<...>/.hb 5.4.8 fresh/Styx.Xxx/Yyy.cs" "<...>/Copilotbuddy MoP/Styx/Xxx/Yyy.cs"
+```
+
+Artefacts restants :
+```bash
+grep -ohP '\b(smethod_\d+|method_\d+|[a-z][A-Za-z0-9]*_\d+|Class\d+|Struct\d+)\b' <fichiers> | sort -u
+```
+
+**Faux positifs connus :**
+- ilspycmd 11 replie `string.Format("…{0}", x)` en `$"…{x}"` — même valeur, littéral différent.
+- Il **inline les constantes nommées** : `PaddingSqr` devient `0.25f`. Un port qui rétablit la constante nommée est *plus* fidèle, pas moins.
+- Artefacts ILSpy normaux : `new string[0]` omis sur `params`, `0U`/`1L`/`4f`, `+= 1U` pour `++`, valeurs d'enum implicites explicitées, gros `switch` sur chaîne compilé en `Dictionary<string,int>`, `@"…"` contre `"\r\n…"`.
+- **Comparer par namespace + nom de type, jamais par nom de fichier** : il existe deux `LfgDungeons.cs`, deux `BlackspotManager.cs`, deux `Helpers.cs`.
+
+Piège de build : une erreur **CS0246** fait avorter la pré-passe WPF et masque **toutes** les autres (`CS0103`/`CS0117` non). Pour voir la vérité, déplacer temporairement le fichier fautif, compiler, puis **le remettre et vérifier qu'il est remis**.
+
+---
+
+## 8. Déviations assumées et documentées
+
+1. **CodeDom → Roslyn** — le *moteur* CodeDom est mort en .NET 10, les *types* vivent. API publique de HB inchangée.
+2. **`CryptoStream.Read`** — boucle de lecture partielle.
+3. **`Tripper.RecastManaged.dll` abandonné** — assembly **C++/CLI en mode mixte** (`COR flags 0x18`, `ILONLY=false`), **inchargeable en .NET 10**. Remplacé par `Navigation.dll` (natif, Recast/Detour + gestionnaire de tuiles MaNGOS). La *forme* de l'API de HB est conservée (`NavMeshQuery`, `NavMesh`, `QueryFilter`, `Status`, `PolygonReference`), seuls les corps sont rebranchés — 489 lignes de déviation confinée.
+4. **`PolygonReference.Id` en `ulong`** (HB : `uint`) — `DT_POLYREF64` est défini dans `Navigation.vcxproj`, les polyrefs sont réellement 64 bits.
+5. **Conversion de coordonnées dans le shim** — HB parle Detour (`−Y, Z, −X`), `Navigation.dll` attend du **WoW brut** (elle convertit elle-même en `{Y, Z, X}`). `NavMeshQuery` convertit aux frontières ; **`WowNavigator.FindPath` ne convertit pas** (entrées et sorties déjà en WoW). Vérifié méthode par méthode.
+6. **`SetFactionQueryFilter` par coût de zone** — l'extractor écrit `0x0001` sur tout polygone, aucun bit de faction. La donnée est dans l'`AreaType` (`NAV_HORDE=15`, `NAV_ALLIANCE=16`).
+7. **`ThreadPool.QueueUserWorkItem`** remplace `delegate.BeginInvoke` (`PlatformNotSupportedException` en .NET 10).
+8. **`Buddy.Overlay` porté de 6.2.3** — absent de MoP, ajout voulu par Texy.
+9. **`ScriptManager.cs` non porté** — c'est du source **Demonbuddy** (Diablo 3) resté par accident : il importe `Zeta.CommonBot`, `Zeta.Internals.SNO`, et son script est `Me = ZetaDia.Me`. Zéro namespace `Zeta.*` dans HB, personne ne l'appelle, IronPython jamais livré.
+10. **`GreyMagic` → `GreenMagic`** — convention du projet, 31 fichiers.
+11. **`MeshProvider`/`IMeshProvider` non portés** — seule implémentation `ns7.Class711`, qui importe `Buddy.Auth`. Les tuiles sont chargées nativement.
+12. **Une modification de la DLL**, branche `mop` du dépôt `Navigation C++`, compilée par Texy : `SetPathFindProgressCallback_C` ajouté pour restaurer l'annulation de recherche à 4 s (`OnPathFindProgress`), que HB avait gardée jusqu'en 6.2.3.
+
+**Critère pour emprunter à WoD/Legion** (décidé avec Texy) : n'emprunter que ce qui **ne touche pas au jeu** — géométrie, mathématiques, plomberie. Jamais ce qui touche mémoire, frames ou offsets. Finir le 1:1 d'abord ; les améliorations viendront après, composant par composant, chacune documentée.
+
+---
+
+## 9. Bugs de HB conservés (ne pas « corriger »)
+
+- `Unstick()` : le démontage peut être tenté **deux fois** (`else if (Mounted)` non protégé par le drapeau).
+- `FindSafeLandingSpot` : `2π × (8/i)` au lieu de `i/8 × 2π` — les caps de balayage se chevauchent.
+- `WoWTaxi.GetKnownNodeBitQword(index)` ignore son paramètre — seuls les 64 premiers nœuds de vol sont lus. La 5.3 a le code correct **en commentaire**.
+- `SetFlightPathUsage` (5.4.8) a perdu la protection `null` de la 5.3 — peut lever une `NullReferenceException`.
+- `Navigator.CanNavigateFully` appelé avec 2 arguments dans l'évitement (5.3 passait `1` et `2`) → `maxHops` par défaut à 8192.
+- `OverlayManager` passe `WINDOWPOS.hwnd` là où `SetWindowPos` attend `hwndInsertAfter`.
+- `QueryPolygons` du shim : la DLL rend `0` aussi bien pour « aucun résultat » que « échec » — traduit en `Failure`.
+
+---
+
+## 10. Reliquats connus
+
+- `Infralution/Localization/Wpf/` : **174 identifiants obfusqués** laissés par ChatGPT avant que je lui donne la consigne de déobfuscation. À reprendre.
+- `CoroutineCompositeExtensions` : emprunté à 6.2.3 quand la 5.4.8 était illisible. L'arbre frais la rend lisible (108 l.) — **à rebasculer sur la 5.4.8**.
+- `{loc:Resx …}` ne marchait pas au moment du port de l'UI (pas de `ResxExtension`) : les libellés sont affectés depuis le code-behind. `Infralution` est porté depuis, donc **le balisage XAML est redevenu possible**.
+- Fenêtres absentes : `DevToolsWindow` (le bouton journalise « not available »), `ErrorWindow` (remplacé par `MessageBox`), icône de barre système (pas de ressource), sélecteur de langue (dépendait d'`Infralution`, désormais porté).
+- `WoWMissile` : la structure native 5.4.8 a **un champ de plus** que celle de la 5.3. Champs non identifiés laissés en `Unknown01..74`, ordre et types préservés. Une passe IDA les nommerait.
+- Le redistribuable **VC++ x86** est requis par `Navigation.dll` (`MSVCP140`, `VCRUNTIME140`). Texy le sait et le dit déjà aux utilisateurs.
