@@ -229,6 +229,7 @@ namespace Tripper.RecastManaged.Detour
             // translation, so it applies to directions exactly as it does to positions.
             hitNormal = ToDetourPos(hitNormalC);
 
+
             if (pathCount > 0)
             {
                 result = new PolygonReference[pathCount];
@@ -241,6 +242,27 @@ namespace Tripper.RecastManaged.Detour
             }
 
             return new Status(status);
+        }
+
+        /// <summary>
+        /// Wraps Navigation.dll's <c>ClosestPointOnPoly_C(uint mapId, ulong polyRef,
+        /// XYZ_C position, out XYZ_C closestPoint)</c>. That export returns a plain bool,
+        /// so the Status is built from Status.Success/Status.Failure rather than
+        /// round-tripped from a native status word.
+        ///
+        /// Added after the first three methods because CommonCoroutines.LandAndDismount
+        /// calls it to snap a candidate landing spot onto the mesh; Honorbuddy's own
+        /// signature is reproduced exactly so that call site ports verbatim.
+        /// </summary>
+        public Status ClosestPointOnPoly(PolygonReference @ref, Vector3 pos, out Vector3 closest)
+        {
+            var posC = ToWowPos(pos);
+
+            bool ok = NativeMethods.ClosestPointOnPoly_C(MapId, @ref.Id, posC,
+                out NativeMethods.XYZ_C closestC);
+
+            closest = ok ? ToDetourPos(closestC) : default;
+            return ok ? Status.Success : Status.Failure;
         }
     }
 }

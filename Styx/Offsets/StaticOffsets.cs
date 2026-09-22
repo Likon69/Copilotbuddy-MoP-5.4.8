@@ -99,6 +99,7 @@ namespace Styx.Offsets
         public IntPtr OwnerAuctions;
         public IntPtr NumListAuctions;
         public IntPtr ListAuctions;
+        public IntPtr InFlightMissiles;
         public IntPtr TaxiMap_NumNodes;
         public IntPtr TaxiMap_CurrentNodeId;
         public IntPtr TaxiMap_NodeInfos;
