@@ -1,0 +1,77 @@
+using System;
+using System.Diagnostics;
+
+namespace Styx.Common
+{
+    public class PerformanceTimer : IDisposable
+    {
+        public PerformanceTimer(string debugText, FinishedMeasuringCallback callback = null, int logMsLimit = 0)
+        {
+            this.finishedMeasuringCallback = callback;
+            this.stopwatch = new Stopwatch();
+            this.debugText = debugText;
+            this.logMsLimit = logMsLimit;
+        }
+
+        public void Start()
+        {
+            this.stopwatch.Start();
+        }
+
+        [Conditional("TIMERS")]
+        private void StartTimer()
+        {
+            this.Start();
+        }
+
+        [Conditional("TIMERS")]
+        private void StopTimer()
+        {
+            this.StopAndPrint();
+        }
+
+        public void DontPrint()
+        {
+            this.dontPrint = true;
+        }
+
+        public long ElapsedMilliseconds
+        {
+            get
+            {
+                return this.stopwatch.ElapsedMilliseconds;
+            }
+        }
+
+        public void StopAndPrint()
+        {
+            this.stopwatch.Stop();
+            if (this.dontPrint)
+            {
+                return;
+            }
+            if (this.ElapsedMilliseconds > (long)this.logMsLimit)
+            {
+                Trace.Write(string.Format("[{0}] {1}", this.stopwatch.Elapsed, this.debugText));
+            }
+            if (this.finishedMeasuringCallback != null)
+            {
+                this.finishedMeasuringCallback.BeginInvoke(this.ElapsedMilliseconds, null, null);
+            }
+        }
+
+        public void Dispose()
+        {
+        }
+
+        private readonly Stopwatch stopwatch;
+
+        private readonly string debugText;
+
+        private bool dontPrint;
+
+        private readonly FinishedMeasuringCallback finishedMeasuringCallback;
+
+        private int logMsLimit;
+    }
+}
