@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionInteract_Run_Interacting_with_" xml:space="preserve">
+    <value>Interacting with </value>
+  </data>
+  <data name="ActionInteract_Run_Trying_to_interact_with_a_null_object__Wtf_" xml:space="preserve">
+    <value>Trying to interact with a null object. Wtf?</value>
+  </data>
+  <data name="ActionMoveToPoi_Run_I_don_t_want_to_move_to__0__0__0_" xml:space="preserve">
+    <value>I don't want to move to &lt;0, 0, 0&gt;</value>
+  </data>
+  <data name="ActionMoveToPoi_Run_Moving_to_" xml:space="preserve">
+    <value>Moving to </value>
+  </data>
+  <data name="ActionSetPoi_Run_Error__" xml:space="preserve">
+    <value>Error: </value>
+  </data>
+  <data name="ActionWaitForLuaEvent_Run__wait_timed_out_" xml:space="preserve">
+    <value> wait timed out!</value>
+  </data>
+  <data name="GalvandarIsDead" xml:space="preserve">
+    <value>Galvandar is dead. Avoiding Iceblood Garrison from now on.</value>
+  </data>
+  <data name="NothingElseToDoWaitingTower" xml:space="preserve">
+    <value>Nothing else to do. Waiting for towers to attack</value>
+  </data>
+</root>
