@@ -1,0 +1,336 @@
+<mah:MetroWindow x:Class="CopilotBuddy.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CopilotBuddy"
+        mc:Ignorable="d"
+        x:Name="Window"
+        Title="CopilotBuddy Settings"
+        Icon="pack://application:,,,/CopilotBuddy.ico"
+        Width="945" Height="512"
+        Background="{DynamicResource WindowBackgroundBrush}"
+        GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
+        TitleCharacterCasing="Normal"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterOwner"
+        MinWidth="509" MinHeight="314"
+        Closing="Window_Closing">
+    <mah:MetroWindow.Resources>
+        <BooleanToVisibilityConverter x:Key="boolToVis"/>
+        <local:NegateConverter x:Key="negate"/>
+        <local:EnumLocalizedDescriptionConverter x:Key="EnumLocalizedDescriptionConverter"/>
+        <local:LogicalAndConverter x:Key="LogicalAndConverter"/>
+    </mah:MetroWindow.Resources>
+    <Grid x:Name="LayoutRoot">
+        <!-- Bottom buttons row 2 (higher) -->
+        <Button x:Name="btnDevTools"
+                Margin="8,0,0,37.96" VerticalAlignment="Bottom" Height="25.96"
+                HorizontalAlignment="Left" Width="112"
+                Click="btnDevTools_Click">
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="tbDevToolsText"/>
+            </Viewbox>
+        </Button>
+        <Button x:Name="btnPlugins"
+                Margin="124,0,0,37.96" VerticalAlignment="Bottom" Height="25.96"
+                HorizontalAlignment="Left" Width="112"
+                Click="btnPlugins_Click">
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="tbPluginsText"/>
+            </Viewbox>
+        </Button>
+        <!-- Discord button - the one deliberate addition beyond HB 5.4.8, requested by the user.
+             Same link, same behaviour as CopilotBuddy/UI/SettingsWindow.xaml.cs:153. -->
+        <Button x:Name="btnDiscord"
+                Margin="240,0,0,37.96" VerticalAlignment="Bottom" Height="25.96"
+                HorizontalAlignment="Left" Width="112"
+                Click="btnDiscord_Click">
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Discord"/>
+            </Viewbox>
+        </Button>
+        <!-- Bottom buttons row 1 (lower) -->
+        <Button x:Name="btnClassConfig"
+                Margin="8,0,0,8" VerticalAlignment="Bottom" Height="25.96"
+                HorizontalAlignment="Left" Width="112"
+                Click="btnClassConfig_Click">
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="tbClassConfigText"/>
+            </Viewbox>
+        </Button>
+        <Button x:Name="btnBotConfig"
+                Margin="124,0,0,8" VerticalAlignment="Bottom" Height="25.96"
+                HorizontalAlignment="Left" Width="112"
+                Click="btnBotConfig_Click">
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="tbBotConfigText"/>
+            </Viewbox>
+        </Button>
+        <Button x:Name="btnSaveAndClose"
+                Margin="240,0,0,8" VerticalAlignment="Bottom" Height="25.96"
+                HorizontalAlignment="Left" Width="112"
+                Click="btnSaveAndClose_Click">
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="tbSaveAndCloseText"/>
+            </Viewbox>
+        </Button>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="8,8,8,67.92">
+            <WrapPanel>
+                <!-- General -->
+                <GroupBox x:Name="gbGeneral" Foreground="White" Height="199" Width="224" Margin="4">
+                    <Grid>
+                        <CheckBox x:Name="chkKillBetweenHotspots" Foreground="White"
+                                  HorizontalAlignment="Left" Margin="8,9,0,0" VerticalAlignment="Top" Width="194"
+                                  IsChecked="{Binding StyxSettings.KillBetweenHotspots, Mode=TwoWay}">
+                            <TextBlock x:Name="tbKillBetweenHotspots" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <CheckBox x:Name="chkLogoutForInactivity" Foreground="White"
+                                  Margin="8,32,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194"
+                                  IsChecked="{Binding StyxSettings.LogoutForInactivity, Mode=TwoWay}">
+                            <TextBlock x:Name="tbLogoutForInactivity" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <CheckBox x:Name="chkRessAtSpiritHealer" Foreground="White"
+                                  Margin="8,55,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194"
+                                  IsChecked="{Binding CharSettings.RessAtSpiritHealers, Mode=TwoWay}">
+                            <TextBlock x:Name="tbRessAtSpiritHealer" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <CheckBox x:Name="chkSeperatedLogFolders" Foreground="White"
+                                  Margin="8,78,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="194"
+                                  IsChecked="{Binding StyxSettings.SeperatedLogFolders, Mode=TwoWay}">
+                            <TextBlock x:Name="tbSeperatedLogFolders" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <Label x:Name="lblLogLevel" Foreground="White" Height="24"
+                               HorizontalAlignment="Left" Margin="8,105,0,0" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="cbLogLevel" Height="23"
+                                  HorizontalAlignment="Left" Margin="8,131,0,0" VerticalAlignment="Top" Width="192"
+                                  SelectionChanged="cbLogLevel_SelectionChanged">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource EnumLocalizedDescriptionConverter}}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                </GroupBox>
+
+                <!-- Mesh / general 2 -->
+                <GroupBox x:Name="gbMesh" Foreground="White" Height="199" Width="224" Margin="4">
+                    <Grid>
+                        <CheckBox x:Name="chkUseFrameLock" Foreground="White"
+                                  Margin="8,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                  IsChecked="{Binding StyxSettings.UseFrameLock, Mode=TwoWay}">
+                            <TextBlock x:Name="tbUseFrameLock" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <Label x:Name="lblTps" Foreground="White" Margin="8,36,0,0"
+                               HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="176"/>
+                        <Slider x:Name="sldTps" Margin="8,60,26,0" Maximum="100" Minimum="5"
+                                TickPlacement="BottomRight" TickFrequency="5" AutoToolTipPlacement="TopLeft"
+                                IsSnapToTickEnabled="True" VerticalAlignment="Top"
+                                Value="{Binding CharSettings.TicksPerSecond, Mode=TwoWay}"/>
+                        <Label x:Name="lblSliderTpsValue" Foreground="White" HorizontalAlignment="Right"
+                               Margin="0,0,12,95" VerticalAlignment="Bottom" ContentStringFormat="N0"
+                               Content="{Binding Value, ElementName=sldTps}"/>
+                        <Label x:Name="lblMeshFolderPath" Foreground="White"
+                               HorizontalAlignment="Left" Height="16" Margin="8,91,0,0" VerticalAlignment="Top" Width="194"/>
+                        <TextBox x:Name="txtMeshPath" HorizontalAlignment="Left" Margin="8,111,0,0"
+                                 TextWrapping="NoWrap" VerticalAlignment="Top" Width="196" IsReadOnly="True"
+                                 Text="{Binding StyxSettings.MeshesFolderPath, Mode=TwoWay}"/>
+                        <Button x:Name="btnChangeMeshPath" Margin="8,139,129,0" Height="21" VerticalAlignment="Top"
+                                Click="btnChangeMeshPath_Click">
+                            <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock x:Name="tbChangeText"/>
+                            </Viewbox>
+                        </Button>
+                    </Grid>
+                </GroupBox>
+
+                <!-- Character manager -->
+                <GroupBox x:Name="gbCharManager" Foreground="White" Height="199" Width="224" Margin="4">
+                    <Grid>
+                        <Label x:Name="lblClassProfile" Foreground="White" Height="16" Margin="8,6,0,0"
+                               VerticalAlignment="Top" HorizontalAlignment="Left" Width="192"/>
+                        <ComboBox x:Name="cbClassProfile" Height="23" HorizontalAlignment="Left"
+                                  Margin="8,27,0,0" VerticalAlignment="Top" Width="192"
+                                  SelectionChanged="cbClassProfile_SelectionChanged"/>
+                        <CheckBox x:Name="chkAutoEquip" Foreground="White" HorizontalAlignment="Left"
+                                  Margin="8,55,0,0" Height="16" VerticalAlignment="Top" Width="192"
+                                  IsChecked="{Binding CharSettings.AutoEquip, Mode=TwoWay}">
+                            <TextBlock x:Name="tbAutoEquip" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <CheckBox x:Name="chkAutoEquipBoEEpics" Foreground="White" HorizontalAlignment="Left"
+                                  Margin="8,76,0,0" Height="16" VerticalAlignment="Top" Width="192"
+                                  IsChecked="{Binding CharSettings.AutoEquipBoEEpics, Mode=TwoWay}"
+                                  IsEnabled="{Binding CharSettings.AutoEquip}">
+                            <TextBlock x:Name="tbAutoEquipBoEEpics" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <CheckBox x:Name="chkSelectTalents" Foreground="White" HorizontalAlignment="Left"
+                                  Margin="8,97,0,0" Height="16" VerticalAlignment="Top" Width="192"
+                                  IsChecked="{Binding CharSettings.SelectTalents, Mode=TwoWay}">
+                            <TextBlock x:Name="tbSelectTalents" TextWrapping="Wrap"/>
+                        </CheckBox>
+                    </Grid>
+                </GroupBox>
+
+                <!-- Character manager 2 (loot rolls) -->
+                <GroupBox x:Name="gbCharManager2" Foreground="White" Height="199" Width="224" Margin="4">
+                    <Grid>
+                        <CheckBox x:Name="chkRollOnItems" Foreground="White" HorizontalAlignment="Left"
+                                  Margin="8,10,0,0" Height="16" VerticalAlignment="Top" Width="192"
+                                  IsChecked="{Binding CharSettings.RollOnItems, Mode=TwoWay}">
+                            <TextBlock x:Name="tbRollOnItems" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <CheckBox x:Name="chkRollDisenchantWhenGreeding" Foreground="White" HorizontalAlignment="Left"
+                                  Margin="8,31,0,0" Height="16" VerticalAlignment="Top" Width="192"
+                                  IsEnabled="{Binding CharSettings.RollOnItems}"
+                                  IsChecked="{Binding CharSettings.RollDisenchantWhenGreed, Mode=TwoWay}">
+                            <TextBlock x:Name="tbRollDisenchantWhenGreed" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <Label x:Name="lblMaxBoEDisenchantQuality" Foreground="White" Height="16" Margin="8,52,0,0"
+                               VerticalAlignment="Top" HorizontalAlignment="Left" Width="192">
+                            <UIElement.IsEnabled>
+                                <MultiBinding Converter="{StaticResource LogicalAndConverter}">
+                                    <Binding Path="CharSettings.RollOnItems"/>
+                                    <Binding Path="CharSettings.RollDisenchantWhenGreed"/>
+                                </MultiBinding>
+                            </UIElement.IsEnabled>
+                        </Label>
+                        <ComboBox x:Name="cbMaxBoEDisenchantQuality" Height="23" HorizontalAlignment="Left"
+                                  Margin="8,73,0,0" VerticalAlignment="Top" Width="192"
+                                  SelectionChanged="cbMaxBoEDisenchantQuality_SelectionChanged">
+                            <UIElement.IsEnabled>
+                                <MultiBinding Converter="{StaticResource LogicalAndConverter}">
+                                    <Binding Path="CharSettings.RollOnItems"/>
+                                    <Binding Path="CharSettings.RollDisenchantWhenGreed"/>
+                                </MultiBinding>
+                            </UIElement.IsEnabled>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource EnumLocalizedDescriptionConverter}}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                </GroupBox>
+
+                <!-- Looting -->
+                <GroupBox x:Name="gbLooting" Foreground="White" Height="199" Width="224" Margin="4">
+                    <Grid>
+                        <CheckBox x:Name="chkLootMobs" Foreground="White" Height="16" Margin="8,13,0,0"
+                                  VerticalAlignment="Top" HorizontalAlignment="Left" Width="194"
+                                  IsChecked="{Binding CharSettings.LootMobs, Mode=TwoWay}">
+                            <TextBlock x:Name="tbLootMobs" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <CheckBox x:Name="chkSkinMobs" Foreground="White" Height="16" Margin="8,34,0,0"
+                                  HorizontalAlignment="Left" VerticalAlignment="Top" Width="95"
+                                  IsChecked="{Binding CharSettings.SkinMobs, Mode=TwoWay}">
+                            <TextBlock x:Name="tbSkinMobs" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <CheckBox x:Name="chkNinjaSkinMobs" Foreground="White" Height="16" Margin="112,34,10,0"
+                                  VerticalAlignment="Top"
+                                  IsChecked="{Binding CharSettings.NinjaSkin, Mode=TwoWay}">
+                            <TextBlock x:Name="tbNinjaSkin" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <CheckBox x:Name="chkHarvestMinerals" Foreground="White" HorizontalAlignment="Left"
+                                  Margin="8,56,0,0" Height="16" VerticalAlignment="Top" Width="194"
+                                  IsChecked="{Binding CharSettings.HarvestMinerals, Mode=TwoWay}">
+                            <TextBlock x:Name="tbHarvestMinerals" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <CheckBox x:Name="chkHarvestHerbs" Foreground="White" Height="16" Margin="8,78,0,0"
+                                  VerticalAlignment="Top" HorizontalAlignment="Left" Width="194"
+                                  IsChecked="{Binding CharSettings.HarvestHerbs, Mode=TwoWay}">
+                            <TextBlock x:Name="tbHarvestHerbs" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <Label x:Name="lblLootRadius" Foreground="White" Margin="8,108,0,0"
+                               HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="194"/>
+                        <Slider x:Name="sldLootDistance" Margin="8,133,28,0" Maximum="100"
+                                TickPlacement="BottomRight" TickFrequency="5" AutoToolTipPlacement="TopLeft"
+                                IsSnapToTickEnabled="True" VerticalAlignment="Top"
+                                Value="{Binding CharSettings.LootRadius, Mode=TwoWay}"/>
+                        <Label x:Name="lblSliderLootRadiusValue" Foreground="White" HorizontalAlignment="Right"
+                               Margin="0,0,8,21" VerticalAlignment="Bottom" ContentStringFormat="N0"
+                               Content="{Binding Value, ElementName=sldLootDistance}"/>
+                    </Grid>
+                </GroupBox>
+
+                <!-- Drink / food amounts -->
+                <GroupBox x:Name="gbVendors" Foreground="White" Height="199" Width="224" Margin="4">
+                    <Grid>
+                        <Label x:Name="lblDrinkAmount" Foreground="White" Margin="8,29,0,0"
+                               HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="194"/>
+                        <Slider x:Name="sldDrinkAmount" Margin="8,51,28,0" VerticalAlignment="Top" Maximum="100"
+                                TickPlacement="BottomRight" TickFrequency="20" AutoToolTipPlacement="TopLeft"
+                                IsSnapToTickEnabled="True"
+                                Value="{Binding CharSettings.DrinkAmount, Mode=TwoWay}"/>
+                        <Label x:Name="lblDrinkAmountValue" Foreground="White" HorizontalAlignment="Right"
+                               Margin="0,49,8,0" ContentStringFormat="N0" Height="16" VerticalAlignment="Top"
+                               Content="{Binding Value, ElementName=sldDrinkAmount}"/>
+                        <Label x:Name="lblFoodAmount" Foreground="White" Margin="8,95,0,0"
+                               HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="194"/>
+                        <Slider x:Name="sldFoodAmount" Margin="8,115,28,0" VerticalAlignment="Top" Maximum="100"
+                                TickPlacement="BottomRight" TickFrequency="20" AutoToolTipPlacement="TopLeft"
+                                IsSnapToTickEnabled="True"
+                                Value="{Binding CharSettings.FoodAmount, Mode=TwoWay}"/>
+                        <Label x:Name="lblFoodAmountValue" Foreground="White" HorizontalAlignment="Right"
+                               Margin="0,111,8,0" ContentStringFormat="N0" Height="16" VerticalAlignment="Top"
+                               Content="{Binding Value, ElementName=sldFoodAmount}"/>
+                    </Grid>
+                </GroupBox>
+
+                <!-- Mail / refreshment names -->
+                <GroupBox x:Name="gbNames" Foreground="White" Height="199" Width="224" Margin="4">
+                    <Grid>
+                        <Label x:Name="lblMailRecipient" Foreground="White" Height="16"
+                               HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txtMailRecipient" Margin="8,27.96,8,0" TextWrapping="NoWrap"
+                                 VerticalAlignment="Top" Text="{Binding CharSettings.MailRecipient, Mode=TwoWay}"/>
+                        <Label x:Name="lblFoodName" Foreground="White" Height="16"
+                               HorizontalAlignment="Left" Margin="8,63,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="txtFoodName" Margin="8,83,8,0" TextWrapping="NoWrap"
+                                 VerticalAlignment="Top" Text="{Binding CharSettings.FoodName, Mode=TwoWay}"/>
+                        <Label x:Name="lblDrinkName" Foreground="White" Height="16"
+                               HorizontalAlignment="Left" Margin="8,0,0,33.96" VerticalAlignment="Bottom"/>
+                        <TextBox x:Name="txtWaterName" Margin="8,0,8,8" TextWrapping="NoWrap"
+                                 VerticalAlignment="Bottom" Text="{Binding CharSettings.DrinkName, Mode=TwoWay}"/>
+                    </Grid>
+                </GroupBox>
+
+                <!-- Mount -->
+                <GroupBox x:Name="gbMount" Foreground="White" Height="199" Width="224" Margin="4">
+                    <Grid>
+                        <Label x:Name="lblMountName" Foreground="White" Height="16" Margin="8,6,0,0"
+                               VerticalAlignment="Top" HorizontalAlignment="Left" Width="192"/>
+                        <ComboBox x:Name="cbMountName" HorizontalAlignment="Left" Margin="8,27,0,0"
+                                  VerticalAlignment="Top" Width="150"
+                                  IsEnabled="{Binding IsChecked, ElementName=chkRandomMount, Converter={StaticResource negate}}"
+                                  ItemsSource="{Binding GroundMounts}"
+                                  SelectedValue="{Binding CharSettings.MountName, Mode=TwoWay}"/>
+                        <Label x:Name="lblFlyingMountName" Foreground="White" Height="16" Margin="8,55,0,0"
+                               VerticalAlignment="Top" HorizontalAlignment="Left" Width="192"/>
+                        <ComboBox x:Name="cbFlyingMountName" HorizontalAlignment="Left" Margin="8,76,0,0"
+                                  VerticalAlignment="Top" Width="150"
+                                  IsEnabled="{Binding IsChecked, ElementName=chkRandomMount, Converter={StaticResource negate}}"
+                                  ItemsSource="{Binding FlyingMounts}"
+                                  SelectedValue="{Binding CharSettings.FlyingMountName, Mode=TwoWay}"/>
+                        <CheckBox x:Name="chkRandomMount" Foreground="White" Height="16" HorizontalAlignment="Left"
+                                  Margin="8,106,0,0" VerticalAlignment="Top" Width="192"
+                                  IsChecked="{Binding CharSettings.UseRandomMount, Mode=TwoWay}">
+                            <TextBlock x:Name="tbRandomMount" TextWrapping="Wrap"/>
+                        </CheckBox>
+                        <Label x:Name="lblMountDistance" Foreground="White" Margin="8,128,0,0"
+                               HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="194"/>
+                        <Slider x:Name="sldMountDistance" Margin="8,148,27,0" Maximum="200" Minimum="30"
+                                TickPlacement="BottomRight" TickFrequency="5" AutoToolTipPlacement="TopLeft"
+                                IsSnapToTickEnabled="True" VerticalAlignment="Top"
+                                Value="{Binding CharSettings.MountDistance, Mode=TwoWay}"/>
+                        <Label x:Name="lblSliderMountDistanceValue" Foreground="White" HorizontalAlignment="Right"
+                               Margin="0,0,7,6" VerticalAlignment="Bottom" ContentStringFormat="N0"
+                               Content="{Binding Value, ElementName=sldMountDistance}"/>
+                    </Grid>
+                </GroupBox>
+            </WrapPanel>
+        </ScrollViewer>
+    </Grid>
+</mah:MetroWindow>

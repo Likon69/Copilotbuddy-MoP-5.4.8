@@ -1,0 +1,87 @@
+<mah:MetroWindow x:Class="CopilotBuddy.PluginsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Name="Window"
+        Title="CopilotBuddy Plugins"
+        Icon="pack://application:,,,/CopilotBuddy.ico"
+        Width="301"
+        Height="324"
+        Background="{DynamicResource WindowBackgroundBrush}"
+        GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
+        TitleCharacterCasing="Normal"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Closing="Window_Closing">
+    <Grid x:Name="LayoutRoot">
+        <ListBox x:Name="lstPlugins"
+                 HorizontalAlignment="Left"
+                 Margin="8,8,0,69.88"
+                 Width="270"
+                 HorizontalContentAlignment="Stretch"
+                 SelectionChanged="lstPlugins_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                        <CheckBox IsChecked="{Binding Enabled, Mode=TwoWay}"
+                                  Click="CheckBox_Click"/>
+                        <Label HorizontalAlignment="Stretch" Content="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label x:Name="lblAuthorLabel"
+               Height="25"
+               HorizontalAlignment="Left"
+               Margin="8,0,0,50"
+               VerticalAlignment="Bottom"
+               Width="59">
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="tbAuthorLabelText"/>
+            </Viewbox>
+        </Label>
+        <Label x:Name="lblVersionLabel"
+               Height="25"
+               HorizontalAlignment="Left"
+               Margin="8,0,0,30"
+               VerticalAlignment="Bottom"
+               Width="59">
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="tbVersionLabelText"/>
+            </Viewbox>
+        </Label>
+        <Label x:Name="lblAuthor"
+               HorizontalAlignment="Left"
+               Margin="54.323,0,0,49.92"
+               VerticalAlignment="Bottom"/>
+        <Label x:Name="lblVersion"
+               HorizontalAlignment="Left"
+               Margin="54.323,0,0,29.96"
+               VerticalAlignment="Bottom"/>
+        <Button x:Name="btnSettings"
+                Height="22"
+                HorizontalAlignment="Left"
+                Margin="8,0,0,8"
+                VerticalAlignment="Bottom"
+                Width="90"
+                Click="btnSettings_Click">
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="tbSettingsButtonText"/>
+            </Viewbox>
+        </Button>
+        <Button x:Name="btnRecompile"
+                Height="22"
+                Width="90"
+                HorizontalAlignment="Right"
+                Margin="0,0,8,8"
+                VerticalAlignment="Bottom"
+                Click="btnRecompile_Click">
+            <Viewbox Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="tbRecompileButtonText"/>
+            </Viewbox>
+        </Button>
+    </Grid>
+</mah:MetroWindow>
