@@ -117,20 +117,235 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MainWindowTitleFormat" xml:space="preserve">
-    <value>{1}</value>
+  <data name="AdvancedModeCheckboxText" xml:space="preserve">
+    <value>Advanced Mode</value>
   </data>
-  <data name="Honorbuddy_Startup_Complete" xml:space="preserve">
-    <value>Honorbuddy Startup Complete</value>
+  <data name="Archbuddy_AllTypes" xml:space="preserve">
+    <value>All types</value>
   </data>
-  <data name="StartUpError64Bit" xml:space="preserve">
-    <value>We couldn't find a free WoW process to attach. There are 64bit version(s) of WoW running. Please make sure you use Honorbuddy Launcher to launch the game before starting honorbuddy.</value>
+  <data name="Archbuddy_AutomaticallySolveArtifacts" xml:space="preserve">
+    <value>Automatically solve artifacts</value>
   </data>
-  <data name="StartUpErrorNotInGame" xml:space="preserve">
-    <value>We couldn't find a free WoW process to attach. Please make certain your toon is standing in game world and you are running latest version of Honorbuddy.</value>
+  <data name="Archbuddy_AutoTrainArchaeology" xml:space="preserve">
+    <value>Auto train archaeology</value>
   </data>
-  <data name="ProcessTitle" xml:space="preserve">
-    <value>PID: {0} logged in on: {1}</value>
+  <data name="Archbuddy_Blacklisting" xml:space="preserve">
+    <value>Blacklisting</value>
+  </data>
+  <data name="Archbuddy_ByName" xml:space="preserve">
+    <value>By name</value>
+  </data>
+  <data name="Archbuddy_ByType" xml:space="preserve">
+    <value>By type</value>
+  </data>
+  <data name="Archbuddy_CrateArtifactsWhenPossible" xml:space="preserve">
+    <value>Crate artifacts when possible</value>
+  </data>
+  <data name="Archbuddy_Draenei" xml:space="preserve">
+    <value>Draenei</value>
+  </data>
+  <data name="Archbuddy_Dwarf" xml:space="preserve">
+    <value>Dwarf</value>
+  </data>
+  <data name="Archbuddy_EasternKingdoms" xml:space="preserve">
+    <value>Eastern Kingdoms</value>
+  </data>
+  <data name="Archbuddy_ForceTrain" xml:space="preserve">
+    <value>Force Train</value>
+  </data>
+  <data name="Archbuddy_Fossil" xml:space="preserve">
+    <value>Fossil</value>
+  </data>
+  <data name="Archbuddy_Kalimdor" xml:space="preserve">
+    <value>Kalimdor</value>
+  </data>
+  <data name="Archbuddy_Mantid" xml:space="preserve">
+    <value>Mantid</value>
+  </data>
+  <data name="Archbuddy_Mogu" xml:space="preserve">
+    <value>Mogu</value>
+  </data>
+  <data name="ArchBuddy_Name" xml:space="preserve">
+    <value>ArchaeologyBuddy</value>
+  </data>
+  <data name="Archbuddy_Nerubian" xml:space="preserve">
+    <value>Nerubian</value>
+  </data>
+  <data name="Archbuddy_NightElf" xml:space="preserve">
+    <value>NightElf</value>
+  </data>
+  <data name="Archbuddy_Northrend" xml:space="preserve">
+    <value>Northrend</value>
+  </data>
+  <data name="Archbuddy_Orc" xml:space="preserve">
+    <value>Orc</value>
+  </data>
+  <data name="Archbuddy_Outland" xml:space="preserve">
+    <value>Outland</value>
+  </data>
+  <data name="Archbuddy_Pandaren" xml:space="preserve">
+    <value>Pandaren</value>
+  </data>
+  <data name="Archbuddy_SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="Archbuddy_SelectContinent" xml:space="preserve">
+    <value>Select continent</value>
+  </data>
+  <data name="Archbuddy_Solve" xml:space="preserve">
+    <value>Solve</value>
+  </data>
+  <data name="Archbuddy_Solving" xml:space="preserve">
+    <value>Solving</value>
+  </data>
+  <data name="Archbuddy_StopSolving" xml:space="preserve">
+    <value>Stop Solving</value>
+  </data>
+  <data name="ArchBuddy_Title" xml:space="preserve">
+    <value>Archbuddy Settings</value>
+  </data>
+  <data name="Archbuddy_Tolvir" xml:space="preserve">
+    <value>Tolvir</value>
+  </data>
+  <data name="Archbuddy_Training" xml:space="preserve">
+    <value>Training</value>
+  </data>
+  <data name="Archbuddy_TrainUpto" xml:space="preserve">
+    <value>Train upto</value>
+  </data>
+  <data name="Archbuddy_Troll" xml:space="preserve">
+    <value>Troll</value>
+  </data>
+  <data name="Archbuddy_UnselectAll" xml:space="preserve">
+    <value>Unselect All</value>
+  </data>
+  <data name="Archbuddy_UseKeystonesWhileSolving" xml:space="preserve">
+    <value>Use keystones while solving</value>
+  </data>
+  <data name="Archbuddy_Vrykul" xml:space="preserve">
+    <value>Vrykul</value>
+  </data>
+  <data name="ArtifactItemQuality" xml:space="preserve">
+    <value>Artifact</value>
+  </data>
+  <data name="AuthorLabelText" xml:space="preserve">
+    <value>Author:</value>
+  </data>
+  <data name="AutoEquip_Name" xml:space="preserve">
+    <value>AutoEquip2</value>
+  </data>
+  <data name="AutoEquipBoEEpicsCheckBoxText" xml:space="preserve">
+    <value>Equip BoE Epics</value>
+  </data>
+  <data name="AutoEquipBoEEpicsCheckBoxToolTip" xml:space="preserve">
+    <value>If this is checked, Honorbuddy will auto equip epics that are Bind on Equip, even if they aren't soulbound yet.</value>
+  </data>
+  <data name="AutoEquipCheckBoxText" xml:space="preserve">
+    <value>Auto Equip</value>
+  </data>
+  <data name="AutoEquipCheckBoxToolTip" xml:space="preserve">
+    <value>If this is checked, Honorbuddy will automatically equip better gear when picked up.
+Also controls quest reward selection and loot rolls; if unchecked, Honorbuddy will select quest rewards based on sell value, and will never roll need on items.</value>
+  </data>
+  <data name="AutomaticMountCheckboxText" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="BGBuddy_AlteracValley" xml:space="preserve">
+    <value>Alterac Valley</value>
+  </data>
+  <data name="BGBuddy_ArathiBasin" xml:space="preserve">
+    <value>Arathi Basin</value>
+  </data>
+  <data name="BGBuddy_BattleForGilneas" xml:space="preserve">
+    <value>Battle For Gilneas</value>
+  </data>
+  <data name="BGBuddy_DeepwindGorge" xml:space="preserve">
+    <value>Deepwind Gorge</value>
+  </data>
+  <data name="BGBuddy_DisableMounting" xml:space="preserve">
+    <value>Disable Mounting</value>
+  </data>
+  <data name="BGBuddy_EyeOfTheStorm" xml:space="preserve">
+    <value>Eye of the Storm</value>
+  </data>
+  <data name="BGBuddy_IsleOfConquest" xml:space="preserve">
+    <value>Isle of Conquest</value>
+  </data>
+  <data name="BGBuddy_LootCorpses" xml:space="preserve">
+    <value>Loot corpses</value>
+  </data>
+  <data name="BGBuddy_MountUpDistance" xml:space="preserve">
+    <value>Mount Up Distance</value>
+  </data>
+  <data name="BGBuddy_Name" xml:space="preserve">
+    <value>BGBuddy</value>
+  </data>
+  <data name="BGBuddy_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="BGBuddy_PullDistance" xml:space="preserve">
+    <value>Pull Distance</value>
+  </data>
+  <data name="BGBuddy_Queue" xml:space="preserve">
+    <value>Queue</value>
+  </data>
+  <data name="BGBuddy_Queue1" xml:space="preserve">
+    <value>Queue #1</value>
+  </data>
+  <data name="BGBuddy_Queue2" xml:space="preserve">
+    <value>Queue #2</value>
+  </data>
+  <data name="BGBuddy_RandomBattleground" xml:space="preserve">
+    <value>Random Battleground</value>
+  </data>
+  <data name="BGBuddy_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="BGBuddy_SilvershardMine" xml:space="preserve">
+    <value>Silvershard Mine</value>
+  </data>
+  <data name="BGBuddy_StrandOfTheAncients" xml:space="preserve">
+    <value>Strand of the Ancients</value>
+  </data>
+  <data name="BGBuddy_TempleOfKotmogu" xml:space="preserve">
+    <value>Temple of Kotmogu</value>
+  </data>
+  <data name="BGBuddy_Title" xml:space="preserve">
+    <value>BGBuddy Settings</value>
+  </data>
+  <data name="BGBuddy_TwinPeaks" xml:space="preserve">
+    <value>Twin Peaks</value>
+  </data>
+  <data name="BGBuddy_WarsongGulch" xml:space="preserve">
+    <value>Warsong Gulch</value>
+  </data>
+  <data name="BGInfo" xml:space="preserve">
+    <value>BGs Won: {0} Lost: {1} Total: {2} ({3}/hr)</value>
+  </data>
+  <data name="BotConfigButtonText" xml:space="preserve">
+    <value>Bot Config</value>
+  </data>
+  <data name="CancelButtonText" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ChangeButtonText" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="CharManagerGroupHeader" xml:space="preserve">
+    <value>Character Manager</value>
+  </data>
+  <data name="ClassConfigButtonText" xml:space="preserve">
+    <value>Class Config</value>
+  </data>
+  <data name="ClassProfileLabelText" xml:space="preserve">
+    <value>Class Profile</value>
+  </data>
+  <data name="ClassProfileToolTip" xml:space="preserve">
+    <value>Honorbuddy will select talents and equip gear according to the profile set here.
+Also controls which quest rewards are chosen, and what to roll 'need' on.</value>
+  </data>
+  <data name="CommonItemQuality" xml:space="preserve">
+    <value>White</value>
   </data>
   <data name="DeathKnight" xml:space="preserve">
     <value>Death Knight</value>
@@ -143,6 +358,21 @@
   </data>
   <data name="DeathKnightUnholy" xml:space="preserve">
     <value>Unholy</value>
+  </data>
+  <data name="Deaths___0____1__hr_" xml:space="preserve">
+    <value>Deaths: {0} ({1}/hr)</value>
+  </data>
+  <data name="DebugLogTabHeader" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="DeveloperToolsButtonText" xml:space="preserve">
+    <value>Developer Tools</value>
+  </data>
+  <data name="DrinkAmountLabelText" xml:space="preserve">
+    <value>Drink Amount to buy</value>
+  </data>
+  <data name="DrinkNameOrIdLabelText" xml:space="preserve">
+    <value>Drink Name (Or ID)</value>
   </data>
   <data name="Druid" xml:space="preserve">
     <value>Druid</value>
@@ -159,6 +389,195 @@
   <data name="DruidRestoration" xml:space="preserve">
     <value>Restoration</value>
   </data>
+  <data name="DungeonBuddy_Name" xml:space="preserve">
+    <value>Dungeonbuddy</value>
+  </data>
+  <data name="EnhancedMode" xml:space="preserve">
+    <value>Enhanced Mode</value>
+  </data>
+  <data name="EpicItemQuality" xml:space="preserve">
+    <value>Purple</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Error___Username" xml:space="preserve">
+    <value>Error - Username</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="FindVendorsAutomaticallyCheckboxText" xml:space="preserve">
+    <value>Find Vendors Automatically</value>
+  </data>
+  <data name="FlyingMountLabelText" xml:space="preserve">
+    <value>Flying Mount</value>
+  </data>
+  <data name="FoodAmountLabelText" xml:space="preserve">
+    <value>Food Amount to buy</value>
+  </data>
+  <data name="FoodNameOrIdLabelText" xml:space="preserve">
+    <value>Food Name (Or ID)</value>
+  </data>
+  <data name="FromBuddyStore" xml:space="preserve">
+    <value>From Buddy Store</value>
+  </data>
+  <data name="FromFileSystem" xml:space="preserve">
+    <value>From File</value>
+  </data>
+  <data name="FromWebSource" xml:space="preserve">
+    <value>From Web Source</value>
+  </data>
+  <data name="GB_Advanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="GB_AlwaysUseSpiritHealer" xml:space="preserve">
+    <value>Always use spirit healer</value>
+  </data>
+  <data name="GB_BlacklistANodeAfter" xml:space="preserve">
+    <value>Blacklist a node after</value>
+  </data>
+  <data name="GB_Blacklisting" xml:space="preserve">
+    <value>Blacklisting</value>
+  </data>
+  <data name="GB_Bounce" xml:space="preserve">
+    <value>Bounce</value>
+  </data>
+  <data name="GB_Circle" xml:space="preserve">
+    <value>Circle</value>
+  </data>
+  <data name="GB_CollectOnlySelectedOnes" xml:space="preserve">
+    <value>Collect only selected ones</value>
+  </data>
+  <data name="GB_DontNinjaNodes" xml:space="preserve">
+    <value>Don't ninja nodes</value>
+  </data>
+  <data name="GB_EmptyBagsNow" xml:space="preserve">
+    <value>Empty bags now</value>
+  </data>
+  <data name="GB_FaceNodesBeforeHarvesting" xml:space="preserve">
+    <value>Face nodes before harvesting</value>
+  </data>
+  <data name="GB_FullBagsBehavior" xml:space="preserve">
+    <value>Full Bags Behavior</value>
+  </data>
+  <data name="GB_Gather" xml:space="preserve">
+    <value>Gather</value>
+  </data>
+  <data name="GB_GatherOptions" xml:space="preserve">
+    <value>Gather Options</value>
+  </data>
+  <data name="GB_HearthAndExit" xml:space="preserve">
+    <value>Hearth and exit</value>
+  </data>
+  <data name="GB_HeightModifier" xml:space="preserve">
+    <value>Height Modifier</value>
+  </data>
+  <data name="GB_Herbalism" xml:space="preserve">
+    <value>Herbalism</value>
+  </data>
+  <data name="GB_IgnoreNodesWithElitesAround" xml:space="preserve">
+    <value>Ignore nodes with elites around</value>
+  </data>
+  <data name="GB_LootMobs" xml:space="preserve">
+    <value>Loot mobs</value>
+  </data>
+  <data name="GB_MailToAlt" xml:space="preserve">
+    <value>Mail to alt</value>
+  </data>
+  <data name="GB_Manage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="GB_Mining" xml:space="preserve">
+    <value>Mining</value>
+  </data>
+  <data name="GB_MountName" xml:space="preserve">
+    <value>Mount Name</value>
+  </data>
+  <data name="GB_Name" xml:space="preserve">
+    <value>Gatherbuddy2</value>
+  </data>
+  <data name="GB_NodeSelection" xml:space="preserve">
+    <value>Node Selection</value>
+  </data>
+  <data name="GB_PathingType" xml:space="preserve">
+    <value>Pathing Type</value>
+  </data>
+  <data name="GB_Paths" xml:space="preserve">
+    <value>Paths</value>
+  </data>
+  <data name="GB_PutLootInGuildVault" xml:space="preserve">
+    <value>Put loot in guild vault</value>
+  </data>
+  <data name="GB_RandomizationFactor" xml:space="preserve">
+    <value>Randomization Factor</value>
+  </data>
+  <data name="GB_RandomizeHotspots" xml:space="preserve">
+    <value>Randomize Hotspots</value>
+  </data>
+  <data name="GB_RepairFromGuildBankFunds" xml:space="preserve">
+    <value>Repair from guild bank funds</value>
+  </data>
+  <data name="GB_Seconds" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="GB_SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="GB_StatusReport" xml:space="preserve">
+    <value>Status Report</value>
+  </data>
+  <data name="GB_StopAfterHowManyHours" xml:space="preserve">
+    <value>Stop after how many hours ?</value>
+  </data>
+  <data name="GB_Title" xml:space="preserve">
+    <value>Gatherbuddy Settings</value>
+  </data>
+  <data name="GB_UnselectAll" xml:space="preserve">
+    <value>Unselect All</value>
+  </data>
+  <data name="GB_WaitForResurrectionSickness" xml:space="preserve">
+    <value>Wait for resurrection sickness</value>
+  </data>
+  <data name="GeneralGroupHeader" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="GlobalSettingsFileCorrupted" xml:space="preserve">
+    <value>Your settings file seems to be corrupted. Honorbuddy can create a new one for you.
+Do you want to create a new one?
+
+Press "Yes" to create a new one and proceed, or "No" to close Honorbuddy now.</value>
+  </data>
+  <data name="Goal___0_" xml:space="preserve">
+    <value>Goal: {0}</value>
+  </data>
+  <data name="HarvestHerbsCheckboxText" xml:space="preserve">
+    <value>Harvest Herbs</value>
+  </data>
+  <data name="HarvestMinesCheckboxText" xml:space="preserve">
+    <value>Harvest Minerals</value>
+  </data>
+  <data name="HeirloomItemQuality" xml:space="preserve">
+    <value>Heirloom</value>
+  </data>
+  <data name="Honor_Gained__0____1__HR_" xml:space="preserve">
+    <value>Honor Gained: {0} ({1}/hr)</value>
+  </data>
+  <data name="Honor_HR___0_" xml:space="preserve">
+    <value>Honor/HR: {0}</value>
+  </data>
+  <data name="Honorbuddy_is_still_running__Click_the_icon_to_bring_the_main_window_back_up_" xml:space="preserve">
+    <value>Honorbuddy is still running! Click the icon to bring the main window back up!</value>
+  </data>
+  <data name="Honorbuddy_Startup_Complete" xml:space="preserve">
+    <value>Honorbuddy Startup Complete</value>
+  </data>
+  <data name="Honorbuddy_Stopped" xml:space="preserve">
+    <value>Honorbuddy Stopped</value>
+  </data>
+  <data name="HonorbuddyUnableToCheckForOrApplyUpdate" xml:space="preserve">
+    <value>Honorbuddy was unable to check for or apply update.</value>
+  </data>
   <data name="Hunter" xml:space="preserve">
     <value>Hunter</value>
   </data>
@@ -170,6 +589,111 @@
   </data>
   <data name="HunterSurvival" xml:space="preserve">
     <value>Survival</value>
+  </data>
+  <data name="InfoTabHeader" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Initialization_complete" xml:space="preserve">
+    <value>Initialization complete</value>
+  </data>
+  <data name="Initializing" xml:space="preserve">
+    <value>Initializing</value>
+  </data>
+  <data name="KillBetweenHotspotsCheckboxText" xml:space="preserve">
+    <value>Kill Between Hotspots</value>
+  </data>
+  <data name="Kills___0____1__hr_" xml:space="preserve">
+    <value>Kills: {0} ({1}/hr)</value>
+  </data>
+  <data name="LearnFlightPathsCheckboxText" xml:space="preserve">
+    <value>Learn New Flight Paths</value>
+  </data>
+  <data name="LegendaryItemQuality" xml:space="preserve">
+    <value>Legendary</value>
+  </data>
+  <data name="LevelBot_GroundMountFarmingMode" xml:space="preserve">
+    <value>Ground mount farming mode</value>
+  </data>
+  <data name="LevelBot_Name" xml:space="preserve">
+    <value>Grind Bot</value>
+  </data>
+  <data name="LevelBot_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="LevelBot_SaveAndClose" xml:space="preserve">
+    <value>Save and Close</value>
+  </data>
+  <data name="LevelBot_Title" xml:space="preserve">
+    <value>Levelbot Settings</value>
+  </data>
+  <data name="Load_an_Honorbuddy_Profile" xml:space="preserve">
+    <value>Load an Honorbuddy Profile</value>
+  </data>
+  <data name="LoadAHonorbuddyProfile" xml:space="preserve">
+    <value>Load a honorbuddy profile</value>
+  </data>
+  <data name="LoadButtonText" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="Loading_Profile___" xml:space="preserve">
+    <value>Loading Profile...</value>
+  </data>
+  <data name="LoadProfileButtonText" xml:space="preserve">
+    <value>Load Profile</value>
+  </data>
+  <data name="LoginButtonText" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginPasswordBoxTooltip" xml:space="preserve">
+    <value>Your Buddy Shop password. Leave empty if you are using a product key to login</value>
+  </data>
+  <data name="LoginPluginKeyBoxTooltip" xml:space="preserve">
+    <value>If you have purchased a plugin key, you may input it here.</value>
+  </data>
+  <data name="LoginUsernameBoxTooltip" xml:space="preserve">
+    <value>Your Buddy Shop username or Honorbuddy Product key.</value>
+  </data>
+  <data name="LoginWindowTitle" xml:space="preserve">
+    <value>Honorbuddy Login</value>
+  </data>
+  <data name="LogLevel" xml:space="preserve">
+    <value>Log Level</value>
+  </data>
+  <data name="LogLevelDiagnostic" xml:space="preserve">
+    <value>Diagnostic</value>
+  </data>
+  <data name="LogLevelNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="LogLevelNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="LogLevelQuiet" xml:space="preserve">
+    <value>Quiet</value>
+  </data>
+  <data name="LogLevelVerbose" xml:space="preserve">
+    <value>Verbose</value>
+  </data>
+  <data name="LogoutForInactivityCheckboxText" xml:space="preserve">
+    <value>Logout For Inactivity</value>
+  </data>
+  <data name="LogTabHeader" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="LootChestsCheckboxText" xml:space="preserve">
+    <value>Loot Chests</value>
+  </data>
+  <data name="LootingGroupHeader" xml:space="preserve">
+    <value>Looting</value>
+  </data>
+  <data name="LootMobsCheckboxText" xml:space="preserve">
+    <value>Loot Mobs</value>
+  </data>
+  <data name="LootRadiusLabelText" xml:space="preserve">
+    <value>Loot Radius</value>
+  </data>
+  <data name="Loots___0____1__hr_" xml:space="preserve">
+    <value>Loots: {0} ({1}/hr)</value>
   </data>
   <data name="Mage" xml:space="preserve">
     <value>Mage</value>
@@ -183,6 +707,42 @@
   <data name="MageFrost" xml:space="preserve">
     <value>Frost</value>
   </data>
+  <data name="MailAndRefreshmentsGroupHeader" xml:space="preserve">
+    <value>Mail &amp; Refreshments</value>
+  </data>
+  <data name="MailRecipientLabelText" xml:space="preserve">
+    <value>Mail Recipient</value>
+  </data>
+  <data name="MainWindowTitleFormat" xml:space="preserve">
+    <value>{1}</value>
+  </data>
+  <data name="MaxBoEDisenchantQualityLabelText" xml:space="preserve">
+    <value>Max BoE Disenchant Quality</value>
+  </data>
+  <data name="MaxBoEDisenchantQualityTooltip" xml:space="preserve">
+    <value>Honorbuddy will only roll disenchant on items that are BoE if their item quality is equal to or below this item quality.</value>
+  </data>
+  <data name="MeshesGroupHeader" xml:space="preserve">
+    <value>Meshes</value>
+  </data>
+  <data name="MeshFolderPathLabelText" xml:space="preserve">
+    <value>Mesh Folder Path</value>
+  </data>
+  <data name="MixedMode_Name" xml:space="preserve">
+    <value>Mixed Mode</value>
+  </data>
+  <data name="MixedMode_Primary" xml:space="preserve">
+    <value>Primary Bot</value>
+  </data>
+  <data name="MixedMode_Secondary" xml:space="preserve">
+    <value>Secondary Bot</value>
+  </data>
+  <data name="MixedMode_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="MixedMode_Title" xml:space="preserve">
+    <value>Mixed Mode Settings</value>
+  </data>
   <data name="Monk" xml:space="preserve">
     <value>Monk</value>
   </data>
@@ -195,11 +755,29 @@
   <data name="MonkWindwalker" xml:space="preserve">
     <value>Windwalker</value>
   </data>
+  <data name="MountDistanceLabelText" xml:space="preserve">
+    <value>Mount Distance</value>
+  </data>
+  <data name="MountGroupHeader" xml:space="preserve">
+    <value>Mount</value>
+  </data>
+  <data name="MountNameLabelText" xml:space="preserve">
+    <value>Ground Mount</value>
+  </data>
+  <data name="NavigationLogTabHeader" xml:space="preserve">
+    <value>Navigation</value>
+  </data>
+  <data name="NinjaSkinCheckboxText" xml:space="preserve">
+    <value>Ninja Skin</value>
+  </data>
   <data name="NoClassProfileLoaded" xml:space="preserve">
     <value>No class profile is loaded. Please uncheck Auto Equip and Select Talents or load a class profile before starting the bot.</value>
   </data>
   <data name="NoSpec" xml:space="preserve">
     <value>No Spec</value>
+  </data>
+  <data name="NoViableSubProfile" xml:space="preserve">
+    <value>The currently loaded profile does not contain a sub profile usable for the current character (is your toon too high level?)</value>
   </data>
   <data name="Paladin" xml:space="preserve">
     <value>Paladin</value>
@@ -213,6 +791,12 @@
   <data name="PaladinRetribution" xml:space="preserve">
     <value>Retribution</value>
   </data>
+  <data name="PartyBot_Name" xml:space="preserve">
+    <value>Party Bot</value>
+  </data>
+  <data name="PauseButtonText" xml:space="preserve">
+    <value>Pause</value>
+  </data>
   <data name="PetCunning" xml:space="preserve">
     <value>Cunning</value>
   </data>
@@ -221,6 +805,27 @@
   </data>
   <data name="PetTenacity" xml:space="preserve">
     <value>Tenacity</value>
+  </data>
+  <data name="Please_enter_your_shop_password_before_continuing_" xml:space="preserve">
+    <value>Please enter your shop password before continuing!</value>
+  </data>
+  <data name="Please_enter_your_shop_username_before_continuing_" xml:space="preserve">
+    <value>Please enter your shop username before continuing!</value>
+  </data>
+  <data name="PluginRecompileAllButtonText" xml:space="preserve">
+    <value>Recompile All</value>
+  </data>
+  <data name="PluginsButtonText" xml:space="preserve">
+    <value>Plugins</value>
+  </data>
+  <data name="PluginSettingsButtonText" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="PluginsWindowTitle" xml:space="preserve">
+    <value>Plugins</value>
+  </data>
+  <data name="PoorItemQuality" xml:space="preserve">
+    <value>Gray</value>
   </data>
   <data name="Priest" xml:space="preserve">
     <value>Priest</value>
@@ -234,6 +839,39 @@
   <data name="PriestShadow" xml:space="preserve">
     <value>Shadow</value>
   </data>
+  <data name="ProcessSelectExplanation" xml:space="preserve">
+    <value>Please select a WoW to attach to...</value>
+  </data>
+  <data name="ProcessTitle" xml:space="preserve">
+    <value>PID: {0} logged in on: {1}</value>
+  </data>
+  <data name="PullDistanceLabelText" xml:space="preserve">
+    <value>Pull Distance</value>
+  </data>
+  <data name="QuestBot_Name" xml:space="preserve">
+    <value>Questing</value>
+  </data>
+  <data name="RandomMountCheckboxText" xml:space="preserve">
+    <value>Use Random Mount</value>
+  </data>
+  <data name="RareItemQuality" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="Recent" xml:space="preserve">
+    <value>Recent</value>
+  </data>
+  <data name="RefreshButtonText" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="ResAtSpiritHealer" xml:space="preserve">
+    <value>Resurrect at spirit healers</value>
+  </data>
+  <data name="ResAtSpiritHealersCheckboxText" xml:space="preserve">
+    <value>Resurrect At Spirit Healers</value>
+  </data>
+  <data name="ResumeButtonText" xml:space="preserve">
+    <value>Resume</value>
+  </data>
   <data name="Rogue" xml:space="preserve">
     <value>Rogue</value>
   </data>
@@ -245,6 +883,47 @@
   </data>
   <data name="RogueSubtlety" xml:space="preserve">
     <value>Subtlety</value>
+  </data>
+  <data name="RollDisenchantWhenGreedCheckBoxText" xml:space="preserve">
+    <value>Disenchant Instead of Greeding</value>
+  </data>
+  <data name="RollDisenchantWhenGreedingCheckBoxToolTip" xml:space="preserve">
+    <value>If this is checked, Honorbuddy will roll disenchant instead of greeding, if possible.</value>
+  </data>
+  <data name="RollOnItemsCheckBoxText" xml:space="preserve">
+    <value>Roll On Items</value>
+  </data>
+  <data name="RollOnItemsCheckBoxToolTip" xml:space="preserve">
+    <value>If this is checked, Honorbuddy will automatically roll on gear and items.
+If 'Auto Equip' is also checked, Honorbuddy will roll 'need' on upgrades.</value>
+  </data>
+  <data name="SaveAndCloseButtonText" xml:space="preserve">
+    <value>Save &amp; Close</value>
+  </data>
+  <data name="SelectButtonText" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="SelectMeshDirectory" xml:space="preserve">
+    <value>Select Mesh Directory</value>
+  </data>
+  <data name="SelectTalentsCheckBoxText" xml:space="preserve">
+    <value>Select Talents</value>
+  </data>
+  <data name="SelectTalentsCheckBoxToolTip" xml:space="preserve">
+    <value>If this is checked, Honorbuddy will automatically select new talents and specialization when leveling.</value>
+  </data>
+  <data name="SeperatedLogFolders" xml:space="preserve">
+    <value>Separated Log Folders</value>
+  </data>
+  <data name="SettingsButtonText" xml:space="preserve">
+    <value>Settings &amp; Tools</value>
+  </data>
+  <data name="SettingsFileInUse" xml:space="preserve">
+    <value>Your settings file is in use, and a new one cannot be created.
+Retry?</value>
+  </data>
+  <data name="SettingsWindowTitle" xml:space="preserve">
+    <value>Settings &amp; Tools</value>
   </data>
   <data name="Shaman" xml:space="preserve">
     <value>Shaman</value>
@@ -258,8 +937,68 @@
   <data name="ShamanRestoration" xml:space="preserve">
     <value>Restoration</value>
   </data>
+  <data name="SkinMobsCheckboxText" xml:space="preserve">
+    <value>Skin Mobs</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="StartButtonText" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="StartUpError64Bit" xml:space="preserve">
+    <value>We couldn't find a free WoW process to attach. There are 64bit version(s) of WoW running. Please make sure you use Honorbuddy Launcher to launch the game before starting honorbuddy.</value>
+  </data>
+  <data name="StartUpErrorBuildMismatch" xml:space="preserve">
+    <value>This Honorbuddy version only supports WoW Patch {0} and you are on WoW Patch {1}. Please go to http://www.thebuddyforum.com/releases/ to check for updates.</value>
+  </data>
+  <data name="StartUpErrorNotInGame" xml:space="preserve">
+    <value>We couldn't find a free WoW process to attach. Please make certain your toon is standing in game world and you are running latest version of Honorbuddy.</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="StopButtonText" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="Talented_Name" xml:space="preserve">
+    <value>Talented2</value>
+  </data>
+  <data name="TicksPerSecondLabelText" xml:space="preserve">
+    <value>Ticks per second</value>
+  </data>
+  <data name="TimeToLevel" xml:space="preserve">
+    <value>Time to Level: {0} hour(s) {1} minute(s) {2} second(s)</value>
+  </data>
+  <data name="TpsTooltipText" xml:space="preserve">
+    <value>Increasing this will speed up the bot while increasing the cpu usage and decreasing the fps on wow.</value>
+  </data>
+  <data name="TrainNewSkillsCheckboxText" xml:space="preserve">
+    <value>Train New Skills</value>
+  </data>
+  <data name="UncommonItemQuality" xml:space="preserve">
+    <value>Green</value>
+  </data>
   <data name="Unknown" xml:space="preserve">
     <value>Unknown</value>
+  </data>
+  <data name="UseFlightPathsCheckboxText" xml:space="preserve">
+    <value>Use Flight Paths</value>
+  </data>
+  <data name="UseFramelockText" xml:space="preserve">
+    <value>Use Framelock</value>
+  </data>
+  <data name="UseMountCheckboxText" xml:space="preserve">
+    <value>Use Mount</value>
+  </data>
+  <data name="UseNativeFlyingCheckboxText" xml:space="preserve">
+    <value>Use Native Flying</value>
+  </data>
+  <data name="VendorsGroupHeader" xml:space="preserve">
+    <value>Vendors</value>
+  </data>
+  <data name="VersionLabelText" xml:space="preserve">
+    <value>Version:</value>
   </data>
   <data name="Warlock" xml:space="preserve">
     <value>Warlock</value>
@@ -273,6 +1012,9 @@
   <data name="WarlockDestruction" xml:space="preserve">
     <value>Destruction</value>
   </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
   <data name="Warrior" xml:space="preserve">
     <value>Warrior</value>
   </data>
@@ -285,7 +1027,13 @@
   <data name="WarriorProtection" xml:space="preserve">
     <value>Protection</value>
   </data>
+  <data name="WebProfileWindowTitle" xml:space="preserve">
+    <value>Load a profile from web</value>
+  </data>
   <data name="WrongClassProfileLoaded" xml:space="preserve">
     <value>The class profile currently loaded is {0} - {1}, but the current toon is {3} - {2}. Please respec the toon, or select a proper class profile under settings before starting the bot.</value>
+  </data>
+  <data name="XP_HR___0_" xml:space="preserve">
+    <value>XP/HR: {0}</value>
   </data>
 </root>

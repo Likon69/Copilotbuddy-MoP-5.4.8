@@ -117,215 +117,174 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CurrentBuildOfWowNotSupported" xml:space="preserve">
-    <value>Current build of wow is not supported! - [{0}] please visit thebuddyforum.com for info on the next release !</value>
+  <data name="__0____Navigator___1_" xml:space="preserve">
+    <value>[{0}] [Navigator] {1}</value>
   </data>
-  <data name="CurrentBuildNotSupportedException" xml:space="preserve">
-    <value>Error! This build of WoW: [{0}] is not supported by Honorbuddy {1}.</value>
+  <data name="__0__Gate__State_has_changed_destroyed__1_" xml:space="preserve">
+    <value>({0} Gate) State has changed destroyed:{1}</value>
   </data>
-  <data name="Cannot_run_injection_routines_while_not_in_game___Crash_Prevention_" xml:space="preserve">
-    <value>Cannot run injection routines while not in game! (Crash Prevention)</value>
+  <data name="_0___1____From___2_" xml:space="preserve">
+    <value>{0} {1} - From: {2}</value>
   </data>
-  <data name="BlackMagic_was_not_Initialized_" xml:space="preserve">
-    <value>BlackMagic was not Initialized!</value>
-  </data>
-  <data name="Unknown" xml:space="preserve">
-    <value>Unknown</value>
-  </data>
-  <data name="Inventory" xml:space="preserve">
-    <value>Inventory</value>
-  </data>
-  <data name="_0__Distance___1_" xml:space="preserve">
-    <value>{0} Distance: {1}</value>
-  </data>
-  <data name="CannotReadDescriptorOnInvalidObject" xml:space="preserve">
-    <value>Cannot read a descriptor on an invalid object.</value>
-  </data>
-  <data name="FactionStringPrintOut" xml:space="preserve">
-    <value>{0}, Parent: {1}</value>
-  </data>
-  <data name="GetGuidByKeyword_failed_" xml:space="preserve">
-    <value>GetGuidByKeyword failed!</value>
-  </data>
-  <data name="This_function_only_takes_vaues_from_0_5" xml:space="preserve">
-    <value>This function only takes vaues from 0-5</value>
-  </data>
-  <data name="Activity___0_" xml:space="preserve">
-    <value>Activity: {0}</value>
-  </data>
-  <data name="Attribute__0__of__1__type_was_missing_in___2___tag_" xml:space="preserve">
-    <value>Attribute {0} of {1} type was missing in "{2}" tag.</value>
-  </data>
-  <data name="BotIsNotPresent" xml:space="preserve">
-    <value>{0} Is not present in the current list of bots</value>
-  </data>
-  <data name="Can_t_start___No_combat_class_is_loaded_" xml:space="preserve">
-    <value>Can't start - No combat class is loaded!</value>
-  </data>
-  <data name="Could_not_find_the_settings_path_" xml:space="preserve">
-    <value>Could not find the settings path!</value>
-  </data>
-  <data name="Entry_in__0_" xml:space="preserve">
-    <value>Entry in {0}</value>
-  </data>
-  <data name="Error_trying_to_save_the_settings_file___0_" xml:space="preserve">
-    <value>Error trying to save the settings file: {0}</value>
-  </data>
-  <data name="Invalid_Routine" xml:space="preserve">
-    <value>Invalid Routine</value>
-  </data>
-  <data name="Missing_attribute__0__in___1____2_" xml:space="preserve">
-    <value>Missing attribute {0} in "{1}".{2}</value>
-  </data>
-  <data name="NewBotAdded" xml:space="preserve">
-    <value>New bot added!: {0}</value>
-  </data>
-  <data name="NotInGame" xml:space="preserve">
-    <value>Not in game</value>
-  </data>
-  <data name="Setting__0__has_invalid_value___1___" xml:space="preserve">
-    <value>Setting {0} has invalid value "{1}"!</value>
-  </data>
-  <data name="The_settings_file_does_not_match_the_type_that_is_being_loaded__Root_name_is___0____expected___1___" xml:space="preserve">
-    <value>The settings file does not match the type that is being loaded! Root name is "{0}", expected "{1}".</value>
-  </data>
-  <data name="Unknown_attribute___0____Input____1____in___2____3_" xml:space="preserve">
-    <value>Unknown attribute "{0}" (Input: "{1}") in "{2}"!{3}</value>
-  </data>
-  <data name="Valid_attributes_are__" xml:space="preserve">
-    <value>Valid attributes are: </value>
-  </data>
-  <data name="Valid_values_are__" xml:space="preserve">
-    <value>Valid values are: </value>
-  </data>
-  <data name="Value___0___in___1___attribute_is_not_supported__Expected__2__type__3_" xml:space="preserve">
-    <value>Value "{0}" in "{1}" attribute is not supported! Expected {2} type.{3}</value>
-  </data>
-  <data name="Value___0___in___1___is_not_supported__2_" xml:space="preserve">
-    <value>Value "{0}" in "{1}" is not supported!{2}</value>
-  </data>
-  <data name="Waiting_on_taxi___" xml:space="preserve">
-    <value>Waiting on taxi...</value>
-  </data>
-  <data name="WoW_cannot_be_minimized_while_running_Honorbuddy_" xml:space="preserve">
-    <value>WoW cannot be minimized while running Honorbuddy!</value>
-  </data>
-  <data name="Wow_exited__Honorbuddy_stopped_" xml:space="preserve">
-    <value>Wow exited, Honorbuddy stopped!</value>
-  </data>
-  <data name="You_have_placed_the__Z__attribute_before_the__X__and__Y__attribute_" xml:space="preserve">
-    <value>You have placed the 'Z' attribute before the 'X' and 'Y' attribute!</value>
-  </data>
-  <data name="_EVENT___0___Args___1_" xml:space="preserve">
-    <value>[EVENT] {0}: Args: {1}</value>
-  </data>
-  <data name="_Valid_values_are__" xml:space="preserve">
-    <value> Valid values are: </value>
-  </data>
-  <data name="boolean" xml:space="preserve">
-    <value>boolean</value>
-  </data>
-  <data name="floating" xml:space="preserve">
-    <value>floating</value>
-  </data>
-  <data name="integral" xml:space="preserve">
-    <value>integral</value>
-  </data>
-  <data name="positive_integral" xml:space="preserve">
-    <value>positive integral</value>
-  </data>
-  <data name="Expected_objective_type_" xml:space="preserve">
-    <value>Expected objective type!</value>
-  </data>
-  <data name="Objective_info_is_missing_type_" xml:space="preserve">
-    <value>Objective info is missing type!</value>
-  </data>
-  <data name="You_did_not_specify_the_ID_of_the_item_in_the_CollectItem_objective_" xml:space="preserve">
-    <value>You did not specify the ID of the item in the CollectItem objective!</value>
-  </data>
-  <data name="You_did_not_specify_the_ID_of_the_mob_in_the_KillMob_objective_" xml:space="preserve">
-    <value>You did not specify the ID of the mob in the KillMob objective!</value>
-  </data>
-  <data name="No_points_in_list_" xml:space="preserve">
-    <value>No points in list!</value>
-  </data>
-  <data name="Unknown_tag___0____Input____1____in___2____3_" xml:space="preserve">
-    <value>Unknown tag "{0}" (Input: "{1}") in "{2}"!{3}</value>
-  </data>
-  <data name="Valid_tags_are__" xml:space="preserve">
-    <value>Valid tags are: </value>
-  </data>
-  <data name="You_did_not_specify_the_ID_of_the_game_object_in_the_UseObject_element_" xml:space="preserve">
-    <value>You did not specify the ID of the game object in the UseObject element!</value>
-  </data>
-  <data name="Expected_object_type__Mob_or_GameObject_" xml:space="preserve">
-    <value>Expected object type; Mob or GameObject.</value>
-  </data>
-  <data name="No_grind_or_quest_hotspots_have_been_defined_" xml:space="preserve">
-    <value>No grind or quest hotspots have been defined!</value>
-  </data>
-  <data name="No_suitable_grind_or_quest_hotspots_in__0__" xml:space="preserve">
-    <value>No suitable grind or quest hotspots in {0}.</value>
-  </data>
-  <data name="Warning__Max_polygon_count_exceeded_while_applying_blackspot__0__with_radius__1___2_" xml:space="preserve">
-    <value>Warning: Max polygon count exceeded while applying blackspot {0} with radius {1}.{2}</value>
-  </data>
-  <data name="_Consider_using_multiple_blackspots_instead_of_one_very_large_blackspot_" xml:space="preserve">
-    <value> Consider using multiple blackspots instead of one very large blackspot.</value>
+  <data name="_0__1____From___2_" xml:space="preserve">
+    <value>{0}{1} - From: {2}</value>
   </data>
   <data name="_0__Dist___1_" xml:space="preserve">
     <value>{0} Dist: {1}</value>
   </data>
-  <data name="Error_getting_mount_info_for_mount_slot__0___Exception___1_" xml:space="preserve">
-    <value>Error getting mount info for mount slot {0}. Exception: {1}</value>
+  <data name="_0__Distance___1_" xml:space="preserve">
+    <value>{0} Distance: {1}</value>
   </data>
-  <data name="Mounting___0_" xml:space="preserve">
-    <value>Mounting: {0}</value>
+  <data name="_ChatMessage___0____1_____2_" xml:space="preserve">
+    <value>[ChatMessage][{0}][{1}]: {2}</value>
   </data>
-  <data name="Stop_and_dismount___" xml:space="preserve">
-    <value>Stop and dismount...</value>
+  <data name="_Consider_using_multiple_blackspots_instead_of_one_very_large_blackspot_" xml:space="preserve">
+    <value> Consider using multiple blackspots instead of one very large blackspot.</value>
   </data>
-  <data name="You_can_t_mount_here_" xml:space="preserve">
-    <value>You can't mount here.</value>
+  <data name="_EVENT___0___Args___1_" xml:space="preserve">
+    <value>[EVENT] {0}: Args: {1}</value>
+  </data>
+  <data name="_Udp_Server_Content__" xml:space="preserve">
+    <value>[Udp Server]Content :</value>
+  </data>
+  <data name="_Udp_Server_Port__" xml:space="preserve">
+    <value>[Udp Server]Port :</value>
+  </data>
+  <data name="_Valid_values_are__" xml:space="preserve">
+    <value> Valid values are: </value>
+  </data>
+  <data name="Aborting_all_activities_now_" xml:space="preserve">
+    <value>Aborting all activities now.</value>
+  </data>
+  <data name="Activity___0_" xml:space="preserve">
+    <value>Activity: {0}</value>
+  </data>
+  <data name="Adding___0_" xml:space="preserve">
+    <value>Adding: {0}</value>
+  </data>
+  <data name="An_error_occured_while_attempting_to_download_a_mesh_file___0___The_server_may_be_having_troubles__so_please_try_again_later_" xml:space="preserve">
+    <value>An error occured while attempting to download a mesh file: {0}. The server may be having troubles, so please try again later.</value>
+  </data>
+  <data name="Attribute__0__of__1__type_was_missing_in___2___tag_" xml:space="preserve">
+    <value>Attribute {0} of {1} type was missing in "{2}" tag.</value>
+  </data>
+  <data name="Blacklisted_mount_spot_at__0_" xml:space="preserve">
+    <value>Blacklisted mount spot at {0}</value>
+  </data>
+  <data name="Blacklisted_Vendor" xml:space="preserve">
+    <value>Blacklisted Vendor</value>
+  </data>
+  <data name="Blacklisting__0__for_5_minutes_because_we_can_t_navigate_to_it_" xml:space="preserve">
+    <value>Blacklisting {0} for 5 minutes because we can't navigate to it!</value>
+  </data>
+  <data name="BlackMagic_was_not_Initialized_" xml:space="preserve">
+    <value>BlackMagic was not Initialized!</value>
+  </data>
+  <data name="boolean" xml:space="preserve">
+    <value>boolean</value>
+  </data>
+  <data name="BotIsNotPresent" xml:space="preserve">
+    <value>{0} Is not present in the current list of bots</value>
+  </data>
+  <data name="Building_spell_book" xml:space="preserve">
+    <value>Building spell book</value>
+  </data>
+  <data name="Buying___0____1__" xml:space="preserve">
+    <value>Buying #{0} [{1}]</value>
+  </data>
+  <data name="Can_t_start___No_combat_class_is_loaded_" xml:space="preserve">
+    <value>Can't start - No combat class is loaded!</value>
+  </data>
+  <data name="Cannot_format_string_of_format___0___" xml:space="preserve">
+    <value>Cannot format string of format ({0}).</value>
+  </data>
+  <data name="Cannot_get_subclasses_of_T_when_T_is_not_a_class_" xml:space="preserve">
+    <value>Cannot get subclasses of T when T is not a class!</value>
+  </data>
+  <data name="Cannot_load__0____code_requires_privilege_to_execute" xml:space="preserve">
+    <value>Cannot load {0} - code requires privilege to execute</value>
+  </data>
+  <data name="Cannot_run_injection_routines_while_not_in_game___Crash_Prevention_" xml:space="preserve">
+    <value>Cannot run injection routines while not in game! (Crash Prevention)</value>
+  </data>
+  <data name="CannotReadDescriptorOnInvalidObject" xml:space="preserve">
+    <value>Cannot read a descriptor on an invalid object.</value>
+  </data>
+  <data name="Changed_tilemap_to__0___Tiled___1_" xml:space="preserve">
+    <value>Changed tilemap to {0}, Tiled: {1}</value>
   </data>
   <data name="Changing_current_profile_to__0_" xml:space="preserve">
     <value>Changing current profile to {0}</value>
   </data>
-  <data name="Could_not_parse__Else__body_node_" xml:space="preserve">
-    <value>Could not parse 'Else' body node!</value>
+  <data name="Chose__0__as_your_combat_class_" xml:space="preserve">
+    <value>Chose {0} as your combat class!</value>
   </data>
-  <data name="Missing_subelement__0__in___1___" xml:space="preserve">
-    <value>Missing subelement {0} in "{1}".</value>
+  <data name="Compiler_error_s__encountered_and_saved_to_AssemblyFactory_CompilerErrors" xml:space="preserve">
+    <value>Compiler error(s) encountered and saved to AssemblyFactory.CompilerErrors</value>
   </data>
-  <data name="Value___0___in___1___tag_is_not_supported__Expected__2__type__3_" xml:space="preserve">
-    <value>Value "{0}" in "{1}" tag is not supported! Expected {2} type.{3}</value>
+  <data name="Confirmed__0__as_your_class_" xml:space="preserve">
+    <value>Confirmed {0} as your class!</value>
   </data>
-  <data name="Warning___0_" xml:space="preserve">
-    <value>Warning: {0}</value>
+  <data name="ConnectionClosed" xml:space="preserve">
+    <value>
+Connection Closed!!</value>
   </data>
-  <data name="We_either_outleveled_the_currently_loaded_profile__or_something_has_gone_terribly_wrong__Can_t_find_a_new__sub_profile_to_use_" xml:space="preserve">
-    <value>We either outleveled the currently loaded profile, or something has gone terribly wrong. Can't find a new (sub)profile to use!</value>
+  <data name="Could_not_compile_CC_from__0__" xml:space="preserve">
+    <value>Could not compile CC from {0}!</value>
   </data>
-  <data name="We_leveled_up__Checking_if_we_need_to_switch_profiles_" xml:space="preserve">
-    <value>We leveled up! Checking if we need to switch profiles.</value>
+  <data name="Could_not_create_user_mesh_directory___0_" xml:space="preserve">
+    <value>Could not create user mesh directory! {0}</value>
   </data>
-  <data name="Could_not_parse__ElseIf___Condition_code___0___could_not_be_compiled_into_C__code_" xml:space="preserve">
-    <value>Could not parse 'ElseIf'. Condition code "{0}" could not be compiled into C# code.</value>
+  <data name="Could_not_find_a_routine_fitting_for_your_class__Please_make_sure_you_have_a_proper_combat_class_routine_in_your_folder__and_restart_Honorbuddy_" xml:space="preserve">
+    <value>Could not find a routine fitting for your class. Please make sure you have a proper combat class routine in your folder, and restart Honorbuddy.</value>
   </data>
-  <data name="Could_not_parse__If___Condition_code___0___could_not_be_compiled_into_C__code_" xml:space="preserve">
-    <value>Could not parse 'If'. Condition code "{0}" could not be compiled into C# code.</value>
+  <data name="Could_not_find_any_food_to_eat_" xml:space="preserve">
+    <value>Could not find any food to eat!</value>
   </data>
-  <data name="Could_not_parse__If__body_node_" xml:space="preserve">
-    <value>Could not parse 'If' body node!</value>
+  <data name="Could_not_find_any_water_to_drink_" xml:space="preserve">
+    <value>Could not find any water to drink!</value>
   </data>
-  <data name="ElseIf_FromXml_Could_not_parse__ElseIf__body_node___0_" xml:space="preserve">
-    <value>Could not parse 'ElseIf' body node: {0}</value>
+  <data name="Could_not_find_Device_" xml:space="preserve">
+    <value>Could not find Device.</value>
+  </data>
+  <data name="Could_not_find_DevicePointer_" xml:space="preserve">
+    <value>Could not find DevicePointer.</value>
+  </data>
+  <data name="Could_not_find_EndSceneProc" xml:space="preserve">
+    <value>Could not find EndSceneProc</value>
   </data>
   <data name="Could_not_find_item_to_use_by_ID__ID_provided___0_" xml:space="preserve">
     <value>Could not find item to use by ID! ID provided: {0}</value>
   </data>
   <data name="Could_not_find_target_to_use_item_on_with_ID__0___ID_provided__1_" xml:space="preserve">
     <value>Could not find target to use item on with ID:{0}, ID provided:{1}</value>
+  </data>
+  <data name="Could_not_find_the_settings_path_" xml:space="preserve">
+    <value>Could not find the settings path!</value>
+  </data>
+  <data name="Could_not_get_plugin_data___0_" xml:space="preserve">
+    <value>Could not get plugin data: {0}</value>
+  </data>
+  <data name="Could_not_parse___0___into_C__statement_" xml:space="preserve">
+    <value>Could not parse "{0}" into C# statement!</value>
+  </data>
+  <data name="Could_not_parse__Else__body_node_" xml:space="preserve">
+    <value>Could not parse 'Else' body node!</value>
+  </data>
+  <data name="Could_not_parse__Else__in__If__" xml:space="preserve">
+    <value>Could not parse 'Else' in 'If'.</value>
+  </data>
+  <data name="Could_not_parse__ElseIf___Condition_code___0___could_not_be_compiled_into_C__code_" xml:space="preserve">
+    <value>Could not parse 'ElseIf'. Condition code "{0}" could not be compiled into C# code.</value>
+  </data>
+  <data name="Could_not_parse__ElseIf__in__If__" xml:space="preserve">
+    <value>Could not parse 'ElseIf' in 'If'.</value>
+  </data>
+  <data name="Could_not_parse__If___Condition_code___0___could_not_be_compiled_into_C__code_" xml:space="preserve">
+    <value>Could not parse 'If'. Condition code "{0}" could not be compiled into C# code.</value>
+  </data>
+  <data name="Could_not_parse__If__body_node_" xml:space="preserve">
+    <value>Could not parse 'If' body node!</value>
   </data>
   <data name="Could_not_parse_SetMailbox_node_" xml:space="preserve">
     <value>Could not parse SetMailbox node.</value>
@@ -336,19 +295,527 @@
   <data name="Could_not_parse_X_Y_and_Z_in__MoveToNode__" xml:space="preserve">
     <value>Could not parse X Y and Z in 'MoveToNode'.</value>
   </data>
+  <data name="Could_not_Virtual_Table_" xml:space="preserve">
+    <value>Could not Virtual Table.</value>
+  </data>
+  <data name="Couldn_t_download_offsets__Closing_bot_in_3_seconds" xml:space="preserve">
+    <value>Couldn't download offsets! Closing bot in 3 seconds</value>
+  </data>
+  <data name="CouldNotCompileBot" xml:space="preserve">
+    <value>Could not compile bot from {0}</value>
+  </data>
+  <data name="CurrentBuildNotSupportedException" xml:space="preserve">
+    <value>Error! This build of WoW: [{0}] is not supported by Honorbuddy {1}.</value>
+  </data>
+  <data name="CurrentBuildOfWowNotSupported" xml:space="preserve">
+    <value>Current build of wow is not supported! - [{0}] please visit thebuddyforum.com for info on the next release !</value>
+  </data>
+  <data name="DateTime___0_" xml:space="preserve">
+    <value>DateTime :{0}</value>
+  </data>
+  <data name="Detection_risk___aborting_all_activities_now_" xml:space="preserve">
+    <value>Detection risk - aborting all activities now.</value>
+  </data>
+  <data name="DirectoryNotFound_BotsLoadDir" xml:space="preserve">
+    <value>Could not find directory to load bots from.</value>
+  </data>
+  <data name="Dismount_to_get_unstuck_" xml:space="preserve">
+    <value>Dismount to get unstuck.</value>
+  </data>
+  <data name="Downloaded__0_" xml:space="preserve">
+    <value>Downloaded {0}</value>
+  </data>
+  <data name="Downloaded__0___1___2__trimesh" xml:space="preserve">
+    <value>Downloaded {0}_{1}_{2}.trimesh</value>
+  </data>
+  <data name="Downloaded__0__trimesh" xml:space="preserve">
+    <value>Downloaded {0}.trimesh</value>
+  </data>
+  <data name="Downloaded_tilemap__0_" xml:space="preserve">
+    <value>Downloaded tilemap {0}</value>
+  </data>
+  <data name="Downloading_mesh_" xml:space="preserve">
+    <value>Downloading mesh.</value>
+  </data>
+  <data name="Downloading_Mesh___" xml:space="preserve">
+    <value>Downloading Mesh...</value>
+  </data>
+  <data name="Drinking__0_" xml:space="preserve">
+    <value>Drinking {0}</value>
+  </data>
+  <data name="Eating__0_" xml:space="preserve">
+    <value>Eating {0}</value>
+  </data>
+  <data name="ElseIf_FromXml_Could_not_parse__ElseIf__body_node___0_" xml:space="preserve">
+    <value>Could not parse 'ElseIf' body node: {0}</value>
+  </data>
+  <data name="EndSceneHookFailed" xml:space="preserve">
+    <value>Error - Endscene hook failed: {0}</value>
+  </data>
+  <data name="Entry_in__0_" xml:space="preserve">
+    <value>Entry in {0}</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Error___GetOffsets_____0_____1_" xml:space="preserve">
+    <value>Error - GetOffsets(): {0} - {1}</value>
+  </data>
+  <data name="Error_getting_mount_info_for_mount_slot__0___Exception___1_" xml:space="preserve">
+    <value>Error getting mount info for mount slot {0}. Exception: {1}</value>
+  </data>
   <data name="Error_in_ForceMail_XML_file_at__0____1_" xml:space="preserve">
     <value>Error in ForceMail XML file at {0}: {1}</value>
   </data>
   <data name="Error_in_ProtectedItems_XML_file_at__0____1_" xml:space="preserve">
     <value>Error in ProtectedItems XML file at {0}: {1}</value>
   </data>
+  <data name="Error_trying_to_save_the_settings_file___0_" xml:space="preserve">
+    <value>Error trying to save the settings file: {0}</value>
+  </data>
+  <data name="Exception_when_attempting_to_download__0____1_" xml:space="preserve">
+    <value>Exception when attempting to download {0}: {1}</value>
+  </data>
+  <data name="Expected_object_type__Mob_or_GameObject_" xml:space="preserve">
+    <value>Expected object type; Mob or GameObject.</value>
+  </data>
+  <data name="Expected_objective_type_" xml:space="preserve">
+    <value>Expected objective type!</value>
+  </data>
+  <data name="FactionStringPrintOut" xml:space="preserve">
+    <value>{0}, Parent: {1}</value>
+  </data>
+  <data name="Failed_to_download__0_" xml:space="preserve">
+    <value>Failed to download {0}</value>
+  </data>
+  <data name="Failed_to_get_tile_map_for__0__" xml:space="preserve">
+    <value>Failed to get tile map for {0}!</value>
+  </data>
+  <data name="Failed_to_load__0__at_all_" xml:space="preserve">
+    <value>Failed to load {0} at all.</value>
+  </data>
+  <data name="File___0__Line___1___3____2_" xml:space="preserve">
+    <value>File: {0} Line: {1} {3}: {2}</value>
+  </data>
+  <data name="First_argument_when_specifying_ThisCall_must_be_a_nonnull_uint_" xml:space="preserve">
+    <value>First argument when specifying ThisCall must be a nonnull uint.</value>
+  </data>
+  <data name="floating" xml:space="preserve">
+    <value>floating</value>
+  </data>
+  <data name="FlyingMountsNotSupported" xml:space="preserve">
+    <value>Flying mounts are not supported.</value>
+  </data>
+  <data name="Found_flying_mount__0__" xml:space="preserve">
+    <value>Found flying mount {0}.</value>
+  </data>
+  <data name="GetGuidByKeyword_failed_" xml:space="preserve">
+    <value>GetGuidByKeyword failed!</value>
+  </data>
+  <data name="GetReactionTowardsException" xml:space="preserve">
+    <value>Exception in GetReactionTowards checking my reaction ({0}) against {1}</value>
+  </data>
+  <data name="Honorbuddy_does_not_currently_support_elevators_" xml:space="preserve">
+    <value>Honorbuddy does not currently support elevators.</value>
+  </data>
+  <data name="Honorbuddy_does_not_support_flying_mounts_" xml:space="preserve">
+    <value>Honorbuddy does not support flying mounts.</value>
+  </data>
+  <data name="Honorbuddy_does_not_support_the_currently_active__gxAPI__please_change_it_to__D3D9_" xml:space="preserve">
+    <value>Honorbuddy does not support the currently active 'gxAPI' please change it to 'D3D9'</value>
+  </data>
+  <data name="INACTIVITY_TIMER_TRIPPED__LOGGING_OUT_" xml:space="preserve">
+    <value>INACTIVITY TIMER TRIPPED! LOGGING OUT!</value>
+  </data>
+  <data name="Index_can_t_be_higher_than_2_for_SpellEffects_" xml:space="preserve">
+    <value>Index can't be higher than 2 for SpellEffects!</value>
+  </data>
+  <data name="Initializing_Battlegrounds" xml:space="preserve">
+    <value>Initializing Battlegrounds</value>
+  </data>
+  <data name="Initializing_Blackspot_Manager" xml:space="preserve">
+    <value>Initializing Blackspot Manager</value>
+  </data>
+  <data name="Initializing_Flight_Paths" xml:space="preserve">
+    <value>Initializing Flight Paths</value>
+  </data>
+  <data name="Initializing_Navigator" xml:space="preserve">
+    <value>Initializing Navigator</value>
+  </data>
+  <data name="Initializing_Plugins" xml:space="preserve">
+    <value>Initializing Plugins</value>
+  </data>
+  <data name="Initializing_Routines" xml:space="preserve">
+    <value>Initializing Routines</value>
+  </data>
+  <data name="Initializing_Spell_Manager" xml:space="preserve">
+    <value>Initializing Spell Manager</value>
+  </data>
+  <data name="Inner___0_" xml:space="preserve">
+    <value>Inner: {0}</value>
+  </data>
+  <data name="integral" xml:space="preserve">
+    <value>integral</value>
+  </data>
+  <data name="Invalid_path_specified_in_DynamicLoader_constructor_" xml:space="preserve">
+    <value>Invalid path specified in DynamicLoader constructor.</value>
+  </data>
+  <data name="Invalid_Routine" xml:space="preserve">
+    <value>Invalid Routine</value>
+  </data>
+  <data name="Invalid_tilemap_for_map__0__received_from_server__Attempting_to_continue_" xml:space="preserve">
+    <value>Invalid tilemap for map {0} received from server. Attempting to continue.</value>
+  </data>
+  <data name="Inventory" xml:space="preserve">
+    <value>Inventory</value>
+  </data>
+  <data name="IsUnderground__Invalid_Executor_" xml:space="preserve">
+    <value>IsUnderground: Invalid Executor.</value>
+  </data>
+  <data name="It_appears_that___0___is_corrupt___If_the_bot_doesn_t_move_in_the_next_few_minutes__exit_Honorbuddy__delete_your_meshes_folder_and_try_again_" xml:space="preserve">
+    <value>It appears that '{0}' is corrupt.  If the bot doesn't move in the next few minutes, exit Honorbuddy, delete your meshes folder and try again.</value>
+  </data>
+  <data name="Learned_Updated_Flight_Path_Information" xml:space="preserve">
+    <value>Learned/Updated Flight Path Information</value>
+  </data>
+  <data name="Loading__0_" xml:space="preserve">
+    <value>Loading {0}</value>
+  </data>
+  <data name="Loading_memory_management___tables" xml:space="preserve">
+    <value>Loading memory management &amp; tables</value>
+  </data>
+  <data name="Loading_Spells" xml:space="preserve">
+    <value>Loading Spells</value>
+  </data>
+  <data name="Loading_Tile_s" xml:space="preserve">
+    <value>Loading Tiles</value>
+  </data>
+  <data name="Logging_of_exception_failed" xml:space="preserve">
+    <value>Logging of exception failed</value>
+  </data>
+  <data name="Login_failed_" xml:space="preserve">
+    <value>Login failed!</value>
+  </data>
+  <data name="Mailing__0_" xml:space="preserve">
+    <value>Mailing {0}</value>
+  </data>
+  <data name="Missing_attribute__0__in___1____2_" xml:space="preserve">
+    <value>Missing attribute {0} in "{1}".{2}</value>
+  </data>
+  <data name="Missing_subelement__0__in___1___" xml:space="preserve">
+    <value>Missing subelement {0} in "{1}".</value>
+  </data>
+  <data name="Mounting___0_" xml:space="preserve">
+    <value>Mounting: {0}</value>
+  </data>
+  <data name="Navmesh_data_for_single_mesh_map__0__could_not_be_found_" xml:space="preserve">
+    <value>Navmesh data for single mesh map {0} could not be found.</value>
+  </data>
+  <data name="Need_at_least_three_vertices_for_triangulation" xml:space="preserve">
+    <value>Need at least three vertices for triangulation</value>
+  </data>
+  <data name="New_spells_available_at_the_trainer__" xml:space="preserve">
+    <value>New spells available at the trainer: </value>
+  </data>
+  <data name="NewBotAdded" xml:space="preserve">
+    <value>New bot added!: {0}</value>
+  </data>
+  <data name="No__0__in_bags_" xml:space="preserve">
+    <value>No {0} in bags!</value>
+  </data>
+  <data name="No_grind_or_quest_hotspots_have_been_defined_" xml:space="preserve">
+    <value>No grind or quest hotspots have been defined!</value>
+  </data>
   <data name="No_hotspots_have_been_defined_" xml:space="preserve">
     <value>No hotspots have been defined!</value>
+  </data>
+  <data name="No_points_in_list_" xml:space="preserve">
+    <value>No points in list!</value>
   </data>
   <data name="No_profile_is_loaded_" xml:space="preserve">
     <value>No profile is loaded!</value>
   </data>
+  <data name="No_suitable_grind_or_quest_hotspots_in__0__" xml:space="preserve">
+    <value>No suitable grind or quest hotspots in {0}.</value>
+  </data>
   <data name="No_suitable_hotspots_in__0__" xml:space="preserve">
     <value>No suitable hotspots in {0}.</value>
+  </data>
+  <data name="NoHotspotsCreatedForQuest" xml:space="preserve">
+    <value>Could not generate any hotspots for quest {0}. Please place a quest override for this quest.</value>
+  </data>
+  <data name="Not_enough_money_to_buy__0_" xml:space="preserve">
+    <value>Not enough money to buy {0}</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>N/A</value>
+  </data>
+  <data name="NotInGame" xml:space="preserve">
+    <value>Not in game</value>
+  </data>
+  <data name="Objective_info_is_missing_type_" xml:space="preserve">
+    <value>Objective info is missing type!</value>
+  </data>
+  <data name="PacketReceived" xml:space="preserve">
+    <value>Packet Received!!
+</value>
+  </data>
+  <data name="Please_purchase_Honorbuddy_" xml:space="preserve">
+    <value>Please purchase Honorbuddy.</value>
+  </data>
+  <data name="Please_purchase_Honorbuddy___" xml:space="preserve">
+    <value>Please purchase Honorbuddy...</value>
+  </data>
+  <data name="Please_purchase_Honorbuddy_to_use__0__" xml:space="preserve">
+    <value>Please purchase Honorbuddy to use {0}.</value>
+  </data>
+  <data name="Please_try_again_in_a_few_minutes" xml:space="preserve">
+    <value>Please try again in a few minutes</value>
+  </data>
+  <data name="Please_visit_http___www_honorbuddy_com_to_buy_Honorbuddy_" xml:space="preserve">
+    <value>Please visit http://www.honorbuddy.com to buy Honorbuddy.</value>
+  </data>
+  <data name="Plugin_from__0__could_not_be_compiled__Compiler_errors_" xml:space="preserve">
+    <value>Plugin from {0} could not be compiled! Compiler errors:</value>
+  </data>
+  <data name="PluginManagerEx_has_not_been_started_" xml:space="preserve">
+    <value>PluginManagerEx has not been started.</value>
+  </data>
+  <data name="positive_integral" xml:space="preserve">
+    <value>positive integral</value>
+  </data>
+  <data name="PostMessage___0_" xml:space="preserve">
+    <value>PostMessage: {0}</value>
+  </data>
+  <data name="Queueing_up__0_" xml:space="preserve">
+    <value>Queueing up {0}</value>
+  </data>
+  <data name="Received_error_code_from_mesh_server_when_attempting_to_download__0____1_" xml:space="preserve">
+    <value>Received error code from mesh server when attempting to download {0}: {1}</value>
+  </data>
+  <data name="Received_error_code_from_mesh_server_when_attempting_to_download__0__trimesh___1_" xml:space="preserve">
+    <value>Received error code from mesh server when attempting to download {0}.trimesh: {1}</value>
+  </data>
+  <data name="Received_error_code_from_mesh_server_when_attempting_to_get_tile_map_for__0____1_" xml:space="preserve">
+    <value>Received error code from mesh server when attempting to get tile map for {0}: {1}</value>
+  </data>
+  <data name="Remoting_client_started_" xml:space="preserve">
+    <value>Remoting client started!</value>
+  </data>
+  <data name="Remoting_server_started_" xml:space="preserve">
+    <value>Remoting server started!</value>
+  </data>
+  <data name="Resting_" xml:space="preserve">
+    <value>Resting.</value>
+  </data>
+  <data name="Restocked" xml:space="preserve">
+    <value>Restocked</value>
+  </data>
+  <data name="RetrievingCurrentDateTime" xml:space="preserve">
+    <value>
+Retriving current Date Time...</value>
+  </data>
+  <data name="Script_files_must_have_a__cs_or__vb_extension__for_C__or_Visual_Basic_NET_respectively_" xml:space="preserve">
+    <value>Script files must have a .cs or .vb extension, for C# or Visual Basic.NET respectively.</value>
+  </data>
+  <data name="SendingCurrentDateTeime" xml:space="preserve">
+    <value>
+Sending current Date Time...
+</value>
+  </data>
+  <data name="settarget_failed_" xml:space="preserve">
+    <value>settarget failed.</value>
+  </data>
+  <data name="Setting__0__has_invalid_value___1___" xml:space="preserve">
+    <value>Setting {0} has invalid value "{1}"!</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Settings_SotA_Area_to___0_" xml:space="preserve">
+    <value>Settings SotA Area to: {0}</value>
+  </data>
+  <data name="Something_is_messed_up__we_didn_t_attach_all_of_our_items_" xml:space="preserve">
+    <value>Something is messed up, we didn't attach all of our items!</value>
+  </data>
+  <data name="Spell_book_built" xml:space="preserve">
+    <value>Spell book built</value>
+  </data>
+  <data name="Stat_name__0__is_unknown__Please_report_this_to_the_HB_team_" xml:space="preserve">
+    <value>Stat name {0} is unknown! Please report this to the HB team.</value>
+  </data>
+  <data name="Stop_and_dismount___" xml:space="preserve">
+    <value>Stop and dismount...</value>
+  </data>
+  <data name="Stuck_for_too_long_at_the_same_spot__Logging_out_of_game" xml:space="preserve">
+    <value>Stuck for too long at the same spot. Logging out of game</value>
+  </data>
+  <data name="SwitchedFromFmtToFmt" xml:space="preserve">
+    <value>Switched from: {0} to {1}!</value>
+  </data>
+  <data name="Sync_Failed_" xml:space="preserve">
+    <value>Sync Failed!</value>
+  </data>
+  <data name="Taking_flight_path_to__0_" xml:space="preserve">
+    <value>Taking flight path to {0}</value>
+  </data>
+  <data name="TaxiMap_is_opened__Updating_known_nodes_list_" xml:space="preserve">
+    <value>TaxiMap is opened! Updating known nodes list.</value>
+  </data>
+  <data name="The_name_of_the_weight_set_can_not_be_null_or_empty_" xml:space="preserve">
+    <value>The name of the weight set can not be null or empty!</value>
+  </data>
+  <data name="The_server_is_either_down__or_too_busy_to_process_the_request" xml:space="preserve">
+    <value>The server is either down, or too busy to process the request</value>
+  </data>
+  <data name="The_settings_file_does_not_match_the_type_that_is_being_loaded__Root_name_is___0____expected___1___" xml:space="preserve">
+    <value>The settings file does not match the type that is being loaded! Root name is "{0}", expected "{1}".</value>
+  </data>
+  <data name="The_unique_key_is_not_contained_in_the_cache_" xml:space="preserve">
+    <value>The unique key is not contained in the cache.</value>
+  </data>
+  <data name="This_function_only_takes_vaues_from_0_5" xml:space="preserve">
+    <value>This function only takes vaues from 0-5</value>
+  </data>
+  <data name="This_map_does_not_use_a_single_navmesh_" xml:space="preserve">
+    <value>This map does not use a single navmesh!</value>
+  </data>
+  <data name="This_mount_is_not_supported_" xml:space="preserve">
+    <value>This mount is not supported.</value>
+  </data>
+  <data name="This_profile_does_not_contain_any_profiles_fitting_the_character_" xml:space="preserve">
+    <value>This profile does not contain any profiles fitting the character!</value>
+  </data>
+  <data name="Tilemap_is_null_" xml:space="preserve">
+    <value>Tilemap is null!</value>
+  </data>
+  <data name="Took_Flight_Path" xml:space="preserve">
+    <value>Took Flight Path</value>
+  </data>
+  <data name="Trying_to_loot___0__of__1__Rarity__2__3_" xml:space="preserve">
+    <value>Trying to loot #{0} of {1} Rarity:{2}{3}</value>
+  </data>
+  <data name="Unable_to_load_new_profile__file_not_found_" xml:space="preserve">
+    <value>Unable to load new profile, file not found!</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="Unknown_attribute___0____Input____1____in___2____3_" xml:space="preserve">
+    <value>Unknown attribute "{0}" (Input: "{1}") in "{2}"!{3}</value>
+  </data>
+  <data name="Unknown_DLL_Loaded__" xml:space="preserve">
+    <value>Unknown DLL Loaded: </value>
+  </data>
+  <data name="Unknown_tag___0____Input____1____in___2____3_" xml:space="preserve">
+    <value>Unknown tag "{0}" (Input: "{1}") in "{2}"!{3}</value>
+  </data>
+  <data name="Updated__0___1___2__trimesh" xml:space="preserve">
+    <value>Updated {0}_{1}_{2}.trimesh</value>
+  </data>
+  <data name="Updated__0__trimesh" xml:space="preserve">
+    <value>Updated {0}.trimesh</value>
+  </data>
+  <data name="Updating__0_" xml:space="preserve">
+    <value>Updating {0}</value>
+  </data>
+  <data name="Use_health_potion_" xml:space="preserve">
+    <value>Use health potion.</value>
+  </data>
+  <data name="Use_mana_potion_" xml:space="preserve">
+    <value>Use mana potion.</value>
+  </data>
+  <data name="User_stopped_the_bot_and_ThreadAbortException_was_thrown__This_is_a_good_thing_" xml:space="preserve">
+    <value>Stop Button pressed. User has stopped the bot.</value>
+  </data>
+  <data name="Valid_attributes_are__" xml:space="preserve">
+    <value>Valid attributes are: </value>
+  </data>
+  <data name="Valid_tags_are__" xml:space="preserve">
+    <value>Valid tags are: </value>
+  </data>
+  <data name="Valid_values_are__" xml:space="preserve">
+    <value>Valid values are: </value>
+  </data>
+  <data name="Value___0___in___1___attribute_is_not_supported__Expected__2__type__3_" xml:space="preserve">
+    <value>Value "{0}" in "{1}" attribute is not supported! Expected {2} type.{3}</value>
+  </data>
+  <data name="Value___0___in___1___is_not_supported__2_" xml:space="preserve">
+    <value>Value "{0}" in "{1}" is not supported!{2}</value>
+  </data>
+  <data name="Value___0___in___1___tag_is_not_supported__Expected__2__type__3_" xml:space="preserve">
+    <value>Value "{0}" in "{1}" tag is not supported! Expected {2} type.{3}</value>
+  </data>
+  <data name="Vendor_does_not_sell_food_or_water___Or_none_could_be_found__Blacklisting_it_" xml:space="preserve">
+    <value>Vendor does not sell food or water. (Or none could be found) Blacklisting it!</value>
+  </data>
+  <data name="Waiting_for_other_HB" xml:space="preserve">
+    <value>Waiting for other HB</value>
+  </data>
+  <data name="Waiting_for_other_HB_" xml:space="preserve">
+    <value>Waiting for other HB.</value>
+  </data>
+  <data name="Waiting_on_taxi___" xml:space="preserve">
+    <value>Waiting on taxi...</value>
+  </data>
+  <data name="WARDEN_HAS_UPDATED_SO_STOPPING_BOTTING_AND_KILLING_WOW_" xml:space="preserve">
+    <value>WARDEN HAS UPDATED SO STOPPING BOTTING AND KILLING WOW!</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Warning___0_" xml:space="preserve">
+    <value>Warning: {0}</value>
+  </data>
+  <data name="Warning___Factions__has_been_moved_to_the__GrindArea___Please_reflect_this_change_in_your_profiles_" xml:space="preserve">
+    <value>Warning: 'Factions' has been moved to the 'GrindArea'. Please reflect this change in your profiles.</value>
+  </data>
+  <data name="Warning___navmesh_could_not_be_loaded__Disabling_hotspot_at___0____1__" xml:space="preserve">
+    <value>Warning - navmesh could not be loaded. Disabling hotspot at &lt;{0}, {1}&gt;</value>
+  </data>
+  <data name="Warning___TargetMaxLevel__has_been_moved_to__GrindArea___Please_reflect_this_change_in_your_profiles_" xml:space="preserve">
+    <value>Warning: 'TargetMaxLevel' has been moved to 'GrindArea'. Please reflect this change in your profiles.</value>
+  </data>
+  <data name="Warning___TargetMinLevel__has_been_moved_to__GrindArea___Please_reflect_this_change_in_your_profiles_" xml:space="preserve">
+    <value>Warning: 'TargetMinLevel' has been moved to 'GrindArea'. Please reflect this change in your profiles.</value>
+  </data>
+  <data name="Warning__Max_polygon_count_exceeded_while_applying_blackspot__0__with_radius__1___2_" xml:space="preserve">
+    <value>Warning: Max polygon count exceeded while applying blackspot {0} with radius {1}.{2}</value>
+  </data>
+  <data name="We_either_outleveled_the_currently_loaded_profile__or_something_has_gone_terribly_wrong__Can_t_find_a_new__sub_profile_to_use_" xml:space="preserve">
+    <value>We either outleveled the currently loaded profile, or something has gone terribly wrong. Can't find a new (sub)profile to use!</value>
+  </data>
+  <data name="We_leveled_up__Checking_if_we_need_to_switch_profiles_" xml:space="preserve">
+    <value>We leveled up! Checking if we need to switch profiles.</value>
+  </data>
+  <data name="WoW_cannot_be_minimized_while_running_Honorbuddy_" xml:space="preserve">
+    <value>WoW cannot be minimized while running Honorbuddy!</value>
+  </data>
+  <data name="Wow_exited__Honorbuddy_stopped_" xml:space="preserve">
+    <value>Wow exited, Honorbuddy stopped!</value>
+  </data>
+  <data name="You_can_not_attach_more_than_12_items_" xml:space="preserve">
+    <value>You can not attach more than 12 items!</value>
+  </data>
+  <data name="You_can_t_mount_here_" xml:space="preserve">
+    <value>You can't mount here.</value>
+  </data>
+  <data name="You_did_not_specify_the_ID_of_the_game_object_in_the_UseObject_element_" xml:space="preserve">
+    <value>You did not specify the ID of the game object in the UseObject element!</value>
+  </data>
+  <data name="You_did_not_specify_the_ID_of_the_item_in_the_CollectItem_objective_" xml:space="preserve">
+    <value>You did not specify the ID of the item in the CollectItem objective!</value>
+  </data>
+  <data name="You_did_not_specify_the_ID_of_the_mob_in_the_KillMob_objective_" xml:space="preserve">
+    <value>You did not specify the ID of the mob in the KillMob objective!</value>
+  </data>
+  <data name="You_have_not_selected_a_mesh_folder__Please_check_your_settings_and_set_a_mesh_folder_before_starting_Honorbuddy_" xml:space="preserve">
+    <value>You have not selected a mesh folder! Please check your settings and set a mesh folder before starting Honorbuddy.</value>
+  </data>
+  <data name="You_have_placed_the__Z__attribute_before_the__X__and__Y__attribute_" xml:space="preserve">
+    <value>You have placed the 'Z' attribute before the 'X' and 'Y' attribute!</value>
+  </data>
+  <data name="You_need_to_buy_Honorbuddy_to_use_over_level_20_" xml:space="preserve">
+    <value>You need to buy Honorbuddy to use over level 20.</value>
   </data>
 </root>
