@@ -16,6 +16,17 @@ namespace Styx.Pathing
     public delegate void NavLogCallback([MarshalAs(UnmanagedType.LPStr)] string msg);
 
     /// <summary>
+    /// Fires between the native sliced A* iterations so a long search can be abandoned.
+    /// Return false to cancel the search, true to let it continue. This is what backs
+    /// Honorbuddy's WowNavigator.OnPathFindProgress / PathFindProgressEventArgs.Cancel,
+    /// which MeshNavigator uses to drop a pathfind still running after 4 seconds while
+    /// the player is in combat or the bot has been stopped.
+    /// </summary>
+    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    [return: MarshalAs(UnmanagedType.I1)]
+    public delegate bool NavPathFindProgressCallback();
+
+    /// <summary>
     /// P/Invoke declarations for Navigation.dll (native C++ Recast/Detour wrapper).</summary>
     [SuppressUnmanagedCodeSecurity]
     internal static class NativeMethods
@@ -348,6 +359,9 @@ namespace Styx.Pathing
 
         [DllImport("Navigation.dll", CallingConvention = CallingConvention.Cdecl)]
         internal static extern void SetNavLogCallback_C(NavLogCallback callback);
+
+        [DllImport("Navigation.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void SetPathFindProgressCallback_C(NavPathFindProgressCallback callback);
 
         // ================================================================
         // Status helpers

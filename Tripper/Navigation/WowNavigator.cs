@@ -323,10 +323,13 @@ namespace Tripper.Navigation
 		/// note and NativeMethods.CalculatePathEx/NativeMethods.XYZ_C's implicit WoWPoint
 		/// operator) — converting here would double-convert.
 		///
-		/// One abort/progress hook is lost as a result: OnPathFindProgress can no longer
-		/// fire mid-search (there is no iterative loop left to call it from), so
-		/// PathFindResult.Aborted is always false and the event, while still exposed for
-		/// API-shape fidelity, is never raised by this method.
+		/// OnPathFindProgress is preserved. Navigation.dll runs the same sliced A* loop
+		/// internally (10000 iterations per slice) and, since the "PathFinder: add a
+		/// progress callback" change, asks the managed side between slices whether to
+		/// continue. This method registers that callback for the duration of the search and
+		/// raises OnPathFindProgress from it, so MeshNavigator.Nav_OnPathFindProgress can
+		/// still abandon a pathfind that has run more than 4 seconds while the player is in
+		/// combat or the bot has stopped — the behaviour Honorbuddy kept through 6.2.3.
 		/// </summary>
 		public PathFindResult FindPath(Vector3 start, Vector3 end)
 		{
@@ -339,11 +342,44 @@ namespace Tripper.Navigation
 				};
 
 				Stopwatch stopwatch = Stopwatch.StartNew();
+				bool cancelled = false;
+
+				// Fires between the native search slices. Honorbuddy raised the same event
+				// from its own UpdateSlicedFindPath loop; the loop now lives in the DLL, so
+				// it calls back in here instead. Returning false stops the search.
+				NavPathFindProgressCallback progress = delegate
+				{
+					EventHandler<PathFindProgressEventArgs> handler = this.OnPathFindProgress;
+					if (handler == null)
+					{
+						return true;
+					}
+
+					PathFindProgressEventArgs args = new PathFindProgressEventArgs(stopwatch.Elapsed);
+					handler(this, args);
+					cancelled |= args.Cancel;
+					return !args.Cancel;
+				};
+
 				WoWPoint startPoint = start;
 				WoWPoint endPoint = end;
-				NavPathResult navResult = NavigationApi.CalculatePathEx(this._mapId, startPoint, endPoint, true);
-				stopwatch.Stop();
+				NavPathResult navResult;
+				NativeMethods.SetPathFindProgressCallback_C(progress);
+				try
+				{
+					navResult = NavigationApi.CalculatePathEx(this._mapId, startPoint, endPoint, true);
+				}
+				finally
+				{
+					// Unhook before returning: the callback captures this search's stopwatch,
+					// and the delegate must outlive every native call that can reach it.
+					NativeMethods.SetPathFindProgressCallback_C(null);
+					GC.KeepAlive(progress);
+					stopwatch.Stop();
+				}
+
 				result.Elapsed = stopwatch.Elapsed;
+				result.Aborted = cancelled;
 
 				if (navResult == null)
 				{
