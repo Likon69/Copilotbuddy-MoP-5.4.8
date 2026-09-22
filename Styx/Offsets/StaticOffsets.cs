@@ -40,6 +40,7 @@ namespace Styx.Offsets
         public IntPtr NonPartyRaidMarkTargets;
         public IntPtr LocalPlayerNumKnownSpells;
         public IntPtr LocalPlayerKnownSpells;
+        public IntPtr LastRedErrorMessage;
         public IntPtr LocalPlayerTotemBars;
         public IntPtr LocalPlayerBattlefieldInstanceType;
         public IntPtr LocalPlayerComboPoints;

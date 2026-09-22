@@ -152,6 +152,7 @@ namespace Styx
             Statics.NonPartyRaidMarkTargets = newBase + 0xDC1CB8;
             Statics.LocalPlayerNumKnownSpells = newBase + 0xDC25E0;
             Statics.LocalPlayerKnownSpells = newBase + 0xDC25E4;
+            Statics.LastRedErrorMessage = newBase + 0xD64F18;
             Statics.LocalPlayerTotemBars = newBase + 0xDC26D8;
             Statics.LocalPlayerBattlefieldInstanceType = newBase + 0xDC3028;
             Statics.LocalPlayerComboPoints = newBase + 0xD65BF9;

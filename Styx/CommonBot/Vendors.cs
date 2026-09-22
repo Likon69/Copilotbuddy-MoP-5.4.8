@@ -102,10 +102,37 @@ namespace Styx.CommonBot
         }
 
         [DebuggerStepThrough]
-        public static Task MailAllItemsCoroutine()
+        public static async Task MailAllItemsCoroutine()
         {
-            // TODO: async state machine Struct303 — port when coroutine infrastructure is available
-            return Task.CompletedTask;
+            List<WoWItem> items = new List<WoWItem>();
+            items.AddRange(InventoryManager.GetItemsToMail());
+            if (OnMailItems != null)
+            {
+                MailItemsEventArgs eventArgs = new MailItemsEventArgs();
+                foreach (MailItemsEventHandler handler in OnMailItems.GetInvocationList())
+                {
+                    try
+                    {
+                        handler(eventArgs);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.WriteException(ex);
+                        eventArgs.AdditionalItems.Clear();
+                        continue;
+                    }
+                    foreach (WoWItem item in eventArgs.AdditionalItems)
+                    {
+                        if (!items.Contains(item))
+                        {
+                            items.Add(item);
+                        }
+                    }
+                    eventArgs.AdditionalItems.Clear();
+                }
+            }
+            await Mail.SendMailWithManyAttachmentsCoroutine(CharacterSettings.Instance.MailRecipient, items.ToArray());
+            ForceMail = false;
         }
 
         [Obsolete("Use MailAllItemsCoroutine instead")]
