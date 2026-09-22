@@ -213,6 +213,8 @@ namespace Styx
 
             Functions.CGLootInfo__GetLootSlotInfo = newBase + 0x5D508F;
             Functions.CGWorldFrame__GetActiveCamera = newBase + 0x4D408F;
+            Functions.EventIsButtonDown = newBase + 0x4A08D;
+            Functions.EventIsKeyDown = newBase + 0x4A0E4;
             Statics.LootRollInfo = newBase + 0xB568A8;
             Statics.NumTotalBidAuctions = newBase + 0xE10508;
             Statics.NumTotalListAuctions = newBase + 0xE10510;

@@ -72,5 +72,7 @@ namespace Styx.Offsets
         public IntPtr MerchantFrame__GetItemAtIndex;
             public IntPtr CGLootInfo__GetLootSlotInfo;
             public IntPtr CGWorldFrame__GetActiveCamera;
+            public IntPtr EventIsButtonDown;
+            public IntPtr EventIsKeyDown;
 }
 }
