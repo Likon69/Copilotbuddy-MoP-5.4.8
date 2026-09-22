@@ -49,69 +49,6 @@ public class FlightorLandSystem
 
 	public bool MoveTo(WoWPoint location)
 	{
-		bool flag = false;
-		LandBoxLocation landBoxLocation = Navigator.FlightorLandSystem.LandBoxLocations
-			.OrderBy(candidate => candidate.LandLocation.Distance(location))
-			.FirstOrDefault(candidate => candidate.MapID == StyxWoW.Me.MapId && candidate.IsWithinBox(location));
-		LandLocation landLocation = Navigator.FlightorLandSystem.LandLocations
-			.OrderBy(candidate => candidate.Location.Distance(location))
-			.FirstOrDefault(candidate => candidate.MapID == StyxWoW.Me.MapId && candidate.Location.Distance(location) < candidate.Distance);
-		if (_currentBoxLocation.LandLocation == WoWPoint.Zero && landBoxLocation.LandLocation != WoWPoint.Zero)
-		{
-			_currentBoxLocation = landBoxLocation;
-		}
-		if (_currentBoxLocation.Landed && _currentBoxLocation.LandLocation != landBoxLocation.LandLocation)
-		{
-			_currentBoxLocation.Landed = false;
-			_currentBoxLocation = landBoxLocation;
-		}
-		if (_currentLocation.Location == WoWPoint.Zero && landLocation.Location != WoWPoint.Zero)
-		{
-			_currentLocation = landLocation;
-		}
-		if (_currentLocation.Landed && _currentLocation.Location != landLocation.Location)
-		{
-			_currentLocation.Landed = false;
-			_currentLocation = landLocation;
-		}
-		if (landBoxLocation.Distance != 0 && landBoxLocation.LandLocation != WoWPoint.Zero && (!landBoxLocation.IsWithinBox(StyxWoW.Me.Location) || (!_currentBoxLocation.Landed && StyxWoW.Me.IsFlying && StyxWoW.Me.Location.Distance(landBoxLocation.LandLocation) >= 3f)))
-		{
-			flag = true;
-			if (Flightor.MountHelper.CanMount && StyxWoW.Me.IsOutdoors)
-			{
-				if (!StyxWoW.Me.Mounted)
-				{
-					Flightor.MountHelper.MountUp();
-					return true;
-				}
-				Flightor.MoveTo(landBoxLocation.LandLocation);
-				return true;
-			}
-		}
-		else if (landLocation.Distance != 0 && landLocation.Location != WoWPoint.Zero && landBoxLocation.LandLocation == WoWPoint.Zero && (StyxWoW.Me.Location.Distance(landLocation.Location) >= (float)landLocation.Distance || (!_currentLocation.Landed && StyxWoW.Me.IsFlying && StyxWoW.Me.Location.Distance(landLocation.Location) >= 3f)))
-		{
-			flag = true;
-			if (Flightor.MountHelper.CanMount && StyxWoW.Me.IsOutdoors)
-			{
-				if (!StyxWoW.Me.Mounted)
-				{
-					Flightor.MountHelper.MountUp();
-					return true;
-				}
-				Flightor.MoveTo(landLocation.Location);
-				return true;
-			}
-		}
-		if (!flag && landBoxLocation.LandLocation == WoWPoint.Zero && landLocation.Location == WoWPoint.Zero)
-		{
-			Flightor.MoveTo(location);
-			return true;
-		}
-		if (landBoxLocation.ShouldDismount && StyxWoW.Me.Mounted && StyxWoW.Me.Location.Distance(landBoxLocation.LandLocation) <= 3f)
-		{
-			Flightor.MountHelper.Dismount();
-			return true;
-		}
 		return false;
 	}
 

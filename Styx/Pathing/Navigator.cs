@@ -18,7 +18,7 @@ namespace Styx.Pathing
 
         internal static void Init()
         {
-            NavigationProvider = new MeshNavigator();
+            NavigationProvider = new DisabledNavigationProvider();
         }
 
         public static FlightorLandSystem FlightorLandSystem { get; set; } = new FlightorLandSystem();
@@ -53,7 +53,7 @@ namespace Styx.Pathing
             }
         }
 
-        private static ITerrainHeightProvider _heightProvider = new DefaultHeightProvider();
+        private static ITerrainHeightProvider _heightProvider = new DisabledHeightProvider();
 
         public static ITerrainHeightProvider HeightProvider
         {
@@ -311,6 +311,19 @@ namespace Styx.Pathing
         private enum CustomAreaType : byte
         {
             BlackSpot = AreaType.Misc1,
+        }
+
+        private sealed class DisabledNavigationProvider : NavigationProvider
+        {
+            public override MoveResult MoveTo(WoWPoint location) { return MoveResult.Failed; }
+            public override float PathPrecision { get; set; }
+            public override WoWPoint[] GeneratePath(WoWPoint from, WoWPoint to) { return new WoWPoint[0]; }
+            public override bool AtLocation(WoWPoint point1, WoWPoint point2) { return false; }
+        }
+
+        private sealed class DisabledHeightProvider : ITerrainHeightProvider
+        {
+            public List<float> FindHeights(float x, float y) { return new List<float>(); }
         }
 
         #endregion

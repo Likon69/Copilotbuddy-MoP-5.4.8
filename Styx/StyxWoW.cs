@@ -64,6 +64,18 @@ namespace Styx
             return log;
         }
 
+        internal static void SetSeparatedLogFolders(bool separated)
+        {
+            string root = Path.Combine(Utilities.AssemblyDirectory, "Logs");
+            string character = Path.Combine(root, string.Format("{0} - {1}", Me.RealmName, Me.Name));
+            foreach (StyxLog log in StyxLog.GetLogs())
+            {
+                if (!log.FileLogging || string.IsNullOrWhiteSpace(log.LogFilePath))
+                    continue;
+                log.ChangeLogFilePath(Path.Combine(separated ? character : root, Path.GetFileName(log.LogFilePath)));
+            }
+        }
+
         internal static T CallInjected<T>(IntPtr address, CallingConvention callingConvention, params object[] args) where T : struct
         {
             return Memory.CallInjected<T>(address, callingConvention, args);

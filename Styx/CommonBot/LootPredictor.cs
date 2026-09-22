@@ -63,7 +63,10 @@ namespace Styx.CommonBot
 
         private static void PurgeExpiredEntries()
         {
-            _entryData.RemoveAll(history => history.LastSeen.ElapsedMilliseconds > HistoryExpiryMilliseconds);
+            uint[] expired = _entryData.Where(pair => pair.Value.LastSeen.ElapsedMilliseconds > HistoryExpiryMilliseconds)
+                .Select(pair => pair.Key).ToArray();
+            foreach (uint entry in expired)
+                _entryData.Remove(entry);
         }
 
         internal static bool CanLoot(WoWUnit unit)

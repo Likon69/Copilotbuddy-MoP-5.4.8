@@ -192,7 +192,7 @@ namespace Styx.CommonBot.Profiles.Quest.Order
 
         public bool CanFly()
         {
-            return Flightor.CanFly;
+            return false;
         }
 
         public bool Chance(double val)

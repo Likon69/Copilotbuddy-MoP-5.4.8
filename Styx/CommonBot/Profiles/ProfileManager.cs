@@ -135,11 +135,6 @@ namespace Styx.CommonBot.Profiles
             XElement xelement = XElement.Parse(streamReader.ReadToEnd());
             XmlLocation = null;
             StyxWoW.AreaManager.SetArea(null);
-            MeshNavigator meshNavigator = Navigator.NavigationProvider as MeshNavigator;
-            if (meshNavigator != null)
-            {
-                meshNavigator.UpdateMaps();
-            }
             CurrentOuterProfile = new Profile(xelement, null);
             RefreshBestProfile();
         }
@@ -163,11 +158,6 @@ namespace Styx.CommonBot.Profiles
                 CharacterSettings.Instance.LastUsedPath = path;
             }
             StyxWoW.AreaManager.SetArea(null);
-            MeshNavigator meshNavigator = Navigator.NavigationProvider as MeshNavigator;
-            if (meshNavigator != null)
-            {
-                meshNavigator.UpdateMaps();
-            }
             CurrentOuterProfile = profile;
             RefreshBestProfile();
             if (CharacterSettings.Instance.RecentProfiles != null)
@@ -199,11 +189,6 @@ namespace Styx.CommonBot.Profiles
         public static void LoadEmpty()
         {
             StyxWoW.AreaManager.SetArea(null);
-            MeshNavigator meshNavigator = Navigator.NavigationProvider as MeshNavigator;
-            if (meshNavigator != null)
-            {
-                meshNavigator.UpdateMaps();
-            }
             CurrentOuterProfile = EmptyProfile;
             RefreshBestProfile();
         }

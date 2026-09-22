@@ -13,5 +13,10 @@ namespace Styx.Common
                 return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             }
         }
+
+        public static string GetObjectString(object value, string nullValue)
+        {
+            return value != null ? value.ToString() : nullValue;
+        }
     }
 }

@@ -735,7 +735,12 @@ namespace Styx.CommonBot
                     return RunStatus.Failure;
                 });
 
-                yield return new ActionRunCoroutine(new Func<object, Task<bool>>(context => CommonCoroutines.LandAndDismount(reason, dismount, landPoint)));
+                yield return new Action(context =>
+                {
+                    if (dismount)
+                        Dismount(reason);
+                    return RunStatus.Success;
+                });
 
                 yield break;
             }

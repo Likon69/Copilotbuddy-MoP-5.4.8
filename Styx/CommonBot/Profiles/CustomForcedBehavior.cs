@@ -6,8 +6,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Media;
 using System.Xml;
 using System.Xml.Linq;
-
-
 using Styx.Common;
 using Styx.TreeSharp;
 using Styx.WoWInternals;
@@ -28,15 +26,14 @@ namespace Styx.CommonBot.Profiles
 		{
 			if (typeof(T) == typeof(WoWPoint))
 			{
-				return (T[])this.UtilGetAttributeAsWoWPoint(attributeName, isAttributeRequired, attributeNameAliases);
+				return (T[])this.UtilGetAttributeAsWoWPointArray(attributeName, isAttributeRequired, attributeNameAliases);
 			}
 			constraints = constraints ?? new CustomForcedBehavior.ConstrainTo.Anything<T>();
 			
 			if (separatorCharacters == null)
 			{
-				RuntimeHelpers.InitializeArray(array = new char[3], fieldof(Styx.CommonBot.Profiles.CustomForcedBehavior.ArrayInitializer).FieldHandle);
+				separatorCharacters = new[] { ',', ';', '|' };
 			}
-			separatorCharacters = array;
 			bool flag = false;
 			string text = this.UtilLocateKey(isAttributeRequired, attributeName, attributeNameAliases);
 			List<T> list = new List<T>();
@@ -210,74 +207,30 @@ namespace Styx.CommonBot.Profiles
 			return t;
 		}
 
-		
-		private object UtilGetAttributeAsWoWPoint(string attr, bool isRequired, string[] aliases)
+		private object UtilGetAttributeAsWoWPointArray(string attr, bool isRequired, string[] aliases)
 		{
-			bool flag = false;
-			string text = this.UtilLocateKey(isRequired, attr, aliases);
-			List<WoWPoint> list = new List<WoWPoint>();
-			char[] array = new char[] { ' ', ',' };
-			char[] array2 = new char[] { '|', ';' };
-			if (text != null && this.Args.ContainsKey(text))
+			string key = this.UtilLocateKey(isRequired, attr, aliases);
+			var points = new List<WoWPoint>();
+			if (key == null || !this.Args.ContainsKey(key))
+				return points.ToArray();
+
+			foreach (string value in this.Args[key].Split(new[] { '|', ';' }, StringSplitOptions.RemoveEmptyEntries))
 			{
-				foreach (string text2 in this.Args[text].Split(array2, StringSplitOptions.RemoveEmptyEntries))
+				string[] coordinates = value.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+				try
 				{
-					string[] array4 = text2.Split(array, StringSplitOptions.RemoveEmptyEntries);
-					if (array4.Length == 3)
-					{
-						double? num = null;
-						try
-						{
-							num = new double?(this.UtilConvert<double>(text, array4[0]));
-							goto IL_0175;
-						}
-						catch (Exception)
-						{
-							flag = true;
-							goto IL_0175;
-						}
-						double? num2;
-						try
-						{
-							IL_00F5:
-							num2 = new double?(this.UtilConvert<double>(text, array4[1]));
-						}
-						catch (Exception)
-						{
-							flag = true;
-						}
-						double? num3 = null;
-						try
-						{
-							num3 = new double?(this.UtilConvert<double>(text, array4[2]));
-						}
-						catch (Exception)
-						{
-							flag = true;
-						}
-						if (num != null && num2 != null && num3 != null)
-						{
-							list.Add(new WoWPoint(num.Value, num2.Value, num3.Value));
-							goto IL_016A;
-						}
-						goto IL_016A;
-						IL_0175:
-						num2 = null;
-						goto IL_00F5;
-					}
-					this.LogMessage("error", "The '{0}' attribute's value contribution (saw '{1}') doesn't have three coordinates (counted {2}).\nExpect entries of the form \"x1,y1,z1 | x2,y2,z2 | x3,...\", or \"x1,y1,z1; x2,y2,z2; x3,...\"", new object[] { text, text2, array4.Length });
-					flag = true;
-					IL_016A:;
+					if (coordinates.Length != 3)
+						throw new FormatException();
+					points.Add(new WoWPoint(this.UtilConvert<double>(key, coordinates[0]), this.UtilConvert<double>(key, coordinates[1]), this.UtilConvert<double>(key, coordinates[2])));
 				}
-				if (flag)
+				catch (Exception)
 				{
-					list.Clear();
+					this.LogMessage("error", "The '{0}' attribute value '{1}' must contain three coordinates.", new object[] { key, value });
 					this.IsAttributeProblem = true;
+					return new WoWPoint[0];
 				}
-				return list.ToArray();
 			}
-			list.Clear();
-			return list.ToArray();
+			return points.ToArray();
 		}
 
 		
@@ -642,7 +595,7 @@ namespace Styx.CommonBot.Profiles
 			IEnumerable<string> enumerable = this.Args.Keys.Where(new Func<string, bool>(this.UtilIsUnrecognizedKey));
 			if (CustomForcedBehavior.Func3 == null)
 			{
-				CustomForcedBehavior.Func3 = new Func<string, string>(CustomForcedBehavior.UtilIdentity);
+				CustomForcedBehavior.Func3 = value => value;
 			}
 			IOrderedEnumerable<string> orderedEnumerable = enumerable.OrderBy(CustomForcedBehavior.Func3);
 			foreach (string text in orderedEnumerable)
@@ -769,26 +722,26 @@ namespace Styx.CommonBot.Profiles
 		
 		private static string sUtilGetAttributeAs<T>(Tuple<string, string> tuple)
 		{
-			return tuple.attributeName;
+			return tuple.Item1;
 		}
 
 		
 		
-		private static string sUtilGetAttributeAsWoWPoint(string attr)
+		private static string UtilAddX(string attr)
 		{
 			return attr + "X";
 		}
 
 		
 		
-		private static string sUtilGetAttributeAsWoWPoint(string attr)
+		private static string UtilAddY(string attr)
 		{
 			return attr + "Y";
 		}
 
 		
 		
-		private static string sUtilIsNumberedAttribute(string attr)
+		private static string UtilAddZ(string attr)
 		{
 			return attr + "Z";
 		}
@@ -1117,7 +1070,7 @@ namespace Styx.CommonBot.Profiles
 			
 			public bool UtilCheckAlias(Tuple<string, string> tuple)
 			{
-				return this.parent.UtilIsNumberedAttribute(tuple.aliasBaseName, tuple.attributeName, this.isPoint);
+				return this.parent.UtilIsNumberedAttribute(tuple.Item2, tuple.Item1, this.isPoint);
 			}
 
 			
