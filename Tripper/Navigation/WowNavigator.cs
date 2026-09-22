@@ -38,8 +38,20 @@ namespace Tripper.Navigation
 	/// </summary>
 	public class WowNavigator : IDisposable
 	{
+		// Navigation.dll's one-time setup. Despite its name Nav_LoadMaps loads no map --
+		// it installs Detour's custom allocator and seeds the native default filter
+		// (Navigation::Initialize). Tiles themselves load lazily: EnsureTiles calls
+		// MMapManager::loadMap, which reads the .mmap next to the DLL on demand.
+		private static bool _nativeInitialized;
+
 		public WowNavigator()
 		{
+			if (!_nativeInitialized)
+			{
+				NavigationApi.LoadMaps();
+				_nativeInitialized = true;
+			}
+
 			this.MeshLock = new object();
 			this.GarbageCollectTime = TimeSpan.FromMinutes(1.0);
 			this.Extents = new Vector3(3f, 20f, 3f);
@@ -360,6 +372,12 @@ namespace Tripper.Navigation
 					cancelled |= args.Cancel;
 					return !args.Cancel;
 				};
+
+				// CalculatePathEx runs against Navigation.dll's own _defaultFilter, the same
+				// one NavMeshQuery pushes into. Without this the search would ignore the
+				// caller's area costs — SetFactionQueryFilter's faction avoidance and
+				// BGBuddy's per-area costs would affect queries but not the actual path.
+				NavMeshQuery.PushFilter(this._mapId, this.QueryFilter.InternalFilter);
 
 				WoWPoint startPoint = start;
 				WoWPoint endPoint = end;

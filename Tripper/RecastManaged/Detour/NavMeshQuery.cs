@@ -62,17 +62,31 @@ namespace Tripper.RecastManaged.Detour
 
         private void ApplyFilter(QueryFilter filter)
         {
-            if (ReferenceEquals(filter, _appliedFilter) && filter.Version == _appliedVersion && MapId == _appliedMapId)
+            PushFilter(MapId, filter);
+        }
+
+        /// <summary>
+        /// Pushes a filter into Navigation.dll's own <c>_defaultFilter</c>, which every
+        /// native query reads. Shared with WowNavigator.FindPath: CalculatePathEx runs
+        /// against that same filter, so a path calculated without this call would ignore
+        /// the caller's area costs — faction avoidance and blackspot costs among them.
+        /// </summary>
+        internal static void PushFilter(uint mapId, QueryFilter filter)
+        {
+            if (filter == null)
+                return;
+
+            if (ReferenceEquals(filter, _appliedFilter) && filter.Version == _appliedVersion && mapId == _appliedMapId)
                 return;
 
             NativeMethods.SetIncludeFlags_C(filter.IncludeFlags);
             NativeMethods.SetExcludeFlags_C(filter.ExcludeFlags);
             for (int i = 0; i < QueryFilter.DT_MAX_AREAS; i++)
-                NativeMethods.SetAreaCost_C(MapId, i, filter.GetAreaCost((byte)i));
+                NativeMethods.SetAreaCost_C(mapId, i, filter.GetAreaCost((byte)i));
 
             _appliedFilter = filter;
             _appliedVersion = filter.Version;
-            _appliedMapId = MapId;
+            _appliedMapId = mapId;
         }
 
         // ------------------------------------------------------------------

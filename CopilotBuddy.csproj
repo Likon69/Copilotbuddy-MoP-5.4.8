@@ -14,6 +14,7 @@
     <RootNamespace>CopilotBuddy</RootNamespace>
     <AssemblyName>CopilotBuddy</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>CopilotBuddy.ico</ApplicationIcon>
   </PropertyGroup>
