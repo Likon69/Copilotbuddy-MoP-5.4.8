@@ -210,6 +210,17 @@ namespace Styx
             VFTableIndex.OnRightClick = (IntPtr)0x45;
             VFTableIndex.GetMatrix = (IntPtr)0x47;
             VFTableIndex.GetName = (IntPtr)0x4D;
+
+            Functions.CGLootInfo__GetLootSlotInfo = newBase + 0x5D508F;
+            Statics.LootRollInfo = newBase + 0xB568A8;
+            Statics.NumTotalBidAuctions = newBase + 0xE10508;
+            Statics.NumTotalListAuctions = newBase + 0xE10510;
+            Statics.BidderAuctions = newBase + 0xE1051C;
+            Statics.NumBidderAuctions = newBase + 0xE10550;
+            Statics.NumOwnerAuctions = newBase + 0xE10560;
+            Statics.OwnerAuctions = newBase + 0xE10564;
+            Statics.NumListAuctions = newBase + 0xE10570;
+            Statics.ListAuctions = newBase + 0xE10574;
         }
 
         public void Clear()

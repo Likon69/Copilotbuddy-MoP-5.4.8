@@ -90,5 +90,14 @@ namespace Styx.Offsets
         public IntPtr MerchantNumItems;
         public IntPtr SendMailItemGuids;
         public IntPtr WorldScene;
-    }
+            public IntPtr LootRollInfo;
+        public IntPtr NumTotalBidAuctions;
+        public IntPtr NumTotalListAuctions;
+        public IntPtr BidderAuctions;
+        public IntPtr NumBidderAuctions;
+        public IntPtr NumOwnerAuctions;
+        public IntPtr OwnerAuctions;
+        public IntPtr NumListAuctions;
+        public IntPtr ListAuctions;
+}
 }

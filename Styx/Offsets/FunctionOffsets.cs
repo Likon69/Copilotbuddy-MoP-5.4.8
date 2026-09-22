@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Styx.Offsets
 {
@@ -70,5 +70,6 @@ namespace Styx.Offsets
         public IntPtr Spell_C__CastSpell;
         public IntPtr Spell_C__HandleTerrainClick;
         public IntPtr MerchantFrame__GetItemAtIndex;
-    }
+            public IntPtr CGLootInfo__GetLootSlotInfo;
+}
 }
