@@ -95,7 +95,7 @@ namespace Infralution.Localization.Wpf
             Thread.CurrentThread.CurrentCulture = cultureInfo_1;
         }
 
-        internal static void smethod_1()
+        internal static void EnsureCultureNotifyIcon()
         {
             if (notifyIcon_0 == null)
             {

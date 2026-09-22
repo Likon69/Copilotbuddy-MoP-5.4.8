@@ -9,19 +9,19 @@ namespace Infralution.Localization.Wpf
 {
     public abstract class ManagedMarkupExtension : MarkupExtension
     {
-        private List<WeakReference> list_0 = new List<WeakReference>();
-        private object object_0;
+        private List<WeakReference> _targetObjects = new List<WeakReference>();
+        private object _targetProperty;
 
         public ManagedMarkupExtension(MarkupExtensionManager manager)
         {
-            manager.method_0(this);
+            manager.RegisterExtension(this);
         }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             RegisterTarget(serviceProvider);
             object obj = this;
-            if (object_0 != null)
+            if (_targetProperty != null)
             {
                 obj = GetValue();
             }
@@ -34,31 +34,31 @@ namespace Infralution.Localization.Wpf
             object targetObject = provideValueTarget.TargetObject;
             if (targetObject != null && targetObject.GetType().FullName != "System.Windows.SharedDp")
             {
-                object_0 = provideValueTarget.TargetProperty;
-                list_0.Add(new WeakReference(targetObject));
+                _targetProperty = provideValueTarget.TargetProperty;
+                _targetObjects.Add(new WeakReference(targetObject));
             }
         }
 
         protected virtual void UpdateTarget(object target)
         {
-            if (object_0 is DependencyProperty)
+            if (_targetProperty is DependencyProperty)
             {
                 DependencyObject dependencyObject = target as DependencyObject;
                 if (dependencyObject != null)
                 {
-                    dependencyObject.SetValue(object_0 as DependencyProperty, GetValue());
+                    dependencyObject.SetValue(_targetProperty as DependencyProperty, GetValue());
                     return;
                 }
             }
-            else if (object_0 is PropertyInfo)
+            else if (_targetProperty is PropertyInfo)
             {
-                (object_0 as PropertyInfo).SetValue(target, GetValue(), null);
+                (_targetProperty as PropertyInfo).SetValue(target, GetValue(), null);
             }
         }
 
         public void UpdateTargets()
         {
-            foreach (WeakReference weakReference in list_0)
+            foreach (WeakReference weakReference in _targetObjects)
             {
                 if (weakReference.IsAlive)
                 {
@@ -69,7 +69,7 @@ namespace Infralution.Localization.Wpf
 
         public bool IsTarget(object target)
         {
-            foreach (WeakReference weakReference in list_0)
+            foreach (WeakReference weakReference in _targetObjects)
             {
                 if (weakReference.IsAlive && weakReference.Target == target)
                 {
@@ -83,11 +83,11 @@ namespace Infralution.Localization.Wpf
         {
             get
             {
-                if (list_0.Count == 0)
+                if (_targetObjects.Count == 0)
                 {
                     return true;
                 }
-                foreach (WeakReference weakReference in list_0)
+                foreach (WeakReference weakReference in _targetObjects)
                 {
                     if (weakReference.IsAlive)
                     {
@@ -102,7 +102,7 @@ namespace Infralution.Localization.Wpf
         {
             get
             {
-                foreach (WeakReference weakReference in list_0)
+                foreach (WeakReference weakReference in _targetObjects)
                 {
                     DependencyObject dependencyObject = weakReference.Target as DependencyObject;
                     if (dependencyObject != null && DesignerProperties.GetIsInDesignMode(dependencyObject))
@@ -116,12 +116,12 @@ namespace Infralution.Localization.Wpf
 
         protected List<WeakReference> TargetObjects
         {
-            get { return list_0; }
+            get { return _targetObjects; }
         }
 
         protected object TargetProperty
         {
-            get { return object_0; }
+            get { return _targetProperty; }
         }
 
         protected Type TargetPropertyType
@@ -129,17 +129,17 @@ namespace Infralution.Localization.Wpf
             get
             {
                 Type type = null;
-                if (object_0 is DependencyProperty)
+                if (_targetProperty is DependencyProperty)
                 {
-                    type = (object_0 as DependencyProperty).PropertyType;
+                    type = (_targetProperty as DependencyProperty).PropertyType;
                 }
-                else if (object_0 is PropertyInfo)
+                else if (_targetProperty is PropertyInfo)
                 {
-                    type = (object_0 as PropertyInfo).PropertyType;
+                    type = (_targetProperty as PropertyInfo).PropertyType;
                 }
-                else if (object_0 != null)
+                else if (_targetProperty != null)
                 {
-                    type = object_0.GetType();
+                    type = _targetProperty.GetType();
                 }
                 return type;
             }

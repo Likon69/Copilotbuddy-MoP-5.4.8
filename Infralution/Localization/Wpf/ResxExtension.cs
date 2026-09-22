@@ -263,7 +263,7 @@ namespace Infralution.Localization.Wpf
             RegisterTarget(serviceProvider);
             if (base.IsInDesignMode)
             {
-                CultureManager.smethod_1();
+                CultureManager.EnsureCultureNotifyIcon();
             }
             if (string.IsNullOrEmpty(Key) && !IsBindingExpression)
             {

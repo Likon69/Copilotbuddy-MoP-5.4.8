@@ -9,32 +9,32 @@ namespace Infralution.Localization.Wpf
 {
     public class ResourceEnumConverter : EnumConverter, IValueConverter
     {
-        private Dictionary<CultureInfo, Class874> dictionary_0 = new Dictionary<CultureInfo, Class874>();
-        private ResourceManager resourceManager_0;
-        private bool bool_0;
-        private Array array_0;
+        private Dictionary<CultureInfo, LookupTable> _lookupTables = new Dictionary<CultureInfo, LookupTable>();
+        private ResourceManager _resourceManager;
+        private bool _isFlagEnum;
+        private Array _flagValues;
 
-        private Class874 method_0(CultureInfo cultureInfo_0)
+        private LookupTable GetLookupTable(CultureInfo culture)
         {
-            Class874 @class = null;
-            if (cultureInfo_0 == null)
+            LookupTable lookupTable = null;
+            if (culture == null)
             {
-                cultureInfo_0 = CultureInfo.CurrentCulture;
+                culture = CultureInfo.CurrentCulture;
             }
-            if (!dictionary_0.TryGetValue(cultureInfo_0, out @class))
+            if (!_lookupTables.TryGetValue(culture, out lookupTable))
             {
-                @class = new Class874();
+                lookupTable = new LookupTable();
                 foreach (object obj in base.GetStandardValues())
                 {
-                    string text = method_1(cultureInfo_0, obj);
+                    string text = GetValueText(culture, obj);
                     if (text != null)
                     {
-                        @class.Add(text, obj);
+                        lookupTable.Add(text, obj);
                     }
                 }
-                dictionary_0.Add(cultureInfo_0, @class);
+                _lookupTables.Add(culture, lookupTable);
             }
-            return @class;
+            return lookupTable;
         }
 
         protected virtual string GetResourceName(object value)
@@ -43,10 +43,10 @@ namespace Infralution.Localization.Wpf
             return string.Format("{0}_{1}", type.Name, value.ToString());
         }
 
-        private string method_1(CultureInfo cultureInfo_0, object object_0)
+        private string GetValueText(CultureInfo culture, object value)
         {
-            string resourceName = GetResourceName(object_0);
-            string text = resourceManager_0.GetString(resourceName, cultureInfo_0);
+            string resourceName = GetResourceName(value);
+            string text = _resourceManager.GetString(resourceName, culture);
             if (text == null)
             {
                 text = resourceName;
@@ -54,11 +54,11 @@ namespace Infralution.Localization.Wpf
             return text;
         }
 
-        private bool method_2(ulong ulong_0)
+        private bool IsSingleBitValue(ulong value)
         {
-            if (ulong_0 <= 1UL && ulong_0 >= 0UL)
+            if (value <= 1UL && value >= 0UL)
             {
-                switch ((int)ulong_0)
+                switch ((int)value)
                 {
                     case 0:
                         return false;
@@ -66,23 +66,23 @@ namespace Infralution.Localization.Wpf
                         return true;
                 }
             }
-            return (ulong_0 & (ulong_0 - 1UL)) == 0UL;
+            return (value & (value - 1UL)) == 0UL;
         }
 
-        private string method_3(CultureInfo cultureInfo_0, object object_0)
+        private string GetFlagValueText(CultureInfo culture, object value)
         {
-            if (Enum.IsDefined(object_0.GetType(), object_0))
+            if (Enum.IsDefined(value.GetType(), value))
             {
-                return method_1(cultureInfo_0, object_0);
+                return GetValueText(culture, value);
             }
-            ulong num = (ulong)Convert.ToUInt32(object_0);
+            ulong num = (ulong)Convert.ToUInt32(value);
             string text = null;
-            foreach (object obj in array_0)
+            foreach (object obj in _flagValues)
             {
                 ulong num2 = (ulong)Convert.ToUInt32(obj);
-                if (method_2(num2) && (num2 & num) == num2)
+                if (IsSingleBitValue(num2) && (num2 & num) == num2)
                 {
-                    string text2 = method_1(cultureInfo_0, obj);
+                    string text2 = GetValueText(culture, obj);
                     if (text == null)
                     {
                         text = text2;
@@ -96,24 +96,24 @@ namespace Infralution.Localization.Wpf
             return text;
         }
 
-        private object method_4(CultureInfo cultureInfo_0, string string_0)
+        private object GetValue(CultureInfo culture, string text)
         {
-            Class874 @class = method_0(cultureInfo_0);
+            LookupTable lookupTable = GetLookupTable(culture);
             object obj = null;
-            @class.TryGetValue(string_0, out obj);
+            lookupTable.TryGetValue(text, out obj);
             return obj;
         }
 
-        private object method_5(CultureInfo cultureInfo_0, string string_0)
+        private object GetFlagValue(CultureInfo culture, string text)
         {
-            Class874 @class = method_0(cultureInfo_0);
-            string[] array = string_0.Split(new char[] { ',' });
+            LookupTable lookupTable = GetLookupTable(culture);
+            string[] array = text.Split(new char[] { ',' });
             ulong num = 0UL;
-            foreach (string text in array)
+            foreach (string textValue in array)
             {
                 object obj = null;
-                string text2 = text.Trim();
-                if (!@class.TryGetValue(text2, out obj))
+                string trimmedTextValue = textValue.Trim();
+                if (!lookupTable.TryGetValue(trimmedTextValue, out obj))
                 {
                     return null;
                 }
@@ -125,12 +125,12 @@ namespace Infralution.Localization.Wpf
         public ResourceEnumConverter(Type type, ResourceManager resourceManager)
             : base(type)
         {
-            resourceManager_0 = resourceManager;
+            _resourceManager = resourceManager;
             object[] customAttributes = type.GetCustomAttributes(typeof(FlagsAttribute), true);
-            bool_0 = customAttributes.Length > 0;
-            if (bool_0)
+            _isFlagEnum = customAttributes.Length > 0;
+            if (_isFlagEnum)
             {
-                array_0 = Enum.GetValues(type);
+                _flagValues = Enum.GetValues(type);
             }
         }
 
@@ -142,7 +142,7 @@ namespace Infralution.Localization.Wpf
             }
             if (value is string)
             {
-                object obj = bool_0 ? method_5(culture, (string)value) : method_4(culture, (string)value);
+                object obj = _isFlagEnum ? GetFlagValue(culture, (string)value) : GetValue(culture, (string)value);
                 if (obj == null)
                 {
                     obj = base.ConvertFrom(context, culture, value);
@@ -160,7 +160,7 @@ namespace Infralution.Localization.Wpf
             }
             if (value != null && destinationType == typeof(string))
             {
-                return bool_0 ? method_3(culture, value) : method_1(culture, value);
+                return _isFlagEnum ? GetFlagValueText(culture, value) : GetValueText(culture, value);
             }
             return base.ConvertTo(context, culture, value, destinationType);
         }
@@ -199,7 +199,7 @@ namespace Infralution.Localization.Wpf
             return ConvertFrom(null, culture, value);
         }
 
-        private class Class874 : Dictionary<string, object>
+        private class LookupTable : Dictionary<string, object>
         {
         }
     }

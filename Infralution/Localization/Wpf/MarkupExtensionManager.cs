@@ -4,18 +4,18 @@ namespace Infralution.Localization.Wpf
 {
     public class MarkupExtensionManager
     {
-        private List<ManagedMarkupExtension> list_0 = new List<ManagedMarkupExtension>();
-        private int int_0;
-        private int int_1 = 40;
+        private List<ManagedMarkupExtension> _activeExtensions = new List<ManagedMarkupExtension>();
+        private int _cleanupCount;
+        private int _cleanupInterval = 40;
 
         public MarkupExtensionManager(int cleanupInterval)
         {
-            int_1 = cleanupInterval;
+            _cleanupInterval = cleanupInterval;
         }
 
         public virtual void UpdateAllTargets()
         {
-            foreach (ManagedMarkupExtension managedMarkupExtension in list_0)
+            foreach (ManagedMarkupExtension managedMarkupExtension in _activeExtensions)
             {
                 managedMarkupExtension.UpdateTargets();
             }
@@ -23,31 +23,31 @@ namespace Infralution.Localization.Wpf
 
         public List<ManagedMarkupExtension> ActiveExtensions
         {
-            get { return list_0; }
+            get { return _activeExtensions; }
         }
 
         public void CleanupInactiveExtensions()
         {
-            List<ManagedMarkupExtension> list = new List<ManagedMarkupExtension>(list_0.Count);
-            foreach (ManagedMarkupExtension managedMarkupExtension in list_0)
+            List<ManagedMarkupExtension> list = new List<ManagedMarkupExtension>(_activeExtensions.Count);
+            foreach (ManagedMarkupExtension managedMarkupExtension in _activeExtensions)
             {
                 if (managedMarkupExtension.IsTargetAlive)
                 {
                     list.Add(managedMarkupExtension);
                 }
             }
-            list_0 = list;
+            _activeExtensions = list;
         }
 
-        internal void method_0(ManagedMarkupExtension managedMarkupExtension_0)
+        internal void RegisterExtension(ManagedMarkupExtension extension)
         {
-            if (int_0 > int_1)
+            if (_cleanupCount > _cleanupInterval)
             {
                 CleanupInactiveExtensions();
-                int_0 = 0;
+                _cleanupCount = 0;
             }
-            list_0.Add(managedMarkupExtension_0);
-            int_0++;
+            _activeExtensions.Add(extension);
+            _cleanupCount++;
         }
     }
 }
