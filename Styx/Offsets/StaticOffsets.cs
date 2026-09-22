@@ -84,5 +84,10 @@ namespace Styx.Offsets
         public IntPtr CurrentShownQuest;
         public IntPtr LootFrame;
         public IntPtr C_PetBattles__IsInBattle;
+        public IntPtr BuybackItemSlotIndexes;
+        public IntPtr MerchantGuid;
+        public IntPtr NumBuybackItems;
+        public IntPtr MerchantNumItems;
+        public IntPtr SendMailItemGuids;
     }
 }

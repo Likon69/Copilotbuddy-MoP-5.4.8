@@ -76,6 +76,7 @@ namespace Styx
             Functions.GetSpellOverrideId = newBase + 0x4F6E09;
             Functions.Spell_C__CastSpell = newBase + 0x4F781E;
             Functions.Spell_C__HandleTerrainClick = newBase + 0x53D65D;
+            Functions.MerchantFrame__GetItemAtIndex = newBase + 0x55C2D2;
 
             Misc.WoWObjDescriptorFieldsOffset = (IntPtr)0x4;
             Misc.LuaStateGlobals = (IntPtr)0x50;
@@ -196,6 +197,11 @@ namespace Styx
             Statics.CurrentShownQuest = newBase + 0xDE7B9C;
             Statics.LootFrame = newBase + 0xDD3280;
             Statics.C_PetBattles__IsInBattle = newBase + 0xB61B20;
+            Statics.BuybackItemSlotIndexes = newBase + 0xDD8FE8;
+            Statics.MerchantGuid = newBase + 0xDD9024;
+            Statics.NumBuybackItems = newBase + 0xDD9018;
+            Statics.MerchantNumItems = newBase + 0xDD9030;
+            Statics.SendMailItemGuids = newBase + 0xE0CD30;
 
             VFTableIndex.GetPosition = (IntPtr)0x27;
             VFTableIndex.GetScale = (IntPtr)0x2E;
