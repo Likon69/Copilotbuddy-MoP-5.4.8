@@ -130,6 +130,8 @@ namespace Styx
             Statics.DbItemCache = newBase + 0xC88348;
             Statics.DbItemSparseCache = newBase + 0xC88408;
             Statics.SpellReagentsCacheObj = newBase + 0xC89608;
+            Statics.GlueState = newBase + 0xC95888;
+            Statics.GameState = newBase + 0xC958B0;
             Statics.SpellCacheMaxId = newBase + 0xC872C4;
             Statics.SpellCacheBase = newBase + 0xC872C8;
             Statics.LocalPlayerAutoRepeatingSpell = newBase + 0xC99108;

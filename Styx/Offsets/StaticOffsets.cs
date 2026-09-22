@@ -16,6 +16,8 @@ namespace Styx.Offsets
         public IntPtr DbItemCache;
         public IntPtr DbItemSparseCache;
         public IntPtr SpellReagentsCacheObj;
+        public IntPtr GlueState;
+        public IntPtr GameState;
         public IntPtr SpellCacheMaxId;
         public IntPtr SpellCacheBase;
         public IntPtr LocalPlayerAutoRepeatingSpell;

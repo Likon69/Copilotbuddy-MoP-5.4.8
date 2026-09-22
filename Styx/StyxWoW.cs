@@ -128,6 +128,22 @@ namespace Styx
             get { return !WowExited && Memory.Read<byte>(Offsets.Statics.IsInGame) != 0; }
         }
 
+        public static GameState GameState => (GameState)Memory.Read<uint>(Offsets.Statics.GameState);
+
+        public static GlueScreen GlueState => (GlueScreen)Memory.Read<uint>(Offsets.Statics.GlueState);
+
+        public static bool IsInWorld
+        {
+            get
+            {
+                if (IsInGame)
+                {
+                    return GameState != GameState.Zoning;
+                }
+                return false;
+            }
+        }
+
         public static void ResetAfk()
         {
             if (!IsInGame || Me == null)
