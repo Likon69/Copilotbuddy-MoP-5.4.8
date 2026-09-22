@@ -54,6 +54,9 @@
     <EmbeddedResource Update="Styx\Localization\Globalization.resx">
       <LogicalName>Styx.Localization.Globalization.resources</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Update="Levelbot\Resources\LevelbotResources.resx">
+      <LogicalName>Levelbot.Resources.LevelbotResources.resources</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

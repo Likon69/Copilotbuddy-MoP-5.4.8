@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionLoot_QuicksSkinner_Skinning__0_" xml:space="preserve">
+    <value>Skinning {0}</value>
+  </data>
+  <data name="ActionLoot_Run_Blacklisting_lootable_for_3_days_" xml:space="preserve">
+    <value>Blacklisting lootable for 3 days.</value>
+  </data>
+  <data name="ActionLoot_Run_Harvesting_" xml:space="preserve">
+    <value>Harvesting </value>
+  </data>
+  <data name="ActionLoot_Run_Looting_" xml:space="preserve">
+    <value>Looting </value>
+  </data>
+  <data name="ActionLoot_Run_Mining_from_" xml:space="preserve">
+    <value>Mining from </value>
+  </data>
+  <data name="ActionLoot_Run_Stop_for_combat_" xml:space="preserve">
+    <value>Stop for combat.</value>
+  </data>
+  <data name="ActionMoveToTarget_Run_MoveToTarget__Could_not_generate_path_to_target___0___blacklisting_" xml:space="preserve">
+    <value>MoveToTarget: Could not generate path to target: {0}, blacklisting!</value>
+  </data>
+  <data name="ActionMoveToTarget_Run_Moving_towards_" xml:space="preserve">
+    <value>Moving towards </value>
+  </data>
+  <data name="ActionMoveToTarget_Run_Moving_towards_level__0___1___2_" xml:space="preserve">
+    <value>Moving towards level {0} {1} {2}</value>
+  </data>
+  <data name="ActionMoveToTarget_Run_Tried_to_move_to__0__for_45_seconds__blacklisting_" xml:space="preserve">
+    <value>Tried to move to {0} for 45 seconds, blacklisting!</value>
+  </data>
+  <data name="ActionPull_Run__0__is_tagged" xml:space="preserve">
+    <value>{0} is tagged</value>
+  </data>
+  <data name="ActionPull_Run_Pre_pull_buffs" xml:space="preserve">
+    <value>Pre pull buffs</value>
+  </data>
+  <data name="ActionPull_Run_Pulling__0__now_" xml:space="preserve">
+    <value>Pulling {0} now.</value>
+  </data>
+  <data name="ActionPull_Run_Pulling_level__0___1__now_" xml:space="preserve">
+    <value>Pulling level {0} {1} now.</value>
+  </data>
+  <data name="ActionReleaseFromCorpse_Run_I_died_" xml:space="preserve">
+    <value>I died.</value>
+  </data>
+  <data name="ActionSetTarget_Run_Dismounting_for_combat_" xml:space="preserve">
+    <value>Dismounting for combat.</value>
+  </data>
+  <data name="ActionSetTarget_Run_Setting__0__at__1__yards_as_your_target" xml:space="preserve">
+    <value>Setting {0} at {1} yards as your target</value>
+  </data>
+  <data name="ActionSetTarget_Run_Setting_level__0___1___2__at__4__yards_as_your_target" xml:space="preserve">
+    <value>Setting level {0} {1} {2} at {3} yards as your target</value>
+  </data>
+  <data name="ActionSetTarget_Run_Setting_level__0___1___2__s_pet_at__4__yards_as_your_target" xml:space="preserve">
+    <value>Setting level {0} {1} {2}'s pet at {3} yards as your target</value>
+  </data>
+  <data name="ActionSetTarget_Run_Setting_target_" xml:space="preserve">
+    <value>Setting target.</value>
+  </data>
+  <data name="BotName" xml:space="preserve">
+    <value>Grind Bot</value>
+  </data>
+  <data name="DeathHelpers_FindSafeSpot__0__is_hostile_test_result_is___1__" xml:space="preserve">
+    <value>{0} is hostile test result is: {1}.</value>
+  </data>
+  <data name="DeathHelpers_FindSafeSpot_There_are__0__hostile_mobs_" xml:space="preserve">
+    <value>There are {0} hostile mobs.</value>
+  </data>
+  <data name="DeathHelpers_GrabCorpse_Clicking_corpse_popup___" xml:space="preserve">
+    <value>Clicking corpse popup...</value>
+  </data>
+  <data name="DeathHelpers_HandleSafeResurrect_Calculating_safe_spot_" xml:space="preserve">
+    <value>Calculating safe spot.</value>
+  </data>
+  <data name="DeathHelpers_HandleSafeResurrect_Clicking__0___1_" xml:space="preserve">
+    <value>Clicking {0} {1}</value>
+  </data>
+  <data name="DeathHelpers_HandleSafeResurrect_Found_safe_spot_at_" xml:space="preserve">
+    <value>Found safe spot at </value>
+  </data>
+  <data name="DeathHelpers_HandleSafeResurrect_Grabbing_our_corpse_" xml:space="preserve">
+    <value>Grabbing our corpse!</value>
+  </data>
+  <data name="DeathHelpers_HandleSafeResurrect_Safe_location_is__0__our_corpse_location_" xml:space="preserve">
+    <value>Safe location is {0} our corpse location.</value>
+  </data>
+  <data name="DeathHelpers_HandleSafeResurrect_We_failed_to_res__Popping_wherever_we_are_" xml:space="preserve">
+    <value>We failed to res. Popping wherever we are!</value>
+  </data>
+  <data name="DiscoBot_CreateCombatBehavior_Moving_to_pull_target" xml:space="preserve">
+    <value>Moving to pull target</value>
+  </data>
+  <data name="LevelBot_CreateCombatBehavior_Applying_Combat_Buffs" xml:space="preserve">
+    <value>Applying Combat Buffs</value>
+  </data>
+  <data name="LevelBot_CreateCombatBehavior_Applying_PreCombatBuffs" xml:space="preserve">
+    <value>Applying PreCombatBuffs</value>
+  </data>
+  <data name="LevelBot_CreateCombatBehavior_Combat" xml:space="preserve">
+    <value>Combat</value>
+  </data>
+  <data name="LevelBot_CreateCombatBehavior_Healing" xml:space="preserve">
+    <value>Healing</value>
+  </data>
+  <data name="LevelBot_CreateCombatBehavior_Pulling" xml:space="preserve">
+    <value>Pulling</value>
+  </data>
+  <data name="LevelBot_CreateCombatBehavior_Resting" xml:space="preserve">
+    <value>Resting</value>
+  </data>
+  <data name="LevelBot_CreateDeathBehavior_Grabbing_corpse" xml:space="preserve">
+    <value>Grabbing corpse</value>
+  </data>
+  <data name="LevelBot_CreateDeathBehavior_Moving_to_corpse" xml:space="preserve">
+    <value>Moving to corpse</value>
+  </data>
+  <data name="LevelBot_CreateDeathBehavior_Moving_to_instance_portal__since_we_died_inside_" xml:space="preserve">
+    <value>Moving to instance portal, since we died inside!</value>
+  </data>
+  <data name="LevelBot_CreateDeathBehavior_Releasing_from_corpse" xml:space="preserve">
+    <value>Releasing from corpse</value>
+  </data>
+  <data name="LevelBot_CreateDeathBehavior_SafeRes_timer_expired___Grabbing_our_corpse_where_we_are_" xml:space="preserve">
+    <value>SafeRes timer expired!! Grabbing our corpse where we are!</value>
+  </data>
+  <data name="LevelBot_CreateDeathBehavior_Safespot_is_invalid__Grabbing_corpse__" xml:space="preserve">
+    <value>Safespot is invalid! Grabbing corpse!!</value>
+  </data>
+  <data name="LevelBot_CreateLootBehavior_Blacklisting_lootable_to_avoid_useless_POI_spam__tried_looting_twice_but_we_still_can_t_loot_" xml:space="preserve">
+    <value>Blacklisting lootable to avoid useless POI spam, tried looting twice but we still can't loot!</value>
+  </data>
+  <data name="LevelBot_CreateLootBehavior_Can_t_generate_a_path_to_the_lootable__Blacklisting_it_for_15_minutes_" xml:space="preserve">
+    <value>Can't generate a path to the lootable. Blacklisting it for 15 minutes.</value>
+  </data>
+  <data name="LevelBot_CreateLootBehavior_I_can_t_tell_if_we_looted__blacklisting_it_just_to_be_safe_" xml:space="preserve">
+    <value>I can't tell if we looted, blacklisting it just to be safe.</value>
+  </data>
+  <data name="LevelBot_CreateLootBehavior_Loot_timer_exceeded_max_time__Blacklisting_lootable_" xml:space="preserve">
+    <value>Loot timer exceeded max time. Blacklisting lootable.</value>
+  </data>
+  <data name="LevelBot_CreateLootBehavior_Lootable_isn_t____lootable__Wtf____Current_type__" xml:space="preserve">
+    <value>Lootable isn't... lootable. Wtf? - Current type: </value>
+  </data>
+  <data name="LevelBot_CreateLootBehavior_Lootable_isn_t_lootable___blacklisting_" xml:space="preserve">
+    <value>Lootable isn't lootable...blacklisting.</value>
+  </data>
+  <data name="LevelBot_CreateLootBehavior_Looting__0__Guid_0x_1_X016_" xml:space="preserve">
+    <value>Looting {0} Guid:0x{1:X016}</value>
+  </data>
+  <data name="LevelBot_CreateLootBehavior_Skinnable___0___1__" xml:space="preserve">
+    <value>Skinnable: {0} {1} </value>
+  </data>
+  <data name="LevelBot_CreateLootBehavior_Unkown_Object" xml:space="preserve">
+    <value>Unkown Object</value>
+  </data>
+  <data name="LevelBot_CreateRoamBehavior_Moving_to_hotspot" xml:space="preserve">
+    <value>Moving to hotspot</value>
+  </data>
+  <data name="LevelBot_CreateVendorBehavior_Buying_Items" xml:space="preserve">
+    <value>Buying Items</value>
+  </data>
+  <data name="LevelBot_CreateVendorBehavior_Learning_new_Flight_Path" xml:space="preserve">
+    <value>Learning new Flight Path</value>
+  </data>
+  <data name="LevelBot_CreateVendorBehavior_Mailing_Items" xml:space="preserve">
+    <value>Mailing Items</value>
+  </data>
+  <data name="LevelBot_CreateVendorBehavior_Repairing_Items" xml:space="preserve">
+    <value>Repairing Items</value>
+  </data>
+  <data name="LevelBot_CreateVendorBehavior_Selling_Items" xml:space="preserve">
+    <value>Selling Items</value>
+  </data>
+  <data name="LevelBot_CreateVendorBehavior_Training_Skills" xml:space="preserve">
+    <value>Training Skills</value>
+  </data>
+  <data name="LevelBot_GrabCorpse_Clicking_corpse_popup___" xml:space="preserve">
+    <value>Clicking corpse popup...</value>
+  </data>
+  <data name="LevelBot_GrabCorpse_Corpse_camp_protection_tripped__Attempting_to_resurrect_at_a_spirit_healer_" xml:space="preserve">
+    <value>Corpse camp protection tripped. Attempting to resurrect at a spirit healer!</value>
+  </data>
+  <data name="LevelBot_GrabCorpse_Corpse_possibly_being_camped__Camp_count__" xml:space="preserve">
+    <value>Corpse possibly being camped. Camp count: </value>
+  </data>
+  <data name="LevelBot_GrabCorpse_Grabbing_corpse" xml:space="preserve">
+    <value>Grabbing corpse</value>
+  </data>
+  <data name="LevelBot_GrabCorpse_Waiting_for_corpse_recovery_delay_to_expire_" xml:space="preserve">
+    <value>Waiting for corpse recovery delay to expire!</value>
+  </data>
+  <data name="LevelBot_PerformCombatActions_Dismount_for_combat_" xml:space="preserve">
+    <value>Dismount for combat.</value>
+  </data>
+  <data name="LevelBot_PerformCombatActions_Not_moving_so_dismount_for_combat_" xml:space="preserve">
+    <value>Not moving so dismount for combat.</value>
+  </data>
+  <data name="LevelBot_Release_I_died_" xml:space="preserve">
+    <value>I died!</value>
+  </data>
+  <data name="LevelBot_Release_Releasing_corpse" xml:space="preserve">
+    <value>Releasing corpse</value>
+  </data>
+  <data name="LevelBot_Start_You_haven_t_loaded_a_profile_" xml:space="preserve">
+    <value>You haven't loaded a profile!</value>
+  </data>
+</root>
