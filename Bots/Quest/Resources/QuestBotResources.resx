@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="ForcedQuestPickUp_GetGoalText_Picking_up_quest_with_ID__0_" xml:space="preserve"><value>Picking up quest with ID {0}</value></data>
+  <data name="CollectItemObjective_GetObjectiveLocation_Could_not_find_mesh_height_for_quest__0__on_step__1_" xml:space="preserve"><value>Could not find mesh height for quest {0} on step {1}</value></data>
+  <data name="ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Use__0__x__1_" xml:space="preserve"><value>Use {0} x {1}</value></data>
+  <data name="Unable_to_evaluate_compile_condition_in_If_tag__Please_check_your_profile_" xml:space="preserve"><value>Unable to evaluate/compile condition in If tag. Please check your profile.</value></data>
+  <data name="QuestBot_Start_Can_not_start_quest_bot___this_profile_does_not_contain_a_quest_order_" xml:space="preserve"><value>Can not start quest bot - this profile does not contain a quest order!</value></data>
+  <data name="BotName" xml:space="preserve"><value>Questing</value></data>
+  <data name="UseGameObjectObjective_GetObjectiveLocation_Could_not_find_mesh_height_for_quest__0__on_step__1_" xml:space="preserve"><value>Could not find mesh height for quest {0} on step {1}</value></data>
+  <data name="CollectItemObjective_CreateBranch_Moving_to_quest_vendor" xml:space="preserve"><value>Moving to quest-vendor</value></data>
+  <data name="TurnInQuestObjective_CreateBranch_Moving_to_turn_in_quest__0__" xml:space="preserve"><value>Moving to turn in quest {0}.</value></data>
+  <data name="ForcedQuestTurnIn_TurnInQuest_Tried_to_complete_quest_5_times_with_no_success" xml:space="preserve"><value>Tried to complete quest 5 times with no success</value></data>
+  <data name="ForcedQuestTurnIn_GetGoalText_Turning_in_quest_with_ID__0_" xml:space="preserve"><value>Turning in quest with ID {0}</value></data>
+  <data name="ForcedGrindTo_OnStart_Goal__Grind_to_level__0_" xml:space="preserve"><value>Goal: Grind to level {0}</value></data>
+  <data name="CollectItemObjective_ToString__CollectItemObjective_ItemID___0___Count___1__" xml:space="preserve"><value>[CollectItemObjective ItemID: {0}, Count: {1}]</value></data>
+  <data name="GrindObjective_GetObjectiveLocation_Could_not_find_mesh_height_for_quest__0__on_step__1_" xml:space="preserve"><value>Could not find mesh height for quest {0} on step {1}</value></data>
+  <data name="ForcedQuestPickUp_OnStart_You_do_not_have_any_space_in_your_quest_log_" xml:space="preserve"><value>You do not have any space in your quest log!</value></data>
+  <data name="ForcedQuestObjective_ToString__ForcedQuestObjective_Objective___0__" xml:space="preserve"><value>[ForcedQuestObjective Objective: {0}]</value></data>
+  <data name="PerformQuestObjectiveOrdered_CreateCurrent_Could_not_create_a_performable_quest_objective_for_objective_with_ID__0__" xml:space="preserve"><value>Could not create a performable quest objective for objective with ID {0}!</value></data>
+  <data name="UseGameObjectObjective_CreateBranch_Moving_to_complete_objective_for__0__" xml:space="preserve"><value>Moving to complete objective for {0}.</value></data>
+  <data name="ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Kill_mob_with_ID__0___1__times" xml:space="preserve"><value>Kill mob with ID {0} {1} times</value></data>
+  <data name="QuestBot_CheckQuestBehaviors_Exception_thrown_while_trying_to_construct_quest_behavior__Tag__0__1__0__2_" xml:space="preserve"><value>Exception thrown while trying to construct quest behavior. Tag:{0}{1}{0}{2}</value></data>
+  <data name="QuestObjective_QuestObjective_Quest_passed_is_not_contained_in_the_quest_log_" xml:space="preserve"><value>Quest passed is not contained in the quest log!</value></data>
+  <data name="ForcedSingleton_ToString__ForcedSingleton_" xml:space="preserve"><value>[ForcedSingleton]</value></data>
+  <data name="ForcedQuestTurnIn_GetGoalText_Turning_in__0_" xml:space="preserve"><value>Turning in {0}</value></data>
+  <data name="QuestHelper_Questing_OnQuestAccepted_Quest_Accepted___0_" xml:space="preserve"><value>Quest Accepted: {0}</value></data>
+  <data name="PerformQuestObjectiveOrdered_CreatePickUp_Can_not_pick_up_a_quest_from_a_gameobject_without_specifying_a_location__Please_check_your_profile_" xml:space="preserve"><value>Can not pick up a quest from a gameobject without specifying a location. Please check your profile.</value></data>
+  <data name="PerformQuestObjectiveOrdered_CreatePerformableObjective_Could_not_find_objective_with_ID__0__in_quest__1_" xml:space="preserve"><value>Could not find objective with ID {0} in quest {1}</value></data>
+  <data name="QuestBot_InteractWithQuestGiver_Tried_to_interact_5_times__Failing" xml:space="preserve"><value>Tried to interact 5 times. Failing</value></data>
+  <data name="SequencePickupQuest_Execute__Questing___Picking_up__0_" xml:space="preserve"><value>[Questing]: Picking up {0}</value></data>
+  <data name="QuestBot_CreateAtQuestPickupBehavior_Accepting_quests_from__0__" xml:space="preserve"><value>Accepting quests from {0}.</value></data>
+  <data name="ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Use_object_with_ID__0___1__times" xml:space="preserve"><value>Use object with ID {0} {1} times</value></data>
+  <data name="ForcedQuestPickUp_GetGoalText_Picking_up__0_" xml:space="preserve"><value>Picking up {0}</value></data>
+  <data name="UseGameObjectObjective_MoveTowardsObjectiveLocation_Can_not_reach_step__0__of__1____blacklisting_" xml:space="preserve"><value>Can not reach step {0} of {1} - blacklisting.</value></data>
+  <data name="PerformQuestObjectiveOrdered_Execute_Nothing_more_to_do__Stopping_bot_" xml:space="preserve"><value>Nothing more to do.</value></data>
+  <data name="QuestManager_RefreshQuests_Unable_to_obtain_enough_information_to_complete_quest___0____Blacklisting_" xml:space="preserve"><value>Unable to obtain enough information to complete quest: {0} - Blacklisting!</value></data>
+  <data name="ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Collect__0__of_item_with_ID__1_" xml:space="preserve"><value>Collect {0} of item with ID {1}</value></data>
+  <data name="QuestBot_CreateQuestBehavior_Moving_to_quest_giver__0__" xml:space="preserve"><value>Moving to quest giver {0}.</value></data>
+  <data name="CollectItemObjective_CreateBranch_Moving_to_complete_collect_objective_for__0__" xml:space="preserve"><value>Moving to complete collect-objective for {0}.</value></data>
+  <data name="UseGameObjectObjective_ToString__UseGameObjectObjective_GameObjectId___0___Count___1__" xml:space="preserve"><value>[UseGameObjectObjective GameObjectId: {0}, Count: {1}]</value></data>
+  <data name="QuestBot_Start_You_haven_t_loaded_a_profile_" xml:space="preserve"><value>You haven't loaded a profile!</value></data>
+  <data name="ForcedGrindTo_OnStart_Reached_GrindTo__level___0___without_a_current_grind_area__Can_t_continue_" xml:space="preserve"><value>Reached GrindTo (level: {0}) without a current grind area. Can't continue.</value></data>
+  <data name="PerformQuestObjectiveOrdered_Execute_Could_not_create_current_in_quest_bot_" xml:space="preserve"><value>Could not create current in quest bot!</value></data>
+  <data name="QuestManager_RefreshQuests_Quest__0__requires_to_go_to_another_continent__Blacklisting_" xml:space="preserve"><value>Quest {0} requires to go to another continent! Blacklisting.</value></data>
+  <data name="ForcedGrindTo_GetGoalText_Grinding" xml:space="preserve"><value>Grinding</value></data>
+  <data name="GrindObjective_ToString__GrindObjective_MobID___0___Count___1__" xml:space="preserve"><value>[GrindObjective MobID: {0}, Count: {1}]</value></data>
+  <data name="ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Collect__0__x__1_" xml:space="preserve"><value>Collect {0} x {1}</value></data>
+  <data name="PerformQuestObjective_Execute_Done_with_objective_for__0_" xml:space="preserve"><value>Done with objective for {0}</value></data>
+  <data name="ForcedGrindTo_GetGoalText_Grinding_to_level__0_" xml:space="preserve"><value>Grinding to level {0}</value></data>
+  <data name="ForcedUseItem_OnStart_Using_item_for__0_" xml:space="preserve"><value>Using item for {0}</value></data>
+  <data name="UseGameObjectObjective_CreateBranch_Using__0__for_quest__1__" xml:space="preserve"><value>Using {0} for quest {1}.</value></data>
+  <data name="ForcedQuestPickUp_ToString__ForcedQuestPickUp_QuestId___0___QuestName___1__" xml:space="preserve"><value>[ForcedQuestPickUp QuestId: {0}, QuestName: {1}]</value></data>
+  <data name="Honorbuddy_stopped" xml:space="preserve"><value>Honorbuddy stopped</value></data>
+  <data name="PerformQuestObjectiveOrdered_CreateTurnIn_Could_not_find_turn_in_step__Please_specify_a_turn_in_override_" xml:space="preserve"><value>Could not find turn in step! Please specify a turn in override!</value></data>
+  <data name="ForcedQuestPickUp_GetGoalText_Picking_up_quest__0__from_item__1_" xml:space="preserve"><value>Picking up quest {0} from item {1}</value></data>
+  <data name="QuestingOverrideManager_Reload_Quest_help__0__could_not_be_loaded___1_" xml:space="preserve"><value>Quest help {0} could not be loaded! {1}</value></data>
+  <data name="QuestObjective_QuestObjective_Quest_passed_has_an_invalid_quest_ID_" xml:space="preserve"><value>Quest passed has an invalid quest ID!</value></data>
+  <data name="TurnInQuestObjective_ToString__TurnInQuestObjective_QuestId___0___QuestName___1__" xml:space="preserve"><value>[TurnInQuestObjective QuestId: {0}, QuestName: {1}]</value></data>
+  <data name="ForcedQuestTurnIn_TurnInQuest_Closing_Questframe" xml:space="preserve"><value>Closing Questframe</value></data>
+  <data name="QuestManager_RefreshQuests_Don_t_know_how_to_complete_quest___0____Blacklisting_" xml:space="preserve"><value>Don't know how to complete quest: {0} - Blacklisting!</value></data>
+  <data name="PerformQuestObjectiveOrdered_CreateTurnIn_Could_not_find_a_height_to_turn_in_quest__0___Consider_overriding_this_quest_in_your_profile_" xml:space="preserve"><value>Could not find a height to turn in quest {0}! Consider overriding this quest in your profile.</value></data>
+  <data name="TurnInQuestObjective_CreateBranch_Turning_in_quests_at_quest_giver__0_" xml:space="preserve"><value>Turning in quests at quest giver {0}</value></data>
+  <data name="QuestBot_InteractWithQuestGiver_Gossip_or_quest_frame_is_visible__Succeeding_" xml:space="preserve"><value>Gossip or quest frame is visible. Succeeding.</value></data>
+  <data name="ForcedGrindTo_ToString__ForcedGrindTo_Level___0__" xml:space="preserve"><value>[ForcedGrindTo Level: {0}]</value></data>
+  <data name="ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Kill__0__x__1_" xml:space="preserve"><value>Kill {0} x {1}</value></data>
+  <data name="TurnInQuestObjective_GetObjectiveLocation_Could_not_find_mesh_height_for_quest__0__on_step__1_" xml:space="preserve"><value>Could not find mesh height for quest {0} on step {1}</value></data>
+  <data name="ForcedUseItem_ToString__ForcedUseItem_ForceUse___0__" xml:space="preserve"><value>[ForcedUseItem ForceUse: {0}]</value></data>
+  <data name="UseGameObjectObjective_CreateBranch_Moving_to_game_object__0__for_quest__1__" xml:space="preserve"><value>Moving to game object {0} for quest {1}.</value></data>
+  <data name="ForcedNothing_ToString__ForcedNothing_" xml:space="preserve"><value>[ForcedNothing]</value></data>
+  <data name="QuestBot_Start_Could_not_construct_all_quest_behaviors_" xml:space="preserve"><value>Could not construct all quest behaviors.</value></data>
+  <data name="TurnInQuestObjective_CreateBranch_Moving_to_quest_turn_in_at_quest_giver__0__" xml:space="preserve"><value>Moving to quest turn in at quest giver {0}.</value></data>
+  <data name="ForcedQuestTurnIn_ToString__ForcedQuestTurnIn_QuestId___0___QuestName___1__" xml:space="preserve"><value>[ForcedQuestTurnIn QuestId: {0}, QuestName: {1}]</value></data>
+  <data name="ForcedMoveTo_OnStart_Moving_to__0_" xml:space="preserve"><value>Moving to {0}</value></data>
+  <data name="ForcedMoveTo_OnStart_Goal__Move_to__0_" xml:space="preserve"><value>Goal: Move to {0}</value></data>
+  </root>

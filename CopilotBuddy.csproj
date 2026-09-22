@@ -57,6 +57,12 @@
     <EmbeddedResource Update="Levelbot\Resources\LevelbotResources.resx">
       <LogicalName>Levelbot.Resources.LevelbotResources.resources</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Update="Bots\Quest\Resources\QuestBotResources.resx">
+      <LogicalName>Bots.Quest.Resources.QuestBotResources.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Bots\BGBuddy\Resources\BGBuddyResources.resx">
+      <LogicalName>Bots.BGBuddy.Resources.BGBuddyResources.resources</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

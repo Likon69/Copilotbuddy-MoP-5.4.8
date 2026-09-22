@@ -1,0 +1,193 @@
+using System.CodeDom.Compiler;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.Resources;
+using System.Runtime.CompilerServices;
+
+namespace Bots.Quest.Resources;
+
+[CompilerGenerated]
+[GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+[DebuggerNonUserCode]
+public class QuestBotResources
+{
+	private static ResourceManager resourceManager_0;
+
+	private static CultureInfo cultureInfo_0;
+
+	[EditorBrowsable(EditorBrowsableState.Advanced)]
+	public static ResourceManager ResourceManager
+	{
+		get
+		{
+			if (object.ReferenceEquals(resourceManager_0, null))
+			{
+				ResourceManager resourceManager = new ResourceManager("Bots.Quest.Resources.QuestBotResources", typeof(QuestBotResources).Assembly);
+				resourceManager_0 = resourceManager;
+			}
+			return resourceManager_0;
+		}
+	}
+
+	[EditorBrowsable(EditorBrowsableState.Advanced)]
+	public static CultureInfo Culture
+	{
+		get
+		{
+			return cultureInfo_0;
+		}
+		set
+		{
+			cultureInfo_0 = value;
+		}
+	}
+
+	public static string BotName => ResourceManager.GetString("BotName", cultureInfo_0);
+
+	public static string CollectItemObjective_CreateBranch_Moving_to_complete_collect_objective_for__0__ => ResourceManager.GetString("CollectItemObjective_CreateBranch_Moving_to_complete_collect_objective_for__0__", cultureInfo_0);
+
+	public static string CollectItemObjective_CreateBranch_Moving_to_quest_vendor => ResourceManager.GetString("CollectItemObjective_CreateBranch_Moving_to_quest_vendor", cultureInfo_0);
+
+	public static string CollectItemObjective_GetObjectiveLocation_Could_not_find_mesh_height_for_quest__0__on_step__1_ => ResourceManager.GetString("CollectItemObjective_GetObjectiveLocation_Could_not_find_mesh_height_for_quest__0__on_step__1_", cultureInfo_0);
+
+	public static string CollectItemObjective_ToString__CollectItemObjective_ItemID___0___Count___1__ => ResourceManager.GetString("CollectItemObjective_ToString__CollectItemObjective_ItemID___0___Count___1__", cultureInfo_0);
+
+	public static string ForcedGrindTo_GetGoalText_Grinding => ResourceManager.GetString("ForcedGrindTo_GetGoalText_Grinding", cultureInfo_0);
+
+	public static string ForcedGrindTo_GetGoalText_Grinding_to_level__0_ => ResourceManager.GetString("ForcedGrindTo_GetGoalText_Grinding_to_level__0_", cultureInfo_0);
+
+	public static string ForcedGrindTo_OnStart_Goal__Grind_to_level__0_ => ResourceManager.GetString("ForcedGrindTo_OnStart_Goal__Grind_to_level__0_", cultureInfo_0);
+
+	public static string ForcedGrindTo_OnStart_Reached_GrindTo__level___0___without_a_current_grind_area__Can_t_continue_ => ResourceManager.GetString("ForcedGrindTo_OnStart_Reached_GrindTo__level___0___without_a_current_grind_area__Can_t_continue_", cultureInfo_0);
+
+	public static string ForcedGrindTo_ToString__ForcedGrindTo_Level___0__ => ResourceManager.GetString("ForcedGrindTo_ToString__ForcedGrindTo_Level___0__", cultureInfo_0);
+
+	public static string ForcedMoveTo_OnStart_Goal__Move_to__0_ => ResourceManager.GetString("ForcedMoveTo_OnStart_Goal__Move_to__0_", cultureInfo_0);
+
+	public static string ForcedMoveTo_OnStart_Moving_to__0_ => ResourceManager.GetString("ForcedMoveTo_OnStart_Moving_to__0_", cultureInfo_0);
+
+	public static string ForcedNothing_ToString__ForcedNothing_ => ResourceManager.GetString("ForcedNothing_ToString__ForcedNothing_", cultureInfo_0);
+
+	public static string ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Collect__0__of_item_with_ID__1_ => ResourceManager.GetString("ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Collect__0__of_item_with_ID__1_", cultureInfo_0);
+
+	public static string ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Collect__0__x__1_ => ResourceManager.GetString("ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Collect__0__x__1_", cultureInfo_0);
+
+	public static string ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Kill__0__x__1_ => ResourceManager.GetString("ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Kill__0__x__1_", cultureInfo_0);
+
+	public static string ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Kill_mob_with_ID__0___1__times => ResourceManager.GetString("ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Kill_mob_with_ID__0___1__times", cultureInfo_0);
+
+	public static string ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Use__0__x__1_ => ResourceManager.GetString("ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Use__0__x__1_", cultureInfo_0);
+
+	public static string ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Use_object_with_ID__0___1__times => ResourceManager.GetString("ForcedQuestObjective_GetFriendlyObjectiveText_Goal__Use_object_with_ID__0___1__times", cultureInfo_0);
+
+	public static string ForcedQuestObjective_ToString__ForcedQuestObjective_Objective___0__ => ResourceManager.GetString("ForcedQuestObjective_ToString__ForcedQuestObjective_Objective___0__", cultureInfo_0);
+
+	public static string ForcedQuestPickUp_GetGoalText_Picking_up__0_ => ResourceManager.GetString("ForcedQuestPickUp_GetGoalText_Picking_up__0_", cultureInfo_0);
+
+	public static string ForcedQuestPickUp_GetGoalText_Picking_up_quest__0__from_item__1_ => ResourceManager.GetString("ForcedQuestPickUp_GetGoalText_Picking_up_quest__0__from_item__1_", cultureInfo_0);
+
+	public static string ForcedQuestPickUp_GetGoalText_Picking_up_quest_with_ID__0_ => ResourceManager.GetString("ForcedQuestPickUp_GetGoalText_Picking_up_quest_with_ID__0_", cultureInfo_0);
+
+	public static string ForcedQuestPickUp_OnStart_You_do_not_have_any_space_in_your_quest_log_ => ResourceManager.GetString("ForcedQuestPickUp_OnStart_You_do_not_have_any_space_in_your_quest_log_", cultureInfo_0);
+
+	public static string ForcedQuestPickUp_ToString__ForcedQuestPickUp_QuestId___0___QuestName___1__ => ResourceManager.GetString("ForcedQuestPickUp_ToString__ForcedQuestPickUp_QuestId___0___QuestName___1__", cultureInfo_0);
+
+	public static string ForcedQuestTurnIn_GetGoalText_Turning_in__0_ => ResourceManager.GetString("ForcedQuestTurnIn_GetGoalText_Turning_in__0_", cultureInfo_0);
+
+	public static string ForcedQuestTurnIn_GetGoalText_Turning_in_quest_with_ID__0_ => ResourceManager.GetString("ForcedQuestTurnIn_GetGoalText_Turning_in_quest_with_ID__0_", cultureInfo_0);
+
+	public static string ForcedQuestTurnIn_ToString__ForcedQuestTurnIn_QuestId___0___QuestName___1__ => ResourceManager.GetString("ForcedQuestTurnIn_ToString__ForcedQuestTurnIn_QuestId___0___QuestName___1__", cultureInfo_0);
+
+	public static string ForcedQuestTurnIn_TurnInQuest_Closing_Questframe => ResourceManager.GetString("ForcedQuestTurnIn_TurnInQuest_Closing_Questframe", cultureInfo_0);
+
+	public static string ForcedQuestTurnIn_TurnInQuest_Tried_to_complete_quest_5_times_with_no_success => ResourceManager.GetString("ForcedQuestTurnIn_TurnInQuest_Tried_to_complete_quest_5_times_with_no_success", cultureInfo_0);
+
+	public static string ForcedSingleton_ToString__ForcedSingleton_ => ResourceManager.GetString("ForcedSingleton_ToString__ForcedSingleton_", cultureInfo_0);
+
+	public static string ForcedUseItem_OnStart_Using_item_for__0_ => ResourceManager.GetString("ForcedUseItem_OnStart_Using_item_for__0_", cultureInfo_0);
+
+	public static string ForcedUseItem_ToString__ForcedUseItem_ForceUse___0__ => ResourceManager.GetString("ForcedUseItem_ToString__ForcedUseItem_ForceUse___0__", cultureInfo_0);
+
+	public static string GrindObjective_GetObjectiveLocation_Could_not_find_mesh_height_for_quest__0__on_step__1_ => ResourceManager.GetString("GrindObjective_GetObjectiveLocation_Could_not_find_mesh_height_for_quest__0__on_step__1_", cultureInfo_0);
+
+	public static string GrindObjective_ToString__GrindObjective_MobID___0___Count___1__ => ResourceManager.GetString("GrindObjective_ToString__GrindObjective_MobID___0___Count___1__", cultureInfo_0);
+
+	public static string Honorbuddy_stopped => ResourceManager.GetString("Honorbuddy_stopped", cultureInfo_0);
+
+	public static string PerformQuestObjective_Execute_Done_with_objective_for__0_ => ResourceManager.GetString("PerformQuestObjective_Execute_Done_with_objective_for__0_", cultureInfo_0);
+
+	public static string PerformQuestObjectiveOrdered_CreateCurrent_Could_not_create_a_performable_quest_objective_for_objective_with_ID__0__ => ResourceManager.GetString("PerformQuestObjectiveOrdered_CreateCurrent_Could_not_create_a_performable_quest_objective_for_objective_with_ID__0__", cultureInfo_0);
+
+	public static string PerformQuestObjectiveOrdered_CreatePerformableObjective_Could_not_find_objective_with_ID__0__in_quest__1_ => ResourceManager.GetString("PerformQuestObjectiveOrdered_CreatePerformableObjective_Could_not_find_objective_with_ID__0__in_quest__1_", cultureInfo_0);
+
+	public static string PerformQuestObjectiveOrdered_CreatePickUp_Can_not_pick_up_a_quest_from_a_gameobject_without_specifying_a_location__Please_check_your_profile_ => ResourceManager.GetString("PerformQuestObjectiveOrdered_CreatePickUp_Can_not_pick_up_a_quest_from_a_gameobject_without_specifying_a_location__Please_check_your_profile_", cultureInfo_0);
+
+	public static string PerformQuestObjectiveOrdered_CreateTurnIn_Could_not_find_a_height_to_turn_in_quest__0___Consider_overriding_this_quest_in_your_profile_ => ResourceManager.GetString("PerformQuestObjectiveOrdered_CreateTurnIn_Could_not_find_a_height_to_turn_in_quest__0___Consider_overriding_this_quest_in_your_profile_", cultureInfo_0);
+
+	public static string PerformQuestObjectiveOrdered_CreateTurnIn_Could_not_find_turn_in_step__Please_specify_a_turn_in_override_ => ResourceManager.GetString("PerformQuestObjectiveOrdered_CreateTurnIn_Could_not_find_turn_in_step__Please_specify_a_turn_in_override_", cultureInfo_0);
+
+	public static string PerformQuestObjectiveOrdered_Execute_Could_not_create_current_in_quest_bot_ => ResourceManager.GetString("PerformQuestObjectiveOrdered_Execute_Could_not_create_current_in_quest_bot_", cultureInfo_0);
+
+	public static string PerformQuestObjectiveOrdered_Execute_Nothing_more_to_do__Stopping_bot_ => ResourceManager.GetString("PerformQuestObjectiveOrdered_Execute_Nothing_more_to_do__Stopping_bot_", cultureInfo_0);
+
+	public static string QuestBot_CheckQuestBehaviors_Exception_thrown_while_trying_to_construct_quest_behavior__Tag__0__1__0__2_ => ResourceManager.GetString("QuestBot_CheckQuestBehaviors_Exception_thrown_while_trying_to_construct_quest_behavior__Tag__0__1__0__2_", cultureInfo_0);
+
+	public static string QuestBot_CreateAtQuestPickupBehavior_Accepting_quests_from__0__ => ResourceManager.GetString("QuestBot_CreateAtQuestPickupBehavior_Accepting_quests_from__0__", cultureInfo_0);
+
+	public static string QuestBot_CreateQuestBehavior_Moving_to_quest_giver__0__ => ResourceManager.GetString("QuestBot_CreateQuestBehavior_Moving_to_quest_giver__0__", cultureInfo_0);
+
+	public static string QuestBot_InteractWithQuestGiver_Gossip_or_quest_frame_is_visible__Succeeding_ => ResourceManager.GetString("QuestBot_InteractWithQuestGiver_Gossip_or_quest_frame_is_visible__Succeeding_", cultureInfo_0);
+
+	public static string QuestBot_InteractWithQuestGiver_Tried_to_interact_5_times__Failing => ResourceManager.GetString("QuestBot_InteractWithQuestGiver_Tried_to_interact_5_times__Failing", cultureInfo_0);
+
+	public static string QuestBot_Start_Can_not_start_quest_bot___this_profile_does_not_contain_a_quest_order_ => ResourceManager.GetString("QuestBot_Start_Can_not_start_quest_bot___this_profile_does_not_contain_a_quest_order_", cultureInfo_0);
+
+	public static string QuestBot_Start_Could_not_construct_all_quest_behaviors_ => ResourceManager.GetString("QuestBot_Start_Could_not_construct_all_quest_behaviors_", cultureInfo_0);
+
+	public static string QuestBot_Start_You_haven_t_loaded_a_profile_ => ResourceManager.GetString("QuestBot_Start_You_haven_t_loaded_a_profile_", cultureInfo_0);
+
+	public static string QuestHelper_Questing_OnQuestAccepted_Quest_Accepted___0_ => ResourceManager.GetString("QuestHelper_Questing_OnQuestAccepted_Quest_Accepted___0_", cultureInfo_0);
+
+	public static string QuestingOverrideManager_Reload_Quest_help__0__could_not_be_loaded___1_ => ResourceManager.GetString("QuestingOverrideManager_Reload_Quest_help__0__could_not_be_loaded___1_", cultureInfo_0);
+
+	public static string QuestManager_RefreshQuests_Don_t_know_how_to_complete_quest___0____Blacklisting_ => ResourceManager.GetString("QuestManager_RefreshQuests_Don_t_know_how_to_complete_quest___0____Blacklisting_", cultureInfo_0);
+
+	public static string QuestManager_RefreshQuests_Quest__0__requires_to_go_to_another_continent__Blacklisting_ => ResourceManager.GetString("QuestManager_RefreshQuests_Quest__0__requires_to_go_to_another_continent__Blacklisting_", cultureInfo_0);
+
+	public static string QuestManager_RefreshQuests_Unable_to_obtain_enough_information_to_complete_quest___0____Blacklisting_ => ResourceManager.GetString("QuestManager_RefreshQuests_Unable_to_obtain_enough_information_to_complete_quest___0____Blacklisting_", cultureInfo_0);
+
+	public static string QuestObjective_QuestObjective_Quest_passed_has_an_invalid_quest_ID_ => ResourceManager.GetString("QuestObjective_QuestObjective_Quest_passed_has_an_invalid_quest_ID_", cultureInfo_0);
+
+	public static string QuestObjective_QuestObjective_Quest_passed_is_not_contained_in_the_quest_log_ => ResourceManager.GetString("QuestObjective_QuestObjective_Quest_passed_is_not_contained_in_the_quest_log_", cultureInfo_0);
+
+	public static string SequencePickupQuest_Execute__Questing___Picking_up__0_ => ResourceManager.GetString("SequencePickupQuest_Execute__Questing___Picking_up__0_", cultureInfo_0);
+
+	public static string TurnInQuestObjective_CreateBranch_Moving_to_quest_turn_in_at_quest_giver__0__ => ResourceManager.GetString("TurnInQuestObjective_CreateBranch_Moving_to_quest_turn_in_at_quest_giver__0__", cultureInfo_0);
+
+	public static string TurnInQuestObjective_CreateBranch_Moving_to_turn_in_quest__0__ => ResourceManager.GetString("TurnInQuestObjective_CreateBranch_Moving_to_turn_in_quest__0__", cultureInfo_0);
+
+	public static string TurnInQuestObjective_CreateBranch_Turning_in_quests_at_quest_giver__0_ => ResourceManager.GetString("TurnInQuestObjective_CreateBranch_Turning_in_quests_at_quest_giver__0_", cultureInfo_0);
+
+	public static string TurnInQuestObjective_GetObjectiveLocation_Could_not_find_mesh_height_for_quest__0__on_step__1_ => ResourceManager.GetString("TurnInQuestObjective_GetObjectiveLocation_Could_not_find_mesh_height_for_quest__0__on_step__1_", cultureInfo_0);
+
+	public static string TurnInQuestObjective_ToString__TurnInQuestObjective_QuestId___0___QuestName___1__ => ResourceManager.GetString("TurnInQuestObjective_ToString__TurnInQuestObjective_QuestId___0___QuestName___1__", cultureInfo_0);
+
+	public static string Unable_to_evaluate_compile_condition_in_If_tag__Please_check_your_profile_ => ResourceManager.GetString("Unable_to_evaluate_compile_condition_in_If_tag__Please_check_your_profile_", cultureInfo_0);
+
+	public static string UseGameObjectObjective_CreateBranch_Moving_to_complete_objective_for__0__ => ResourceManager.GetString("UseGameObjectObjective_CreateBranch_Moving_to_complete_objective_for__0__", cultureInfo_0);
+
+	public static string UseGameObjectObjective_CreateBranch_Moving_to_game_object__0__for_quest__1__ => ResourceManager.GetString("UseGameObjectObjective_CreateBranch_Moving_to_game_object__0__for_quest__1__", cultureInfo_0);
+
+	public static string UseGameObjectObjective_CreateBranch_Using__0__for_quest__1__ => ResourceManager.GetString("UseGameObjectObjective_CreateBranch_Using__0__for_quest__1__", cultureInfo_0);
+
+	public static string UseGameObjectObjective_GetObjectiveLocation_Could_not_find_mesh_height_for_quest__0__on_step__1_ => ResourceManager.GetString("UseGameObjectObjective_GetObjectiveLocation_Could_not_find_mesh_height_for_quest__0__on_step__1_", cultureInfo_0);
+
+	public static string UseGameObjectObjective_MoveTowardsObjectiveLocation_Can_not_reach_step__0__of__1____blacklisting_ => ResourceManager.GetString("UseGameObjectObjective_MoveTowardsObjectiveLocation_Can_not_reach_step__0__of__1____blacklisting_", cultureInfo_0);
+
+	public static string UseGameObjectObjective_ToString__UseGameObjectObjective_GameObjectId___0___Count___1__ => ResourceManager.GetString("UseGameObjectObjective_ToString__UseGameObjectObjective_GameObjectId___0___Count___1__", cultureInfo_0);
+
+	internal QuestBotResources()
+	{
+	}
+}
