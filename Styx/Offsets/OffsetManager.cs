@@ -212,6 +212,7 @@ namespace Styx
             VFTableIndex.GetName = (IntPtr)0x4D;
 
             Functions.CGLootInfo__GetLootSlotInfo = newBase + 0x5D508F;
+            Functions.CGWorldFrame__GetActiveCamera = newBase + 0x4D408F;
             Statics.LootRollInfo = newBase + 0xB568A8;
             Statics.NumTotalBidAuctions = newBase + 0xE10508;
             Statics.NumTotalListAuctions = newBase + 0xE10510;
