@@ -285,7 +285,7 @@ namespace Styx.CommonBot.Coroutines
                 meshNavigator.Nav.LoadTile(TileIdentifier.GetByPosition(origin.X, origin.Y));
                 for (float i = 1f; i <= 8f; i++)
                 {
-                    float headingRadians = (float)Math.PI * 2f * (8f / i);
+                    float headingRadians = (float)Math.PI * 2f * (i / 8f);
                     meshNavigator.Nav.LoadTile(TileIdentifier.GetByPosition(origin.RayCast(headingRadians, searchRadius2D)));
                 }
 
