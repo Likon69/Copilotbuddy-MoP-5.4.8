@@ -89,5 +89,6 @@ namespace Styx.Offsets
         public IntPtr NumBuybackItems;
         public IntPtr MerchantNumItems;
         public IntPtr SendMailItemGuids;
+        public IntPtr WorldScene;
     }
 }

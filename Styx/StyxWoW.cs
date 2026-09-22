@@ -26,6 +26,10 @@ namespace Styx
         public static WoWClient WoWClient { get; private set; }
 
         public static WoWDb Db { get; private set; }
+        public static Styx.WoWInternals.World.WorldScene WorldScene
+        {
+            get { return new Styx.WoWInternals.World.WorldScene(Memory.Read<IntPtr>(Offsets.Statics.WorldScene)); }
+        }
 
         public static Styx.WoWInternals.WoWCache.WoWCache Cache { get; private set; }
 

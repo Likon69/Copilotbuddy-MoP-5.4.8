@@ -44,5 +44,6 @@ namespace Styx.Offsets
         public IntPtr WoWUnitThreatInfo;
         public IntPtr InventoryOffset;
         public IntPtr ClientConnectionOffset;
+        public IntPtr WorldSceneWorldMap;
     }
 }

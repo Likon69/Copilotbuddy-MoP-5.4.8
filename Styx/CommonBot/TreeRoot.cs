@@ -17,6 +17,7 @@ using Styx.Pathing;
 using Styx.Resources;
 using Styx.TreeSharp;
 using Styx.WoWInternals;
+using Action = Styx.TreeSharp.Action;
 
 namespace Styx.CommonBot
 {

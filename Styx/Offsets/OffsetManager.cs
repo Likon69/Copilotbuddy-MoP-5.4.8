@@ -117,6 +117,7 @@ namespace Styx
             Misc.WoWUnitThreatInfo = (IntPtr)0x14A8;
             Misc.InventoryOffset = (IntPtr)0x3BC8;
             Misc.ClientConnectionOffset = (IntPtr)0x462C;
+            Misc.WorldSceneWorldMap = (IntPtr)0x8;
 
             Statics.LuaDummyNode = newBase + 0x941D80;
             Statics.GameObjectDataSlots = newBase + 0xB578B0;
@@ -202,6 +203,7 @@ namespace Styx
             Statics.NumBuybackItems = newBase + 0xDD9018;
             Statics.MerchantNumItems = newBase + 0xDD9030;
             Statics.SendMailItemGuids = newBase + 0xE0CD30;
+            Statics.WorldScene = newBase + 0xE31294;
 
             VFTableIndex.GetPosition = (IntPtr)0x27;
             VFTableIndex.GetScale = (IntPtr)0x2E;

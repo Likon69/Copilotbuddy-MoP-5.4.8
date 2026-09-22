@@ -18,6 +18,8 @@ namespace Styx.CommonBot.Routines
             TopMost = true;
         }
 
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         internal CombatRoutine SelectedRoutine { get; set; }
 
         private void RoutineSelectionForm_Load(object sender, EventArgs e)

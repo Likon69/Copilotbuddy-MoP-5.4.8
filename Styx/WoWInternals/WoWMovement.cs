@@ -360,9 +360,9 @@ namespace Styx.WoWInternals
                 {
                     Matrix worldMatrix = transport.GetWorldMatrix();
                     Matrix.Invert(ref worldMatrix, out worldMatrix);
-                    Vector3 vector = clickPos;
-                    Vector3 vector2;
-                    Vector3.Transform(ref vector, ref worldMatrix, out vector2);
+                    Tripper.Tools.Math.Vector3 vector = clickPos;
+                    Tripper.Tools.Math.Vector3 vector2;
+                    Tripper.Tools.Math.Vector3.Transform(ref vector, ref worldMatrix, out vector2);
                     clickPos = vector2;
                 }
 

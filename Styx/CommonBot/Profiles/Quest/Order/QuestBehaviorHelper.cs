@@ -37,7 +37,7 @@ namespace Styx.CommonBot.Profiles.Quest.Order
         {
             if (_behaviorTypes == null)
             {
-                var cc = new CodeCompiler(QuestBehaviorsDirectory);
+                var cc = new Styx.Common.Compiler.CodeCompiler(QuestBehaviorsDirectory);
                 CompilerResults results = cc.Compile();
 
                 foreach (CompilerError error in results.Errors)
@@ -94,7 +94,7 @@ namespace Styx.CommonBot.Profiles.Quest.Order
 
                 _behaviorTypes.RemoveAll(toRemove.Contains);
 
-                var cc = new CodeCompiler(filePath);
+                var cc = new Styx.Common.Compiler.CodeCompiler(filePath);
                 CompilerResults results = cc.Compile();
 
                 foreach (CompilerError error in results.Errors)

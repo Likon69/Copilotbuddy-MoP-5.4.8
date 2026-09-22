@@ -18,6 +18,7 @@ using Styx.WoWInternals;
 using Styx.WoWInternals.DBC;
 using Styx.WoWInternals.World;
 using Styx.WoWInternals.WoWObjects;
+using Action = Styx.TreeSharp.Action;
 
 namespace Styx.CommonBot
 {
@@ -718,7 +719,7 @@ namespace Styx.CommonBot
             public ActionLandAndDismount(string reason = "", bool dismount = true, WoWPoint? landPoint = null)
                 : base()
             {
-                CreateBehavior(reason, dismount, landPoint).ForEach(new Extensions.ForEachDelegate<Composite>(AddChild));
+                CreateBehavior(reason, dismount, landPoint).ForEach(new Styx.Common.Extensions.ForEachDelegate<Composite>(AddChild));
             }
 
             private IEnumerable<Composite> CreateBehavior(string reason = "", bool dismount = true, WoWPoint? landPoint = null)

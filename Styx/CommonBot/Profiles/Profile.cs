@@ -576,7 +576,7 @@ namespace Styx.CommonBot.Profiles
                                             case "aerialblackspot":
                                                 {
                                                     WoWFactionGroup factionGroup = WoWFactionGroup.Neutral;
-                                                    uint mapId = 0;
+                                                    uint aerialMapId = 0;
                                                     var points = new List<Vector2>();
 
                                                     XAttribute[] attributes = blackspot.Attributes().ToArray();
@@ -595,7 +595,7 @@ namespace Styx.CommonBot.Profiles
                                                                 case "name":
                                                                     break;
                                                                 case "mapid":
-                                                                    if (!uint.TryParse(attribute.Value, out mapId))
+                                                                    if (!uint.TryParse(attribute.Value, out aerialMapId))
                                                                     {
                                                                         throw new ProfileAttributeExpectedException<uint>(attribute);
                                                                     }
@@ -646,7 +646,7 @@ namespace Styx.CommonBot.Profiles
                                                         points.Add(new Vector2(pointX, pointY));
                                                     }
 
-                                                    var key = new Tuple<uint, WoWFactionGroup>(mapId, factionGroup);
+                                                    var key = new Tuple<uint, WoWFactionGroup>(aerialMapId, factionGroup);
                                                     if (!_aerialBlackspots.ContainsKey(key))
                                                     {
                                                         _aerialBlackspots.Add(key, new List<Vector2[]>());
