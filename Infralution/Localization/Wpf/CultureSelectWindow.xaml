@@ -1,0 +1,22 @@
+<Window
+	x:Class="Infralution.Localization.Wpf.CultureSelectWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Title="Select Language"
+	Height="90"
+	Width="338"
+	MinHeight="90"
+	MinWidth="174"
+	Topmost="True"
+	WindowStartupLocation="CenterOwner"
+	ResizeMode="NoResize"
+	MaxWidth="Infinity"
+	MaxHeight="90">
+	<Grid>
+		<ComboBox
+			Name="_cultureCombo"
+			Margin="12,12,12,0"
+			Height="27"
+			VerticalAlignment="Top"
+			DisplayMemberPath="NativeName"
+			SelectionChanged="_cultureCombo_SelectionChanged" />
+	</Grid>
+</Window>
