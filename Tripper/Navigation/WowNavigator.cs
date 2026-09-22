@@ -71,27 +71,48 @@ namespace Tripper.Navigation
 		/// HB raised this from Tripper's own tile loader. Navigation.dll instead offers a
 		/// single process-wide callback (SetTileLoadedCallback_C), so the thunk is installed
 		/// on first subscription and kept in a static field — a local delegate would be
-		/// collected while native code still holds the pointer. HB's OnSubTileLoaded has no
-		/// native counterpart and is not reproduced.
+		/// collected while native code still holds the pointer.
 		/// </summary>
 		public event EventHandler<TileLoadedEventArgs> OnTileLoaded
 		{
 			add
 			{
 				this._onTileLoaded += value;
-				if (_tileLoadedThunk == null)
-				{
-					_tileLoadedThunk = NativeTileLoaded;
-					NavigationApi.SetTileLoadedCallback(_tileLoadedThunk);
-				}
-				_tileLoadedOwner = this;
+				this.InstallTileLoadedThunk();
 			}
 			remove { this._onTileLoaded -= value; }
+		}
+
+		/// <summary>
+		/// HB raised this once per Detour tile added from a WoW tile, before OnTileLoaded.
+		/// One mmtile holds up to 16 Detour tiles whose coordinates depend on the map's
+		/// mesh origin (not HB's <c>(wowTile - 32) * 4 + sub</c>), so they are read back
+		/// from Navigation.dll (GetAdtSubTiles_C) and are valid for <see cref="NavMesh.GetTileAt"/>.
+		/// </summary>
+		public event EventHandler<TileLoadedEventArgs> OnSubTileLoaded
+		{
+			add
+			{
+				this._onSubTileLoaded += value;
+				this.InstallTileLoadedThunk();
+			}
+			remove { this._onSubTileLoaded -= value; }
+		}
+
+		private void InstallTileLoadedThunk()
+		{
+			if (_tileLoadedThunk == null)
+			{
+				_tileLoadedThunk = NativeTileLoaded;
+				NavigationApi.SetTileLoadedCallback(_tileLoadedThunk);
+			}
+			_tileLoadedOwner = this;
 		}
 
 		private static NavTileLoadedCallback _tileLoadedThunk;
 		private static WowNavigator _tileLoadedOwner;
 		private EventHandler<TileLoadedEventArgs> _onTileLoaded;
+		private EventHandler<TileLoadedEventArgs> _onSubTileLoaded;
 
 		private static void NativeTileLoaded(uint mapId, int x, int y)
 		{
@@ -99,6 +120,18 @@ namespace Tripper.Navigation
 			if (owner == null)
 			{
 				return;
+			}
+
+			EventHandler<TileLoadedEventArgs> subHandler = owner._onSubTileLoaded;
+			if (subHandler != null)
+			{
+				int[] subX = new int[16];
+				int[] subY = new int[16];
+				int count = NativeMethods.GetAdtSubTiles_C(mapId, x, y, subX, subY, subX.Length);
+				for (int i = 0; i < count; i++)
+				{
+					subHandler(owner, new TileLoadedEventArgs { Tile = new Tripper.MeshMisc.TileIdentifier(subX[i], subY[i]) });
+				}
 			}
 
 			EventHandler<TileLoadedEventArgs> handler = owner._onTileLoaded;

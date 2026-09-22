@@ -63,5 +63,16 @@ namespace Tripper.RecastManaged.Detour
             uint status = NativeMethods.GetPolyFlags_C(MapId, @ref.Id, out flags);
             return new Status(status);
         }
+
+        /// <summary>
+        /// Wraps Navigation.dll's <c>GetTileAt_C(uint mapId, int x, int y)</c>. Returns
+        /// null when no tile is loaded at (x, y), as HB's did.
+        /// </summary>
+        public MeshTile GetTileAt(int x, int y)
+        {
+            if (NativeMethods.GetTileAt_C(MapId, x, y) == System.IntPtr.Zero)
+                return null;
+            return new MeshTile(MapId, x, y);
+        }
     }
 }

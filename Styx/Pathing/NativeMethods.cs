@@ -322,6 +322,21 @@ namespace Styx.Pathing
             uint mapId, ulong polyRef, out ushort outFlags);
 
         // ================================================================
+        // Tile enumeration (BGBuddy gate logic)
+        // ================================================================
+
+        [DllImport("Navigation.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr GetTileAt_C(uint mapId, int x, int y);
+
+        [DllImport("Navigation.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int GetTilePolys_C(
+            uint mapId, int x, int y, [Out] ulong[] outRefs, int maxRefs);
+
+        [DllImport("Navigation.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int GetAdtSubTiles_C(
+            uint mapId, int x, int y, [Out] int[] outX, [Out] int[] outY, int maxTiles);
+
+        // ================================================================
         // Off-mesh connections
         // ================================================================
 
