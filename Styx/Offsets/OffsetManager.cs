@@ -221,6 +221,10 @@ namespace Styx
             Statics.OwnerAuctions = newBase + 0xE10564;
             Statics.NumListAuctions = newBase + 0xE10570;
             Statics.ListAuctions = newBase + 0xE10574;
+            Statics.TaxiMap_NumNodes = newBase + 0xE0AF6C;
+            Statics.TaxiMap_CurrentNodeId = newBase + 0xE0AF74;
+            Statics.TaxiMap_NodeInfos = newBase + 0xE0B3C8;
+            Statics.TaxiMap_KnownNodes = newBase + 0xE0B3D8;
         }
 
         public void Clear()

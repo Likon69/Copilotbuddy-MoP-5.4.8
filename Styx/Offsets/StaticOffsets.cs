@@ -90,7 +90,7 @@ namespace Styx.Offsets
         public IntPtr MerchantNumItems;
         public IntPtr SendMailItemGuids;
         public IntPtr WorldScene;
-            public IntPtr LootRollInfo;
+        public IntPtr LootRollInfo;
         public IntPtr NumTotalBidAuctions;
         public IntPtr NumTotalListAuctions;
         public IntPtr BidderAuctions;
@@ -99,5 +99,9 @@ namespace Styx.Offsets
         public IntPtr OwnerAuctions;
         public IntPtr NumListAuctions;
         public IntPtr ListAuctions;
+        public IntPtr TaxiMap_NumNodes;
+        public IntPtr TaxiMap_CurrentNodeId;
+        public IntPtr TaxiMap_NodeInfos;
+        public IntPtr TaxiMap_KnownNodes;
 }
 }
