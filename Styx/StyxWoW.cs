@@ -5,8 +5,10 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
+using Buddy.Overlay;
 using GreenMagic;
 using Styx.Common;
 using Styx.CommonBot;
@@ -36,6 +38,29 @@ namespace Styx
         public static AreaManager AreaManager { get; private set; }
 
         public static Landmarks Landmarks { get; private set; }
+
+        private static OverlayManager overlayManager;
+
+        // HB 6.2.3 StyxWoW.cs:299-316. `null` for the dispatcher is deliberate: OverlayManager
+        // spins up its own STA thread when no dispatcher is supplied, so it is self-sufficient here.
+        public static OverlayManager Overlay
+        {
+            get
+            {
+                if (StyxWoW.overlayManager == null)
+                {
+                    StyxWoW.overlayManager = new OverlayManager(StyxWoW.Memory.Process, null, null);
+                    StyxWoW.overlayManager.Activate();
+                    if (!StyxWoW.overlayManager.IsDesktopCompositionEnabled)
+                    {
+                        Task.Delay(9000).ContinueWith(task => StyxWoW.overlayManager.Deactivate());
+                        StyxWoW.overlayManager.AddToast("Deactivating the overlay because Desktop Composition is disabled ", 7000);
+                        Logging.Write(Colors.Red, "Deactivating the overlay because Desktop Composition is disabled which causes a significant drop in FPS while overlay is active. We recommend enabling Desktop Composition because the overlay provides a safe way for Honorbuddy and 3rd party extensions to display in-game notifications and UI elements");
+                    }
+                }
+                return StyxWoW.overlayManager;
+            }
+        }
 
         private static readonly Dictionary<string, StyxLog> Logs = new Dictionary<string, StyxLog>();
 
