@@ -132,4 +132,160 @@
   <data name="ProcessTitle" xml:space="preserve">
     <value>PID: {0} logged in on: {1}</value>
   </data>
+  <data name="DeathKnight" xml:space="preserve">
+    <value>Death Knight</value>
+  </data>
+  <data name="DeathKnightBlood" xml:space="preserve">
+    <value>Blood</value>
+  </data>
+  <data name="DeathKnightFrost" xml:space="preserve">
+    <value>Frost</value>
+  </data>
+  <data name="DeathKnightUnholy" xml:space="preserve">
+    <value>Unholy</value>
+  </data>
+  <data name="Druid" xml:space="preserve">
+    <value>Druid</value>
+  </data>
+  <data name="DruidBalance" xml:space="preserve">
+    <value>Balance</value>
+  </data>
+  <data name="DruidFeral" xml:space="preserve">
+    <value>Feral</value>
+  </data>
+  <data name="DruidGuardian" xml:space="preserve">
+    <value>Guardian</value>
+  </data>
+  <data name="DruidRestoration" xml:space="preserve">
+    <value>Restoration</value>
+  </data>
+  <data name="Hunter" xml:space="preserve">
+    <value>Hunter</value>
+  </data>
+  <data name="HunterBeastMastery" xml:space="preserve">
+    <value>Beast Mastery</value>
+  </data>
+  <data name="HunterMarksmanship" xml:space="preserve">
+    <value>Marksmanship</value>
+  </data>
+  <data name="HunterSurvival" xml:space="preserve">
+    <value>Survival</value>
+  </data>
+  <data name="Mage" xml:space="preserve">
+    <value>Mage</value>
+  </data>
+  <data name="MageArcane" xml:space="preserve">
+    <value>Arcane</value>
+  </data>
+  <data name="MageFire" xml:space="preserve">
+    <value>Fire</value>
+  </data>
+  <data name="MageFrost" xml:space="preserve">
+    <value>Frost</value>
+  </data>
+  <data name="Monk" xml:space="preserve">
+    <value>Monk</value>
+  </data>
+  <data name="MonkBrewmaster" xml:space="preserve">
+    <value>Brewmaster</value>
+  </data>
+  <data name="MonkMistweaver" xml:space="preserve">
+    <value>Mistweaver</value>
+  </data>
+  <data name="MonkWindwalker" xml:space="preserve">
+    <value>Windwalker</value>
+  </data>
+  <data name="NoClassProfileLoaded" xml:space="preserve">
+    <value>No class profile is loaded. Please uncheck Auto Equip and Select Talents or load a class profile before starting the bot.</value>
+  </data>
+  <data name="NoSpec" xml:space="preserve">
+    <value>No Spec</value>
+  </data>
+  <data name="Paladin" xml:space="preserve">
+    <value>Paladin</value>
+  </data>
+  <data name="PaladinHoly" xml:space="preserve">
+    <value>Holy</value>
+  </data>
+  <data name="PaladinProtection" xml:space="preserve">
+    <value>Protection</value>
+  </data>
+  <data name="PaladinRetribution" xml:space="preserve">
+    <value>Retribution</value>
+  </data>
+  <data name="PetCunning" xml:space="preserve">
+    <value>Cunning</value>
+  </data>
+  <data name="PetFerocity" xml:space="preserve">
+    <value>Ferocity</value>
+  </data>
+  <data name="PetTenacity" xml:space="preserve">
+    <value>Tenacity</value>
+  </data>
+  <data name="Priest" xml:space="preserve">
+    <value>Priest</value>
+  </data>
+  <data name="PriestDiscipline" xml:space="preserve">
+    <value>Discipline</value>
+  </data>
+  <data name="PriestHoly" xml:space="preserve">
+    <value>Holy</value>
+  </data>
+  <data name="PriestShadow" xml:space="preserve">
+    <value>Shadow</value>
+  </data>
+  <data name="Rogue" xml:space="preserve">
+    <value>Rogue</value>
+  </data>
+  <data name="RogueAssassination" xml:space="preserve">
+    <value>Assassination</value>
+  </data>
+  <data name="RogueCombat" xml:space="preserve">
+    <value>Combat</value>
+  </data>
+  <data name="RogueSubtlety" xml:space="preserve">
+    <value>Subtlety</value>
+  </data>
+  <data name="Shaman" xml:space="preserve">
+    <value>Shaman</value>
+  </data>
+  <data name="ShamanElemental" xml:space="preserve">
+    <value>Elemental</value>
+  </data>
+  <data name="ShamanEnhancement" xml:space="preserve">
+    <value>Enhancement</value>
+  </data>
+  <data name="ShamanRestoration" xml:space="preserve">
+    <value>Restoration</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="Warlock" xml:space="preserve">
+    <value>Warlock</value>
+  </data>
+  <data name="WarlockAffliction" xml:space="preserve">
+    <value>Affliction</value>
+  </data>
+  <data name="WarlockDemonology" xml:space="preserve">
+    <value>Demonology</value>
+  </data>
+  <data name="WarlockDestruction" xml:space="preserve">
+    <value>Destruction</value>
+  </data>
+  <data name="Warrior" xml:space="preserve">
+    <value>Warrior</value>
+  </data>
+  <data name="WarriorArms" xml:space="preserve">
+    <value>Arms</value>
+  </data>
+  <data name="WarriorFury" xml:space="preserve">
+    <value>Fury</value>
+  </data>
+  <data name="WarriorProtection" xml:space="preserve">
+    <value>Protection</value>
+  </data>
+  <data name="WrongClassProfileLoaded" xml:space="preserve">
+    <value>The class profile currently loaded is {0} - {1}, but the current toon is {3} - {2}. Please respec the toon, or select a proper class profile under settings before starting the bot.</value>
+  </data>
 </root>
