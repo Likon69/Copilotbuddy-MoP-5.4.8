@@ -36,10 +36,9 @@
       <HintPath>Lib\Tripper.Tools.dll</HintPath>
       <Private>true</Private>
     </Reference>
-    <Reference Include="Tripper.RecastManaged">
-      <HintPath>Lib\Tripper.RecastManaged.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
+    <!-- Tripper.RecastManaged.dll is a mixed-mode C++/CLI assembly (COR flags 0x18, ILONLY=false).
+         .NET 10 cannot load mixed-mode assemblies, so referencing it would compile and then throw
+         BadImageFormatException at runtime. Recast/Detour is reached through Navigation.dll instead. -->
   </ItemGroup>
 
   <ItemGroup>
