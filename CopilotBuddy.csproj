@@ -21,12 +21,25 @@
   <ItemGroup>
     <PackageReference Include="MahApps.Metro" Version="2.4.11" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.CodeDom" Version="9.0.0" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="CopilotBuddy.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Tripper\Tools\**\*.cs" />
+    <Reference Include="Tripper.Tools">
+      <HintPath>Lib\Tripper.Tools.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="Tripper.RecastManaged">
+      <HintPath>Lib\Tripper.RecastManaged.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
