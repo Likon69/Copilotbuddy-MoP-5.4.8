@@ -151,6 +151,14 @@ namespace Styx.Common.Compiler
 
         public List<string> SourceFilePaths { get; private set; }
 
+        private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, MetadataReference> MetadataReferenceCache =
+            new System.Collections.Concurrent.ConcurrentDictionary<string, MetadataReference>(StringComparer.OrdinalIgnoreCase);
+
+        internal static MetadataReference GetMetadataReference(string path)
+        {
+            return MetadataReferenceCache.GetOrAdd(path, p => MetadataReference.CreateFromFile(p));
+        }
+
         public void AddReference(string assembly)
         {
             if (!Options.ReferencedAssemblies.Contains(assembly))
@@ -267,7 +275,7 @@ namespace Styx.Common.Compiler
                     .Cast<string>()
                     .Where(reference => !string.IsNullOrEmpty(reference) && File.Exists(reference))
                     .Distinct(StringComparer.OrdinalIgnoreCase)
-                    .Select(reference => (MetadataReference)MetadataReference.CreateFromFile(reference))
+                    .Select(reference => Styx.Common.Compiler.CodeCompiler.GetMetadataReference(reference))
                     .ToList();
 
                 var compilationOptions = new CSharpCompilationOptions(

@@ -154,7 +154,7 @@ namespace Styx.CommonBot.Profiles.Quest.Order
                 try
                 {
                     if (!assembly.IsDynamic && !string.IsNullOrEmpty(assembly.Location))
-                        references.Add(MetadataReference.CreateFromFile(assembly.Location));
+                        references.Add(Styx.Common.Compiler.CodeCompiler.GetMetadataReference(assembly.Location));
                 }
                 catch (NotSupportedException)
                 {

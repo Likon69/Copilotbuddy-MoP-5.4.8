@@ -1206,7 +1206,7 @@ namespace CopilotBuddy
                 .Cast<string>()
                 .Where(reference => !string.IsNullOrEmpty(reference) && File.Exists(reference))
                 .Distinct(StringComparer.OrdinalIgnoreCase)
-                .Select(reference => (MetadataReference)MetadataReference.CreateFromFile(reference))
+                .Select(reference => Styx.Common.Compiler.CodeCompiler.GetMetadataReference(reference))
                 .ToList();
 
             CSharpCompilationOptions compilationOptions = new CSharpCompilationOptions(
