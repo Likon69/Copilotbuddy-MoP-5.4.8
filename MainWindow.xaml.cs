@@ -145,6 +145,11 @@ namespace CopilotBuddy
                     result = ErrorWindow.Show(Globalization.StartUpErrorNotInGame, "CopilotBuddy Error", MessageBoxButton.OKCancel, System.Drawing.SystemIcons.Error);
                 }
             }
+            else if (_freeProcesses.All(d => d.Value != 18414))
+            {
+                Logging.Write(Colors.OrangeRed, "This CopilotBuddy version only supports WoW Patch " + 18414 + " and you are on WoW Patch " + _freeProcesses.First().Value + ". Please go to http://www.thebuddyforum.com/releases/ to check for updates.");
+                result = ErrorWindow.Show(string.Format(Globalization.StartUpErrorBuildMismatch, 18414, _freeProcesses.First().Value), "CopilotBuddy Error", MessageBoxButton.OKCancel, System.Drawing.SystemIcons.Error);
+            }
 
             if (result == MessageBoxResult.Cancel)
             {

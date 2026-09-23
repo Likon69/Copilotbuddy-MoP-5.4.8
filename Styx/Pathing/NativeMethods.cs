@@ -249,6 +249,19 @@ namespace Styx.Pathing
             out float outT, out XYZ_C outHitNormal,
             [Out] ulong[] outPath, out int outPathCount, int maxPath);
 
+        [DllImport("Navigation.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern uint FindPolyPath_C(
+            uint mapId, ulong startRef, ulong endRef,
+            XYZ_C startPos, XYZ_C endPos,
+            [Out] ulong[] outPath, out int outPathCount, int maxPath);
+
+        [DllImport("Navigation.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern uint FindStraightPath_C(
+            uint mapId, XYZ_C startPos, XYZ_C endPos,
+            ulong[] path, int pathCount,
+            [Out] XYZ_C[] outPoints, [Out] byte[] outFlags, [Out] ulong[] outRefs,
+            out int outCount, int maxPoints);
+
         // ================================================================
         // Tile and area filtering
         // ================================================================

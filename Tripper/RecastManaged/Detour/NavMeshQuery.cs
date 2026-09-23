@@ -264,5 +264,118 @@ namespace Tripper.RecastManaged.Detour
             closest = ok ? ToDetourPos(closestC) : default;
             return ok ? Status.Success : Status.Failure;
         }
+
+        /// <summary>
+        /// Wraps Navigation.dll's <c>FindPolyPath_C(uint mapId, ulong startRef, ulong endRef,
+        /// XYZ_C startPos, XYZ_C endPos, ulong[] outPath, out int outPathCount, int maxPath)</c>.
+        /// Like Raycast_HB_C, this export returns Navigation.dll's own NavStatusFlag word
+        /// (bit-for-bit the same layout as StatusDetailFlag/dtStatus), so it is
+        /// round-tripped directly into a Status rather than reduced to success/failure.
+        /// </summary>
+        public Status FindPath(PolygonReference startRef, PolygonReference endRef,
+            Vector3 startPos, Vector3 endPos, QueryFilter filter, int maxPath,
+            out PolygonReference[] path)
+        {
+            ApplyFilter(filter);
+
+            var startC = ToWowPos(startPos);
+            var endC = ToWowPos(endPos);
+
+            if (maxPath <= 0)
+                maxPath = 1;
+
+            var pathBuf = new ulong[maxPath];
+            uint status = NativeMethods.FindPolyPath_C(MapId, startRef.Id, endRef.Id, startC, endC,
+                pathBuf, out int pathCount, maxPath);
+
+            if (pathCount > 0)
+            {
+                path = new PolygonReference[pathCount];
+                for (int i = 0; i < pathCount; i++)
+                    path[i] = new PolygonReference(pathBuf[i]);
+            }
+            else
+            {
+                path = Array.Empty<PolygonReference>();
+            }
+
+            return new Status(status);
+        }
+
+        /// <summary>
+        /// Wraps Navigation.dll's <c>FindStraightPath_C(uint mapId, XYZ_C startPos, XYZ_C
+        /// endPos, ulong[] path, int pathCount, XYZ_C[] outPoints, byte[] outFlags,
+        /// ulong[] outRefs, out int outCount, int maxPoints)</c>. Same NavStatusFlag/
+        /// dtStatus layout as FindPath/Raycast, round-tripped directly into a Status.
+        /// </summary>
+        public Status FindStraightPath(Vector3 startPos, Vector3 endPos, PolygonReference[] path,
+            int maxStraightPath, out Vector3[] points, out StraightPathFlags[] flags,
+            out PolygonReference[] refs)
+        {
+            var startC = ToWowPos(startPos);
+            var endC = ToWowPos(endPos);
+
+            int pathCount = path?.Length ?? 0;
+            var pathBuf = new ulong[pathCount];
+            for (int i = 0; i < pathCount; i++)
+                pathBuf[i] = path[i].Id;
+
+            if (maxStraightPath <= 0)
+                maxStraightPath = 1;
+
+            var pointsBuf = new NativeMethods.XYZ_C[maxStraightPath];
+            var flagsBuf = new byte[maxStraightPath];
+            var refsBuf = new ulong[maxStraightPath];
+
+            uint status = NativeMethods.FindStraightPath_C(MapId, startC, endC, pathBuf, pathCount,
+                pointsBuf, flagsBuf, refsBuf, out int count, maxStraightPath);
+
+            if (count > 0)
+            {
+                points = new Vector3[count];
+                flags = new StraightPathFlags[count];
+                refs = new PolygonReference[count];
+                for (int i = 0; i < count; i++)
+                {
+                    points[i] = ToDetourPos(pointsBuf[i]);
+                    flags[i] = (StraightPathFlags)flagsBuf[i];
+                    refs[i] = new PolygonReference(refsBuf[i]);
+                }
+            }
+            else
+            {
+                points = Array.Empty<Vector3>();
+                flags = Array.Empty<StraightPathFlags>();
+                refs = Array.Empty<PolygonReference>();
+            }
+
+            return new Status(status);
+        }
+
+        /// <summary>
+        /// Wraps Navigation.dll's <c>FindDistanceToWallFromPoly_C(uint mapId, ulong polyRef,
+        /// XYZ_C position, float maxRadius, out XYZ_C hitPoint, out XYZ_C outHitNormal)</c>.
+        /// That export returns the hit distance as a plain float (a negative value signals
+        /// failure -- see FindDistanceToWallFromPoly_C's native implementation), so the
+        /// returned Status is built from Status.Success/Status.Failure rather than
+        /// round-tripped from a native status word, matching FindNearestPolygon/
+        /// ClosestPointOnPoly above.
+        /// </summary>
+        public Status FindDistanceToWall(PolygonReference startRef, Vector3 centerPos, float maxRadius,
+            QueryFilter filter, out float hitDist, out Vector3 hitPos, out Vector3 hitNormal)
+        {
+            ApplyFilter(filter);
+
+            var centerC = ToWowPos(centerPos);
+
+            float dist = NativeMethods.FindDistanceToWallFromPoly_C(MapId, startRef.Id, centerC, maxRadius,
+                out NativeMethods.XYZ_C hitPointC, out NativeMethods.XYZ_C hitNormalC);
+
+            hitDist = dist;
+            hitPos = ToDetourPos(hitPointC);
+            hitNormal = ToDetourPos(hitNormalC);
+
+            return dist >= 0f ? Status.Success : Status.Failure;
+        }
     }
 }

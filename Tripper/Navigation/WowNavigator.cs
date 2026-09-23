@@ -161,15 +161,8 @@ namespace Tripper.Navigation
 		public Vector3 Extents { get; set; }
 
 		/// <summary>
-		/// Kept for API-shape fidelity only. HB's RandomizePaths drove a whole family of
-		/// private helpers (method_6 through method_16 in the 5.4.8 decompile) that pushed
-		/// path points a few units off the straight line using low-level
-		/// NavMeshQuery.FindDistanceToWall/Raycast/FindPath(multi-poly)/ClosestPointOnPoly
-		/// calls — none of which exist on this port's NavMeshQuery (only
-		/// FindNearestPolygon, QueryPolygons and Raycast were ported; see NavMeshQuery.cs).
-		/// FindPath here is a single NavigationApi.CalculatePathEx call with no
-		/// post-processing hook, so setting this property has no observable effect. Left
-		/// settable (not removed) because it is public HB API surface.
+		/// Drives the ported RandomizePath/FixPathWalkabilityOnly post-processing pipeline
+		/// in FindPath (5.4.8 decompile's method_5..method_16).
 		/// </summary>
 		public bool RandomizePaths { get; set; }
 
@@ -451,23 +444,20 @@ namespace Tripper.Navigation
 		/// Rewired: HB's FindPath (5.4.8 decompile lines 441-618) drove Detour directly —
 		/// two FindNearestPolygon calls, InitSlicedFindPath, a manual UpdateSlicedFindPath
 		/// loop with OnPathFindProgress-based abort, FinalizeSlicedFindPath, a partial-path
-		/// ClosestPointOnPoly snap, FindStraightPath, then RandomizePaths/
-		/// MovePathAwayFromEdges post-processing — against NavMeshQuery members
-		/// (InitSlicedFindPath/UpdateSlicedFindPath/FinalizeSlicedFindPath/
-		/// FindStraightPath/ClosestPointOnPoly/FindDistanceToWall/FindPath(multi-poly))
-		/// that this port's NavMeshQuery does not expose (only FindNearestPolygon,
-		/// QueryPolygons and Raycast were ported; see NavMeshQuery.cs). Navigation.dll does
-		/// the entire find-nearest-poly + sliced-find + finalize + partial-path snap +
-		/// straight-path pipeline in one call (Navigation.cpp's FindPathEx), reached here
-		/// through NavigationApi.CalculatePathEx.
+		/// ClosestPointOnPoly snap, FindStraightPath, then RandomizePath/
+		/// FixPathWalkabilityOnly post-processing. Navigation.dll does the
+		/// find-nearest-poly + sliced-find + finalize + partial-path snap + straight-path
+		/// part of that pipeline in one call (Navigation.cpp's FindPathEx), reached here
+		/// through NavigationApi.CalculatePathEx; the RandomizePath/FixPathWalkabilityOnly
+		/// tail is ported as-is below and runs against this.MeshQuery exactly as HB's did.
 		///
-		/// No NavHelper/GraphicalHelper conversion is applied: HB's own FindPath converted
-		/// its inputs with NavHelper.ToNav (decompile lines 447-448) and its output points
-		/// back with NavHelper.ToWow (line 565) specifically because it talked to
-		/// NavMeshQuery, which speaks Detour space. CalculatePathEx instead takes and
-		/// returns raw WoW-space points directly (see NavMeshQuery.cs's "Coordinate space"
-		/// note and NativeMethods.CalculatePathEx/NativeMethods.XYZ_C's implicit WoWPoint
-		/// operator) — converting here would double-convert.
+		/// CalculatePathEx takes and returns raw WoW-space points directly (see
+		/// NavMeshQuery.cs's "Coordinate space" note and NativeMethods.CalculatePathEx/
+		/// NativeMethods.XYZ_C's implicit WoWPoint operator), unlike this.MeshQuery, which
+		/// speaks Detour space like HB's own NavMeshQuery did. So navResult's points are
+		/// converted to Detour space (NavHelper.ToNav) before RandomizePath/
+		/// FixPathWalkabilityOnly and back to WoW space (NavHelper.ToWow) after, matching
+		/// where HB's own FindPath did that same ToWow conversion (decompile line 647).
 		///
 		/// OnPathFindProgress is preserved. Navigation.dll runs the same sliced A* loop
 		/// internally (10000 iterations per slice) and, since the "PathFinder: add a
@@ -547,37 +537,55 @@ namespace Tripper.Navigation
 				Vector3[] points = new Vector3[navResult.Points.Length];
 				for (int i = 0; i < points.Length; i++)
 				{
-					points[i] = navResult.Points[i];
+					points[i] = NavHelper.ToNav(navResult.Points[i]);
 				}
-				result.Points = points;
 
 				StraightPathFlags[] flags = new StraightPathFlags[navResult.StraightPathFlags.Length];
 				for (int i = 0; i < flags.Length; i++)
 				{
 					flags[i] = (StraightPathFlags)navResult.StraightPathFlags[i];
 				}
-				result.Flags = flags;
-
-				Tripper.MeshMisc.AreaType[] polyTypes = new Tripper.MeshMisc.AreaType[navResult.PolyTypes.Length];
-				for (int i = 0; i < polyTypes.Length; i++)
-				{
-					polyTypes[i] = (Tripper.MeshMisc.AreaType)navResult.PolyTypes[i];
-				}
-				result.PolyTypes = polyTypes;
-
-				Tripper.MeshMisc.AbilityFlags[] abilityFlags = new Tripper.MeshMisc.AbilityFlags[navResult.AbilityFlags.Length];
-				for (int i = 0; i < abilityFlags.Length; i++)
-				{
-					abilityFlags[i] = (Tripper.MeshMisc.AbilityFlags)navResult.AbilityFlags[i];
-				}
-				result.AbilityFlags = abilityFlags;
 
 				PolygonReference[] polygons = new PolygonReference[navResult.PolyRefs.Length];
 				for (int i = 0; i < polygons.Length; i++)
 				{
 					polygons[i] = new PolygonReference(navResult.PolyRefs[i]);
 				}
+
+				if (this.RandomizePaths)
+				{
+					this.RandomizePath(ref points, ref polygons, ref flags, 2f, 6f, 4f);
+				}
+				else
+				{
+					this.FixPathWalkabilityOnly(ref points, ref polygons, ref flags, 2f);
+				}
+
+				for (int i = 0; i < points.Length; i++)
+				{
+					NavHelper.ToWow(ref points[i]);
+					this.UpdateTileUsageTime(Tripper.MeshMisc.TileIdentifier.GetByPosition(points[i]));
+				}
+
+				result.Points = points;
+				result.Flags = flags;
 				result.Polygons = polygons;
+
+				Tripper.MeshMisc.AbilityFlags[] abilityFlags = new Tripper.MeshMisc.AbilityFlags[polygons.Length];
+				Tripper.MeshMisc.AreaType[] polyTypes = new Tripper.MeshMisc.AreaType[polygons.Length];
+				for (int i = 0; i < polygons.Length; i++)
+				{
+					if (this.Mesh.GetPolyArea(polygons[i], out byte area).Succeeded)
+					{
+						polyTypes[i] = (Tripper.MeshMisc.AreaType)area;
+					}
+					if (this.Mesh.GetPolyFlags(polygons[i], out ushort polyFlags).Succeeded)
+					{
+						abilityFlags[i] = (Tripper.MeshMisc.AbilityFlags)polyFlags;
+					}
+				}
+				result.AbilityFlags = abilityFlags;
+				result.PolyTypes = polyTypes;
 
 				return result;
 			}
@@ -606,6 +614,286 @@ namespace Tripper.Navigation
 			{
 				handler(msg);
 			}
+		}
+
+		private enum EdgeMoveResult
+		{
+			NotNearEdge,
+			Failed,
+			Moved
+		}
+
+		private delegate void StraightPathFixupCallback(ref Vector3[] points, ref PolygonReference[] polys, ref StraightPathFlags[] flags);
+
+		private bool SnapPointToMesh(ref Vector3 point, out PolygonReference poly, QueryFilter filter, bool logErrors = true)
+		{
+			Status status = this.MeshQuery.FindNearestPolygon(point, new Vector3(0.5f, 5f, 0.5f), filter, out Vector3 nearestPt, out poly);
+			if (!status.Failed && poly.Id != 0)
+			{
+				point = nearestPt;
+				return true;
+			}
+			if (status.Failed && logErrors)
+			{
+				this.LogMessage($"SnapPointToMesh failed with {status.Flags} for point {point}");
+			}
+			else if (logErrors)
+			{
+				this.LogMessage($"SnapPointToMesh failed for point {point}");
+			}
+			return false;
+		}
+
+		private bool RandomizePoint(ref Vector3 point, out PolygonReference poly, QueryFilter filter, float radius, Random random)
+		{
+			float radiusSqr = radius * radius;
+			Vector3 offset = default(Vector3);
+			do
+			{
+				offset.X = (float)((random.NextDouble() - 0.5) * 2.0 * (double)radius);
+				offset.Y = 0f;
+				offset.Z = (float)((random.NextDouble() - 0.5) * 2.0 * (double)radius);
+			}
+			while (offset.MagnitudeSqr > radiusSqr);
+			point += offset;
+			return this.SnapPointToMesh(ref point, out poly, filter);
+		}
+
+		private EdgeMoveResult TryMoveAwayFromEdge(ref Vector3 point, ref PolygonReference poly, QueryFilter filter, float distance)
+		{
+			Status status = this.MeshQuery.FindDistanceToWall(poly, point, distance, filter, out float dist, out Vector3 hitPos, out Vector3 hitNormal);
+			if (status.Failed)
+			{
+				this.LogMessage($"FindDistanceToWall failed with {status.Flags} - point {point} (TryMoveAwayFromEdge)");
+				return EdgeMoveResult.Failed;
+			}
+			if (dist >= distance)
+			{
+				return EdgeMoveResult.NotNearEdge;
+			}
+			Vector3 nearestPt = hitPos;
+			status = this.MeshQuery.FindNearestPolygon(nearestPt, new Vector3(0.5f, 5f, 0.5f), filter, out nearestPt, out PolygonReference nearPoly);
+			if (nearPoly.Id == 0)
+			{
+				this.LogMessage($"First FindNearestPolygon got empty poly ref at point {hitPos}, distance {dist}, normal {hitNormal} - please report this on the forums!");
+				return EdgeMoveResult.Failed;
+			}
+			Vector3 target = hitPos + hitNormal * distance * 2f;
+			status = this.MeshQuery.Raycast(nearPoly, nearestPt, target, filter, 512, out PolygonReference[] _, out float t, out Vector3 _);
+			if (status.Failed)
+			{
+				this.LogMessage($"Raycast failed with {status.Flags} - point {point} (TryMoveAwayFromEdge)");
+				return EdgeMoveResult.Failed;
+			}
+			if (t == float.MaxValue)
+			{
+				point = hitPos + hitNormal * distance;
+			}
+			else
+			{
+				Vector3 hitPoint = nearestPt + (target - nearestPt) * t;
+				point = (hitPos + hitPoint) / 2f;
+			}
+			if (!this.SnapPointToMesh(ref point, out poly, filter))
+			{
+				return EdgeMoveResult.Failed;
+			}
+			return EdgeMoveResult.Moved;
+		}
+
+		private void MovePathPointsAwayFromEdges(List<Vector3> points, List<PolygonReference> polys, List<StraightPathFlags> flags, float distance)
+		{
+			for (int i = 1; i < points.Count - 1; i++)
+			{
+				if ((flags[i] & StraightPathFlags.OffmeshConnection) == 0 && (flags[i - 1] & StraightPathFlags.OffmeshConnection) == 0)
+				{
+					Vector3 point = points[i];
+					PolygonReference poly = polys[i];
+					if (this.TryMoveAwayFromEdge(ref point, ref poly, this.QueryFilter.InternalFilter, distance) == EdgeMoveResult.Moved)
+					{
+						points[i] = point;
+						polys[i] = poly;
+					}
+				}
+			}
+		}
+
+		private void RandomizePathPoints(List<Vector3> points, List<PolygonReference> polys, List<StraightPathFlags> flags, float minDistance, float maxDistance, float jitterCap, Random random)
+		{
+			for (int i = 1; i < points.Count - 1; i++)
+			{
+				if ((flags[i] & StraightPathFlags.OffmeshConnection) == 0 && (flags[i - 1] & StraightPathFlags.OffmeshConnection) == 0)
+				{
+					float distance = (float)(random.NextDouble() * (double)(maxDistance - minDistance) + (double)minDistance);
+					bool moved = false;
+					Vector3 point = points[i];
+					PolygonReference poly = polys[i];
+					switch (this.TryMoveAwayFromEdge(ref point, ref poly, this.QueryFilter.InternalFilter, distance))
+					{
+						case EdgeMoveResult.NotNearEdge:
+						{
+							float jitter = (float)random.NextDouble() * Math.Min(distance, jitterCap);
+							moved = this.RandomizePoint(ref point, out poly, this.QueryFilter.InternalFilter, jitter, random);
+							break;
+						}
+						case EdgeMoveResult.Moved:
+							moved = true;
+							break;
+					}
+					if (moved)
+					{
+						points[i] = point;
+						polys[i] = poly;
+					}
+				}
+			}
+		}
+
+		private void FixPathWalkability(List<Vector3> points, List<PolygonReference> polys, List<StraightPathFlags> flags, StraightPathFixupCallback fixup)
+		{
+			for (int i = 0; i < points.Count - 1; i++)
+			{
+				if ((flags[i] & StraightPathFlags.OffmeshConnection) != StraightPathFlags.None || (flags[i + 1] & StraightPathFlags.OffmeshConnection) != StraightPathFlags.None)
+				{
+					continue;
+				}
+				Vector3 a = points[i];
+				Vector3 b = points[i + 1];
+				if (a.DistanceSqr(b) < 0.010000001f)
+				{
+					continue;
+				}
+				Status status = this.MeshQuery.Raycast(polys[i], a, b, this.QueryFilter.InternalFilter, 512, out PolygonReference[] hitPath, out float t, out Vector3 hitNormal);
+				if (status.Failed)
+				{
+					this.LogMessage($"Raycast from {NavHelper.ToWow(a)} to {NavHelper.ToWow(b)} (high: {NavHelper.ToWow(points.First())} to {NavHelper.ToWow(points.Last())}) failed with {status.Flags} (FixPathWalkability)");
+					continue;
+				}
+				if (t <= 1E-07f)
+				{
+					Vector3 nudged = a;
+					Vector3 dir = b - nudged;
+					dir.Normalize();
+					nudged += dir * 0.1f;
+					if (this.SnapPointToMesh(ref nudged, out PolygonReference nudgedPoly, this.QueryFilter.InternalFilter))
+					{
+						status = this.MeshQuery.Raycast(nudgedPoly, nudged, b, this.QueryFilter.InternalFilter, 512, out hitPath, out t, out hitNormal);
+						if (status.Failed)
+						{
+							this.LogMessage($"Second raycast from {NavHelper.ToWow(nudged)} to {NavHelper.ToWow(b)} (high: {NavHelper.ToWow(points.First())} to {NavHelper.ToWow(points.Last())}) failed with {status.Flags} (FixPathWalkability)");
+							continue;
+						}
+						if (t > 1E-07f)
+						{
+							points[i] = nudged;
+							polys[i] = nudgedPoly;
+						}
+					}
+				}
+				if (t == float.MaxValue)
+				{
+					continue;
+				}
+				PolygonReference endPoly = polys[i + 1];
+				if (endPoly.Id == 0)
+				{
+					status = this.MeshQuery.FindNearestPolygon(b, new Vector3(0.5f, 5f, 0.5f), this.QueryFilter.InternalFilter, out Vector3 _, out endPoly);
+					if (status.Failed || endPoly.Id == 0)
+					{
+						if (status.Failed)
+						{
+							this.LogMessage($"FindNearestPolygon failed with {status.Flags} - point {NavHelper.ToWow(b)} (FixPathWalkability)");
+						}
+						else
+						{
+							this.LogMessage($"FindNearestPolygon couldn't find point {NavHelper.ToWow(b)} (FixPathWalkability)");
+						}
+						continue;
+					}
+				}
+				status = this.MeshQuery.FindPath(polys[i], endPoly, a, b, this.QueryFilter.InternalFilter, 512, out PolygonReference[] corridor);
+				if (status.Failed)
+				{
+					this.LogMessage($"Path find from {NavHelper.ToWow(a)} to {NavHelper.ToWow(b)} (high: {NavHelper.ToWow(points.First())} to {NavHelper.ToWow(points.Last())}) failed with {status.Flags} (FixPathWalkability)");
+					continue;
+				}
+				if (status.HasFlag(StatusDetailFlag.PartialResult))
+				{
+					this.LogMessage($"Path find from {NavHelper.ToWow(a)} to {NavHelper.ToWow(b)} (high: {NavHelper.ToWow(points.First())} to {NavHelper.ToWow(points.Last())}) resulted in partial path (FixPathWalkability)!");
+					continue;
+				}
+				status = this.MeshQuery.FindStraightPath(a, b, corridor, 512, out Vector3[] subPoints, out StraightPathFlags[] subFlags, out PolygonReference[] subRefs);
+				if (status.Failed)
+				{
+					this.LogMessage($"FindStraightPath from {NavHelper.ToWow(a)} to {NavHelper.ToWow(b)} (high: {NavHelper.ToWow(points.First())} to {NavHelper.ToWow(points.Last())}) failed with {status.Flags} (FixPathWalkability)!");
+				}
+				else
+				{
+					fixup?.Invoke(ref subPoints, ref subRefs, ref subFlags);
+					points.InsertRange(i + 1, subPoints.Skip(1).Take(subPoints.Length - 2));
+					polys.InsertRange(i + 1, subRefs.Skip(1).Take(subRefs.Length - 2));
+					flags.InsertRange(i + 1, subFlags.Skip(1).Take(subFlags.Length - 2));
+					i += subPoints.Length - 2;
+				}
+			}
+		}
+
+		private void FixPathWalkabilityForRandomize(List<Vector3> points, List<PolygonReference> polys, List<StraightPathFlags> flags, float minDistance, float maxDistance, float jitterCap, Random random, int depth)
+		{
+			StraightPathFixupCallback fixup = delegate (ref Vector3[] fixupPoints, ref PolygonReference[] fixupPolys, ref StraightPathFlags[] fixupFlags)
+			{
+				this.RandomizePathIteration(ref fixupPoints, ref fixupPolys, ref fixupFlags, minDistance, maxDistance, jitterCap, random, depth + 1);
+			};
+			this.FixPathWalkability(points, polys, flags, fixup);
+		}
+
+		private void RandomizePathIteration(ref Vector3[] points, ref PolygonReference[] polys, ref StraightPathFlags[] flags, float minDistance, float maxDistance, float jitterCap, Random random, int depth)
+		{
+			if (depth <= 5)
+			{
+				List<Vector3> pointList = points.ToList();
+				List<PolygonReference> polyList = polys.ToList();
+				List<StraightPathFlags> flagList = flags.ToList();
+				this.RandomizePathPoints(pointList, polyList, flagList, minDistance, maxDistance, jitterCap, random);
+				this.FixPathWalkabilityForRandomize(pointList, polyList, flagList, minDistance, maxDistance, jitterCap, random, depth);
+				points = pointList.ToArray();
+				polys = polyList.ToArray();
+				flags = flagList.ToArray();
+			}
+		}
+
+		private void RandomizePath(ref Vector3[] points, ref PolygonReference[] polys, ref StraightPathFlags[] flags, float minDistance, float maxDistance, float jitterCap)
+		{
+			this.RandomizePathIteration(ref points, ref polys, ref flags, minDistance, maxDistance, jitterCap, new Random(), 0);
+		}
+
+		private void FixPathWalkabilityForFixup(List<Vector3> points, List<PolygonReference> polys, List<StraightPathFlags> flags, float distance, int depth)
+		{
+			StraightPathFixupCallback fixup = delegate (ref Vector3[] fixupPoints, ref PolygonReference[] fixupPolys, ref StraightPathFlags[] fixupFlags)
+			{
+				this.FixPathWalkabilityIteration(ref fixupPoints, ref fixupPolys, ref fixupFlags, distance, depth + 1);
+			};
+			this.FixPathWalkability(points, polys, flags, fixup);
+		}
+
+		private void FixPathWalkabilityIteration(ref Vector3[] points, ref PolygonReference[] polys, ref StraightPathFlags[] flags, float distance, int depth)
+		{
+			if (depth <= 5)
+			{
+				List<Vector3> pointList = points.ToList();
+				List<PolygonReference> polyList = polys.ToList();
+				List<StraightPathFlags> flagList = flags.ToList();
+				this.MovePathPointsAwayFromEdges(pointList, polyList, flagList, distance);
+				this.FixPathWalkabilityForFixup(pointList, polyList, flagList, distance, depth);
+				points = pointList.ToArray();
+				polys = polyList.ToArray();
+				flags = flagList.ToArray();
+			}
+		}
+
+		private void FixPathWalkabilityOnly(ref Vector3[] points, ref PolygonReference[] polys, ref StraightPathFlags[] flags, float distance)
+		{
+			this.FixPathWalkabilityIteration(ref points, ref polys, ref flags, distance, 0);
 		}
 
 		public static WowQueryFilter GetNewDefaultQueryFilter()
