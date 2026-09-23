@@ -483,19 +483,11 @@ namespace Styx.Pathing
 
         public static NavPathResult? CalculatePathEx(uint mapId, WoWPoint start, WoWPoint end, bool straightPath = true)
         {
-            NavigatorDebug.LogApi($"CalculatePathEx: map={mapId} ({start.X:F1},{start.Y:F1})->({end.X:F1},{end.Y:F1}) straight={straightPath}");
-            var sw = System.Diagnostics.Stopwatch.StartNew();
             IntPtr ptr = NativeMethods.CalculatePathEx(mapId,
                 new NativeMethods.XYZ_C(start.X, start.Y, start.Z),
                 new NativeMethods.XYZ_C(end.X, end.Y, end.Z),
                 straightPath);
-            var result = NavPathResult.FromNative(ptr);
-            sw.Stop();
-            if (result != null)
-                NavigatorDebug.LogApi($"CalculatePathEx OK: {result.Length} points, {sw.ElapsedMilliseconds}ms");
-            else
-                NavigatorDebug.LogError($"CalculatePathEx FAILED in {sw.ElapsedMilliseconds}ms");
-            return result;
+            return NavPathResult.FromNative(ptr);
         }
 
         public static bool InitSliced(uint mapId, WoWPoint start, WoWPoint end)
@@ -547,11 +539,9 @@ namespace Styx.Pathing
 
         public static bool HasLineOfSight(uint mapId, WoWPoint start, WoWPoint end)
         {
-            bool result = NativeMethods.HasLineOfSight_C(mapId,
+            return NativeMethods.HasLineOfSight_C(mapId,
                 new NativeMethods.XYZ_C(start.X, start.Y, start.Z),
                 new NativeMethods.XYZ_C(end.X, end.Y, end.Z));
-            NavigatorDebug.LogVerbose($"HasLineOfSight: map={mapId} -> {result}");
-            return result;
         }
 
         public static bool RaycastWithExtents(uint mapId, WoWPoint start, WoWPoint end,
@@ -693,12 +683,6 @@ namespace Styx.Pathing
                     if (d > minDepth && d > depth)
                         depth = d;
                 }
-                if (depth > 0f)
-                {
-                    NavigatorDebug.LogApi(
-                        $"IsBelowWaterSurface: map={mapId} ({location.X:F1},{location.Y:F1},{location.Z:F1}) " +
-                        $"submerged {depth:F1}yd below a Water polygon ({candidates.Count} column heights probed)");
-                }
                 return depth > 0f;
             }
             catch
@@ -830,7 +814,6 @@ namespace Styx.Pathing
                 ok = false;
 
             nearest = ok ? new WoWPoint(n.x, n.y, n.z) : position;
-            NavigatorDebug.LogApi($"FindNearestPoint: map={mapId} ({position.X:F1},{position.Y:F1}) -> ok={ok} snapped=({nearest.X:F1},{nearest.Y:F1})");
             return ok;
         }
 
