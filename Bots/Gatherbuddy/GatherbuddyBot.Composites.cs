@@ -2,13 +2,15 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Bots.GatherBuddy;
 using Bots.GatherBuddy.Resources;
 using Bots.Grind;
 using CommonBehaviors.Actions;
 using Styx;
-
+using Styx.Common.Helpers;
 using Styx.CommonBot;
+using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
 using Styx.CommonBot.Inventory;
 using Styx.CommonBot.Profiles;
@@ -28,6 +30,65 @@ namespace Bots.Gatherbuddy
 {
     public partial class GatherbuddyBot : BotBase
     {
+        private sealed class CombineItemsTask : CoroutineTask<bool>
+        {
+            private static readonly Dictionary<uint, int> ItemQuantities = new Dictionary<uint, int>
+            {
+                { 97512, 10 },
+                { 97619, 10 },
+                { 97620, 10 }
+            };
+
+            private readonly WaitTimer _timer = new WaitTimer(TimeSpan.FromSeconds(2));
+
+            public override async Task<bool> Run()
+            {
+                WoWUnit activeMover = WoWMovement.ActiveMover;
+                if (activeMover == null || activeMover.IsFlying)
+                {
+                    return false;
+                }
+
+                ShapeshiftForm shapeshift = StyxWoW.Me.Shapeshift;
+                if (shapeshift != ShapeshiftForm.Normal &&
+                    shapeshift != ShapeshiftForm.BattleStance &&
+                    shapeshift != ShapeshiftForm.BerserkerStance &&
+                    shapeshift != ShapeshiftForm.DefensiveStance)
+                {
+                    return false;
+                }
+
+                if (_timer.IsFinished)
+                {
+                    foreach (KeyValuePair<uint, int> itemQuantity in ItemQuantities)
+                    {
+                        long quantity = 0;
+                        foreach (WoWItem item in StyxWoW.Me.BagItems)
+                        {
+                            if (item == null || !item.IsValid || item.Entry != itemQuantity.Key)
+                            {
+                                continue;
+                            }
+
+                            quantity += item.StackCount;
+                            if (quantity >= itemQuantity.Value)
+                            {
+                                item.UseContainerItem();
+                                _timer.Reset();
+                                return true;
+                            }
+                        }
+                    }
+
+                    _timer.Reset();
+                }
+
+                return false;
+            }
+        }
+
+		private CombineItemsTask _combineItemsTask;
+
         #region CreateGatherbuddyLogic
 
 		private static bool ignoreCombat;
@@ -172,8 +233,8 @@ namespace Bots.Gatherbuddy
                                 {
                                     harvestAttempts = 0;
                                     movePoint = WoWPoint.Zero;
-                                    BlacklistNodes.Add(lastNode.Location);
-                                    Blacklist.Add(lastNode.Guid, TimeSpan.FromMinutes(15));
+                                    BlacklistNodes[lastNode.Location] = "Failed to harvest 3 times.";
+                                    Blacklist.Add(lastNode.Guid, BlacklistFlags.Node, TimeSpan.FromMinutes(15), "Attempted looting unsucessfull three times in a row.");
                                     Log(GatherBuddyResources.BlacklistingCurrentNodeAfter3FailedAttempts);
                                     nodeTimer.Reset();
                                     lastNode = null;
@@ -185,8 +246,8 @@ namespace Bots.Gatherbuddy
                                 {
                                     movePoint = WoWPoint.Zero;
                                     Log(GatherBuddyResources.BlacklistingCurrentNodeAfter__0__seconds, GatherbuddySettings.Instance.BlacklistTimer);
-                                    BlacklistNodes.Add(lastNode.Location);
-                                    Blacklist.Add(lastNode.Guid, TimeSpan.FromMinutes(15));
+                                    BlacklistNodes[lastNode.Location] = "Took more then " + GatherbuddySettings.Instance.BlacklistTimer + " seconds to loot";
+                                    Blacklist.Add(lastNode.Guid, BlacklistFlags.Node, TimeSpan.FromMinutes(15), string.Format("Node took more than the allowed {0} seconds to loot.", GatherbuddySettings.Instance.BlacklistTimer));
                                     nodeTimer.Reset();
                                     lastNode = null;
                                 })),
@@ -288,35 +349,32 @@ namespace Bots.Gatherbuddy
 
                         new Sequence(
                             ctx => LootTargeting.Instance.FirstObject,
+							new Action(ret => WoWMovement.MoveStop()),
                             new WaitContinue(
                                 5, ret => !StyxWoW.Me.IsFalling,
                                 new Action(ret => WoWMovement.MoveStop())),
                             new WaitContinue(
                                 1, ret => !StyxWoW.Me.IsMoving,
                                 new Action(ret => WoWMovement.MoveStop())),
-                            new Action(ret => WoWMovement.MoveStop()),
                             new ActionSetActivity(GatherBuddyResources.InteractingWithNode),
                             new Action(ret => harvestAttempts++),
                             new DecoratorContinue(
                                 ret => ret is WoWGameObject && GatherbuddySettings.Instance.FaceNodes,
                                 new Action(ret => StyxWoW.Me.SetFacing((WoWGameObject)ret))),
-                            new Action(ret => StyxWoW.SleepForLagDuration()),
+							new SleepForLagDuration(),
                             new Action(ret => ((WoWObject)ret).Interact()),
-                // Wait for the loot frame...
                             new Wait(
-                                5, ret => LootFrame.Instance.IsVisible || StyxWoW.Me.Combat || StyxWoW.Me.IsFlying ||
+                                5, ret => (LootFrame.Instance.IsVisible && LootFrame.Instance.LootItems > 0) || StyxWoW.Me.Combat || StyxWoW.Me.IsFlying ||
                                           (WoWObject)ret == null ||
                                           (WoWObject)ret != lastNode,
-                                new Action(
+								new Sequence(
+								new Action(
                                     ret =>
                                     {
-                                        nodeTimer.Reset();
                                         if (StyxWoW.Me.Combat)
                                             return;
 
-                                        Blacklist.Add(((WoWObject)ret).Guid, TimeSpan.FromSeconds(2));
                                         var obj = ObjectManager.GetAnyObjectByGuid<WoWObject>(LootFrame.Instance.LootingObjectGuid);
-                                        // This happens sometimes, when we're moving slightly too fast. Just ignore it if its null.
                                         if (obj == null)
                                             return;
 
@@ -333,39 +391,24 @@ namespace Bots.Gatherbuddy
                                         }
 
                                         LootFrame.Instance.LootAll();
-                                        StyxWoW.SleepForLagDuration();
                                         movePoint = WoWPoint.Zero;
 
                                         Log("{0} {1}.", (obj is WoWGameObject) ? GatherBuddyResources.Harvested : GatherBuddyResources.Looted, name);
-                                    })),
+                                    }),
+								new WaitContinue(
+									2,
+									ret => StyxWoW.Me.Combat || (WoWObject)ret == null || !((WoWObject)ret).IsValid || (ret is WoWGameObject && !((WoWGameObject)ret).CanUse()),
+									new ActionAlwaysSucceed()))),
 
                             new Decorator(ret => Vendors.ForceSell && GatherbuddySettings.Instance.UseGuildVault,
                                 new Action(ret => CreateVendorBehavior()))
                             ))),
 
                 new Decorator(
-                    ret => StyxWoW.Me.MovementInfo.IsSwimming && !StyxWoW.Me.HasAura("Sea Legs"),
-                    new Sequence(
-                        new Action(ret => WoWMovement.Move(WoWMovement.MovementDirection.JumpAscend)),
-                        new Wait(
-                                20, ret => StyxWoW.Me.MovementInfo.JumpingOrShortFalling,
-                                new Sequence(
-                                    new Action(ret => WoWMovement.MoveStop()),
-                                    new Wait(
-                                        5, ret => !StyxWoW.Me.MovementInfo.JumpingOrShortFalling ||
-                                                   StyxWoW.Me.Class == WoWClass.Druid,
-                                        new Action(
-                                            ret =>
-                                            {
-                                                Flightor.MountHelper.MountUp();
-                                                Thread.Sleep(100);
-                                                WoWMovement.Move(WoWMovement.MovementDirection.JumpAscend);
-                                                Thread.Sleep(200);
-                                                WoWMovement.MoveStop();
-                                            })))))),
-                new Decorator(
                     ret => LootTargeting.Instance.FirstObject == null,
-                    new Sequence(
+					new PrioritySelector(
+					new ActionRunCoroutine(ret => _combineItemsTask ?? (_combineItemsTask = new CombineItemsTask())),
+					new Sequence(
                         new ActionSetActivity(GatherBuddyResources.MovingToNextHotspot),
                         new DecoratorContinue(
                             ret => StyxWoW.Me.MovementInfo.IsDescending,
@@ -373,7 +416,7 @@ namespace Bots.Gatherbuddy
                         new Action(ret => Flightor.MoveTo(Profile.CurrentProfile.Current)),
                         // Make sure we don't get afk flagged when flying around.
                         new ActionIdle()
-                        ))
+						)))
                 );
         }
 
@@ -464,15 +507,16 @@ namespace Bots.Gatherbuddy
                                 return false;
                             },
                         new PrioritySelector(
-                            new Decorator(
-                                ret => !StyxWoW.Me.IsFlying,
-                                new PrioritySelector(
-                                    new Decorator(
-                                        ret => GatherbuddySettings.Instance.UseGuildVault,
-                                        CreateGuildVaultBehavior()),
-                                    new Decorator(
-                                        ret => GatherbuddySettings.Instance.HearthAndExit,
-                                        CreateHearthAndExitBehavior()))),
+							new Decorator(
+								ret => GatherbuddySettings.Instance.UseGuildVault,
+								new PrioritySelector(
+									new Mount.ActionLandAndDismount("Guild vault run"),
+									CreateGuildVaultBehavior())),
+							new Decorator(
+								ret => GatherbuddySettings.Instance.HearthAndExit,
+								new PrioritySelector(
+									new Mount.ActionLandAndDismount("Hearth and exit"),
+									CreateHearthAndExitBehavior())),
 							new Decorator(
 								ret => GatherbuddySettings.Instance.MailToAlt,
 								CreateMailBehavior()))),
@@ -552,9 +596,9 @@ namespace Bots.Gatherbuddy
                                 new WoWPoint(1052.84f, 638.6432f, -45.02334f)
                             }),
 						new Action(ret => WoWMovement.MoveStop()),
-						new Action(ret => StyxWoW.SleepForLagDuration()),
+						new SleepForLagDuration(),
 						new Action(ret => sellVendor.Interact()),
-						new Action(ret => Thread.Sleep(1000)),
+						new Sleep(1000),
                         new DecoratorContinue(
                             ret => !MerchantFrame.Instance.IsVisible && GossipFrame.Instance.IsVisible,
                             new Action(ret => GossipFrame.Instance.SelectGossipOption(1))),
@@ -565,7 +609,7 @@ namespace Bots.Gatherbuddy
 							else
 								Vendors.RepairAllItems();
 						}),
-						new Action(ret => Thread.Sleep(1000)),
+						new Sleep(1000),
 						new Action(ret =>
 							{
 								sellVendor = null;
@@ -641,7 +685,7 @@ namespace Bots.Gatherbuddy
 
 					new Decorator(
 						ret => sellVendor != null && sellVendor.IsValid &&
-							(!sellVendor.IsOutdoors || GameWorld.TraceLine(sellVendor.Location, sellVendor.Location.Add(0, 0, 30), GameWorld.CGWorldFrameHitFlags.HitTestGroundAndStructures)),
+							(!sellVendor.IsOutdoors || GameWorld.TraceLine(sellVendor.Location, sellVendor.Location.Add(0, 0, 30), TraceLineHitFlags.Collision)),
 						new Action(ret =>
 							{
 								WoWUnit outsideUnit = ObjectManager.GetObjectsOfType<WoWUnit>().
@@ -666,7 +710,7 @@ namespace Bots.Gatherbuddy
 
 					new Sequence(
 						new ActionSetActivity(GatherBuddyResources.MovingToRepair),
-						new Action(ret => Flightor.MoveTo(repairVendor.Location)))
+						new Action(ret => Flightor.MoveTo(repairVendor.Location, true)))
 					);
 		}
 

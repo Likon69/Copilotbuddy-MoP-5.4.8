@@ -57,7 +57,7 @@ namespace Styx.WoWInternals.DBC
         #region Nested type: AreaTableEntry
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        private unsafe struct AreaTableEntry
+        public unsafe struct AreaTableEntry
         {
             public uint Id;
             public uint MapId;

@@ -102,7 +102,7 @@ namespace Styx.CommonBot.Profiles
 			IEnumerable<string> enumerable = this.Args.Keys.Where(new Func<string, bool>(@class.UtilCheckAttribute));
 			foreach (string text in enumerable)
 			{
-				flag |= this.UtilGetNumberedAttribute<T>(text, constraints, list);
+				flag |= this.UtilAddToNumberedAttributeToArray<T>(text, constraints, list);
 			}
 			if (aliasBaseNames != null)
 			{
@@ -128,7 +128,7 @@ namespace Styx.CommonBot.Profiles
 				IEnumerable<string> enumerable4 = enumerable3.Select(func4);
 				foreach (string text2 in enumerable4)
 				{
-					flag |= this.UtilGetNumberedAttribute<T>(text2, constraints, list);
+					flag |= this.UtilAddToNumberedAttributeToArray<T>(text2, constraints, list);
 				}
 			}
 			if (list.Count < countRequired)
@@ -145,7 +145,7 @@ namespace Styx.CommonBot.Profiles
 		}
 
 		
-		private bool UtilGetNumberedAttribute<T>(string attr, CustomForcedBehavior.IConstraintChecker<T> constraints, List<T> list_1)
+		private bool UtilAddToNumberedAttributeToArray<T>(string attr, CustomForcedBehavior.IConstraintChecker<T> constraints, List<T> resultList)
 		{
 			string text = attr;
 			if (typeof(T) == typeof(WoWPoint))
@@ -164,7 +164,7 @@ namespace Styx.CommonBot.Profiles
 			{
 				return true;
 			}
-			list_1.Add((T)((object)obj));
+			resultList.Add((T)((object)obj));
 			return false;
 		}
 
@@ -627,7 +627,7 @@ namespace Styx.CommonBot.Profiles
 		
 		protected CustomForcedBehavior(Dictionary<string, string> args)
 		{
-			this.dictionary_0 = args;
+			this._args = args;
 			this.baseName = string.Format("{0}-v{1}", base.GetType().Name, this.UtilStripSubversionDecorations(this.SubversionRevision));
 		}
 
@@ -642,7 +642,7 @@ namespace Styx.CommonBot.Profiles
 		{
 			get
 			{
-				return this.dictionary_0;
+				return this._args;
 			}
 		}
 
@@ -795,7 +795,7 @@ namespace Styx.CommonBot.Profiles
 		private List<string> _recognizedAttributes = new List<string>();
 
 		
-		private readonly Dictionary<string, string> dictionary_0;
+		private readonly Dictionary<string, string> _args;
 
 		
 		private Styx.TreeSharp.Composite _branch;

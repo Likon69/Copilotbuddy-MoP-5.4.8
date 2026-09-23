@@ -39,6 +39,12 @@ namespace Styx
 
         public static Landmarks Landmarks { get; private set; }
 
+        public static WoWCamera Camera { get; private set; }
+
+        public static bool ExecutorLogging { get; private set; }
+
+        private static StyxLog _executorLog;
+
         private static OverlayManager overlayManager;
 
         // HB 6.2.3 StyxWoW.cs:299-316. `null` for the dispatcher is deliberate: OverlayManager
@@ -128,6 +134,16 @@ namespace Styx
             get { return !WowExited && Memory.Read<byte>(Offsets.Statics.IsInGame) != 0; }
         }
 
+        public static GraphicsApi GameGraphicsApi
+        {
+            get { return ReadGraphicsApi(Memory, true); }
+        }
+
+        internal static bool IsInitialized
+        {
+            get { return Memory != null; }
+        }
+
         public static Version GameVersion
         {
             get
@@ -213,6 +229,7 @@ namespace Styx
             AreaManager = new AreaManager();
             WoWClient = new WoWClient();
             Landmarks = new Landmarks();
+            Camera = new WoWCamera();
             ObjectManager.Update();
         }
 
@@ -237,6 +254,47 @@ namespace Styx
                 }
             }
             Thread.Sleep(timeSpan);
+        }
+
+        public static void EnableExecutorLogging()
+        {
+            if (!ExecutorLogging)
+            {
+                if (_executorLog == null)
+                {
+                    _executorLog = GetLog("Executor");
+                }
+                Memory.Executor.OnBeginExecute += ExecutorOnBeginExecute;
+                Memory.Executor.OnEndExecute += ExecutorOnEndExecute;
+                Memory.Executor.OnExecute += ExecutorOnExecute;
+                ExecutorLogging = true;
+            }
+        }
+
+        public static void DisableExecutorLogging()
+        {
+            if (ExecutorLogging)
+            {
+                Memory.Executor.OnBeginExecute -= ExecutorOnBeginExecute;
+                Memory.Executor.OnEndExecute -= ExecutorOnEndExecute;
+                Memory.Executor.OnExecute -= ExecutorOnExecute;
+                ExecutorLogging = false;
+            }
+        }
+
+        private static void ExecutorOnExecute(object sender, EventArgs e)
+        {
+            _executorLog.Write("OnInjection{0}{1}", Environment.NewLine, Utilities.GetStackTrace(3, -1));
+        }
+
+        private static void ExecutorOnEndExecute(object sender, EventArgs e)
+        {
+            _executorLog.Write("OnEndExecute{0}{1}", Environment.NewLine, Utilities.GetStackTrace(3, -1));
+        }
+
+        private static void ExecutorOnBeginExecute(object sender, EventArgs e)
+        {
+            _executorLog.Write("OnBeginExecute{0}{1}", Environment.NewLine, Utilities.GetStackTrace(3, -1));
         }
 
         public static string LastRedErrorMessage

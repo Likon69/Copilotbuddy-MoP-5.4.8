@@ -35,7 +35,7 @@ namespace Styx.WoWInternals.DBC
 
         #region Nested type: ResearchSiteEntry
 
-        private struct ResearchSiteEntry
+        public struct ResearchSiteEntry
         {
             public uint Entry;
             public uint dword4;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Media;
@@ -70,26 +71,27 @@ namespace Bots.Gatherbuddy
 
 		private static void CreateHardCodedBlacklist()
 		{
+			BlacklistNodes.Clear();
                 // eastern kingdoms
             if (StyxWoW.Me.MapId == 0)
             {
                 // twilight highlands
-                BlacklistNodes.Add(new WoWPoint(-4515.803, -4921.126, 158.473)); // mid air twilight jasmine
-                BlacklistNodes.Add(new WoWPoint(-4515.803, -4919.83, 158.473)); // mid air twilight jasmine
-                BlacklistNodes.Add(new WoWPoint(-4592.35, -4893.94, 163.83)); // mid air twilight jasmine
-                BlacklistNodes.Add(new WoWPoint(-4499.49, -4460, 174.916)); // mid air twilight jasmine
+                BlacklistNodes[new WoWPoint(-4515.803, -4921.126, 158.473)] = "Default blacklist";
+                BlacklistNodes[new WoWPoint(-4515.803, -4919.83, 158.473)] = "Default blacklist";
+                BlacklistNodes[new WoWPoint(-4592.35, -4893.94, 163.83)] = "Default blacklist";
+                BlacklistNodes[new WoWPoint(-4499.49, -4460, 174.916)] = "Default blacklist";
 
-                BlacklistNodes.Add(new WoWPoint(-4160.62, -4403.73, 195.035)); // underground node
+                BlacklistNodes[new WoWPoint(-4160.62, -4403.73, 195.035)] = "Default blacklist";
             }
                 // kalimdor
             else if (StyxWoW.Me.MapId == 1)
             {
-                BlacklistNodes.Add(new WoWPoint(-10298.63, -306.4288, 253.4157)); // underground node in uldum
+                BlacklistNodes[new WoWPoint(-10298.63, -306.4288, 253.4157)] = "Default blacklist";
             }
                 // outland
             else if (StyxWoW.Me.MapId == 530)
             {
-                BlacklistNodes.Add(new WoWPoint(2612.169, 5853.195, 12.9664));      // long fall near thunderlord strnghold
+                BlacklistNodes[new WoWPoint(2612.169, 5853.195, 12.9664)] = "Default blacklist";
             }
                 // northrend
             else if (StyxWoW.Me.MapId == 571)
@@ -102,9 +104,20 @@ namespace Bots.Gatherbuddy
 
 		}
 
-		private static bool IsBlacklisted(WoWPoint location)
+		private static bool IsBlacklisted(WoWPoint location, out WoWPoint blacklistLocation, out string reason)
 		{
-			return BlacklistNodes.Any(p => p.DistanceSqr(location) < 2);
+			blacklistLocation = WoWPoint.Empty;
+			reason = string.Empty;
+			foreach (KeyValuePair<WoWPoint, string> blacklistedNode in BlacklistNodes)
+			{
+				if (blacklistedNode.Key.DistanceSqr(location) < 4f)
+				{
+					blacklistLocation = blacklistedNode.Key;
+					reason = blacklistedNode.Value;
+					return true;
+				}
+			}
+			return false;
 		}
 
 		private static bool IsInBlackspot(WoWPoint location)

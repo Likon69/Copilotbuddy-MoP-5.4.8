@@ -12,7 +12,7 @@ namespace Styx.WoWInternals
 
         public AlteracValleyLandmarkType LandmarkType
         {
-            get { return smethod_1(this); }
+            get { return GetMarkType(this); }
         }
 
         public LandmarkControlType ControlType
@@ -46,9 +46,9 @@ namespace Styx.WoWInternals
             }
         }
 
-        private static AlteracValleyLandmarkType smethod_1(WoWLandMark woWLandMark_0)
+        private static AlteracValleyLandmarkType GetMarkType(WoWLandMark landmark)
         {
-            uint entry = woWLandMark_0.Entry;
+            uint entry = landmark.Entry;
             uint num = entry;
             if (num <= 1255U)
             {

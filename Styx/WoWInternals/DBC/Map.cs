@@ -148,7 +148,7 @@ namespace Styx.WoWInternals.DBC
         #region Nested type: MapEntry
 
         [StructLayout(LayoutKind.Sequential)]
-        private struct MapEntry
+        public struct MapEntry
         {
             public override string ToString()
             {

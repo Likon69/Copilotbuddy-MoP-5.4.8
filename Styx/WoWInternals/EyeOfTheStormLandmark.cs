@@ -12,7 +12,7 @@ namespace Styx.WoWInternals
 
         public EyeOfTheStormLandmarkType LandmarkType
         {
-            get { return smethod_1(this); }
+            get { return GetMarkType(this); }
         }
 
         public LandmarkControlType ControlType
@@ -36,9 +36,9 @@ namespace Styx.WoWInternals
             }
         }
 
-        private static EyeOfTheStormLandmarkType smethod_1(WoWLandMark woWLandMark_0)
+        private static EyeOfTheStormLandmarkType GetMarkType(WoWLandMark landmark)
         {
-            uint entry = woWLandMark_0.Entry;
+            uint entry = landmark.Entry;
             switch (entry)
             {
                 case 1941U:

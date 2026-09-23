@@ -4,8 +4,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using ArchaeologyBuddy.Resources;
 using Bots.Grind;
+using Buddy.Coroutines;
 using CommonBehaviors.Actions;
 using Styx;
 using Styx.Common;
@@ -430,18 +432,10 @@ namespace Bots.ArchaeologyBuddy
 		{
 			return
 				new Decorator(ret => !IsInDigSite && ClosestDigSiteLocation != WoWPoint.Empty,
+					new PrioritySelector(
+					new ActionRunCoroutine(ret => OpenCanopicJars()),
 					new Action(delegate
 					{
-						if (StyxWoW.Me.Location.Distance2D(ClosestDigSiteLocation) < 450 && 
-							DateTime.Now.Subtract(digsiteBoundPulse).TotalSeconds > 3)
-						{
-							digsiteBoundPulse = DateTime.Now;
-							if (CurrentDigSiteBounds == null)
-							{
-								CurrentDigSiteBounds = FindCurrentDigSiteBounds();
-							}
-						}
-
 						if (StyxWoW.Me.Location.Distance(CurrentDigsite.Location) < 5)
 						{
 							WoWMovement.MoveStop();
@@ -539,7 +533,33 @@ namespace Bots.ArchaeologyBuddy
 
 						digSiteCheck = true;
 						return RunStatus.Success;
-					}));
+					})));
+		}
+
+		private static async Task<bool> OpenCanopicJars()
+		{
+			if (WoWMovement.ActiveMover == null || WoWMovement.ActiveMover.IsFlying)
+			{
+				return false;
+			}
+
+			List<WoWItem> canopicJars = StyxWoW.Me.BagItems.Where(item => item.Entry == 64657).ToList();
+			if (!canopicJars.Any())
+			{
+				return false;
+			}
+
+			Log("Opening Canopic Jars...");
+			foreach (WoWItem canopicJar in canopicJars)
+			{
+				canopicJar.UseContainerItem();
+				await Coroutine.Wait(2000, () => LootFrame.Instance.IsVisible);
+				await Coroutine.Sleep(500);
+				LootFrame.Instance.LootAll();
+				await Coroutine.Wait(5000, () => !canopicJar.IsValid);
+			}
+
+			return true;
 		}
 
 		#endregion
@@ -553,7 +573,7 @@ namespace Bots.ArchaeologyBuddy
                 new Action(delegate
                             {
                                 WoWGameObject artifact = ObjectManager.GetObjectsOfType<WoWGameObject>(true, true).
-                                    FirstOrDefault(o => o.Entry == 206836 ||
+                                    FirstOrDefault(o => (o.Entry == 206836 ||
                                                         o.Entry == 202655 ||
                                                         o.Entry == 204282 ||
                                                         o.Entry == 203071 ||
@@ -564,7 +584,8 @@ namespace Bots.ArchaeologyBuddy
                                                         o.Entry == 207187 ||
                                                         o.Entry == 211174 ||
                                                         o.Entry == 211163 ||
-                                                        o.Entry == 218950);
+                                                        o.Entry == 218950) &&
+                                                        !Blacklist.Contains(o, BlacklistFlags.Loot));
 
                                 if (artifact == null)
                                 {
@@ -574,8 +595,16 @@ namespace Bots.ArchaeologyBuddy
 
                                 if (_artifactInteractCounter >= 10)
                                 {
-                                    Log("Tried to open the artifact more than 10 times, blacklisting the current digsite for 2 hours to avoid a current WoW bug.");
-                                    TempBlacklist(CurrentDigsite, TimeSpan.FromHours(2));
+                                    if (CurrentDigsite != null)
+                                    {
+                                        Log("Tried to open the artifact more than 10 times, blacklisting the current digsite for 2 hours to avoid a current WoW bug.");
+                                        TempBlacklist(CurrentDigsite, TimeSpan.FromHours(2));
+                                        ResetVariables();
+                                    }
+                                    else
+                                    {
+                                        Blacklist.Add(artifact, BlacklistFlags.Loot, TimeSpan.FromHours(2), "Tried to open the artifact more than 10 times, blacklisting it to avoid a current WoW bug");
+                                    }
                                     return RunStatus.Success;
                                 }
 
@@ -636,8 +665,7 @@ namespace Bots.ArchaeologyBuddy
                         new Decorator(ret => collectedArtifact >= artifactsToCollect,
 							new Action(delegate
 								{
-									if (!IsInADigSite)
-										ResetVariables();
+									ResetVariables();
 
 									return RunStatus.Success;
 								})),
@@ -726,8 +754,7 @@ namespace Bots.ArchaeologyBuddy
 									nextSurveyPoint = WoWPoint.Empty;
 									myLastLocation = WoWPoint.Empty;
 
-									if (!IsInADigSite)
-										ResetVariables();
+									ResetVariables();
 
 									return RunStatus.Success;
 								})),

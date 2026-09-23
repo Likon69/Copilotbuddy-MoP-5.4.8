@@ -26,14 +26,14 @@ namespace Styx.Patchables
                             return MapId;
                         }
 
-                        return method_0(MapId2);
+                        return GetMapId(MapId2);
                     }
                 }
 
                 uint num2 = StyxWoW.Memory.Read<uint>(StyxWoW.Offsets.Statics.BattlefieldStatusMapId);
                 if (Status != BattlegroundStatus.Active || (ulong)num2 < (ulong)((long)StyxWoW.Db[ClientDb.Map].MinIndex) || (ulong)num2 > (ulong)((long)StyxWoW.Db[ClientDb.Map].MaxIndex))
                 {
-                    return method_0(MapId2);
+                    return GetMapId(MapId2);
                 }
 
                 WoWDb.Row row = StyxWoW.Db[ClientDb.Map].GetRow(num2);
@@ -42,13 +42,13 @@ namespace Styx.Patchables
                     return num2;
                 }
 
-                return method_0(MapId2);
+                return GetMapId(MapId2);
             }
         }
 
-        private uint method_0(ulong ulong_0)
+        private uint GetMapId(ulong mapId)
         {
-            uint num = (uint)(ulong_0 & 65535UL);
+            uint num = (uint)(mapId & 65535UL);
             if (num == 32U)
             {
                 return 32U;

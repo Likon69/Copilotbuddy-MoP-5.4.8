@@ -12,7 +12,7 @@ namespace Styx.WoWInternals
 
         public IsleOfConquestLandmarkType LandmarkType
         {
-            get { return smethod_1(this); }
+            get { return GetMarkType(this); }
         }
 
         public LandmarkControlType ControlType
@@ -92,9 +92,9 @@ namespace Styx.WoWInternals
             }
         }
 
-        private static IsleOfConquestLandmarkType smethod_1(WoWLandMark woWLandMark_0)
+        private static IsleOfConquestLandmarkType GetMarkType(WoWLandMark landmark)
         {
-            switch (woWLandMark_0.Entry)
+            switch (landmark.Entry)
             {
                 case 2345U:
                 case 2346U:

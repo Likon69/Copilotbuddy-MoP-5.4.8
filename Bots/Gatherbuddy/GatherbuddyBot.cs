@@ -22,7 +22,7 @@ namespace Bots.Gatherbuddy
 {
 	public partial class GatherbuddyBot : BotBase
     {
-		public static HashSet<WoWPoint> BlacklistNodes = new HashSet<WoWPoint>();
+		public static Dictionary<WoWPoint, string> BlacklistNodes = new Dictionary<WoWPoint, string>();
 		private static readonly HashSet<WoWPoint> SafeNodes = new HashSet<WoWPoint>();
 		public static readonly Dictionary<string, int> NodeCollectionCount = new Dictionary<string, int>();
 		private static DateTime _startTime;
@@ -222,6 +222,10 @@ namespace Bots.Gatherbuddy
 
 				if (nodeAvoidList.Contains(unit.Entry))
 				{
+					if (GatherbuddySettings.Instance.DiagnosticLogging)
+					{
+						Log("{0} removed. Reason: nodeAvoidList", unit.Name);
+					}
 					units.RemoveAt(i);
 					continue;
 				}
@@ -234,35 +238,67 @@ namespace Bots.Gatherbuddy
 
 				if (unit.IsHerb && ignoreHerbs)
 				{
+					if (GatherbuddySettings.Instance.DiagnosticLogging)
+					{
+						Log("{0} removed. Reason: herb and ignoring herbs", unit.Name);
+					}
 					units.RemoveAt(i);
 					continue;
 				}
 
                 if (unit.IsMineral && ignoreMines)
 				{
+					if (GatherbuddySettings.Instance.DiagnosticLogging)
+					{
+						Log("{0} removed. Reason: mineral and ignoring minerals", unit.Name);
+					}
 					units.RemoveAt(i);
 					continue;
 				}
 
 				if (!unit.CanLoot)
 				{
+					if (GatherbuddySettings.Instance.DiagnosticLogging)
+					{
+						Log("{0} removed. Reason: can't loot", unit.Name);
+					}
 					units.RemoveAt(i);
 					continue;
 				}
 
                 var location = unit.Location;
 
-                if (IsBlacklisted(location))
+                WoWPoint blacklistLocation;
+                string blacklistReason;
+                if (IsBlacklisted(location, out blacklistLocation, out blacklistReason))
                 {
+					if (GatherbuddySettings.Instance.DiagnosticLogging)
+					{
+						Log("{0} removed. Reason: blacklisted with reason {1}. Node Location: {2} Blacklist Location: {3}", unit.Name, blacklistReason, location, blacklistLocation);
+					}
                     units.RemoveAt(i);
                     continue;
                 }
 
                 if (IsInBlackspot(location))
                 {
+					if (GatherbuddySettings.Instance.DiagnosticLogging)
+					{
+						Log("{0} removed. Reason: in blackspot", unit.Name);
+					}
                     units.RemoveAt(i);
                     continue;
                 }
+
+				if (Styx.Pathing.FlightorNavigation.BlackspotManager.IsInBlackspot(location))
+				{
+					if (GatherbuddySettings.Instance.DiagnosticLogging)
+					{
+						Log("{0} removed. Reason: in flightor blackspot", unit.Name);
+					}
+					units.RemoveAt(i);
+					continue;
+				}
 				
 				if (GatherbuddySettings.Instance.NoNinja && Flightor.MountHelper.Mounted)
 				{
@@ -272,7 +308,7 @@ namespace Bots.Gatherbuddy
 					if (player != null)
 					{
 						dLog("Removing \"{0}\" from loot list. Ninja attempt avoided", unit.Name);
-                        Blacklist.Add(unit, TimeSpan.FromSeconds(5));
+                        Blacklist.Add(unit, BlacklistFlags.Node, TimeSpan.FromSeconds(5), "We don't ninja nodes.");
 						units.RemoveAt(i);
 						continue;
 					}
@@ -286,7 +322,7 @@ namespace Bots.Gatherbuddy
 				if (eliteMob != null && GatherbuddySettings.Instance.IgnoreElites)
 				{
                     dLog("Removing \"{0}\" from loot list. There is an elite mob around. Name: {1}", unit.Name, eliteMob.Name);
-                    Blacklist.Add(unit, TimeSpan.FromSeconds(5));
+					Blacklist.Add(unit, BlacklistFlags.Node, TimeSpan.FromSeconds(5), "Elite mob too close to the node.");
 					units.RemoveAt(i);
 					continue;
 				}
@@ -294,10 +330,10 @@ namespace Bots.Gatherbuddy
 				if (SafeNodes.Contains(location))
 					continue;
 
-                if (!StyxWoW.Me.HasAura("Sea Legs") && GameWorld.TraceLine(location.Add(0, 0, 1000), location, GameWorld.CGWorldFrameHitFlags.HitTestLiquid))
+                if (!StyxWoW.Me.HasAura("Sea Legs") && GameWorld.TraceLine(location.Add(0, 0, 1000), location, TraceLineHitFlags.LiquidWaterWalkable))
 				{
                     dLog("Adding underwater node \"{0}\" to blacklist. Location: {1}", unit.Name, location);
-                    BlacklistNodes.Add(location);
+					BlacklistNodes[location] = "Underwater node";
 					units.RemoveAt(i);
 					continue;
 				}
@@ -309,7 +345,7 @@ namespace Bots.Gatherbuddy
 				}
 
                 dLog("Adding underground node \"{0}\" to blacklist. Location: {1}", unit.Name, location);
-                BlacklistNodes.Add(location);
+				BlacklistNodes[location] = "Underground node";
 				units.RemoveAt(i);
 			}
 		}

@@ -512,7 +512,7 @@ namespace Styx.WoWInternals.WoWObjects
             return _traceLinePosCache;
         }
 
-        private WoWMovementInfo _movementInfo;
+        public WoWMovementInfo _movementInfo;
 
         public WoWMovementInfo MovementInfo
         {

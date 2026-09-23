@@ -29,7 +29,7 @@ namespace Styx.WoWInternals.World
 
     public class WorldMap
     {
-        private const int MaxNumSubMaps = 12;
+        public const int MaxNumSubMaps = 12;
 
         [StructLayout(LayoutKind.Explicit, Pack = 1, Size = 112)]
         private unsafe struct NativeWorldMap

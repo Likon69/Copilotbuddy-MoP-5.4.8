@@ -6,10 +6,10 @@ namespace Styx.WoWInternals.World
     public unsafe struct JbnMapAreaTableEntry
     {
         public byte Flags;
-        public fixed byte Padding[3];
-        public uint Unknown4;
-        public uint Unknown8;
-        public uint UnknownC;
+        public fixed byte f1[3];
+        public uint dword4;
+        public uint dword8;
+        public uint dwordC;
         public bool HasTileHere => (Flags & 1) != 0;
     }
 }

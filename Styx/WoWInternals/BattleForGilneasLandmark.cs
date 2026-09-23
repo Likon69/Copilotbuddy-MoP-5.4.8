@@ -12,7 +12,7 @@ namespace Styx.WoWInternals
 
         public BattleForGilneasLandmarkType LandmarkType
         {
-            get { return smethod_1(this); }
+            get { return GetMarkType(this); }
         }
 
         public LandmarkControlType ControlType
@@ -46,9 +46,9 @@ namespace Styx.WoWInternals
             }
         }
 
-        private static BattleForGilneasLandmarkType smethod_1(WoWLandMark woWLandMark_0)
+        private static BattleForGilneasLandmarkType GetMarkType(WoWLandMark landmark)
         {
-            switch (woWLandMark_0.Entry)
+            switch (landmark.Entry)
             {
                 case 2400U:
                 case 2401U:

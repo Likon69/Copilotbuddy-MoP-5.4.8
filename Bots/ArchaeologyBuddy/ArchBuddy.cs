@@ -13,7 +13,6 @@ using Styx;
 using Styx.Common;
 using Styx.Common.Helpers;
 using Styx.CommonBot;
-using Styx.CommonBot.AreaManagement;
 using Styx.CommonBot.Profiles;
 using Styx.Helpers;
 
@@ -44,14 +43,11 @@ namespace Bots.ArchaeologyBuddy
 		private static WoWPoint safeMyLastLocation = WoWPoint.Empty;
 		private static WoWPoint safestMyLastLocation = WoWPoint.Empty;
 		private static WoWPoint ValidDigSitePoint = WoWPoint.Empty;
-		private static PvPArea CurrentDigSiteBounds;
 		private static readonly Stopwatch stuckTimer = new Stopwatch();
 		private static readonly Stopwatch safeStuckTimer = new Stopwatch();
         private static IEnumerable<FileInfo> u;
 		private static readonly Stopwatch safestStuckTimer = new Stopwatch();
         private static WaitTimer w = new WaitTimer(TimeSpan.FromHours(1));
-		private static bool LTUser;
-		private static DateTime digsiteBoundPulse = DateTime.Now;
 		internal static List<Digsite> PermanentBlacklist = new List<Digsite>();
 	    internal static List<Digsite> DigSites = new List<Digsite>();
 		internal static List<Fragment> Fragments = new List<Fragment>();

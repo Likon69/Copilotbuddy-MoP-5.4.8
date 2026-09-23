@@ -9,7 +9,7 @@ namespace Styx.Patchables
     {
         public LandmarkType Type
         {
-            get { return (LandmarkType)int_0; }
+            get { return (LandmarkType)_type; }
         }
 
         public uint Entry;
@@ -18,6 +18,6 @@ namespace Styx.Patchables
 
         public float MapY;
 
-        private int int_0;
+        private int _type;
     }
 }

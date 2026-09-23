@@ -52,7 +52,7 @@ namespace Styx.WoWInternals.DBC
         #region Nested type: MapDifficultyEntry
 
         [StructLayout(LayoutKind.Sequential)]
-        private struct MapDifficultyEntry
+        public struct MapDifficultyEntry
         {
             public uint Id;
             public uint MapId;

@@ -12,7 +12,7 @@ namespace Styx.WoWInternals
 
         public ArathiBasinLandmarkType LandmarkType
         {
-            get { return smethod_1(this); }
+            get { return GetMarkType(this); }
         }
 
         public LandmarkControlType ControlType
@@ -56,9 +56,9 @@ namespace Styx.WoWInternals
             }
         }
 
-        private static ArathiBasinLandmarkType smethod_1(WoWLandMark woWLandMark_0)
+        private static ArathiBasinLandmarkType GetMarkType(WoWLandMark landmark)
         {
-            uint entry = woWLandMark_0.Entry;
+            uint entry = landmark.Entry;
             if (entry >= 1609U && entry <= 1613U)
             {
                 return ArathiBasinLandmarkType.Stables;
