@@ -825,7 +825,8 @@ namespace Bots.Gatherbuddy
 								ret => ClosestMailbox.Location.Distance(StyxWoW.Me.Location) > 3f,
 								new Sequence(
 									new ActionSetActivity(GatherBuddyResources.MovingToMailbox),
-									new Action(ret => Flightor.MoveTo(ClosestMailbox.Location)))),
+									new Action(ret => Flightor.MoveTo(ClosestMailbox.Location, checkIndoors: true)))),
+							new Mount.ActionLandAndDismount("Mailing"),
 							new Sequence(
 								new ActionSetActivity("Mailing items"),
 								new Action(ret => vashjirBreadcrumb = new List<WoWPoint>()
