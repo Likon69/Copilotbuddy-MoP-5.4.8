@@ -33,6 +33,8 @@
 
   <ItemGroup>
     <Compile Remove="Tripper\Tools\**\*.cs" />
+    <Compile Remove="Bots\DungeonBuddy\**\*.cs" />
+    <!-- ^^^ temporary: DungeonBuddy port in progress, remove when done -->
     <Reference Include="Tripper.Tools">
       <HintPath>Lib\Tripper.Tools.dll</HintPath>
       <Private>true</Private>
@@ -62,6 +64,15 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Bots\BGBuddy\Resources\BGBuddyResources.resx">
       <LogicalName>Bots.BGBuddy.Resources.BGBuddyResources.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Bots\Professionbuddy\Localization\Strings.resx">
+      <LogicalName>Bots.Professionbuddy.Localization.Strings.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Bots\Professionbuddy\Properties\Resources.resx">
+      <LogicalName>Bots.Professionbuddy.Properties.Resources.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bots\Professionbuddy\Help.rtf">
+      <LogicalName>Bots.Professionbuddy.Help.rtf</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 

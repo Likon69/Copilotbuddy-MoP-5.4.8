@@ -230,6 +230,7 @@ namespace CopilotBuddy
             {
                 BotManager.Instance.Add(new Bots.BGBuddy.BGBuddy());
                 BotManager.Instance.Add(new Bots.Grind.LevelBot());
+                BotManager.Instance.Add(new Bots.Professionbuddy.ProfessionbuddyBot());
                 BotManager.Instance.Add(new Bots.Quest.QuestBot());
                 BotManager.Instance.LoadBots();
             }
