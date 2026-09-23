@@ -733,10 +733,8 @@ namespace Styx.WoWInternals.WoWObjects
                     return false;
                 }
 
-                // 5.4.8 emulates this one through StyxWoW.Memory.Call<T> (see rule 18).
                 byte canUse = StyxWoW.Memory.CallInjected<byte>(StyxWoW.Offsets.Functions.CGPlayer_C__CanUseItem, CallingConvention.ThisCall, (uint)(int)BaseAddress, infoBlock.Address, allocated.Address);
 
-                // 5.4.8 reads the result through StyxWoW.Memory.RemoteAsm.Memory (see rule 18).
                 reason = (GameError)StyxWoW.Memory.Read<uint>(allocated.Address);
                 return canUse != 0;
             }

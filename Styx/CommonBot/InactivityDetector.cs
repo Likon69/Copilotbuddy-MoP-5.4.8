@@ -8,9 +8,6 @@ using Styx.WoWInternals;
 
 namespace Styx.CommonBot
 {
-    /// <summary>
-    /// Handles logging out when the player remains inactive for the configured period.
-    /// </summary>
     public static class InactivityDetector
     {
         private static WaitTimer _inactivityTimer;

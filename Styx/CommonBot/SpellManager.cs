@@ -1037,7 +1037,6 @@ namespace Styx.CommonBot
 
         private static int GetKnownSpellIndex(int overrideSpellId, bool isPetAction)
         {
-            // 5.4.8 emulates this one through StyxWoW.Memory.Call<int> (see rule 18).
             return StyxWoW.Memory.CallInjected<int>(StyxWoW.Offsets.Functions.GetKnownSpellIndex, CallingConvention.Cdecl, overrideSpellId, isPetAction ? 1 : 0);
         }
 
@@ -1056,7 +1055,6 @@ namespace Styx.CommonBot
 
         private static int GetSpellOverrideId(int spellId)
         {
-            // 5.4.8 emulates this one through StyxWoW.Memory.Call<int> (see rule 18).
             return StyxWoW.Memory.CallInjected<int>(StyxWoW.Offsets.Functions.GetSpellOverrideId, CallingConvention.Cdecl, spellId);
         }
 

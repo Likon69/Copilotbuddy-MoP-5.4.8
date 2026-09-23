@@ -30,11 +30,6 @@ namespace Styx.Common.WpfControls
             }
         }
 
-        // ILSpy renders this as `private protected bool ... { protected get; private set; }`,
-        // which is not legal C#: the property cannot carry a modifier when an accessor does.
-        // `private protected` did not exist in C# 5 either, when Honorbuddy was written -- the
-        // decompiler inferred it from the IL accessibilities (protected getter, private setter).
-        // A protected getter with a private setter reproduces exactly that IL.
         protected bool IsMouseOverSplitElement { get; private set; }
 
         public SplitButton()

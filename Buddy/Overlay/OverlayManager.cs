@@ -199,17 +199,6 @@ namespace Buddy.Overlay
             }
         }
 
-        // HB 6.2.3 quirk (ns30.Class234.method_2 / this file's ToastWindowMessageHook): this hook is
-        // only installed on the TOAST window's HwndSource, and it is the sole place that repositions
-        // the WIDGET window - see UpdateOverlayPosition below, which only moves the toast window
-        // directly. It also passes the WINDOWPOS structure's own `hwnd` field (ptr->intptr_0 in the
-        // decompile) as the SetWindowPos "insert after" handle, instead of the structure's
-        // `hwndInsertAfter` field. Both WotLK's and Legion's readable ports "fixed" this (they
-        // reposition both windows directly from UpdateOverlayPosition and pass hwndInsertAfter here).
-        // This is preserved exactly as decompiled per the "never fix Honorbuddy's bugs" rule; it
-        // looks like a genuine HB bug but has not been changed.
-        // (Named ToastWindowMessageHook rather than HwndSourceHook - the delegate type imported from
-        // System.Windows.Interop already has that name.)
         private unsafe IntPtr ToastWindowMessageHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             if (msg == 71)
@@ -399,10 +388,6 @@ namespace Buddy.Overlay
             Dispatcher.Run();
         }
 
-        // HB 6.2.3 quirk: only the toast window is repositioned here. The widget window is kept in
-        // sync indirectly, through ToastWindowMessageHook above (see the comment there). Both readable ports
-        // instead call SetPosition on both windows directly from this method; that divergence is not
-        // reproduced, per the "HB wins on behaviour" rule.
         private void UpdateOverlayPosition()
         {
             IntPtr window = NativeMethods.GetWindow(this.AttachedProcess.MainWindowHandle, GetWindowRelationship.GwHwndprev);

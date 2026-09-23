@@ -57,11 +57,6 @@ namespace Styx.Common
             }
             if (this.finishedMeasuringCallback != null)
             {
-                // Honorbuddy wrote `finishedMeasuringCallback.BeginInvoke(ElapsedMilliseconds, null, null)`.
-                // Delegate BeginInvoke/EndInvoke throw PlatformNotSupportedException on .NET Core and
-                // later, so they cannot be used here. With a null callback and null state the original
-                // was a pure fire-and-forget invocation on a thread-pool thread, and nothing ever
-                // consumed the IAsyncResult -- which is exactly what this reproduces.
                 long elapsedMilliseconds = this.ElapsedMilliseconds;
                 FinishedMeasuringCallback callback = this.finishedMeasuringCallback;
                 ThreadPool.QueueUserWorkItem(delegate(object state)

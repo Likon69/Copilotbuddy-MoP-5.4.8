@@ -20,14 +20,10 @@ namespace Styx.CommonBot
     /// </summary>
     public static class FlightPaths
     {
-        // 5.4.8's IsIgnored/IgnoreFp + DualHashSet mechanism replaces 5.3's Blacklist-based ignore list.
-        // Field name kept from 5.3 (including its "Ingore" typo) since 5.3 is the naming authority.
         private static HashSet<uint> _hordeIngoreFPs = new HashSet<uint> { 12617U };
 
         private static HashSet<uint> _allianceIgnoreFPs = new HashSet<uint> { 12636U, 18788U };
 
-        // New in 5.4.8 (was dualHashSet_0). No 5.3 counterpart exists; named to match the style of its
-        // neighbours (_hordeIngoreFPs / _fpWaitTimer).
         private static DualHashSet<uint, WoWPoint> _ignoredFlightPaths = new DualHashSet<uint, WoWPoint>();
 
         private static WaitTimer _fpWaitTimer = new WaitTimer(TimeSpan.FromSeconds(15.0));
@@ -166,8 +162,6 @@ namespace Styx.CommonBot
             TakingPathFrom = null;
             TakingPathTo = null;
             Reason = FlightPathReason.None;
-            // Note: unlike 5.3 (which always cleared the Navigator), 5.4.8 only clears it when the
-            // current POI is still the flight POI. Ported as-is.
             if (BotPoi.Current.Type == PoiType.Fly)
             {
                 Navigator.Clear();
@@ -187,10 +181,6 @@ namespace Styx.CommonBot
             XmlFlightNode endNode;
             GetClosestFlightPathNodes(from, to, out startNode, out endNode);
 
-            // Note: 5.4.8 dropped 5.3's null-safety here (no check that startNode/endNode are non-null
-            // before dereferencing .Location below, and no fallback to FlightPathReason.Update). If
-            // GetClosestFlightPathNodes() returns nulls, this throws a NullReferenceException, exactly
-            // as the decompiled 5.4.8 IL does. Ported as-is (not a bug we're allowed to fix).
             TakingPathTo = endNode;
             TakingPathFrom = startNode;
             Reason = FlightPathReason.Use;
@@ -264,9 +254,6 @@ namespace Styx.CommonBot
 
             if (File.Exists(OldXmlPath) && !File.Exists(XmlPath))
             {
-                // Bug preserved from 5.4.8: this creates a directory AT XmlPath itself (which includes
-                // the "FlightPaths.xml" filename), not at Path.GetDirectoryName(XmlPath) as the
-                // preceding existence check just tested. Ported as-is.
                 if (!Directory.Exists(Path.GetDirectoryName(XmlPath)))
                 {
                     Directory.CreateDirectory(XmlPath);
@@ -311,11 +298,6 @@ namespace Styx.CommonBot
             }
         }
 
-        /// <summary>
-        /// New in 5.4.8 (no 5.3 counterpart; 5.3's closest equivalent was NeedNearbyUpdate(), which
-        /// 5.4.8 no longer has). Name taken verbatim from the 5.4.8 decompile - it is a public member
-        /// and was not obfuscated.
-        /// </summary>
         public static bool NeedToGrabNode
         {
             get
@@ -384,12 +366,6 @@ namespace Styx.CommonBot
             return fullTravelTime < runPathTime;
         }
 
-        // Was smethod_0. Note: this is 5.4.8's (more elaborate) algorithm, not 5.3's - it additionally
-        // filters ignored nodes, picks the end node as the closest-to-`end` node that is actually
-        // connected to the chosen start node (via First(predicate), which throws
-        // InvalidOperationException if none of the continent's nodes are connected to the start node -
-        // ported as-is, this is 5.4.8's real behaviour), and finally nulls out both nodes if the start
-        // node turns out to be closer to `end` than the chosen end node is.
         private static void GetClosestFlightPathNodes(WoWPoint start, WoWPoint end, out XmlFlightNode startNode, out XmlFlightNode endNode)
         {
             if (XmlNodes.Count == 0)
@@ -419,21 +395,16 @@ namespace Styx.CommonBot
             }
         }
 
-        // Was smethod_1.
         private static XmlFlightNode GetNode(string name)
         {
             return XmlNodes.FirstOrDefault(x => x.Name == name);
         }
 
-        // Was smethod_2. 5.3 had a 2-arg overload (masterEntry, myLevel) filtering on UpdateLevel too,
-        // but 5.4.8's XmlFlightNode has no UpdateLevel member (confirmed against both the 5.4.8
-        // decompile and this project's XmlFlightNode.cs), so 5.4.8 only takes masterEntry.
         private static XmlFlightNode GetNodeFromMaster(uint masterEntry)
         {
             return XmlNodes.FirstOrDefault(x => x.MasterEntry == masterEntry);
         }
 
-        // Was smethod_3.
         private static float GetPathDistance(WoWPoint[] path)
         {
             float length = 0f;
@@ -444,7 +415,6 @@ namespace Styx.CommonBot
             return length;
         }
 
-        // Was smethod_4.
         private static void HandleTaxiMapOpened(object sender, LuaEventArgs e)
         {
             try

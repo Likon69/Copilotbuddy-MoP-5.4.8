@@ -27,8 +27,6 @@ namespace Levelbot.Decorators.Combat
                 && (!LevelbotSettings.Instance.GroundMountFarmingMode || !StyxWoW.Me.Mounted);
         }
 
-        // Dead code in HB 5.4.8: this level-range check exists but CanRun above never calls it.
-        // Preserved as-is per porting rules (no bug fixes).
         private static bool IsInLevelRange(WoWUnit unit, GrindArea area)
         {
             if (area == null)

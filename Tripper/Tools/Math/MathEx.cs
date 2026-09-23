@@ -134,10 +134,6 @@ namespace Tripper.Tools.Math
             return right;
         }
 
-        // NOTE: Plane is a missing dependency (Tripper.Tools.Math.Plane, from the 6.2.3
-        // Tripper.Tools/Math/Plane.cs source) — not yet ported into the project. This method
-        // is written against it as the 6.2.3 source requires, and will need that type present
-        // to compile.
         public unsafe static void ClipPolygonToPlane(Vector3[] inVerts, int numInVerts, Vector3[] outVerts, out int numOutVerts, Plane plane, bool keepOnPlane, float epsilon)
         {
             if (numInVerts > 32)

@@ -534,7 +534,6 @@ namespace Bots.DungeonBuddy
                         Logger.WriteDebug("Accepting queue");
                         Lua.DoString("AcceptProposal()");
                     })),
-                // Proposal succeeded: wait for the zone transition and reset the dungeon timer.
                 new Decorator(
                     ret => _proposalSucceeded,
                     new ActionRunCoroutine(ret => HandleProposalTransition())),

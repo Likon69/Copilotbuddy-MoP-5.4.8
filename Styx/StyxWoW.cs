@@ -47,8 +47,6 @@ namespace Styx
 
         private static OverlayManager overlayManager;
 
-        // HB 6.2.3 StyxWoW.cs:299-316. `null` for the dispatcher is deliberate: OverlayManager
-        // spins up its own STA thread when no dispatcher is supplied, so it is self-sufficient here.
         public static OverlayManager Overlay
         {
             get

@@ -10,33 +10,8 @@ using Tripper.Tools.Math;
 
 namespace Tripper.Navigation
 {
-	/// <summary>
-	/// 1:1 API-shape port of Honorbuddy 5.4.8's <c>Tripper.Navigation.WowNavigator</c>
-	/// (see "hb decompile\.hb 5.4.8\Honorbuddy\Tripper\Navigation\WowNavigator.cs", names
-	/// recovered against the unobfuscated
-	/// "hb decompile\.hb 5.3\Tripper\Navigation\WowNavigator.cs"). HB's
-	/// MeshProvider/IMeshProvider is intentionally left out (see below); every other public
-	/// member is ported, with every method body rewired onto Navigation.dll via
-	/// Styx.Pathing.NavigationApi.
-	///
-	/// Deliberate deviations from HB, all authorized up front:
-	///  - MeshProvider is not ported. HB's only implementation (ns7.Class711) pulled in
-	///    Buddy.Auth (forbidden) to fetch tiles from a mesh server (dead). Tile supply is
-	///    now native (MoveMap.cpp), reached only through NavigationApi.
-	///  - Map identity: HB's Maps/ChangeMap/PrimaryMapName deal in map *names* (matching
-	///    MeshNavigator.cs's `list.SequenceEqual(this.Nav.Maps)`); Navigation.dll deals in
-	///    a numeric mapId. The public shape stays name-based; internally a `uint _mapId`
-	///    is refreshed from StyxWoW.Me.MapId every time ChangeMap actually changes the map
-	///    list, and pushed into Mesh.MapId / MeshQuery.MapId.
-	///  - SetFactionQueryFilter: see its own XML doc.
-	///  - FindPath: see its own XML doc.
-	/// </summary>
 	public class WowNavigator : IDisposable
 	{
-		// Navigation.dll's one-time setup. Despite its name Nav_LoadMaps loads no map --
-		// it installs Detour's custom allocator and seeds the native default filter
-		// (Navigation::Initialize). Tiles themselves load lazily: EnsureTiles calls
-		// MMapManager::loadMap, which reads the .mmap next to the DLL on demand.
 		private static bool _nativeInitialized;
 
 		public WowNavigator()
@@ -73,12 +48,6 @@ namespace Tripper.Navigation
 
 		public event NavigatorLogMessage OnNavigatorLogMessage;
 
-		/// <summary>
-		/// HB raised this from Tripper's own tile loader. Navigation.dll instead offers a
-		/// single process-wide callback (SetTileLoadedCallback_C), so the thunk is installed
-		/// on first subscription and kept in a static field — a local delegate would be
-		/// collected while native code still holds the pointer.
-		/// </summary>
 		public event EventHandler<TileLoadedEventArgs> OnTileLoaded
 		{
 			add
@@ -89,12 +58,6 @@ namespace Tripper.Navigation
 			remove { this._onTileLoaded -= value; }
 		}
 
-		/// <summary>
-		/// HB raised this once per Detour tile added from a WoW tile, before OnTileLoaded.
-		/// One mmtile holds up to 16 Detour tiles whose coordinates depend on the map's
-		/// mesh origin (not HB's <c>(wowTile - 32) * 4 + sub</c>), so they are read back
-		/// from Navigation.dll (GetAdtSubTiles_C) and are valid for <see cref="NavMesh.GetTileAt"/>.
-		/// </summary>
 		public event EventHandler<TileLoadedEventArgs> OnSubTileLoaded
 		{
 			add
@@ -160,10 +123,6 @@ namespace Tripper.Navigation
 
 		public Vector3 Extents { get; set; }
 
-		/// <summary>
-		/// Drives the ported RandomizePath/FixPathWalkabilityOnly post-processing pipeline
-		/// in FindPath (5.4.8 decompile's method_5..method_16).
-		/// </summary>
 		public bool RandomizePaths { get; set; }
 
 		public string[] Maps { get; private set; }
@@ -180,18 +139,6 @@ namespace Tripper.Navigation
 			}
 		}
 
-		/// <summary>
-		/// Rewired: HB rebuilt Mesh/MeshQuery from MeshProvider.IsTiled/GetTile and called
-		/// MeshQuery.Init/SetTileLoaderFunction (5.4.8 decompile lines 625-682). Those
-		/// members do not exist on this port's NavMesh/NavMeshQuery (see their class
-		/// summaries: both are stateless wrappers holding only a MapId, with no unmanaged
-		/// resource of their own — Navigation.dll owns the actual mesh data, loaded
-		/// separately via NavigationApi.LoadMaps()). So this only tracks the map-name list
-		/// for HB API compatibility (MeshNavigator.cs compares against it with
-		/// SequenceEqual) and refreshes the numeric map id from StyxWoW.Me.MapId — see the
-		/// class summary's "Map identity" note — before (re)creating plain Mesh/MeshQuery
-		/// instances bound to that id.
-		/// </summary>
 		public void ChangeMap(ICollection<string> maps)
 		{
 			if (maps == null)
@@ -228,16 +175,6 @@ namespace Tripper.Navigation
 			}
 		}
 
-		/// <summary>
-		/// Rewired: HB's tile decompression (MeshProvider.GetTile + Mesh.AddTile, 5.4.8
-		/// decompile's method_4) has no native equivalent to call into — Navigation.dll
-		/// loads .mmtile data itself (MoveMap.cpp) and this port's NavMesh exposes no
-		/// AddTile/GetTileAt (see NavMesh.cs: only GetPolyArea was ported). This instead
-		/// calls NavigationApi.EnsureTiles for the world point at the tile's center (see
-		/// TileCenter) with ring 0, then confirms the load via NavigationApi.IsTileLoaded
-		/// (converted to Navigation.dll's own tile numbering via NativeTileIndex) since
-		/// EnsureTiles itself returns void and gives no success/failure signal.
-		/// </summary>
 		public bool LoadTile(Tripper.MeshMisc.TileIdentifier wowTile)
 		{
 			lock (this.MeshLock)
@@ -262,13 +199,6 @@ namespace Tripper.Navigation
 			}
 		}
 
-		/// <summary>
-		/// Rewired: HB's UnloadTile (5.4.8 decompile lines 744-777) walked the four Detour
-		/// sub-tiles of the given WoW tile through Mesh.GetTileRefAt/RemoveTile — members
-		/// this port's NavMesh does not expose (only GetPolyArea; see NavMesh.cs). This
-		/// instead calls NavigationApi.UnloadTile with the tile converted to Navigation.
-		/// dll's own numbering (see NativeTileIndex) and drops the managed usage-time entry.
-		/// </summary>
 		public bool UnloadTile(Tripper.MeshMisc.TileIdentifier wowTile)
 		{
 			lock (this.MeshLock)
@@ -286,13 +216,6 @@ namespace Tripper.Navigation
 			}
 		}
 
-		/// <summary>
-		/// Rewired: HB's UnloadAllTiles (5.4.8 decompile lines 728-742) enumerated
-		/// Mesh.GetAllTiles()/RemoveTile — not exposed by this port's NavMesh (see
-		/// NavMesh.cs). This instead walks the managed tile-usage tracking dictionary
-		/// (the same one LoadTile/UnloadTile/GarbageCollectTiles maintain) and calls
-		/// NavigationApi.UnloadTile for each.
-		/// </summary>
 		public void UnloadAllTiles()
 		{
 			lock (this.MeshLock)
@@ -323,17 +246,6 @@ namespace Tripper.Navigation
 
 		public TimeSpan GarbageCollectTime { get; set; }
 
-		/// <summary>
-		/// Rewired: HB's GarbageCollectTiles (5.4.8 decompile lines 404-438) swept its own
-		/// TileIdentifier-&gt;Stopwatch dictionary and called the (now-rewired) UnloadTile
-		/// for every entry older than GarbageCollectTime. Same algorithm here, over the
-		/// same kind of managed usage-time dictionary, calling this port's
-		/// NavigationApi-backed UnloadTile. Native side note: Navigation.cpp separately
-		/// runs its own time-based tile GC (TILE_GC_TIMEOUT_MS = 60000, i.e. 1 minute,
-		/// matching this class's own GarbageCollectTime default) automatically inside
-		/// every CalculatePathEx call — this method is the managed-side counterpart for
-		/// tiles this navigator loaded directly via LoadTile.
-		/// </summary>
 		public void GarbageCollectTiles(bool log = true)
 		{
 			lock (this.MeshLock)
@@ -361,26 +273,6 @@ namespace Tripper.Navigation
 			}
 		}
 
-		/// <summary>
-		/// Deliberate deviation from Honorbuddy 5.4.8 (decompile lines 888-906,
-		/// smethod_0/smethod_1): HB excluded the opposing faction by OR-ing
-		/// AbilityFlags.Horde/Alliance into QueryFilter.ExcludeFlags. That cannot work
-		/// here: this extractor stamps a constant walkable-ability flag of 0x0001 on every
-		/// walkable polygon (see the porting brief), so no AbilityFlags.Horde/Alliance bit
-		/// is ever set on a poly for ExcludeFlags to match. Faction is carried by AREA TYPE
-		/// instead: Tripper.MeshMisc.AreaType.Horde=15, .Alliance=16, .HordePortal=10,
-		/// .AlliancePortal=11 match the extractor's NAV_HORDE/NAV_ALLIANCE/
-		/// NAV_HORDE_PORTAL/NAV_ALLIANCE_PORTAL area ids value for value. So this sets a
-		/// prohibitive area cost (ProhibitiveFactionAreaCost = 1000, an order of magnitude
-		/// past the "Blocked" area's own 100 default cost — see BuildDefaultQueryFilter —
-		/// so it is strongly avoided but, being a cost rather than a hard exclusion, still
-		/// finite: a route through enemy territory can still be found if it is the only
-		/// one, same as HB's own Blocked/Blackspot areas were never literally impassable)
-		/// on the OPPOSING faction's area types, leaving the player's own faction's areas
-		/// at the normal default cost (1.66). Precomputed once per faction in the
-		/// constructor (_hordeFilter/_allianceFilter), mirroring HB's own
-		/// dictionary_0["Horde"]/["Alliance"] cache.
-		/// </summary>
 		public void SetFactionQueryFilter(bool isHorde)
 		{
 			lock (this.MeshLock)
@@ -440,33 +332,6 @@ namespace Tripper.Navigation
 			}
 		}
 
-		/// <summary>
-		/// Rewired: HB's FindPath (5.4.8 decompile lines 441-618) drove Detour directly —
-		/// two FindNearestPolygon calls, InitSlicedFindPath, a manual UpdateSlicedFindPath
-		/// loop with OnPathFindProgress-based abort, FinalizeSlicedFindPath, a partial-path
-		/// ClosestPointOnPoly snap, FindStraightPath, then RandomizePath/
-		/// FixPathWalkabilityOnly post-processing. Navigation.dll does the
-		/// find-nearest-poly + sliced-find + finalize + partial-path snap + straight-path
-		/// part of that pipeline in one call (Navigation.cpp's FindPathEx), reached here
-		/// through NavigationApi.CalculatePathEx; the RandomizePath/FixPathWalkabilityOnly
-		/// tail is ported as-is below and runs against this.MeshQuery exactly as HB's did.
-		///
-		/// CalculatePathEx takes and returns raw WoW-space points directly (see
-		/// NavMeshQuery.cs's "Coordinate space" note and NativeMethods.CalculatePathEx/
-		/// NativeMethods.XYZ_C's implicit WoWPoint operator), unlike this.MeshQuery, which
-		/// speaks Detour space like HB's own NavMeshQuery did. So navResult's points are
-		/// converted to Detour space (NavHelper.ToNav) before RandomizePath/
-		/// FixPathWalkabilityOnly and back to WoW space (NavHelper.ToWow) after, matching
-		/// where HB's own FindPath did that same ToWow conversion (decompile line 647).
-		///
-		/// OnPathFindProgress is preserved. Navigation.dll runs the same sliced A* loop
-		/// internally (10000 iterations per slice) and, since the "PathFinder: add a
-		/// progress callback" change, asks the managed side between slices whether to
-		/// continue. This method registers that callback for the duration of the search and
-		/// raises OnPathFindProgress from it, so MeshNavigator.Nav_OnPathFindProgress can
-		/// still abandon a pathfind that has run more than 4 seconds while the player is in
-		/// combat or the bot has stopped — the behaviour Honorbuddy kept through 6.2.3.
-		/// </summary>
 		public PathFindResult FindPath(Vector3 start, Vector3 end)
 		{
 			lock (this.MeshLock)
@@ -480,9 +345,6 @@ namespace Tripper.Navigation
 				Stopwatch stopwatch = Stopwatch.StartNew();
 				bool cancelled = false;
 
-				// Fires between the native search slices. Honorbuddy raised the same event
-				// from its own UpdateSlicedFindPath loop; the loop now lives in the DLL, so
-				// it calls back in here instead. Returning false stops the search.
 				NavPathFindProgressCallback progress = delegate
 				{
 					EventHandler<PathFindProgressEventArgs> handler = this.OnPathFindProgress;
@@ -497,10 +359,6 @@ namespace Tripper.Navigation
 					return !args.Cancel;
 				};
 
-				// CalculatePathEx runs against Navigation.dll's own _defaultFilter, the same
-				// one NavMeshQuery pushes into. Without this the search would ignore the
-				// caller's area costs — SetFactionQueryFilter's faction avoidance and
-				// BGBuddy's per-area costs would affect queries but not the actual path.
 				NavMeshQuery.PushFilter(this._mapId, this.QueryFilter.InternalFilter);
 
 				WoWPoint startPoint = start;
@@ -513,8 +371,6 @@ namespace Tripper.Navigation
 				}
 				finally
 				{
-					// Unhook before returning: the callback captures this search's stopwatch,
-					// and the delegate must outlive every native call that can reach it.
 					NativeMethods.SetPathFindProgressCallback_C(null);
 					GC.KeepAlive(progress);
 					stopwatch.Stop();
@@ -929,7 +785,6 @@ namespace Tripper.Navigation
 			return BuildFactionQueryFilter(horde);
 		}
 
-		/// <summary>See SetFactionQueryFilter's XML doc for the area-cost deviation this implements.</summary>
 		private const float ProhibitiveFactionAreaCost = 1000f;
 
 		private static WowQueryFilter BuildFactionQueryFilter(bool isHorde)
@@ -948,18 +803,6 @@ namespace Tripper.Navigation
 			return filter;
 		}
 
-		/// <summary>
-		/// Maps Navigation.dll's NavPathFindStep (Navigation C++/Navigation/NavStatus.h:
-		/// FIND_START_POLY=0, FIND_END_POLY=1, INIT_PATHFIND=2, UPDATE_PATHFIND=3,
-		/// FINALIZE_PATHFIND=4, FIND_STRAIGHT_PATH=5, NONE=-1) onto this port's
-		/// Tripper.Navigation.PathFindStep (None=0, FindStartPoly=1, FindEndPoly=2,
-		/// InitPathFind=3, UpdatePathFind=4, FinalizePathFind=5,
-		/// SnapPartialPathToEnd=6, FindStraightPath=7). The two enums do NOT share numeric
-		/// values (PathFindStep.None is 0, not -1; every other member is offset by one; and
-		/// SnapPartialPathToEnd has no native counterpart at all since the partial-path
-		/// snap now happens inside Navigation.dll itself), so this is an explicit lookup
-		/// rather than a cast.
-		/// </summary>
 		private static PathFindStep MapFailStep(int nativeFailStep)
 		{
 			switch (nativeFailStep)
@@ -981,19 +824,6 @@ namespace Tripper.Navigation
 			}
 		}
 
-		/// <summary>
-		/// Derives a WoW-space point at the center of the ADT tile <paramref name="ti"/>
-		/// identifies, to feed NavigationApi.EnsureTiles (which, like CalculatePathEx,
-		/// takes raw un-permuted WoW coordinates — see NativeMethods.XYZ_C's implicit
-		/// WoWPoint operator). This is the algebraic inverse of the unmodified
-		/// Tripper.MeshMisc.TileIdentifier.GetByPosition(x, y): X = 32 - Ceiling(y /
-		/// 533.3333), Y = 32 - Ceiling(x / 533.3333). Using the tile's center (0.5 tiles in
-		/// from either edge) keeps the point safely away from both edges, so the
-		/// Ceiling-vs-truncate difference between that formula and Navigation.dll's own
-		/// WorldToTile ("Navigation C++/Navigation/Navigation.cpp":
-		/// tileX = (int)((32*533.33333f - worldX) / 533.33333f), same for tileY/worldY)
-		/// cannot push it into the wrong tile.
-		/// </summary>
 		private static WoWPoint TileCenter(Tripper.MeshMisc.TileIdentifier ti)
 		{
 			const float TileSize = 533.3333f;
@@ -1002,14 +832,6 @@ namespace Tripper.Navigation
 			return new WoWPoint(worldX, worldY, 0f);
 		}
 
-		/// <summary>
-		/// Converts a TileIdentifier (HB's WoW-ADT tile numbering, X from world y and Y
-		/// from world x — see TileCenter) to the (x, y) indices Navigation.dll's
-		/// IsTileLoaded_C/UnloadTile_C expect. Navigation::WorldToTile computes tileX from
-		/// worldX and tileY from worldY directly, with no axis swap (see TileCenter's XML
-		/// doc for the exact formula); substituting TileCenter's worldX/worldY back into
-		/// that formula shows nativeTileX == ti.Y and nativeTileY == ti.X exactly.
-		/// </summary>
 		private static void NativeTileIndex(Tripper.MeshMisc.TileIdentifier ti, out int nativeX, out int nativeY)
 		{
 			nativeX = ti.Y;
@@ -1026,11 +848,6 @@ namespace Tripper.Navigation
 		private readonly Dictionary<string, WowQueryFilter> _namedFilters = new Dictionary<string, WowQueryFilter>();
 		private WowQueryFilter _queryFilter;
 
-		/// <summary>
-		/// See the class summary's "Map identity" note: refreshed from StyxWoW.Me.MapId
-		/// every time ChangeMap actually changes the map list, and pushed into Mesh.MapId /
-		/// MeshQuery.MapId.
-		/// </summary>
 		private uint _mapId;
 	}
 }

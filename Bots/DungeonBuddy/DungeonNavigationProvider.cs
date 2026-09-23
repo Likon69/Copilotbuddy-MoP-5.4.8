@@ -13,10 +13,6 @@ namespace Bots.DungeonBuddy;
 
 internal sealed class DungeonNavigationProvider : MeshNavigator
 {
-	/// <summary>
-	/// Short-lived cache of whether a path exists (and its distance) between two points, so repeated
-	/// CanNavigateFully/CanNavigateDistanceFully checks between the same two points don't re-run pathfinding.
-	/// </summary>
 	private class PathDistanceCache
 	{
 		private const float MatchToleranceSqr = 9f;

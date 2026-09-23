@@ -84,8 +84,6 @@ namespace Bots.Grind
             _lootBlacklistCount = 0;
         }
 
-        // NOTE: HB 5.4.8 dead code - this is exactly the "generic loot" predicate that
-        // canRunDecoratorDelegate_16 (below, in CreateLootBehavior) duplicates. Preserved as-is.
         private static bool CanPickGenericLootable()
         {
             return BotPoi.Current.Type != PoiType.Skin && BotPoi.Current.Type != PoiType.Loot && LootTargeting.Instance.FirstObject != null &&
@@ -279,10 +277,6 @@ namespace Bots.Grind
                                 new ActionSetPoi(context => new BotPoi(LootTargeting.Instance.FirstObject, PoiType.Loot, NavType.Run)))))));
         }
 
-        // Recovered from the 5.4.8 IL (Struct327, originally ns34.Class436's func_0/smethod_48 ->
-        // LevelBot.smethod_2()). Waits, while the current POI is a lootable unit that can't yet be
-        // looted, for LootPredictor to decide it's worth continuing to wait (yielding a frame at a
-        // time), up to 4 seconds, or until the unit becomes invalid.
         private static async Task<bool> WaitForLootableCoroutine(object context)
         {
             if (BotPoi.Current.Type != PoiType.Loot)
@@ -315,8 +309,6 @@ namespace Bots.Grind
             }
         }
 
-        // Recovered from the 5.4.8 IL (Struct328, originally func_1/smethod_61). Waits for the loot
-        // window to actually close before the caller clears the POI.
         private static async Task<bool> WaitForLootWindowCoroutine(object context)
         {
             if (BotPoi.Current.Type == PoiType.Loot)
@@ -464,11 +456,6 @@ namespace Bots.Grind
             get { return StyxWoW.AreaManager.CurrentGrindArea != null && StyxWoW.AreaManager.CurrentGrindArea.HotspotChanged; }
         }
 
-        // NOTE: The 5.4.8 decompile compiles this member's body to a bare async state
-        // machine (AsyncTaskMethodBuilder<bool>) with no visible statements - the decompiler
-        // could not reconstruct it, and no other recoverable source was available. Per the
-        // porting rules ("never invent code"), the body is not present here. See the port
-        // report for the full list of members affected this way.
         [Obsolete("Use the Roam coroutine")]
         public static PrioritySelector CreateRoamBehavior(NavType navType = NavType.Run)
         {
@@ -624,7 +611,6 @@ namespace Bots.Grind
             return new ActionRunCoroutine(new Func<object, CoroutineTask<bool>>(context => combatCoroutine));
         }
 
-        // Can we path (within maxDistance of the destination) from start to end on the current mesh.
         private static bool CanPathTo(WoWPoint start, WoWPoint end, float maxDistance)
         {
             var meshNavigator = Navigator.NavigationProvider as MeshNavigator;
@@ -881,11 +867,6 @@ namespace Bots.Grind
                                     new ActionSuceedIfDeadOrGhost()))))));
         }
 
-        // NOTE: the previous porting pass had this wrap MainVendorLogic() itself, which would have
-        // recursed forever (MainVendorLogic -> VendorMainHookExecutor.ExecuteCoroutine() -> this
-        // hook's composite -> MainVendorLogic -> ...). The 5.4.8 IL confirms the hook actually wraps
-        // the real body, RunVendorLogicCoroutine (originally smethod_12) - fixed here now that the
-        // real body is recovered.
         private static HookExecutor VendorMainHookExecutor
         {
             get
@@ -901,7 +882,6 @@ namespace Bots.Grind
             return new PrioritySelector(new ActionRunCoroutine(new Func<object, Task<bool>>(context => MainVendorLogic())));
         }
 
-        // Blacklists whatever LevelBot is currently trying to interact with (flight path, vendor, mailbox, or generic POI).
         private static void BlacklistCurrentPoi(string reason)
         {
             if (BotPoi.Current.Type == PoiType.Fly)
@@ -1080,11 +1060,6 @@ namespace Bots.Grind
             }
         }
 
-        // The following helpers have real, recovered bodies but their exact former position inside
-        // the (unrecoverable, see report) vendor coroutine bodies could not be determined, since the
-        // async methods that host them (MainVendorLogic and its private helpers) are only visible as
-        // AsyncTaskMethodBuilder plumbing in the 5.4.8 decompile. They are preserved as standalone
-        // members rather than silently dropped.
         private static bool IsMerchantFrameClosed(object context) { return !MerchantFrame.Instance.IsVisible; }
 
         private static void LogAndBlacklistNoMerchantFrame(object context)
@@ -1125,10 +1100,6 @@ namespace Bots.Grind
 
         private static void CloseTrainer(object context) { Lua.DoString("CloseTrainer()", "WoW.lua"); }
 
-        // Three separate, identically-bodied predicates in the 5.4.8 decompile (each its own
-        // compiler-generated lambda site inside the unrecoverable vendor coroutine); preserved
-        // as three distinct members rather than merged, since their original call sites (and
-        // whether the merge would be behavior-preserving) could not be verified.
         private static bool CurrentPoiIsNone_1() { return BotPoi.Current.Type == PoiType.None; }
         private static bool CurrentPoiIsNone_2() { return BotPoi.Current.Type == PoiType.None; }
         private static bool CurrentPoiIsNone_3() { return BotPoi.Current.Type == PoiType.None; }
@@ -1139,8 +1110,6 @@ namespace Bots.Grind
 
         private static bool IsMounted() { return StyxWoW.Me.Mounted; }
 
-        // Recovered from the 5.4.8 IL (Struct330). BehaviorFlags-gated roam sequence: find a
-        // target, else move to an existing kill POI, else move to the next hotspot.
         public static async Task<bool> Roam(NavType navType = NavType.Run)
         {
             if (!BehaviorFlags.HasFlag(BehaviorFlags.Roam))
@@ -1155,7 +1124,6 @@ namespace Bots.Grind
             return await MoveToHotspot(navType);
         }
 
-        // Recovered from the 5.4.8 IL (Struct331).
         public static async Task<bool> FindTarget(NavType navType)
         {
             if (BotPoi.Current.Type.IsOneOf(PoiType.Kill, PoiType.Loot, PoiType.Skin, PoiType.Harvest))
@@ -1175,7 +1143,6 @@ namespace Bots.Grind
             return true;
         }
 
-        // Recovered from the 5.4.8 IL (Struct332).
         public static async Task<bool> MoveToKillPoi()
         {
             if (BotPoi.Current.Type != PoiType.Kill)
@@ -1202,7 +1169,6 @@ namespace Bots.Grind
             return moveResult.IsSuccessful();
         }
 
-        // Recovered from the 5.4.8 IL (Struct333).
         public static async Task<bool> MoveToHotspot(NavType navType)
         {
             if (!BotPoi.Current.Type.IsOneOf(PoiType.None, PoiType.Hotspot) || !NeedToMoveToHotspot)
@@ -1219,8 +1185,6 @@ namespace Bots.Grind
             return true;
         }
 
-        // Recovered from the 5.4.8 IL (Struct335). The public entry point simply funnels into the
-        // Vendor_Main hook - the real logic is RunVendorLogicCoroutine below (originally smethod_12).
         public static async Task<bool> MainVendorLogic()
         {
             if (ProfileManager.CurrentProfile == null)
@@ -1229,8 +1193,6 @@ namespace Bots.Grind
             return await VendorMainHookExecutor.ExecuteCoroutine();
         }
 
-        // Recovered from the 5.4.8 IL (Struct334, originally smethod_11). Sells everything and waits
-        // (up to 15s) for bag space to free up; used by the Vendor_Sell hook.
         private static async Task<bool> SellAllItemsCoroutine()
         {
             uint freeSlotsBefore = StyxWoW.Me.FreeNormalBagSlots;
@@ -1240,9 +1202,6 @@ namespace Bots.Grind
             return true;
         }
 
-        // Recovered from the 5.4.8 IL (Struct336, originally smethod_12). This is the real body of
-        // the Vendor_Main hook (see VendorMainHookExecutor below): try to approach/interact with the
-        // current vendor POI, else pick the next vendor destination and close all vendor frames.
         private static async Task<bool> RunVendorLogicCoroutine()
         {
             if (await ApproachVendorPoiCoroutine())
@@ -1257,10 +1216,6 @@ namespace Bots.Grind
             return false;
         }
 
-        // Recovered from the 5.4.8 IL (Struct337, originally smethod_13). Handles mounting up for a
-        // ground-mount sell/repair run, moving to the current vendor POI, grabbing the nearest flight
-        // master when the POI has no fixed entry yet, and otherwise handing off to
-        // InteractVendorObjectCoroutine / RunVendorHooksCoroutine.
         private static async Task<bool> ApproachVendorPoiCoroutine()
         {
             bool isVendorPoi = BotPoi.Current.Type.IsOneOf(PoiType.Sell, PoiType.Repair, PoiType.Mail, PoiType.Buy, PoiType.Train);
@@ -1310,9 +1265,6 @@ namespace Bots.Grind
                 return true;
             }
 
-            // NOTE (HB 5.4.8 quirk, preserved as-is): whichever of the two coroutines below runs,
-            // its own result is discarded here - this method always returns true once it gets this
-            // far, exactly like the original IL.
             if (!IsAnyVendorFrameOpen())
                 await InteractVendorObjectCoroutine();
             else
@@ -1321,9 +1273,6 @@ namespace Bots.Grind
             return true;
         }
 
-        // Recovered from the 5.4.8 IL (Struct340, originally smethod_16). Nudges away from an object
-        // we spawned too close to (WoW's interact-range bug), stops moving, interacts with the vendor
-        // POI object, and handles the flight-master taxi window / gossip options.
         private static async Task<bool> InteractVendorObjectCoroutine()
         {
             WoWObject poiObject = BotPoi.Current.AsObject;
@@ -1375,8 +1324,6 @@ namespace Bots.Grind
 
                     return await FinishVendorInteractCoroutine();
                 }
-                // BotPoi.Current.Type changed to something other than Fly while we were waiting:
-                // fall through to the same handling as a non-flightpath vendor POI, below.
             }
 
             if (!await Coroutine.Wait(5000, IsAnyVendorFrameOpen))
@@ -1396,8 +1343,6 @@ namespace Bots.Grind
             return true;
         }
 
-        // Shared tail of InteractVendorObjectCoroutine (originally IL_0440 in smethod_16): try to
-        // select the right gossip option and wait for the taxi map, else blacklist the flight master.
         private static async Task<bool> FinishVendorInteractCoroutine()
         {
             if (GossipFrame.Instance.IsVisible)
@@ -1413,8 +1358,6 @@ namespace Bots.Grind
             return true;
         }
 
-        // Recovered from the 5.4.8 IL (Struct338, originally smethod_14). Lazily builds, then runs,
-        // the Vendor_Sell / Vendor_Repair / Vendor_Mail / Vendor_Buy / Vendor_Train / Fly sub-hooks.
         private static async Task<bool> RunVendorHooksCoroutine()
         {
             if (_vendorRootSelector == null)
@@ -1476,9 +1419,6 @@ namespace Bots.Grind
             return await _vendorRootSelector.ExecuteCoroutine();
         }
 
-        // Recovered from the 5.4.8 IL (Struct339, originally smethod_15). Picks the next vendor
-        // destination: mailbox first (if NeedsToMail), else sell/repair vendor (via MountVendor),
-        // else a food vendor, else a flight path POI.
         private static async Task<bool> FindVendorDestinationCoroutine()
         {
             if (BotPoi.Current.Type == PoiType.Kill)
@@ -1498,8 +1438,6 @@ namespace Bots.Grind
             {
                 if (!await MountVendor(sellOrRepair.Value))
                 {
-                    // NOTE (HB 5.4.8 quirk, preserved as-is): always looks up a Repair vendor here,
-                    // even when sellOrRepair is Sell.
                     Vendor closestVendor = ProfileManager.CurrentProfile.VendorManager.GetClosestVendor(Vendor.VendorType.Repair);
                     BotPoi.Current = new BotPoi(closestVendor, sellOrRepair.Value);
                 }
@@ -1524,8 +1462,6 @@ namespace Bots.Grind
             return true;
         }
 
-        // Recovered from the 5.4.8 IL (Struct341, originally smethod_17, Task not Task<bool>). Called
-        // when the vendor POI has no resolvable WoWObject - blacklists it and clears the POI.
         private static Task BlacklistUnreachableVendorPoi()
         {
             if (BotPoi.Current.Type == PoiType.Mail)
@@ -1546,8 +1482,6 @@ namespace Bots.Grind
             return Task.CompletedTask;
         }
 
-        // Recovered from the 5.4.8 IL (Struct342, originally smethod_19). Selects the first gossip
-        // option matching the given type, or blacklists/clears the POI if none is found.
         private static async Task<bool> SelectGossipOptionCoroutine(GossipEntry.GossipEntryType gossipEntryType)
         {
             GossipFrame gossipFrame = GossipFrame.Instance;
@@ -1573,8 +1507,6 @@ namespace Bots.Grind
             return false;
         }
 
-        // Recovered from the 5.4.8 IL (Struct343, originally smethod_20). The Fly hook body: dismount
-        // and cancel shapeshift if needed, then take the flight path node matching FlightPaths.TakingPathTo.
         private static async Task<bool> TakeFlightPathCoroutine()
         {
             if (BotPoi.Current.Type != PoiType.Fly)
@@ -1614,7 +1546,6 @@ namespace Bots.Grind
             return true;
         }
 
-        // Recovered from the 5.4.8 IL (Struct344, originally smethod_21). The Mail hook body.
         private static async Task<bool> MailItemsCoroutine()
         {
             if (BotPoi.Current.Type != PoiType.Mail)
@@ -1637,8 +1568,6 @@ namespace Bots.Grind
             return true;
         }
 
-        // Recovered from the 5.4.8 IL (Struct345). Mounts up on a ground vendor-mount (if any is
-        // configured/available), rides to the nearest vendor-mount target, and sets it as the POI.
         public static async Task<bool> MountVendor(PoiType poiType)
         {
             Mount.MountWrapper groundMount = FindGroundMount();
@@ -1673,9 +1602,6 @@ namespace Bots.Grind
             return true;
         }
 
-        // Renamed from the decompiled "Class437" - no HB 5.3 counterpart exists (coroutines were
-        // introduced after 5.3). This is the coroutine that CreateCombatBehavior() hands to
-        // ActionRunCoroutine; it wires up the nine Combat_*/Routine_* named hook locations.
         private sealed class CombatCoroutine : CoroutineTask<bool>
         {
             public CombatCoroutine()
@@ -1691,15 +1617,11 @@ namespace Bots.Grind
                 _combatOnly = new CoroutineHookExecutor("Combat_Only", "Combat: Combat Only Hook Location - This will only call the Routine's Combat Function such as the main attack, will NOT call buffs, healing, resting, or pull.", CombatOnlyCoroutine);
             }
 
-            // Recovered from the 5.4.8 IL (Struct323). Just awaits the Combat_Main hook.
             public override async Task<bool> Run()
             {
                 return await _combatMain;
             }
 
-            // Recovered from the 5.4.8 IL (Struct324, the constructor's "method_0"). The Combat_Main
-            // hook body: dismount if needed, handle a pending skinning cast, abandon a dead/invalid
-            // combat POI, run Combat_OOC while out of combat, else run the attack chain below.
             private async Task<bool> CombatMainCoroutine()
             {
                 if (!BehaviorFlags.HasAny(BehaviorFlags.Combat))
@@ -1729,13 +1651,9 @@ namespace Bots.Grind
                         return true;
                 }
 
-                // NOTE (HB 5.4.8 quirk, preserved as-is): CombatAttackCoroutine's own result is
-                // discarded by the original IL too - this always returns true once it gets this far.
                 return await CombatAttackCoroutine();
             }
 
-            // Recovered from the 5.4.8 IL (Struct325, the constructor's "method_1"). The Combat_OOC
-            // hook body: rest/pre-combat-buff while out of combat, then handle pulling.
             private async Task<bool> CombatOutOfCombatCoroutine()
             {
                 if (BehaviorFlags.HasAny(BehaviorFlags.Rest))
@@ -1776,15 +1694,10 @@ namespace Bots.Grind
                 if (await _combatPullBuff)
                     return true;
 
-                // NOTE (HB 5.4.8 quirk, preserved as-is): Combat_Pull's result is discarded - this
-                // always returns true once it gets this far.
                 await _combatPull;
                 return true;
             }
 
-            // Recovered from the 5.4.8 IL (Struct326, the constructor's "method_3", called from
-            // CombatMainCoroutine once in combat with a live, non-abandoned POI). Runs the
-            // Combat_Heal / Combat_Buff / Combat_Only chain.
             private async Task<bool> CombatAttackCoroutine()
             {
                 if (!BehaviorFlags.HasAny(BehaviorFlags.Combat))
@@ -1806,8 +1719,6 @@ namespace Bots.Grind
                 if (await _combatBuff)
                     return true;
 
-                // NOTE (HB 5.4.8 quirk, preserved as-is): Combat_Only's result is discarded - this
-                // always returns true once it gets this far.
                 await _combatOnly;
                 return true;
             }
@@ -1895,8 +1806,6 @@ namespace Bots.Grind
             private readonly CoroutineHookExecutor _combatOnly;
         }
 
-        // Renamed from the decompiled "Class858" - port of the death-corpse "find a safe spot to
-        // res at" helper (used by the Death_CorpseRetrieval hook above).
         private static class DeathHelpers
         {
             internal static WoWPoint FindSafeSpot()

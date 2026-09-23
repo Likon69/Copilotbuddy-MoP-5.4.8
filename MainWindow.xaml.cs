@@ -30,13 +30,6 @@ namespace CopilotBuddy
 {
     public partial class MainWindow : MetroWindow
     {
-        // Ported from Honorbuddy 5.4.8 Honorbuddy.MainWindow. The Buddy Store / BuddyAuth /
-        // Tripwire / auto-updater machinery HB 5.4.8 wraps around this logic (LoginWindow,
-        // UpdateWindow, Buddy.Auth.*, Tripwire.Client, ns20/ns36 auth classes) has no
-        // equivalent anywhere in this project (no such namespaces exist), so none of it is
-        // reproduced here - CopilotBuddy attaches directly, the way HB 5.4.8's own
-        // HandleSuccess()/InitializeOnAuthSuccess()/AfterInitOnAuthSuccess() behave once
-        // authentication has already succeeded.
 
         public MainWindow()
         {
@@ -66,12 +59,6 @@ namespace CopilotBuddy
 
         private void SetStaticLabels()
         {
-            // No ResxExtension markup extension exists in this project's Styx.Localization
-            // (only Globalization.cs, the generated resource accessor, is present - the WotLK
-            // reference project's Styx/Localization/ResxExtension.cs was never ported here).
-            // Every one of these keys is confirmed present in Styx/Localization/Globalization.resx,
-            // so the real localized string is used - just assigned in code instead of via
-            // {loc:Resx ...} markup.
             tbLoadProfileText.Text = Globalization.LoadProfileButtonText;
             tbSettingsText.Text = Globalization.SettingsButtonText;
             tbEnhancedModeText.Text = Globalization.EnhancedMode;
@@ -116,10 +103,6 @@ namespace CopilotBuddy
                     BotEvents.OnBotChanged += BotEvents_OnBotChanged;
                     BotEvents.Player.OnLevelUp += args => _lastLevel = args.NewLevel;
 
-                    // Wires WoW-process-exit -> bot stop, and the "no combat routine" start guard.
-                    // HB 5.4.8's own TreeRoot has no such method to call; this project's TreeRoot
-                    // does (Styx/CommonBot/TreeRoot.cs), and nothing else calls it, so it must be
-                    // invoked once after attach for that wiring to exist at all.
                     TreeRoot.Initialize();
 
                     InitializeOnAuthSuccess();
@@ -190,11 +173,6 @@ namespace CopilotBuddy
             _infoTimer = infoTimer;
         }
 
-        /// <summary>
-        /// Mirrors HB 5.4.8 AfterInitOnAuthSuccess(): consumes /loadprofile and /autostart
-        /// (autostart here, matching the ORIGINAL HB 4.3.4/5.4.8 command line, not /botname -
-        /// HB 5.4.8's own AfterInitOnAuthSuccess only checks AutoLoadProfile and AutoStart).
-        /// </summary>
         private void AfterInitOnAuthSuccess()
         {
             TreeRoot.StatusText = Globalization.Honorbuddy_Startup_Complete;
@@ -611,9 +589,6 @@ namespace CopilotBuddy
 
         private void Window_StateChanged(object sender, EventArgs e)
         {
-            // HB 5.4.8 minimizes to a tray NotifyIcon here. This project has no tray-icon
-            // resource wired up (HbWasp.ico is HB's own embedded resource); minimizing to the
-            // taskbar instead, rather than inventing a tray icon, is the honest behaviour.
         }
 
         #endregion

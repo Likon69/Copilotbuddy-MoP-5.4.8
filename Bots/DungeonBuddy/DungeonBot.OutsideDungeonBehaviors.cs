@@ -271,7 +271,6 @@ namespace Bots.DungeonBuddy
                                                 },
                                             new Decorator(ctx => ctx is Mailbox, new ActionSetPoi(true, ctx => new BotPoi((Mailbox) ctx))),
                                             new Decorator(ctx => ctx is Vendor, new ActionSetPoi(true, ctx => new BotPoi((Vendor) ctx, PoiType.Repair)))))),
-                                // buy consumables, premptively.
                                 new Decorator(
                                     ctx => ShouldBuyConsumables,
                                     new PrioritySelector(

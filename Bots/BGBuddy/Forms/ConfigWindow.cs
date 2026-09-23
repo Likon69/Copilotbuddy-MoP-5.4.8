@@ -9,14 +9,6 @@ using Styx.WoWInternals;
 
 namespace Bots.BGBuddy.Forms
 {
-    /// <summary>
-    /// Ported from Honorbuddy 5.4.8 Bots.BGBuddy.Forms.ConfigWindow. Live re-localization
-    /// (Infralution.Localization.Wpf.CultureManager.UICultureChanged) is not reproduced:
-    /// Infralution isn't referenced by this project (see SettingsWindow.xaml.cs for the same,
-    /// earlier decision in this codebase), so that HB 5.4.8 hook has no equivalent to fall
-    /// back to; the labels are still set once, from Styx.Localization.Globalization, when the
-    /// window is constructed.
-    /// </summary>
     public partial class ConfigWindow : Form
     {
         public ConfigWindow()

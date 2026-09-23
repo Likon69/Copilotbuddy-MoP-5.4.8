@@ -21,15 +21,6 @@ using Application = System.Windows.Application;
 
 namespace CopilotBuddy
 {
-    /// <summary>
-    /// Generic reflection-driven settings editor for any Styx.Helpers.Settings-derived object
-    /// (builds one tab per AddPage() call, one editor per [Setting] property). This is a
-    /// WotLK-project-only utility window - Honorbuddy 5.4.8 has no equivalent (its combat
-    /// routines show their own hand-built WinForms/WPF configuration windows via
-    /// ICombatRoutine.OnButtonPress()), so there is no HB logic to reconcile it against; it is
-    /// ported here unchanged (namespace only), available for any combat routine or bot in this
-    /// project that wants a ready-made settings dialog instead of writing its own.
-    /// </summary>
     public partial class RoutineSettingsWindow : Window
     {
         private static readonly System.Windows.Media.Brush SectionForeground =

@@ -101,9 +101,6 @@ namespace Styx.CommonBot
             }
         }
 
-        /// <summary>
-        /// Occurs when Honorbuddy is requested to shut down.
-        /// </summary>
         public static event EventHandler<ShutdownRequestedEventArgs> OnShutdownRequested;
 
         public static void Shutdown(int exitCode = 0, bool closeWow = false)

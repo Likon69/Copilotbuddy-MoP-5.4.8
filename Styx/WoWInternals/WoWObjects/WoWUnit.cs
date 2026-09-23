@@ -501,7 +501,6 @@ namespace Styx.WoWInternals.WoWObjects
 
                             using (StyxWoW.Memory.TemporaryCacheState(false))
                             {
-                                // 5.4.8 reads the result through StyxWoW.Memory.RemoteAsm.Memory (see rule 18).
                                 return StyxWoW.Memory.Read<WoWPoint>(allocatedMemory.Address);
                             }
                         }

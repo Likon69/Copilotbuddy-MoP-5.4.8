@@ -50,9 +50,6 @@ namespace Styx.Pathing.Avoidance
 
                 foreach (WoWUnit woWUnit in templist)
                 {
-                    // Honorbuddy 5.4.8: this loop body is empty (dead code preserved from the
-                    // original, where the Add(new AvoidLocationInfo(...)) call inside it is
-                    // commented out).
                 }
             }
 

@@ -143,17 +143,12 @@ namespace Styx.Helpers
             return IsInPath(location, myAggroRange, start, destination);
         }
 
-        // NOTE: BoundingSphere is a missing dependency (Tripper.Tools.Math.BoundingSphere,
-        // from the 6.2.3 Tripper.Tools/Math/BoundingSphere.cs source) — not yet ported into
-        // the project.
         public static bool IsInPath(WoWPoint location, float radius, WoWPoint start, WoWPoint destination)
         {
             BoundingSphere sphere = new BoundingSphere(location, radius);
             return IsInPath(sphere, start, destination);
         }
 
-        // NOTE: Ray is a missing dependency (Tripper.Tools.Math.Ray, from the 6.2.3
-        // Tripper.Tools/Math/Ray.cs source) — not yet ported into the project.
         public static bool IsInPath(BoundingSphere sphere, WoWPoint start, WoWPoint destination)
         {
             Ray ray = new Ray(start, start.GetDirectionTo(destination));

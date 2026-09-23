@@ -85,7 +85,6 @@ namespace Styx.WoWInternals.WoWCache
                 allocatedMemory.Write<ulong>(0, guid);
                 try
                 {
-                    // 5.4.8 emulates this one through StyxWoW.Memory.Call<T> (see rule 18).
                     IntPtr ret = StyxWoW.Memory.CallInjected<IntPtr>(function, CallingConvention.ThisCall, (uint)(int)cache, index, allocatedMemory.Address, a3, a4, a5);
                     return ret != (IntPtr)0 ? new InfoBlock(ret, index) : null;
                 }

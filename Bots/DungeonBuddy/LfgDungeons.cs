@@ -41,7 +41,6 @@ public class LfgDungeons : IEquatable<LfgDungeons>
 		public int ScenarioId;
 		public LfgType Type;
 		public int BonusRepAmount;
-		// two trailing DB fields with no known use in DungeonBuddy; kept for correct row layout.
 		private readonly int _reserved1;
 		private readonly int _reserved2;
 	}

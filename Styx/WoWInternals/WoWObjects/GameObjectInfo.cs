@@ -28,9 +28,6 @@ namespace Styx.WoWInternals.WoWObjects
             get { return _infoBlock.Id; }
         }
 
-        /// <summary>
-        /// Returns true when this object is available in WoW's cache.
-        /// </summary>
         public bool IsCached
         {
             get { return _infoBlock != null; }

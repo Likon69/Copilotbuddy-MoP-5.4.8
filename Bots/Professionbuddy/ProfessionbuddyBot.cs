@@ -741,7 +741,6 @@ namespace Bots.Professionbuddy
 			}
 		}
 
-		// hardcoded list of common tradeskill tool item ids (hammers, mining picks, etc)
 		private List<uint> LoadTradeskillTools()
 		{
 			return new List<uint>

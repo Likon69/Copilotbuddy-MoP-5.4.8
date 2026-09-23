@@ -256,14 +256,6 @@ namespace Styx.CommonBot.Coroutines
             return true;
         }
 
-        // 5.3 has no counterpart for this landing-spot search; it was introduced with
-        // the async coroutine layer in 5.4.8 (decompiled name: smethod_0).
-        // BLOCKED: relies on Tripper.RecastManaged.Detour.NavMeshQuery.ClosestPointOnPoly,
-        // which this project's NavMeshQuery.cs (Tripper\RecastManaged\Detour\NavMeshQuery.cs)
-        // deliberately does not implement -- its header states only FindNearestPolygon,
-        // QueryPolygons and Raycast are ported ("the rest of HB's ~20-method surface is
-        // intentionally not reproduced"). Ported verbatim below anyway per the fidelity
-        // rule; it will not compile until ClosestPointOnPoly is added to NavMeshQuery.
         private static WoWPoint? FindSafeLandingSpot(WoWPoint origin, float searchRadius2D, float excludeRadius2D, List<WoWPoint> nearbyLocations, TimeSpan timeout)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();

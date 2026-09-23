@@ -13,9 +13,6 @@ using Styx.WoWInternals;
 
 namespace Bots.DungeonBuddy;
 
-/// <summary>
-/// Handles synchronizing the in-game LFG/LFR queue with the dungeons/raids/scenarios selected in <see cref="DungeonBuddySettings"/>.
-/// </summary>
 internal static class LfgQueue
 {
 	private enum RandomQueueKind
@@ -33,7 +30,6 @@ internal static class LfgQueue
 		}
 	}
 
-	// number of bosses required to be killed for a given lfrId to be considered fully completed for the week.
 	private static readonly Dictionary<uint, uint> LfrBossCounts = new Dictionary<uint, uint>
 	{
 		{ 527u, 3u },
@@ -94,9 +90,6 @@ internal static class LfgQueue
 		}
 	}
 
-	/// <summary>
-	/// Un-queues dungeons/scenarios/raids that are no longer desired and queues the ones that are.
-	/// </summary>
 	public static async Task<bool> SyncQueue()
 	{
 		using (StyxWoW.Memory.AcquireFrame())
@@ -310,9 +303,6 @@ internal static class LfgQueue
 			select d).ToList();
 	}
 
-	/// <summary>
-	/// Returns true if the raid finder wing has already had the required number of bosses killed this week.
-	/// </summary>
 	public static bool HasCompletedLfr(uint lfgId)
 	{
 		string lua = $"return select(2,GetLFGDungeonNumEncounters({lfgId}))";

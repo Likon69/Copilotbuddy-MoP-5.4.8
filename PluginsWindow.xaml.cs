@@ -9,10 +9,6 @@ using Styx.Plugins;
 
 namespace CopilotBuddy
 {
-    /// <summary>
-    /// Ported from Honorbuddy 5.4.8 Honorbuddy.PluginsWindow (logic unchanged; window chrome
-    /// follows the WotLK reference project's MahApps styling).
-    /// </summary>
     public partial class PluginsWindow : MetroWindow
     {
         public PluginsWindow()

@@ -150,7 +150,6 @@ public static class DungeonManager
 		{
 			return candidates.FirstOrDefault();
 		}
-		// several scripts share the same map id (e.g. Dire Maul wings); disambiguate using the dungeon's sub-level.
 		List<Dungeon> matchingSharedMapLevel = (from candidate in candidates
 			select new { match = candidate, sharedMapEntry = SharedMapDungeonEntries.FirstOrDefault(e => candidate.DungeonId == e.LfgId) }
 			into pair

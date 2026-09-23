@@ -116,10 +116,6 @@ namespace Styx.Pathing.FlightorNavigation
 		public IEnumerable<NavMeshBuilderNode> Search(Vector2 loc, float maxRange)
 		{
 			float maxRangeSqr = maxRange * maxRange;
-			// Equivalent to the 5.3 query `from node in _nodes where node.NodeRef != -1
-			// let distSqr = Vector2.DistanceSqr(ref loc, ref node.Location) where distSqr <= maxRangeSqr select node`,
-			// rewritten because Roslyn rejects taking a ref of a LINQ range variable (CS1939); DistanceSqr never
-			// mutates its ref parameters, so a local copy of node.Location is behaviorally identical.
 			return _nodes
 				.Where(node => node.NodeRef != -1)
 				.Select(node =>

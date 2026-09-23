@@ -121,10 +121,6 @@ namespace Buddy.Overlay.Internal
 
         public const int WS_EX_NOACTIVATE = 134217728;
 
-        // Not referenced by any Overlay code path (neither community port carries it), but present
-        // on the obfuscated ns26.Class230 (int_3 = -2147483648, int_4 = 1073741824) and therefore
-        // ported per the "no silently dropped member" rule. Values match the standard WS_POPUP and
-        // WS_CHILD window-style constants (0x80000000 / 0x40000000) exactly.
         public const int WS_POPUP = -2147483648;
 
         public const int WS_CHILD = 1073741824;

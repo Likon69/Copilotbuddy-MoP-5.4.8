@@ -8,16 +8,6 @@ namespace Styx.WoWInternals
 {
     public class WoWMissile
     {
-        // Native <c>CMissile</c> memory layout, read directly off the client via
-        // StyxWoW.Memory.Read&lt;CMissile&gt;. Field order/types come straight from the
-        // 5.4.8 decompile and must not be reordered or resized -- that would change the
-        // marshaled layout. Only CasterGuid, TargetGuid, SpellId, SpellVisualId, Flags,
-        // Pos, FirePos and ImpactPos have a confirmed identity (they're the fields the
-        // public properties below read); the 5.4.8 layout has at least one extra native
-        // field versus HB 5.3's CMissile (a float immediately before Pos), so the
-        // remaining filler fields could not be safely re-mapped onto 5.3's dwordXX names
-        // without verified offsets, and are left as sequentially numbered unknowns rather
-        // than guessed at.
         internal struct CMissile
         {
             public ulong CasterGuid;

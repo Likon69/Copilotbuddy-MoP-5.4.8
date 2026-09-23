@@ -16,18 +16,6 @@ using Tripper.Tools.Math;
 
 namespace Styx.Pathing
 {
-	/// <summary>
-	/// 1:1 logic port of Honorbuddy 5.4.8's <c>Styx.Pathing.MeshNavigator</c> (see
-	/// "hb decompile\.hb 5.4.8\Honorbuddy\Styx\Pathing\MeshNavigator.cs", names recovered
-	/// against the unobfuscated "hb decompile\.hb 5.3\Styx\Pathing\MeshNavigator.cs").
-	///
-	/// One member is deliberately NOT ported: 5.4.8's OnSetAsCurrent assigned
-	/// <c>this.Nav.MeshProvider = new ns7.Class711();</c>. That type pulled in Buddy.Auth
-	/// (out of scope) to fetch tiles from Honorbuddy's mesh servers (long dead). Tile
-	/// supply is now native, reached only through WowNavigator/NavigationApi, and
-	/// WowNavigator in this port exposes no MeshProvider/IMeshProvider at all (see its
-	/// class summary's "Deliberate deviations" note) — so there is nothing to assign.
-	/// </summary>
 	public class MeshNavigator : NavigationProvider
 	{
 		public MeshNavigator()
@@ -54,7 +42,6 @@ namespace Styx.Pathing
 			Styx.CommonBot.BotEvents.OnBotStopped += this.BotEvents_OnBotStopped;
 			Styx.CommonBot.BotEvents.OnPulse += this.BotEvents_OnPulse;
 			Styx.CommonBot.Mount.OnMountUp += this.Mount_OnMountUp;
-			// Deliberately omitted: this.Nav.MeshProvider = new ns7.Class711(); — see class summary.
 			this.Nav.OnNavigatorLogMessage += MeshNavigator.Nav_OnNavigatorLogMessage;
 			this._isSetAsCurrent = true;
 		}
@@ -853,15 +840,6 @@ namespace Styx.Pathing
 			return new WoWPoint(segStart.X + woWPoint2.X * num2, segStart.Y + woWPoint2.Y * num2, segStart.Z + woWPoint2.Z * num2);
 		}
 
-		/// <summary>
-		/// Recovered from Honorbuddy 5.4.8's ns13.Class644.smethod_0 (referenced from this
-		/// class as global::ns13.Class644.smethod_0(...) at every "time used:" diagnostic).
-		/// 5.3 calls this same helper Styx.Resources.LogHelper.GetTimeString; that class does
-		/// not exist in this port (nothing else in this file's dependency set needs it), so
-		/// it is kept as a private static helper here instead of a separate LogHelper.cs, to
-		/// honor the "touch only the target file" rule. Every string literal and numeric
-		/// threshold is preserved exactly from the decompile.
-		/// </summary>
 		private static string GetTimeString(TimeSpan timeSpan)
 		{
 			if (timeSpan.TotalDays >= 1.0)

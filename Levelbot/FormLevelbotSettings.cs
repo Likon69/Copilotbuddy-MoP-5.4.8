@@ -6,12 +6,6 @@ using Styx.Localization;
 
 namespace Levelbot
 {
-    // Ported from Honorbuddy 5.4.8 Levelbot.FormLevelbotSettings. HB 5.4.8 re-applies the static
-    // labels whenever Infralution.Localization.Wpf.CultureManager.UICultureChanged fires, so the
-    // form's text updates live if the user switches language. Infralution isn't referenced by this
-    // project (see SettingsWindow.xaml.cs for the same, earlier decision in this codebase), so that
-    // live re-localization hook has no equivalent to fall back to; the labels are still set once,
-    // from Styx.Localization.Globalization, when the form loads.
     [Obfuscation(Exclude = true, ApplyToMembers = false)]
     public partial class FormLevelbotSettings : Form
     {

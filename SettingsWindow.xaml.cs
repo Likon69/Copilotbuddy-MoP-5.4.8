@@ -18,12 +18,6 @@ using Styx.WoWInternals;
 
 namespace CopilotBuddy
 {
-    /// <summary>
-    /// Ported from Honorbuddy 5.4.8 Honorbuddy.SettingsWindow. Language selection
-    /// (btnSelectLanguage_Click / Infralution.Localization.Wpf.CultureSelectWindow) is not
-    /// reproduced: Infralution isn't referenced by this project and no replacement culture
-    /// picker exists here, so that HB 5.4.8 feature has no equivalent to fall back to.
-    /// </summary>
     public partial class SettingsWindow : MetroWindow
     {
         public SettingsWrap Wrap { get; set; }
@@ -100,8 +94,6 @@ namespace CopilotBuddy
 
         private void SetStaticLabels()
         {
-            // No ResxExtension markup extension exists in this project (see MainWindow.xaml.cs);
-            // every key below is confirmed present in Globalization.resx and assigned here instead.
             Title = Globalization.SettingsWindowTitle;
             tbDevToolsText.Text = Globalization.DeveloperToolsButtonText;
             tbPluginsText.Text = Globalization.PluginsButtonText;
@@ -197,19 +189,11 @@ namespace CopilotBuddy
             pluginsWindow.Show();
         }
 
-        /// <summary>
-        /// No DeveloperToolsWindow/DevToolsWindow class exists in this project (see
-        /// MainWindow.xaml.cs btnDevTools_Click) - reports instead of doing nothing.
-        /// </summary>
         private void btnDevTools_Click(object sender, RoutedEventArgs e)
         {
             Logging.Write(Colors.OrangeRed, "Developer Tools window is not available in this build.");
         }
 
-        /// <summary>
-        /// User-requested Discord link, carried over verbatim from
-        /// CopilotBuddy/UI/SettingsWindow.xaml.cs:153 (same URL, same behaviour).
-        /// </summary>
         private void btnDiscord_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
