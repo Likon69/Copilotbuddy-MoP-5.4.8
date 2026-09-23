@@ -102,7 +102,7 @@
                                   IsChecked="{Binding StyxSettings.SeperatedLogFolders, Mode=TwoWay}">
                             <TextBlock x:Name="tbSeperatedLogFolders" TextWrapping="Wrap"/>
                         </CheckBox>
-                        <Label x:Name="lblLogLevel" Foreground="White" Height="24"
+                        <Label Panel.ZIndex="1" x:Name="lblLogLevel" Foreground="White" Height="24"
                                HorizontalAlignment="Left" Margin="8,105,0,0" VerticalAlignment="Top"/>
                         <ComboBox x:Name="cbLogLevel" Height="23"
                                   HorizontalAlignment="Left" Margin="8,131,0,0" VerticalAlignment="Top" Width="192"
@@ -124,16 +124,16 @@
                                   IsChecked="{Binding StyxSettings.UseFrameLock, Mode=TwoWay}">
                             <TextBlock x:Name="tbUseFrameLock" TextWrapping="Wrap"/>
                         </CheckBox>
-                        <Label x:Name="lblTps" Foreground="White" Margin="8,36,0,0"
+                        <Label Panel.ZIndex="1" x:Name="lblTps" Foreground="White" Margin="8,36,0,0"
                                HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="176"/>
                         <Slider x:Name="sldTps" Margin="8,60,26,0" Maximum="100" Minimum="5"
                                 TickPlacement="BottomRight" TickFrequency="5" AutoToolTipPlacement="TopLeft"
                                 IsSnapToTickEnabled="True" VerticalAlignment="Top"
                                 Value="{Binding CharSettings.TicksPerSecond, Mode=TwoWay}"/>
-                        <Label x:Name="lblSliderTpsValue" Foreground="White" HorizontalAlignment="Right"
+                        <Label Panel.ZIndex="1" x:Name="lblSliderTpsValue" Foreground="White" HorizontalAlignment="Right"
                                Margin="0,0,12,95" VerticalAlignment="Bottom" ContentStringFormat="N0"
                                Content="{Binding Value, ElementName=sldTps}"/>
-                        <Label x:Name="lblMeshFolderPath" Foreground="White"
+                        <Label Panel.ZIndex="1" x:Name="lblMeshFolderPath" Foreground="White"
                                HorizontalAlignment="Left" Height="16" Margin="8,91,0,0" VerticalAlignment="Top" Width="194"/>
                         <TextBox x:Name="txtMeshPath" HorizontalAlignment="Left" Margin="8,111,0,0"
                                  TextWrapping="NoWrap" VerticalAlignment="Top" Width="196" IsReadOnly="True"
@@ -150,7 +150,7 @@
                 <!-- Character manager -->
                 <GroupBox x:Name="gbCharManager" Foreground="White" Height="199" Width="224" Margin="4">
                     <Grid>
-                        <Label x:Name="lblClassProfile" Foreground="White" Height="16" Margin="8,6,0,0"
+                        <Label Panel.ZIndex="1" x:Name="lblClassProfile" Foreground="White" Height="16" Margin="8,6,0,0"
                                VerticalAlignment="Top" HorizontalAlignment="Left" Width="192"/>
                         <ComboBox x:Name="cbClassProfile" Height="23" HorizontalAlignment="Left"
                                   Margin="8,27,0,0" VerticalAlignment="Top" Width="192"
@@ -188,7 +188,7 @@
                                   IsChecked="{Binding CharSettings.RollDisenchantWhenGreed, Mode=TwoWay}">
                             <TextBlock x:Name="tbRollDisenchantWhenGreed" TextWrapping="Wrap"/>
                         </CheckBox>
-                        <Label x:Name="lblMaxBoEDisenchantQuality" Foreground="White" Height="16" Margin="8,52,0,0"
+                        <Label Panel.ZIndex="1" x:Name="lblMaxBoEDisenchantQuality" Foreground="White" Height="16" Margin="8,52,0,0"
                                VerticalAlignment="Top" HorizontalAlignment="Left" Width="192">
                             <UIElement.IsEnabled>
                                 <MultiBinding Converter="{StaticResource LogicalAndConverter}">
@@ -243,13 +243,13 @@
                                   IsChecked="{Binding CharSettings.HarvestHerbs, Mode=TwoWay}">
                             <TextBlock x:Name="tbHarvestHerbs" TextWrapping="Wrap"/>
                         </CheckBox>
-                        <Label x:Name="lblLootRadius" Foreground="White" Margin="8,108,0,0"
+                        <Label Panel.ZIndex="1" x:Name="lblLootRadius" Foreground="White" Margin="8,108,0,0"
                                HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="194"/>
                         <Slider x:Name="sldLootDistance" Margin="8,133,28,0" Maximum="100"
                                 TickPlacement="BottomRight" TickFrequency="5" AutoToolTipPlacement="TopLeft"
                                 IsSnapToTickEnabled="True" VerticalAlignment="Top"
                                 Value="{Binding CharSettings.LootRadius, Mode=TwoWay}"/>
-                        <Label x:Name="lblSliderLootRadiusValue" Foreground="White" HorizontalAlignment="Right"
+                        <Label Panel.ZIndex="1" x:Name="lblSliderLootRadiusValue" Foreground="White" HorizontalAlignment="Right"
                                Margin="0,0,8,21" VerticalAlignment="Bottom" ContentStringFormat="N0"
                                Content="{Binding Value, ElementName=sldLootDistance}"/>
                     </Grid>
@@ -258,22 +258,22 @@
                 <!-- Drink / food amounts -->
                 <GroupBox x:Name="gbVendors" Foreground="White" Height="199" Width="224" Margin="4">
                     <Grid>
-                        <Label x:Name="lblDrinkAmount" Foreground="White" Margin="8,29,0,0"
+                        <Label Panel.ZIndex="1" x:Name="lblDrinkAmount" Foreground="White" Margin="8,29,0,0"
                                HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="194"/>
                         <Slider x:Name="sldDrinkAmount" Margin="8,51,28,0" VerticalAlignment="Top" Maximum="100"
                                 TickPlacement="BottomRight" TickFrequency="20" AutoToolTipPlacement="TopLeft"
                                 IsSnapToTickEnabled="True"
                                 Value="{Binding CharSettings.DrinkAmount, Mode=TwoWay}"/>
-                        <Label x:Name="lblDrinkAmountValue" Foreground="White" HorizontalAlignment="Right"
+                        <Label Panel.ZIndex="1" x:Name="lblDrinkAmountValue" Foreground="White" HorizontalAlignment="Right"
                                Margin="0,49,8,0" ContentStringFormat="N0" Height="16" VerticalAlignment="Top"
                                Content="{Binding Value, ElementName=sldDrinkAmount}"/>
-                        <Label x:Name="lblFoodAmount" Foreground="White" Margin="8,95,0,0"
+                        <Label Panel.ZIndex="1" x:Name="lblFoodAmount" Foreground="White" Margin="8,95,0,0"
                                HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="194"/>
                         <Slider x:Name="sldFoodAmount" Margin="8,115,28,0" VerticalAlignment="Top" Maximum="100"
                                 TickPlacement="BottomRight" TickFrequency="20" AutoToolTipPlacement="TopLeft"
                                 IsSnapToTickEnabled="True"
                                 Value="{Binding CharSettings.FoodAmount, Mode=TwoWay}"/>
-                        <Label x:Name="lblFoodAmountValue" Foreground="White" HorizontalAlignment="Right"
+                        <Label Panel.ZIndex="1" x:Name="lblFoodAmountValue" Foreground="White" HorizontalAlignment="Right"
                                Margin="0,111,8,0" ContentStringFormat="N0" Height="16" VerticalAlignment="Top"
                                Content="{Binding Value, ElementName=sldFoodAmount}"/>
                     </Grid>
@@ -282,15 +282,15 @@
                 <!-- Mail / refreshment names -->
                 <GroupBox x:Name="gbNames" Foreground="White" Height="199" Width="224" Margin="4">
                     <Grid>
-                        <Label x:Name="lblMailRecipient" Foreground="White" Height="16"
+                        <Label Panel.ZIndex="1" x:Name="lblMailRecipient" Foreground="White" Height="16"
                                HorizontalAlignment="Left" Margin="8,8,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="txtMailRecipient" Margin="8,27.96,8,0" TextWrapping="NoWrap"
                                  VerticalAlignment="Top" Text="{Binding CharSettings.MailRecipient, Mode=TwoWay}"/>
-                        <Label x:Name="lblFoodName" Foreground="White" Height="16"
+                        <Label Panel.ZIndex="1" x:Name="lblFoodName" Foreground="White" Height="16"
                                HorizontalAlignment="Left" Margin="8,63,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="txtFoodName" Margin="8,83,8,0" TextWrapping="NoWrap"
                                  VerticalAlignment="Top" Text="{Binding CharSettings.FoodName, Mode=TwoWay}"/>
-                        <Label x:Name="lblDrinkName" Foreground="White" Height="16"
+                        <Label Panel.ZIndex="1" x:Name="lblDrinkName" Foreground="White" Height="16"
                                HorizontalAlignment="Left" Margin="8,0,0,33.96" VerticalAlignment="Bottom"/>
                         <TextBox x:Name="txtWaterName" Margin="8,0,8,8" TextWrapping="NoWrap"
                                  VerticalAlignment="Bottom" Text="{Binding CharSettings.DrinkName, Mode=TwoWay}"/>
@@ -300,14 +300,14 @@
                 <!-- Mount -->
                 <GroupBox x:Name="gbMount" Foreground="White" Height="199" Width="224" Margin="4">
                     <Grid>
-                        <Label x:Name="lblMountName" Foreground="White" Height="16" Margin="8,6,0,0"
+                        <Label Panel.ZIndex="1" x:Name="lblMountName" Foreground="White" Height="16" Margin="8,6,0,0"
                                VerticalAlignment="Top" HorizontalAlignment="Left" Width="192"/>
                         <ComboBox x:Name="cbMountName" HorizontalAlignment="Left" Margin="8,27,0,0"
                                   VerticalAlignment="Top" Width="150"
                                   IsEnabled="{Binding IsChecked, ElementName=chkRandomMount, Converter={StaticResource negate}}"
                                   ItemsSource="{Binding GroundMounts}"
                                   SelectedValue="{Binding CharSettings.MountName, Mode=TwoWay}"/>
-                        <Label x:Name="lblFlyingMountName" Foreground="White" Height="16" Margin="8,55,0,0"
+                        <Label Panel.ZIndex="1" x:Name="lblFlyingMountName" Foreground="White" Height="16" Margin="8,55,0,0"
                                VerticalAlignment="Top" HorizontalAlignment="Left" Width="192"/>
                         <ComboBox x:Name="cbFlyingMountName" HorizontalAlignment="Left" Margin="8,76,0,0"
                                   VerticalAlignment="Top" Width="150"
@@ -319,13 +319,13 @@
                                   IsChecked="{Binding CharSettings.UseRandomMount, Mode=TwoWay}">
                             <TextBlock x:Name="tbRandomMount" TextWrapping="Wrap"/>
                         </CheckBox>
-                        <Label x:Name="lblMountDistance" Foreground="White" Margin="8,128,0,0"
+                        <Label Panel.ZIndex="1" x:Name="lblMountDistance" Foreground="White" Margin="8,128,0,0"
                                HorizontalAlignment="Left" Height="16" VerticalAlignment="Top" Width="194"/>
                         <Slider x:Name="sldMountDistance" Margin="8,148,27,0" Maximum="200" Minimum="30"
                                 TickPlacement="BottomRight" TickFrequency="5" AutoToolTipPlacement="TopLeft"
                                 IsSnapToTickEnabled="True" VerticalAlignment="Top"
                                 Value="{Binding CharSettings.MountDistance, Mode=TwoWay}"/>
-                        <Label x:Name="lblSliderMountDistanceValue" Foreground="White" HorizontalAlignment="Right"
+                        <Label Panel.ZIndex="1" x:Name="lblSliderMountDistanceValue" Foreground="White" HorizontalAlignment="Right"
                                Margin="0,0,7,6" VerticalAlignment="Bottom" ContentStringFormat="N0"
                                Content="{Binding Value, ElementName=sldMountDistance}"/>
                     </Grid>

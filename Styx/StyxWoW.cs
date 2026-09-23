@@ -128,6 +128,19 @@ namespace Styx
             get { return !WowExited && Memory.Read<byte>(Offsets.Statics.IsInGame) != 0; }
         }
 
+        public static Version GameVersion
+        {
+            get
+            {
+                if (Memory != null && Memory.Process != null)
+                {
+                    FileVersionInfo fileVersionInfo = Memory.Process.MainModule.FileVersionInfo;
+                    return new Version(fileVersionInfo.FileMajorPart, fileVersionInfo.FileMinorPart, fileVersionInfo.FileBuildPart, fileVersionInfo.FilePrivatePart);
+                }
+                return new Version(0, 0, 0, 0);
+            }
+        }
+
         public static GameState GameState => (GameState)Memory.Read<uint>(Offsets.Statics.GameState);
 
         public static GlueScreen GlueState => (GlueScreen)Memory.Read<uint>(Offsets.Statics.GlueState);

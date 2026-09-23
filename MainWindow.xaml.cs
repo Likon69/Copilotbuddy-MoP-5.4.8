@@ -223,20 +223,14 @@ namespace CopilotBuddy
 
         #region Bot selector (HB 5.4.8 AddBotsToGui)
 
-        /// <summary>
-        /// HB 5.4.8 pre-registers ten built-in BotBase classes (ArchBuddy, BGBuddy, DungeonBot,
-        /// GatherbuddyBot, ProfessionbuddyBot, LevelBot, QuestBot, MixedModeEx, DiscoBot,
-        /// GrindBuddy) before calling _bots.LoadBots(). None of those classes exist in this
-        /// project (Bots/, GrindBuddy2/, NewMixedMode/, PartyBot/ contain no BotBase
-        /// implementations), so only BotManager.Instance.LoadBots() - which dynamically
-        /// compiles whatever is dropped in the Bots folder, exactly like HB's own call -
-        /// is meaningful here.
-        /// </summary>
         private void AddBotsToGui()
         {
             cmbBotSelector.Items.Clear();
             try
             {
+                BotManager.Instance.Add(new Bots.BGBuddy.BGBuddy());
+                BotManager.Instance.Add(new Bots.Grind.LevelBot());
+                BotManager.Instance.Add(new Bots.Quest.QuestBot());
                 BotManager.Instance.LoadBots();
             }
             catch (Exception ex)
