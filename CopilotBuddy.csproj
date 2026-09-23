@@ -33,8 +33,6 @@
 
   <ItemGroup>
     <Compile Remove="Tripper\Tools\**\*.cs" />
-    <Compile Remove="Bots\DungeonBuddy\**\*.cs" />
-    <!-- ^^^ temporary: DungeonBuddy port in progress, remove when done -->
     <Reference Include="Tripper.Tools">
       <HintPath>Lib\Tripper.Tools.dll</HintPath>
       <Private>true</Private>
