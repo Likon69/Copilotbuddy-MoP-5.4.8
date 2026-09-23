@@ -26,20 +26,22 @@ namespace Bots.ArchaeologyBuddy.SQLiteHelper
             var dt = new DataTable();
             try
             {
-                var cnn = new SQLiteConnection(_dbConnection);
-                cnn.SetPassword(Password);
-                cnn.Open();
-                var mycommand = new SQLiteCommand(cnn) { CommandText = sql };
-                var reader = mycommand.ExecuteReader();
-                dt.Load(reader);
-                reader.Close();
-                cnn.Close();
+                using (var cnn = new SQLiteConnection(_dbConnection))
+                {
+                    cnn.SetPassword(Password);
+                    cnn.Open();
+                    using (var mycommand = new SQLiteCommand(cnn) { CommandText = sql })
+                    using (var reader = mycommand.ExecuteReader())
+                    {
+                        dt.Load(reader);
+                        return dt;
+                    }
+                }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return dt;
         }
     }
 }
