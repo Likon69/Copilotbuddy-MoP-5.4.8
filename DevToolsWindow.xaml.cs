@@ -1170,6 +1170,15 @@ namespace CopilotBuddy
                     compilerParameters.ReferencedAssemblies.Add(assembly.Location);
                 }
             }
+            string trustedPlatformAssemblies = AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") as string;
+            if (trustedPlatformAssemblies != null)
+            {
+                foreach (string reference in trustedPlatformAssemblies.Split(Path.PathSeparator))
+                {
+                    if (!string.IsNullOrEmpty(reference) && !compilerParameters.ReferencedAssemblies.Contains(reference))
+                        compilerParameters.ReferencedAssemblies.Add(reference);
+                }
+            }
             compilerParameters.GenerateExecutable = false;
             compilerParameters.TempFiles = new TempFileCollection(TempFolder, keepFiles: false);
             compilerParameters.IncludeDebugInformation = false;

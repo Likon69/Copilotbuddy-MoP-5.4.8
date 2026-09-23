@@ -10,7 +10,7 @@
 	Background="{DynamicResource WindowBackgroundBrush}"
 	GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
 	TitleCharacterCasing="Normal"
-	Icon="pack://application:,,,/images/HbWasp.ico">
+	Icon="pack://application:,,,/images/bender.ico">
 	<Grid x:Name="LayoutRoot">
 		<TabControl x:Name="tabControl" Margin="0" SelectionChanged="TabControl_OnSelectionChanged">
 			<TabItem x:Name="tabProfiles" Header="Profiles">
