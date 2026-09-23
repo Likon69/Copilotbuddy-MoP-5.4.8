@@ -51,6 +51,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Bots\ArchaeologyBuddy\Resources\ArchaeologyResources.resx">
+      <LogicalName>ArchaeologyBuddy.Resources.ArchaeologyResources.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Bots\ArchaeologyBuddy\Properties\Resources.resx">
+      <LogicalName>ArchaeologyBuddy.Properties.Resources.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CommonBehaviors\Resources\CommonBehaviorsResources.resx">
+      <LogicalName>CommonBehaviors.Resources.CommonBehaviorsResources.resources</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Update="Styx\Resources\StyxResources.resx">
       <LogicalName>Styx.Resources.StyxResources.resources</LogicalName>
     </EmbeddedResource>
