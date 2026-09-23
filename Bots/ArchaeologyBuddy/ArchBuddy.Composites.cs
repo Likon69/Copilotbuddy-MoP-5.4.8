@@ -853,7 +853,7 @@ namespace Bots.ArchaeologyBuddy
                                                         Navigator.CanNavigateFully(StyxWoW.Me.Location, point)))
 												{
                                                     // If point hits ground its an underground location
-                                                    if (GameWorld.TraceLine(point.Add(0, 0, 500), point.Add(0, 0, 2), GameWorld.CGWorldFrameHitFlags.HitTestGround | GameWorld.CGWorldFrameHitFlags.HitTestWMO))
+                                                    if (GameWorld.TraceLine(point.Add(0, 0, 500), point.Add(0, 0, 2), TraceLineHitFlags.WmoCollision | TraceLineHitFlags.Terrain))
                                                         continue;
 
 												    nextSurveyPoint = point;

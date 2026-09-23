@@ -293,7 +293,7 @@ namespace Bots.Gatherbuddy
 
                                     GameWorld.MassTraceLine(
                                         pointsAroundNode.Select(p => new WorldLine(p.Add(0, 0, 20), p.Add(0, 0, -20))).
-                                            ToArray(), GameWorld.CGWorldFrameHitFlags.HitTestGroundAndStructures, out hitResults,
+                                            ToArray(), TraceLineHitFlags.Collision, out hitResults,
                                         out pointsAtGround);
 
                                     var bestLandingPoint = pointsAtGround.Where(p => nodeLocation.DistanceSqr(p) <= 4f * 4f).OrderByDescending(p => p.Z).FirstOrDefault();
@@ -689,7 +689,7 @@ namespace Bots.Gatherbuddy
 						new Action(ret =>
 							{
 								WoWUnit outsideUnit = ObjectManager.GetObjectsOfType<WoWUnit>().
-														Where(u => u.IsValid && u.IsOutdoors && !GameWorld.TraceLine(u.Location, u.Location.Add(0, 0, 30), GameWorld.CGWorldFrameHitFlags.HitTestGroundAndStructures)).
+														Where(u => u.IsValid && u.IsOutdoors && !GameWorld.TraceLine(u.Location, u.Location.Add(0, 0, 30), TraceLineHitFlags.Collision)).
 														OrderBy(u => u.Location.Distance(repairVendor.Location)).
 														FirstOrDefault();
 
