@@ -69,6 +69,9 @@
     <EmbeddedResource Update="Bots\Professionbuddy\Properties\Resources.resx">
       <LogicalName>Bots.Professionbuddy.Properties.Resources.resources</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Update="Bots\Gatherbuddy\Resources\GatherBuddyResources.resx">
+      <LogicalName>Bots.GatherBuddy.Resources.GatherBuddyResources.resources</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="Bots\Professionbuddy\Help.rtf">
       <LogicalName>Bots.Professionbuddy.Help.rtf</LogicalName>
     </EmbeddedResource>

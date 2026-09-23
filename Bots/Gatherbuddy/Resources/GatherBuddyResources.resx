@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="BotName" xml:space="preserve"><value>Gatherbuddy2</value></data>
+  <data name="Gatherbuddy" xml:space="preserve"><value>Gatherbuddy</value></data>
+  <data name="Looted" xml:space="preserve"><value>Looted</value></data>
+  <data name="Deposited__0__item_1__to_guild_vault_tab_2_" xml:space="preserve"><value>Deposited {0} item{1} to guild vault tab{2}</value></data>
+  <data name="ThereIsNotEnoughSpaceInGuildVaultToDepositAllItemsStoppingBot" xml:space="preserve"><value>There is not enough space in guild vault to deposit all items. Stopping bot</value></data>
+  <data name="DepositingItemsToGuildVault" xml:space="preserve"><value>Depositing items to guild vault</value></data>
+  <data name="MovingToNode" xml:space="preserve"><value>Moving to node</value></data>
+  <data name="BlacklistingCurrentNodeAfter3FailedAttempts" xml:space="preserve"><value>Blacklisting current node after 3 failed attempts</value></data>
+  <data name="MailBoxWarning2" xml:space="preserve"><value>You have set GB2 to mail items but you don't have a mail recipient set</value></data>
+  <data name="MailBoxWarning1" xml:space="preserve"><value>You have set GB2 to mail items but current profile doesn't contain a mailbox</value></data>
+  <data name="MovingToRepair" xml:space="preserve"><value>Moving to repair</value></data>
+  <data name="RepairingItems" xml:space="preserve"><value>Repairing items</value></data>
+  <data name="AscendingToWaitResSickness" xml:space="preserve"><value>Ascending to wait res sickness</value></data>
+  <data name="HearthAndExit" xml:space="preserve"><value>Hearth and exit</value></data>
+  <data name="WaitingForResurrectionSickness" xml:space="preserve"><value>Waiting for resurrection sickness</value></data>
+  <data name="SuccessfullyDepositedAllItems" xml:space="preserve"><value>Successfully deposited all items</value></data>
+  <data name="MovingToRepairVendor" xml:space="preserve"><value>Moving to repair vendor</value></data>
+  <data name="ApproachingNodeNameAtLocation" xml:space="preserve"><value>Approaching "{0}" at X="{1}" Y="{2}" Z="{3}"</value></data>
+  <data name="NewProfileHasBeenLoadedUpdatingWaypoints" xml:space="preserve"><value>A new profile has been loaded. Updating waypoints</value></data>
+  <data name="StoppedGatherbuddyAfterGathering__0__nodes_in__1_h__2_m__3_s_" xml:space="preserve"><value>Stopped gatherbuddy after gathering {0} nodes in {1}h {2}m {3}s.</value></data>
+  <data name="InteractingWithNode" xml:space="preserve"><value>Interacting with node</value></data>
+  <data name="ExitingWoWAndHBHeartAndExitBehavior" xml:space="preserve"><value>Exiting WoW and HB. Hearth and exit behavior</value></data>
+  <data name="MovingToGuildVault" xml:space="preserve"><value>Moving to guild vault</value></data>
+  <data name="ExitingWoWAndHBAfterGathering__0__nodes_in__1_h__2_m__3_s_" xml:space="preserve"><value>Exiting WoW and HB after gathering {0} nodes in {1}h {2}m {3}s.</value></data>
+  <data name="MovingToMailbox" xml:space="preserve"><value>Moving to mailbox</value></data>
+  <data name="GuildVaultRunUsingHearthstone" xml:space="preserve"><value>Guild Vault run. Using Hearthstone</value></data>
+  <data name="ProfileDoesntContainAnyHotspots" xml:space="preserve"><value>Profile doesn't contain any hotspots</value></data>
+  <data name="CorpseRun" xml:space="preserve"><value>Corpse run</value></data>
+  <data name="BlacklistingCurrentNodeAfter__0__seconds" xml:space="preserve"><value>Blacklisting current node after {0} seconds</value></data>
+  <data name="MovingToNextHotspot" xml:space="preserve"><value>Moving to next hotspot</value></data>
+  <data name="Harvested" xml:space="preserve"><value>Harvested</value></data>
+  <data name="GatherbuddyHasBeenRunningFor__1_h__2_m__3_s__CollectedATotalOf__0__Nodes_" xml:space="preserve"><value>Gatherbuddy has been running for {1}h {2}m {3}s. Collected a total of {0} nodes.</value></data>
+  </root>

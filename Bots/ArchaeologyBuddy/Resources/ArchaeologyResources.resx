@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+  <data name="Draenei">
+    <value xml:space="preserve">Draenei</value>
+  </data>
+  <data name="Dwarf">
+    <value xml:space="preserve">Dwarf</value>
+  </data>
+  <data name="Fossil">
+    <value xml:space="preserve">Fossil</value>
+  </data>
+  <data name="Nerubian">
+    <value xml:space="preserve">Nerubian</value>
+  </data>
+  <data name="NightElf">
+    <value xml:space="preserve">NightElf</value>
+  </data>
+  <data name="Orc">
+    <value xml:space="preserve">Orc</value>
+  </data>
+  <data name="Tolvir">
+    <value xml:space="preserve">Tolvir</value>
+  </data>
+  <data name="Troll">
+    <value xml:space="preserve">Troll</value>
+  </data>
+  <data name="Vrykul">
+    <value xml:space="preserve">Vrykul</value>
+  </data>
+  <data name="ByName">
+    <value xml:space="preserve">by Name</value>
+  </data>
+  <data name="ByType">
+    <value xml:space="preserve">by Type</value>
+  </data>
+  <data name="AllTypes">
+    <value xml:space="preserve">All types</value>
+  </data>
+  <data name="StopSolving">
+    <value xml:space="preserve">Stop solving</value>
+  </data>
+  <data name="Solve">
+    <value xml:space="preserve">Solve</value>
+  </data>
+  <data name="BotName">
+    <value xml:space="preserve">ArchaeologyBuddy</value>
+  </data>
+  <data name="SelectContinent">
+    <value xml:space="preserve">Select a continent...</value>
+  </data>
+  <data name="Kalimdor">
+    <value xml:space="preserve">Kalimdor</value>
+  </data>
+  <data name="EasternKingdoms">
+    <value xml:space="preserve">Eastern Kingdoms</value>
+  </data>
+  <data name="Outlands">
+    <value xml:space="preserve">Outland</value>
+  </data>
+  <data name="Outland">
+    <value xml:space="preserve">Outland</value>
+  </data>
+  <data name="Northrend">
+    <value xml:space="preserve">Northrend</value>
+  </data>
+  <data name="ArchBuddyStarWarning">
+    <value xml:space="preserve">ArchaeologyBuddy can only train Archaeology in Kalimdor for Horde and Eastern Kingdoms for Alliance. Please start AB in the approaite continent or train Archaeology first.</value>
+  </data>
+  <data name="ArchBuddyPaidPluginLifetimeMemberDetected">
+    <value xml:space="preserve">Paid Plugin, or Lifetime member detected. Starting ArchaeologyBuddy in flying mode</value>
+  </data>
+  <data name="ArchBuddyPaidPluginLifetimeMemberNotDetected">
+    <value xml:space="preserve">You are either not a lifetime member, don't have a Paid Plugin Key, or don't have flying skill/mount. Ground mode of ArchaeologyBuddy is not yet fully functional. Its not suggested to use AB w/o a flying mount</value>
+  </data>
+  <data name="ArchBuddyStopMessage">
+    <value xml:space="preserve">Stopped Archaeologybuddy after clearing {0} digsites in {1}h {2}m {3}s.</value>
+  </data>
+  <data name="SolveReport">
+    <value xml:space="preserve">Solve Report:</value>
+  </data>
+  <data name="NoSolves">
+    <value xml:space="preserve">No solves</value>
+  </data>
+  <data name="ArchBuddyDeathBehaviorRezzingAtSpiritHealer">
+    <value xml:space="preserve">Rezzing at spirit healer since we can't fully navigate to our corpse</value>
+  </data>
+  <data name="Solving">
+    <value xml:space="preserve">Solving "{0}"</value>
+  </data>
+  <data name="SolvingArtifact">
+    <value xml:space="preserve">Solving artifact</value>
+  </data>
+  <data name="TrainingArchaeology">
+    <value xml:space="preserve">Training Archaeology</value>
+  </data>
+  <data name="TrainingArchaeologyAtSkill">
+    <value xml:space="preserve">Training Archaeology at {0} skill</value>
+  </data>
+  <data name="MovingToArchaeologyTrainer">
+    <value xml:space="preserve">Moving to Archaeology Trainer</value>
+  </data>
+  <data name="SearchingForDigsites">
+    <value xml:space="preserve">Searching for digsites...</value>
+  </data>
+  <data name="FoundDigsiteDistanceYards">
+    <value xml:space="preserve">Found digsite {0} {1} [Distance: {2} yards]</value>
+  </data>
+  <data name="(Blacklisted)">
+    <value xml:space="preserve">(blacklisted)</value>
+  </data>
+  <data name="NEWFoundDigsiteDistanceYards">
+    <value xml:space="preserve">*NEW* Found digsite {0} [Distance: {1} yards]</value>
+  </data>
+  <data name="CouldntFindValidLandingPointAt">
+    <value xml:space="preserve">Couldn't find a valid landing point at {0}</value>
+  </data>
+  <data name="NoDigsitesOnTheMap">
+    <value xml:space="preserve">No digsites on the map</value>
+  </data>
+  <data name="SelectedAsTheNextDigsite">
+    <value xml:space="preserve">Selected "{0}" as the next digsite.</value>
+  </data>
+  <data name="FindDigsiteBehavior_AllCurrentDigsitesAreBlacklistedSelectingClosestDigsiteAsTheNextDigsite">
+    <value xml:space="preserve">All current digsites are blacklisted. Selecting closest digsite "{0}" as the next digsite.</value>
+  </data>
+  <data name="StopAndDismount">
+    <value xml:space="preserve">Stop and dismount.</value>
+  </data>
+  <data name="MovingToTheDigsite">
+    <value xml:space="preserve">Moving to the digsite</value>
+  </data>
+  <data name="Collecting">
+    <value xml:space="preserve">Collecting {0} #{1}</value>
+  </data>
+  <data name="LootingArchaeologyFind">
+    <value xml:space="preserve">Looting Archaeology Find</value>
+  </data>
+  <data name="NextSurveyPoint_db">
+    <value xml:space="preserve">Next survey point (db): </value>
+  </data>
+  <data name="NextSurveyPoint_no_db">
+    <value xml:space="preserve">Next survey point (no db): </value>
+  </data>
+  <data name="CantFindValidPointToSurvey">
+    <value xml:space="preserve">Can't find a valid point to survey</value>
+  </data>
+  <data name="MovingToNextSurveyPoint">
+    <value xml:space="preserve">Moving to next survey point</value>
+  </data>
+  <data name="Surveying">
+    <value xml:space="preserve">Surveying</value>
+  </data>
+  <data name="ArchBuddy">
+    <value xml:space="preserve">ArchBuddy</value>
+  </data>
+</root>

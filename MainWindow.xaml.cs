@@ -228,7 +228,10 @@ namespace CopilotBuddy
             cmbBotSelector.Items.Clear();
             try
             {
+                BotManager.Instance.Add(new Bots.ArchaeologyBuddy.ArchBuddy());
                 BotManager.Instance.Add(new Bots.BGBuddy.BGBuddy());
+                BotManager.Instance.Add(new Bots.DungeonBuddy.DungeonBot());
+                BotManager.Instance.Add(new Bots.Gatherbuddy.GatherbuddyBot());
                 BotManager.Instance.Add(new Bots.Grind.LevelBot());
                 BotManager.Instance.Add(new Bots.Professionbuddy.ProfessionbuddyBot());
                 BotManager.Instance.Add(new Bots.Quest.QuestBot());
