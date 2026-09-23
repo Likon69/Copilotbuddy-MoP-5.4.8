@@ -149,19 +149,9 @@ namespace CopilotBuddy
 
             AddBotsToGui();
 
-            TreeRoot.StatusText = Globalization.Initialization_complete;
+            Initor.OnAuthSuccess();
 
-            try
-            {
-                Logging.Write("Initializing Plugins...");
-                var enabledPlugins = CharacterSettings.Instance.EnabledPlugins ?? new string[0];
-                PluginManager.Initialize(enabledPlugins);
-            }
-            catch (Exception ex)
-            {
-                Logging.Write(Colors.Red, "Failed to initialize plugins: {0}", ex.Message);
-                Logging.WriteException(ex);
-            }
+            TreeRoot.StatusText = Globalization.Initialization_complete;
 
             CharacterSettings.Instance.Initialized = true;
             ToggleButtons(true);
@@ -615,6 +605,9 @@ namespace CopilotBuddy
 
             foreach (var pluginContainer in PluginManager.Plugins)
                 pluginContainer.Enabled = false;
+
+            if (Initor.Initialized)
+                Initor.OnShutdown();
 
             StyxLog.StopLogThread();
             e.Cancel = false;
