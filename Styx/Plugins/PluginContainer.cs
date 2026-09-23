@@ -42,15 +42,40 @@ namespace Styx.Plugins
                 }
                 if (!value)
                 {
-                    this.Plugin.Dispose();
-                    this.Plugin.OnDisable();
+                    try
+                    {
+                        this.Plugin.Dispose();
+                        this.Plugin.OnDisable();
+                    }
+                    catch (Exception ex)
+                    {
+                        Styx.Common.Logging.WriteDiagnostic("Exception while disabling plugin " + this.Name + ": " + ex);
+                    }
+                    this._enabled = value;
                 }
                 else
                 {
-                    this.Plugin.Initialize();
-                    this.Plugin.OnEnable();
+                    try
+                    {
+                        this.Plugin.Initialize();
+                    }
+                    catch (Exception ex)
+                    {
+                        Styx.Common.Logging.WriteDiagnostic("Exception thrown when initializing " + this.Name + ". Plugin is now disabled. Stack trace is as follows.");
+                        Styx.Common.Logging.WriteException(ex);
+                        this._enabled = false;
+                        return;
+                    }
+                    try
+                    {
+                        this.Plugin.OnEnable();
+                    }
+                    catch (Exception ex)
+                    {
+                        Styx.Common.Logging.WriteDiagnostic("Exception while enabling plugin " + this.Name + ": " + ex);
+                    }
+                    this._enabled = value;
                 }
-                this._enabled = value;
             }
         }
 

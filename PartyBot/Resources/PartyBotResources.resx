@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BotName" xml:space="preserve">
+    <value>PartyBot</value>
+  </data>
+  <data name="DiscoBot_CreateCombatBehavior_Moving_to_target" xml:space="preserve">
+    <value>Moving to target</value>
+  </data>
+  <data name="DiscoBot_CreateCombatBehavior_Pulling" xml:space="preserve">
+    <value>Pulling</value>
+  </data>
+  <data name="DiscoBot_CreateCombatBehavior_Setting_target_to_pull" xml:space="preserve">
+    <value>Setting target to pull</value>
+  </data>
+  <data name="DiscoBot_CreateDeathBehavior__PartyBot__Waited_3_minutes_and_we_got_no_ress__Releasing_from_corpse_" xml:space="preserve">
+    <value>[PartyBot] Waited 3 minutes and we got no ress, Releasing from corpse!</value>
+  </data>
+  <data name="DiscoBot_CreateDeathBehavior__PartyBot__Waiting_for_ress_" xml:space="preserve">
+    <value>[PartyBot] Waiting for ress!</value>
+  </data>
+  <data name="DiscoBot_CreateEventBehavior__PartyBot__Accepting_dungeon_invite" xml:space="preserve">
+    <value>[PartyBot] Accepting dungeon invite</value>
+  </data>
+  <data name="DiscoBot_CreateEventBehavior__PartyBot__Accepting_group_invite" xml:space="preserve">
+    <value>[PartyBot] Accepting group invite</value>
+  </data>
+  <data name="DiscoBot_CreateEventBehavior__PartyBot__Accepting_shared_quest" xml:space="preserve">
+    <value>[PartyBot] Accepting shared quest</value>
+  </data>
+  <data name="DiscoBot_CreateEventBehavior__PartyBot__Role_Check_is_in_progress" xml:space="preserve">
+    <value>[PartyBot] Role Check is in progress</value>
+  </data>
+  <data name="DiscoBot_CreatePartyBotBehavior__PartyBot__Following_Leader" xml:space="preserve">
+    <value>[PartyBot] Following Leader</value>
+  </data>
+  <data name="DiscoBot_CreatePartyBotBehavior__PartyBot__Killing_something" xml:space="preserve">
+    <value>[PartyBot] Killing something</value>
+  </data>
+  <data name="DiscoBot_CreatePartyBotBehavior__PartyBot__LeaderOnDifferentMap" xml:space="preserve">
+    <value>[PartyBot] Leader is on a different map</value>
+  </data>
+  <data name="DiscoBot_CreatePartyBotBehavior__PartyBot__Vendoring" xml:space="preserve">
+    <value>[PartyBot] Vendoring</value>
+  </data>
+  <data name="DiscoBot_NoLeaderNameProvided" xml:space="preserve">
+    <value>The 'Leader Name' setting must contain the name of your leader</value>
+  </data>
+  <data name="DiscoBot_WoWChat_Party__PartyBot__Dancing" xml:space="preserve">
+    <value>[PartyBot] Dancing</value>
+  </data>
+  <data name="DiscoBot_WoWChat_Party__PartyBot__Entering_Dungeon" xml:space="preserve">
+    <value>[PartyBot] Entering Dungeon</value>
+  </data>
+  <data name="DiscoBot_WoWChat_Party__PartyBot__Leaving_Battleground" xml:space="preserve">
+    <value>[PartyBot] Leaving Battleground</value>
+  </data>
+  <data name="DiscoBot_WoWChat_Party__PartyBot__Leaving_Dungeon" xml:space="preserve">
+    <value>[PartyBot] Leaving Dungeon</value>
+  </data>
+  <data name="DiscoBot_WoWChat_Party__PartyBot__Someone_told_me_to_go_sell_" xml:space="preserve">
+    <value>[PartyBot] Someone told me to go sell!</value>
+  </data>
+  <data name="DiscoBot_WoWChat_Party__PartyBot__Someone_told_me_to_mail_" xml:space="preserve">
+    <value>[PartyBot] Someone told me to mail!</value>
+  </data>
+  <data name="DiscoBot_WoWChat_Party__PartyBot__Someone_told_me_to_repair_" xml:space="preserve">
+    <value>[PartyBot] Someone told me to repair!</value>
+  </data>
+  <data name="DiscoBot_WoWChat_Party__PartyBot__Someone_told_me_to_train_" xml:space="preserve">
+    <value>[PartyBot] Someone told me to train!</value>
+  </data>
+</root>

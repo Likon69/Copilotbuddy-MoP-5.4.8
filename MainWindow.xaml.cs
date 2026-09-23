@@ -232,9 +232,12 @@ namespace CopilotBuddy
                 BotManager.Instance.Add(new Bots.BGBuddy.BGBuddy());
                 BotManager.Instance.Add(new Bots.DungeonBuddy.DungeonBot());
                 BotManager.Instance.Add(new Bots.Gatherbuddy.GatherbuddyBot());
-                BotManager.Instance.Add(new Bots.Grind.LevelBot());
                 BotManager.Instance.Add(new Bots.Professionbuddy.ProfessionbuddyBot());
+                BotManager.Instance.Add(new Bots.Grind.LevelBot());
                 BotManager.Instance.Add(new Bots.Quest.QuestBot());
+                BotManager.Instance.Add(new NewMixedMode.MixedModeEx());
+                BotManager.Instance.Add(new PartyBot.DiscoBot());
+                BotManager.Instance.Add(new GrindBuddy2.GrindBuddy());
                 BotManager.Instance.LoadBots();
             }
             catch (Exception ex)

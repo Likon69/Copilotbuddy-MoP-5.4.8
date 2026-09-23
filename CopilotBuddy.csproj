@@ -75,6 +75,12 @@
     <EmbeddedResource Include="Bots\Professionbuddy\Help.rtf">
       <LogicalName>Bots.Professionbuddy.Help.rtf</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Update="NewMixedMode\Resources\NewMixedModeResources.resx">
+      <LogicalName>NewMixedMode.Resources.NewMixedModeResources.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PartyBot\Resources\PartyBotResources.resx">
+      <LogicalName>PartyBot.Resources.PartyBotResources.resources</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
