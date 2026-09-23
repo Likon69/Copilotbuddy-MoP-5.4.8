@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="Action_DisenchantAction_Help" xml:space="preserve"><value>This action will Disenchant,Mill or Prospect items in the player's bags</value></data>
+  <data name="Action_DisenchantAction_Mill" xml:space="preserve"><value>Mill</value></data>
+  <data name="Action_DisenchantAction_Name" xml:space="preserve"><value>Disenchant</value></data>
+  <data name="Action_GetItemFromBankAction_Name" xml:space="preserve"><value>Withdraw Item From Bank</value></data>
+  <data name="Action_GetItemFromBankAction_Help" xml:space="preserve"><value>This action will withdraw the specified items from your personal or guild bank. It can also withdraw the items needed for your recipes in the action tree. 'Withdraw Additively' if set to true will buy axact amount of items regardless of item count player has in bags. All items will be withdrawn if 'Item Entries' is left blank</value></data>
+  <data name="Action_Declaration_Help" xml:space="preserve"><value>This is useful to declare fields, properties, methods, classes or any other types in C#</value></data>
+  <data name="Action_Declaration_Name" xml:space="preserve"><value>Declaration</value></data>
+  <data name="Error_UnableToFindSpellWithEntry" xml:space="preserve"><value>Unable to find a spell that matches Entry</value></data>
+  <data name="FlowControl_Condition" xml:space="preserve"><value>Condition</value></data>
+  <data name="Action_InteractAction_InteractType" xml:space="preserve"><value>Interact Type</value></data>
+  <data name="Action_TrainSkillAction_Name" xml:space="preserve"><value>Train Skill</value></data>
+  <data name="Action_TrainSkillAction_Help" xml:space="preserve"><value>This action will go to the trainer and train all available spells. Location can be left blank if the NPC is in the database.</value></data>
+  <data name="Action_SellItemAction_Name" xml:space="preserve"><value>Sell Item</value></data>
+  <data name="Action_SellItemAction_Help" xml:space="preserve"><value>This action will sell items to a merchant. It will either sell a specified item time 'Count' stacks, or sell all grey/white/green quality items. This action will find the closest vendor if 'Npc Entry' is set to 0. 'Item Entries' takes a comma separated list of item entries</value></data>
+  <data name="Action_SellItemOnAhAction_AuctionDuration" xml:space="preserve"><value>Auction Duration</value></data>
+  <data name="Error_UnableToFindAuctioneer" xml:space="preserve"><value>Unable to find auctioneer, maybe he's dead?</value></data>
+  <data name="Action_MoveToAction_Name" xml:space="preserve"><value>Move To</value></data>
+  <data name="Action_MoveToAction_Help" xml:space="preserve"><value>This action will move your character to the selected location or if set to go to NearestXXX it will search the object manager and NPC database for the specific unit/object and move to it. It will also target NPCs so the interact action can be used right after this action finishes without having to specify an Npc Entry in it</value></data>
+  <data name="Action_SellItemOnAhAction_PostIfBelowMinBuyout" xml:space="preserve"><value>Post If Below MinBuyout</value></data>
+  <data name="Error_UnableToFindMailbox" xml:space="preserve"><value>Unable To find Mailbox</value></data>
+  <data name="Action_LoadProfileAction_Help" xml:space="preserve"><value>This action will load a profile, which can be either a Honorbuddy or Professionbuddy profile. Path needs to be relative to the currently loaded Professionbuddy profile and either in same folder or in a subfolder. If Path is empty and the profile type is Honorbuddy then an empty profile will be loaded. If 'Is Local Or From Store' is set to false then path can be set to the web address of a xml profile.</value></data>
+  <data name="Action_LoadProfileAction_Name" xml:space="preserve"><value>Load Profile</value></data>
+  <data name="Action_SubRoutine_Help" xml:space="preserve"><value>Subroutine can contain multiple actions which you can execute using the 'Call SubRoutine' action</value></data>
+  <data name="Action_SubRoutine_Name" xml:space="preserve"><value>Subroutine</value></data>
+  <data name="Action_Common_ItemEntry" xml:space="preserve"><value>Item ID</value></data>
+  <data name="Error_UnableToFindBank" xml:space="preserve"><value>Unable to find bank</value></data>
+  <data name="Action_BuyItemAction_Name" xml:space="preserve"><value>Buy Item</value></data>
+  <data name="Action_BuyItemAction_Help" xml:space="preserve"><value>This action will buy items from a merchant, either a specific item or any materials the merchant has that are needed for recipes in the action tree. If 'Buy Additively' is set to true this will buy the axact amount of items regardless of the item count player has in bags</value></data>
+  <data name="Action_Common_Summary" xml:space="preserve"><value>Summary</value></data>
+  <data name="Action_Common_AutoFindAH" xml:space="preserve"><value>Auto find AH</value></data>
+  <data name="Error_UnableToFindProfile" xml:space="preserve"><value>Unable to find profile</value></data>
+  <data name="Action_Common_AutoFindBank" xml:space="preserve"><value>Auto find Bank</value></data>
+  <data name="Action_InteractAction_GameobjectType" xml:space="preserve"><value>Game object Type</value></data>
+  <data name="Action_Common_SubRoutineName" xml:space="preserve"><value>Subroutine Name</value></data>
+  <data name="Action_LoadProfileAction_ProfileType" xml:space="preserve"><value>Profile Type</value></data>
+  <data name="UI_Add" xml:space="preserve"><value>Add</value></data>
+  <data name="UI_Cut" xml:space="preserve"><value>Cut</value></data>
+  <data name="UI_New" xml:space="preserve"><value>New</value></data>
+  <data name="Action_DisenchantAction_Prospect" xml:space="preserve"><value>Prospect</value></data>
+  <data name="Action_ChangeBotAction_BotName" xml:space="preserve"><value>Bot Name</value></data>
+  <data name="Action_Common_MaxBuyout" xml:space="preserve"><value>Max Buyout</value></data>
+  <data name="Action_InteractAction_Name" xml:space="preserve"><value>Interact</value></data>
+  <data name="Action_InteractAction_Help" xml:space="preserve"><value>This action will cause your character to interact with a specific target. If Entry is set to zero and Interact Type is set to NPC then this action will interact with current target. 'Interact Delay' is a time in milliseconds to wait before interacting with target. This can be also used to go to objects like forge/anvil or NPCs that are within 100 feet</value></data>
+  <data name="UI_Delete" xml:space="preserve"><value>Delete</value></data>
+  <data name="Error_NoItemEntries" xml:space="preserve"><value>No Item Entries are specified</value></data>
+  <data name="Action_Common_Uncommon" xml:space="preserve"><value>Uncommon</value></data>
+  <data name="Error_SubroutineNotFound" xml:space="preserve"><value>Unable to find Subroutine with name</value></data>
+  <data name="Error_UnableToFindLocationFromDB" xml:space="preserve"><value>Unable to find location from Database</value></data>
+  <data name="Action_Common_MinBuyout" xml:space="preserve"><value>Min Buyout</value></data>
+  <data name="Action_Common_GuildTab" xml:space="preserve"><value>Guild Tab</value></data>
+  <data name="Composite_While_PulseSecondaryBot" xml:space="preserve"><value>Pulse Secondary Bot</value></data>
+  <data name="Action_Common_BuyAdditively" xml:space="preserve"><value>Buy Additively</value></data>
+  <data name="Action_Common_ItemType" xml:space="preserve"><value>Item Type</value></data>
+  <data name="Action_Common_ItemCategory" xml:space="preserve"><value>Item Category</value></data>
+  <data name="Action_Settings_Name" xml:space="preserve"><value>Settings</value></data>
+  <data name="Action_Settings_Help" xml:space="preserve"><value>This action adds a user customizable setting to Professionbuddy profiles</value></data>
+  <data name="Action_DisenchantAction_Disenchant" xml:space="preserve"><value>Disenchant</value></data>
+  <data name="UI_LoadProfile" xml:space="preserve"><value>Load Profile</value></data>
+  <data name="Action_SellItemOnAhAction_UndercutPercent" xml:space="preserve"><value>Undercut Percent</value></data>
+  <data name="Action_Common_SpellName" xml:space="preserve"><value>Spell Name</value></data>
+  <data name="Composite_While_LongName" xml:space="preserve"><value>While Condition</value></data>
+  <data name="Action_Common_Category" xml:space="preserve"><value>Category</value></data>
+  <data name="FlowControl_IgnoreCanRun" xml:space="preserve"><value>Ignore Condition until done</value></data>
+  <data name="Action_AttachToTreehook_Name" xml:space="preserve"><value>Attach to Treehook</value></data>
+  <data name="Action_AttachToTreehook_Help" xml:space="preserve"><value>This action will attach a SubRoutine to a Treehook. The Subroutine is automatically detached from the TreeHook when bot is stopped or a new Professionbuddy profile is loaded. Calling this action more than once has no effect, the TreeHook is only attached the first time it is executed. The TreeHook will be attached to on profile startup if the 'Attach on Start' property value is set to 'true'</value></data>
+  <data name="Action_SellItemOnAhAction_PostPartialStacks" xml:space="preserve"><value>Post partial stacks</value></data>
+  <data name="Action_BuyItemFromAhAction_BidOnItem" xml:space="preserve"><value>Bid On Items</value></data>
+  <data name="Action_Common_ItemEntries" xml:space="preserve"><value>Item IDs</value></data>
+  <data name="Action_PutItemInBankAction_Help" xml:space="preserve"><value>This action will deposit the specified item/s into your personal or guild bank. Set 'Guild Tab' to 0 to deposit in whichever tab has room</value></data>
+  <data name="Action_PutItemInBankAction_Name" xml:space="preserve"><value>Deposit Item in Bank</value></data>
+  <data name="Action_AttachToTreehook_AttachOnStart" xml:space="preserve"><value>Attach on Start</value></data>
+  <data name="UI_Settings" xml:space="preserve"><value>Settings</value></data>
+  <data name="Action_CastSpellAction_RepeatType" xml:space="preserve"><value>Repeat Type</value></data>
+  <data name="Action_StackItemsAction_Help" xml:space="preserve"><value>This action will stack up items in player's bags. Use this before Disenchanting/Milling/Prospecting</value></data>
+  <data name="Action_StackItemsAction_Name" xml:space="preserve"><value>Stack Items</value></data>
+  <data name="Action_CSharpAction_CompileError" xml:space="preserve"><value>Compile Error</value></data>
+  <data name="UI_Profile" xml:space="preserve"><value>Profile</value></data>
+  <data name="Action_Common_Material" xml:space="preserve"><value>Material</value></data>
+  <data name="Action_AttachToTreehook_TreeHookName" xml:space="preserve"><value>TreeHook Name</value></data>
+  <data name="Action_CastSpellAction_Name" xml:space="preserve"><value>Cast Spell</value></data>
+  <data name="Action_CastSpellAction_Help" xml:space="preserve"><value>This action will cast the specified spell. This should only be used for recipes. To cast other spell use a Custom Action and SpellManager.Cast(). Repeat is the amount of times it will be casted depending on the repeat type used. If Repeat type is set to Specific it will cast the spell 'Repeat' times.
+    Craftable means it will automatically set 'Repeat' based on the number of times the recipe can be repeated with current materials in bags. Banker type uses the info from DataStore Wow addon and will repeat the spell based on how many of the crafted items you have on yourself or on your alts/bank/gbank. So if for example you try to keep a stock 20 of each glyph on your bankers, your banker has 15 Glyph of Arcane Blast and you set repeat to 20, it will make 5 glyphs, The DataStore addon is required to used this mode</value></data>
+  <data name="Action_Common_ItemSelection" xml:space="preserve"><value>Item Selection</value></data>
+  <data name="UI_Reload" xml:space="preserve"><value>Reload</value></data>
+  <data name="Action_Common_WithdrawAdditively" xml:space="preserve"><value>Withdraw Additively</value></data>
+  <data name="Action_Common_UseCategory" xml:space="preserve"><value>Use Category</value></data>
+  <data name="Action_CallSubRoutine_Help" xml:space="preserve"><value>This action will execute a SubRoutine</value></data>
+  <data name="Action_CallSubRoutine_Name" xml:space="preserve"><value>Call SubRoutine</value></data>
+  <data name="Action_Common_Craftable" xml:space="preserve"><value>Craftable</value></data>
+  <data name="UI_Actions" xml:space="preserve"><value>Actions</value></data>
+  <data name="Action_Common_Deposit" xml:space="preserve"><value>Deposit</value></data>
+  <data name="Action_SubRoutine_SubroutineName" xml:space="preserve"><value>Subroutine Name</value></data>
+  <data name="UI_Ingredients" xml:space="preserve"><value>Ingredients</value></data>
+  <data name="Action_Common_Specific" xml:space="preserve"><value>Specific</value></data>
+  <data name="UI_Copy" xml:space="preserve"><value>Copy</value></data>
+  <data name="UI_Bags" xml:space="preserve"><value>Bags</value></data>
+  <data name="UI_Bank" xml:space="preserve"><value>Bank</value></data>
+  <data name="UI_Open" xml:space="preserve"><value>Open</value></data>
+  <data name="UI_Name" xml:space="preserve"><value>Name</value></data>
+  <data name="UI_Need" xml:space="preserve"><value>Need</value></data>
+  <data name="UI_Help" xml:space="preserve"><value>Help</value></data>
+  <data name="UI_Save" xml:space="preserve"><value>Save</value></data>
+  <data name="Action_MailItemAction_Help" xml:space="preserve"><value>This action will mail either all items with matching IDs found in 'Item IDs', by category or quality. Note: Amount = axact number, not stacks. This mails items to the 'Mail Recipient' from Honorbuddy settings</value></data>
+  <data name="Action_MailItemAction_Name" xml:space="preserve"><value>Mail Item</value></data>
+  <data name="Action_FlyToAction_Dismount" xml:space="preserve"><value>Dismount on Arrival</value></data>
+  <data name="Action_CastSpellAction_CastOnItem" xml:space="preserve"><value>Cast On Item</value></data>
+  <data name="Action_FlyToAction_Name" xml:space="preserve"><value>Fly To</value></data>
+  <data name="Action_FlyToAction_Help" xml:space="preserve"><value>This action relies on Flightor, the 3d navigator used by Gatherbuddy2. This action will fly your character to the selected location and dismount on arrival if Dismount is set to true. Be sure to make the target location outdoors and not underneath any obsticles.</value></data>
+  <data name="Action_Common_ActionType" xml:space="preserve"><value>Action Type</value></data>
+  <data name="Action_SellItemAction_SellItemType" xml:space="preserve"><value>Sell Item Type</value></data>
+  <data name="Action_Common_ItemTarget" xml:space="preserve"><value>Item Target</value></data>
+  <data name="Action_Common_SpecificItem" xml:space="preserve"><value>Specific Item</value></data>
+  <data name="Action_CastSpellAction_Casted" xml:space="preserve"><value>Casted</value></data>
+  <data name="Action_Common_Withdraw" xml:space="preserve"><value>Withdraw</value></data>
+  <data name="FlowControl_If_Name" xml:space="preserve"><value>If</value></data>
+  <data name="FlowControl_If_Help" xml:space="preserve"><value>'If Condition' will execute the actions it contains if the specified condition is true. 'Ignore Condition until done' basically will ignore the Condition if any of the actions it contains is running.If you need to repeat a set of actions then use 'While Condition' or nest this within a 'While Condition'</value></data>
+  <data name="Action_Common_Location" xml:space="preserve"><value>Location</value></data>
+  <data name="Action_Common_ItemSubCategory" xml:space="preserve"><value>Item SubCategory</value></data>
+  <data name="UI_ProfileSettings" xml:space="preserve"><value>Profile Settings</value></data>
+  <data name="Action_Common_StackSize" xml:space="preserve"><value>Stack Size</value></data>
+  <data name="Action_InteractAction_SpellFocus" xml:space="preserve"><value>Spell Focus</value></data>
+  <data name="Action_Common_Timeout" xml:space="preserve"><value>Timeout</value></data>
+  <data name="Action_Common_Entry" xml:space="preserve"><value>Entry</value></data>
+  <data name="Action_Common_Count" xml:space="preserve"><value>Count</value></data>
+  <data name="Action_WaitAction_LongName" xml:space="preserve"><value>Wait until Condition</value></data>
+  <data name="Action_Common_Repeat" xml:space="preserve"><value>Repeat</value></data>
+  <data name="UI_HelpWindowTitle" xml:space="preserve"><value>ProfessionBuddy Help</value></data>
+  <data name="Action_Common_DefaultValue" xml:space="preserve"><value>Default Value</value></data>
+  <data name="Action_Common_IgnoreStackSizeBelow" xml:space="preserve"><value>Ignore Stacksize Below</value></data>
+  <data name="Action_WaitAction_Condition" xml:space="preserve"><value>Until Condition</value></data>
+  <data name="Action_CustomAction_Name" xml:space="preserve"><value>Custom Action</value></data>
+  <data name="Action_CustomAction_Help" xml:space="preserve"><value>This action will execute a valid C# statement or coroutine before moving to next action.</value></data>
+  <data name="Action_Common_NpcEntry" xml:space="preserve"><value>Npc Entry</value></data>
+  <data name="Action_Common_MaxCODPrice" xml:space="preserve"><value>Max COD Price</value></data>
+  <data name="Error_UnableToFindItemToCastOn" xml:space="preserve"><value>No item found to cast spell on</value></data>
+  <data name="Action_GetMailAction_Name" xml:space="preserve"><value>Get Mail</value></data>
+  <data name="Action_GetMailAction_Help" xml:space="preserve"><value>This action retrieves all mail in the mailbox, or only items that match the entries found in 'Item Entries'. 'Max COD Price' is the price per item in stack. Since mailboxes are not in the NPC database you need to be within 100 yards of a mailbox to 'autofind' it</value></data>
+  <data name="Action_Common_ItemQuality" xml:space="preserve"><value>Item Quality</value></data>
+  <data name="Action_SellItemOnAhAction_Name" xml:space="preserve"><value>Sell Item To AH</value></data>
+  <data name="Action_SellItemOnAhAction_Help" xml:space="preserve"><value>This action will post either all items with matching entries found in 'Item Entries' or by item category and optionally sub catagory on the Auction house. If cheapest item on AH is below minimum buyout then the item is listed at min buyout if 'Post If Below Min Buyout' is set to 'true', else if the cheapest item is higher then the max buyout then the item is listed at max buyout, otherwise it's listed at lowest buyout minus undercut precent.'Item Entries' takes a comma separated list of item entries. All stacks of items below the 'Ignore StackSize Below' are ignored when undercutting auctions</value></data>
+  <data name="Action_Common_SettingName" xml:space="preserve"><value>Setting Name</value></data>
+  <data name="Action_Common_Banker" xml:space="preserve"><value>Banker</value></data>
+  <data name="Action_CancelAuctionAction_Help" xml:space="preserve"><value>This action will cancel auctions that matches item entries or all auctions that belong to a category and optionally sub category if they have been undercut. 'Item Entries' takes a comma separated list of item entries. Set 'Use Category' to false and leave 'Item Entries' blank to cancel all undercut auctions. If the competition is at or below 'Min Buyout' than that auction is skipped.</value></data>
+  <data name="Action_CancelAuctionAction_Name" xml:space="preserve"><value>Cancel Auction</value></data>
+  <data name="Action_Common_SummaryExample" xml:space="preserve"><value>This is a summary of what this setting does</value></data>
+  <data name="Action_Common_SpellEntry" xml:space="preserve"><value>Spell ID</value></data>
+  <data name="Action_Common_ItemsToWithdraw" xml:space="preserve"><value>Items to Withdraw</value></data>
+  <data name="Action_Common_Global" xml:space="preserve"><value>Global</value></data>
+  <data name="Action_Comment_Help" xml:space="preserve"><value>This does nothing but add a comment</value></data>
+  <data name="Action_Comment_Name" xml:space="preserve"><value>Comment</value></data>
+  <data name="UI_Tradeskill" xml:space="preserve"><value>Tradeskill</value></data>
+  <data name="UI_Profiles" xml:space="preserve"><value>Profiles</value></data>
+  <data name="Action_Common_Amount" xml:space="preserve"><value>Amount</value></data>
+  <data name="Action_BuyItemFromAhAction_Help" xml:space="preserve"><value>This action will buy a either a specified item, ingredients that a recipe requires or whatevers in the material list from the Auction house if item is below specified maximum price. Item Entries contain the entries of the items or a recipe entry if buying materials for a recipe.'Bid On Item', if set to true will bid on an item if buyout price &amp;gt; maxBuyout and minBid  &amp;lt;= maxBuyout. 'Item Entries' accepts a comma separated list of Item entries. 'Buy Additively' if set to true will buy axact amount of items regardless of the item count player has in bags</value></data>
+  <data name="Action_BuyItemFromAhAction_Name" xml:space="preserve"><value>Buy Item From AH</value></data>
+  <data name="UI_Paste" xml:space="preserve"><value>Paste</value></data>
+  <data name="FlowControl_If_LongName" xml:space="preserve"><value>If Condition</value></data>
+  <data name="Action_Common_Use" xml:space="preserve"><value>Use</value></data>
+  <data name="Action_Common_Buy" xml:space="preserve"><value>Buy</value></data>
+  <data name="Action_Common_All" xml:space="preserve"><value>All</value></data>
+  <data name="Action_Common_AutoFindMailbox" xml:space="preserve"><value>Auto find Mailbox</value></data>
+  <data name="Action_WaitAction_Name" xml:space="preserve"><value>Wait</value></data>
+  <data name="Action_WaitAction_Help" xml:space="preserve"><value>This action will wait for an amount of time or until condition becomes true before moving to next action. Timeout is in milliseconds</value></data>
+  <data name="Error_NotAValidItemEntry" xml:space="preserve"><value>{0} is not a number thus it's not valid Item Entry</value></data>
+  <data name="Action_InteractAction_InteractDelay" xml:space="preserve"><value>Interact Delay</value></data>
+  <data name="Composite_While_Name" xml:space="preserve"><value>While</value></data>
+  <data name="Composite_While_Help" xml:space="preserve"><value>'While Condition' will repeatedly execute the actions it contains if the specified condition is true. 'Ignore Condition until done' basically will ignore the Condition if any of the actions it contains is running. The difference between this and the 'If Condition' is that this will auto reset all actions within it and all nested 'If/While' Conditions
+        If the 'Pulse Secondary Bot' property is enabled the secondary bot is pulsed after the 'While Condition' is done executing last child and only if the 'Condition' still evaluates to 'true'</value></data>
+  <data name="Action_Common_MinFreeBagSlots" xml:space="preserve"><value>Min Free Bagslots</value></data>
+  <data name="Action_LoadProfileAction_IsLocal" xml:space="preserve"><value>Is Local</value></data>
+  <data name="Action_Common_Rare" xml:space="preserve"><value>Rare</value></data>
+  <data name="Action_Common_Type" xml:space="preserve"><value>Type</value></data>
+  <data name="Action_Common_Path" xml:space="preserve"><value>Path</value></data>
+  <data name="Action_Common_Sell" xml:space="preserve"><value>Sell</value></data>
+  <data name="Action_Common_Bank" xml:space="preserve"><value>Bank</value></data>
+  <data name="Action_Common_Epic" xml:space="preserve"><value>Epic</value></data>
+  <data name="Action_Common_Name" xml:space="preserve"><value>Name</value></data>
+  <data name="Action_Common_Code" xml:space="preserve"><value>Code</value></data>
+  <data name="Action_Common_Mail" xml:space="preserve"><value>Mail</value></data>
+  <data name="Action_Common_Hidden" xml:space="preserve"><value>Hidden</value></data>
+  <data name="Action_SellItemOnAhAction_BidPercent" xml:space="preserve"><value>Bid Percent</value></data>
+  <data name="Action_GetMailAction_CheckNewMail" xml:space="preserve"><value>Check for New Mail</value></data>
+  <data name="Action_ChangeBotAction_Help" xml:space="preserve"><value>This action will change to the bot specified with 'Bot Name' Property. 'Bot Name' can be a partial match</value></data>
+  <data name="Action_ChangeBotAction_Name" xml:space="preserve"><value>Change Bot</value></data>
+  <data name="Action_MoveToAction_MoveToType" xml:space="preserve"><value>MoveTo Type</value></data>
+  </root>
