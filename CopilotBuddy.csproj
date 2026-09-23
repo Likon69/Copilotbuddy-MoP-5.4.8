@@ -47,6 +47,7 @@
 
   <ItemGroup>
     <None Include="Lib\FASM.DLL" Link="FASM.DLL" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Lib\Data.bin" Link="Data.bin" CopyToOutputDirectory="PreserveNewest" />
     <None Include="Lib\Navigation.dll" Link="Navigation.dll" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 

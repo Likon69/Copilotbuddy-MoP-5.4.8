@@ -19,8 +19,6 @@ namespace Styx.CommonBot.Database
                 if (_conn == null)
                 {
                     var csb = new SQLiteConnectionStringBuilder();
-                    // Awesome password. I know. Love me!
-                    csb.Password = "JkejXP5_fG2vN-jlFVME";
                     csb.DataSource = Utilities.AssemblyDirectory + "\\Data.bin";
 
                     csb.Pooling = true;
