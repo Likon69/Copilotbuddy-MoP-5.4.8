@@ -69,12 +69,12 @@ namespace Styx
             Functions.DbItemTextCache_GetInfoBlockById = newBase + 0x22EBAD;
             Functions.DBItemCache_GetInfoBlockByID = newBase + 0x24250B;
             Functions.DBItemCache_GetClassInfoBlockByID = newBase + 0x3CE9E4;
-            Functions.Spell_C__CastSpell2 = newBase + 0x38EE1C;
+            Functions.Spell_C__CastSpell2 = newBase + 0x4F781E;
             Functions.Spell_C_HandleSpriteClick = newBase + 0x38F129;
             Functions.CGPlayer_C__ClearAFK = newBase + 0x3ABEA7;
             Functions.GetKnownSpellIndex = newBase + 0x4F5A33;
             Functions.GetSpellOverrideId = newBase + 0x4F6E09;
-            Functions.Spell_C__CastSpell = newBase + 0x4F781E;
+            Functions.Spell_C__CastSpell = newBase + 0x38EE1C;
             Functions.Spell_C__HandleTerrainClick = newBase + 0x53D65D;
             Functions.MerchantFrame__GetItemAtIndex = newBase + 0x55C2D2;
 
