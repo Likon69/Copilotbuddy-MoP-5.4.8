@@ -145,6 +145,26 @@ namespace Tripper.RecastManaged.Detour
             return ok ? Status.Success : Status.Failure;
         }
 
+        public Status ClosestPointOnPolyBoundary(PolygonReference @ref, Vector3 pos, out Vector3 closest)
+        {
+            var posC = ToWowPos(pos);
+
+            bool ok = NativeMethods.ClosestPointOnPolyBoundary_C(MapId, @ref.Id, posC,
+                out NativeMethods.XYZ_C closestC);
+
+            closest = ok ? ToDetourPos(closestC) : default;
+            return ok ? Status.Success : Status.Failure;
+        }
+
+        public Status GetPolyHeight(PolygonReference @ref, Vector3 pos, out float height)
+        {
+            var posC = ToWowPos(pos);
+
+            bool ok = NativeMethods.GetPolyHeight_C(MapId, @ref.Id, posC, out height);
+
+            return ok ? Status.Success : Status.Failure;
+        }
+
         public Status FindPath(PolygonReference startRef, PolygonReference endRef,
             Vector3 startPos, Vector3 endPos, QueryFilter filter, int maxPath,
             out PolygonReference[] path)

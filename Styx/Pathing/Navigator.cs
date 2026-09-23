@@ -13,15 +13,18 @@ namespace Styx.Pathing
     {
         static Navigator()
         {
+            PlayerMover = new ClickToMoveMover();
+            HeightProvider = new DefaultHeightProvider();
+            FlightorLandSystem = new FlightorLandSystem();
             FlightorLandSystem.InitializeLandLocations();
         }
 
         internal static void Init()
         {
-            NavigationProvider = new DisabledNavigationProvider();
+            NavigationProvider = new MeshNavigator();
         }
 
-        public static FlightorLandSystem FlightorLandSystem { get; set; } = new FlightorLandSystem();
+        public static FlightorLandSystem FlightorLandSystem { get; set; }
 
         private static INavigationProvider _navigationProvider;
 
@@ -53,7 +56,7 @@ namespace Styx.Pathing
             }
         }
 
-        private static ITerrainHeightProvider _heightProvider = new DisabledHeightProvider();
+        private static ITerrainHeightProvider _heightProvider;
 
         public static ITerrainHeightProvider HeightProvider
         {
@@ -69,7 +72,7 @@ namespace Styx.Pathing
             }
         }
 
-        private static IPlayerMover _playerMover = new ClickToMoveMover();
+        private static IPlayerMover _playerMover;
 
         public static IPlayerMover PlayerMover
         {
@@ -311,19 +314,6 @@ namespace Styx.Pathing
         private enum CustomAreaType : byte
         {
             BlackSpot = AreaType.Misc1,
-        }
-
-        private sealed class DisabledNavigationProvider : NavigationProvider
-        {
-            public override MoveResult MoveTo(WoWPoint location) { return MoveResult.Failed; }
-            public override float PathPrecision { get; set; }
-            public override WoWPoint[] GeneratePath(WoWPoint from, WoWPoint to) { return new WoWPoint[0]; }
-            public override bool AtLocation(WoWPoint point1, WoWPoint point2) { return false; }
-        }
-
-        private sealed class DisabledHeightProvider : ITerrainHeightProvider
-        {
-            public List<float> FindHeights(float x, float y) { return new List<float>(); }
         }
 
         #endregion
