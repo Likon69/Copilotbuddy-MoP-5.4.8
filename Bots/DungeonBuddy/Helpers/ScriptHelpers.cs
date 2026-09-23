@@ -72,7 +72,9 @@ namespace Bots.DungeonBuddy.Helpers
             Ranged = 8,
             Melee = 16,
             Leader = 32,
-            Follower = 64
+            Follower = 64,
+            RangedDps = Dps | Ranged,
+            MeleeDps = Dps | Melee
         }
 
         #endregion

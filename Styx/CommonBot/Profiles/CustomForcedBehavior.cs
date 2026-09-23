@@ -209,6 +209,7 @@ namespace Styx.CommonBot.Profiles
 
 		private object UtilGetAttributeAsWoWPointArray(string attr, bool isRequired, string[] aliases)
 		{
+			bool problem = false;
 			string key = this.UtilLocateKey(isRequired, attr, aliases);
 			var points = new List<WoWPoint>();
 			if (key == null || !this.Args.ContainsKey(key))
@@ -217,18 +218,28 @@ namespace Styx.CommonBot.Profiles
 			foreach (string value in this.Args[key].Split(new[] { '|', ';' }, StringSplitOptions.RemoveEmptyEntries))
 			{
 				string[] coordinates = value.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
-				try
+				if (coordinates.Length != 3)
 				{
-					if (coordinates.Length != 3)
-						throw new FormatException();
-					points.Add(new WoWPoint(this.UtilConvert<double>(key, coordinates[0]), this.UtilConvert<double>(key, coordinates[1]), this.UtilConvert<double>(key, coordinates[2])));
+					this.LogMessage("error", "The '{0}' attribute's value contribution (saw '{1}') doesn't have three coordinates (counted {2}).\nExpect entries of the form \"x1,y1,z1 | x2,y2,z2 | x3,...\", or \"x1,y1,z1; x2,y2,z2; x3,...\"", new object[] { key, value, coordinates.Length });
+					problem = true;
+					continue;
 				}
-				catch (Exception)
-				{
-					this.LogMessage("error", "The '{0}' attribute value '{1}' must contain three coordinates.", new object[] { key, value });
-					this.IsAttributeProblem = true;
-					return new WoWPoint[0];
-				}
+				double? x = null;
+				try { x = this.UtilConvert<double>(key, coordinates[0]); }
+				catch (Exception) { problem = true; }
+				double? y = null;
+				try { y = this.UtilConvert<double>(key, coordinates[1]); }
+				catch (Exception) { problem = true; }
+				double? z = null;
+				try { z = this.UtilConvert<double>(key, coordinates[2]); }
+				catch (Exception) { problem = true; }
+				if (x.HasValue && y.HasValue && z.HasValue)
+					points.Add(new WoWPoint(x.Value, y.Value, z.Value));
+			}
+			if (problem)
+			{
+				points.Clear();
+				this.IsAttributeProblem = true;
 			}
 			return points.ToArray();
 		}

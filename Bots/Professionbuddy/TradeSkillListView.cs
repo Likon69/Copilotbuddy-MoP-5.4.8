@@ -95,6 +95,12 @@ namespace Bots.Professionbuddy
 		public TextBox FilterText { get; private set; }
 		public ComboBox CategoryCombo { get; private set; }
 
+		public sealed override string Text
+		{
+			get { return base.Text; }
+			set { base.Text = value; }
+		}
+
 		public int TradeIndex
 		{
 			get { return index; }

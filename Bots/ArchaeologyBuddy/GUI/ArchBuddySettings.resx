@@ -444,16 +444,16 @@
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="&gt;&gt;lblTrainUpto.Name" xml:space="preserve">
+    <value>lblTrainUpto</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblTrainUpto.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblTrainUpto.Parent" xml:space="preserve">
     <value>tabPage3</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblTrainUpto.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;nudTrainUntil.Name" xml:space="preserve">
@@ -537,31 +537,31 @@
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblTrainUpto.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblTrainUpto.Location" type="System.Drawing.Point, System.Drawing">
     <value>32, 85</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblTrainUpto.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
   </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblTrainUpto.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="lblTrainUpto.Text" xml:space="preserve">
     <value>Train upto</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="&gt;&gt;lblTrainUpto.Name" xml:space="preserve">
+    <value>lblTrainUpto</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblTrainUpto.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblTrainUpto.Parent" xml:space="preserve">
     <value>tabPage3</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblTrainUpto.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="nudTrainUntil.Location" type="System.Drawing.Point, System.Drawing">

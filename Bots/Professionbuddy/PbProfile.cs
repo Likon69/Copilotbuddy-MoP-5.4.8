@@ -350,7 +350,7 @@ namespace Bots.Professionbuddy
 				using (Package package = Package.Open(path, FileMode.Create))
 				{
 					// Add the PB profile
-					PackagePart packagePartDocument = package.CreatePart(partUriProfile, MediaTypeNames.Text.Xml, CompressionOption.Normal);
+					PackagePart packagePartDocument = package.CreatePart(partUriProfile, "text/xml", CompressionOption.Normal);
 					using (var fileStream = new FileStream(profilePath, FileMode.Open, FileAccess.Read))
 					{
 						CopyStream(fileStream, packagePartDocument.GetStream());
@@ -359,7 +359,7 @@ namespace Bots.Professionbuddy
 
 					foreach (var kv in hbProfileUrls)
 					{
-						PackagePart packagePartHbProfile = package.CreatePart(kv.Value, MediaTypeNames.Text.Xml, CompressionOption.Normal);
+						PackagePart packagePartHbProfile = package.CreatePart(kv.Value, "text/xml", CompressionOption.Normal);
 
 						using (var fileStream = new FileStream(kv.Key, FileMode.Open, FileAccess.Read))
 						{

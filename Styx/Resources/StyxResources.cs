@@ -200,8 +200,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string An_error_occured_while_attempting_to_download_a_mesh_file___0___The_server_may_be_having_troubles__so_please_try_again_later_ {
             get {
-                return ResourceManager.GetString("An_error_occured_while_attempting_to_download_a_mesh_file___0___The_server_may_be" +
-                        "_having_troubles__so_please_try_again_later_", resourceCulture);
+                return ResourceManager.GetString("An_error_occured_while_attempting_to_download_a_mesh_file___0___The_server_may_be_having_troubles__so_please_try_again_later_", resourceCulture);
             }
         }
 
@@ -418,8 +417,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string Could_not_find_a_routine_fitting_for_your_class__Please_make_sure_you_have_a_proper_combat_class_routine_in_your_folder__and_restart_Honorbuddy_ {
             get {
-                return ResourceManager.GetString("Could_not_find_a_routine_fitting_for_your_class__Please_make_sure_you_have_a_prop" +
-                        "er_combat_class_routine_in_your_folder__and_restart_Honorbuddy_", resourceCulture);
+                return ResourceManager.GetString("Could_not_find_a_routine_fitting_for_your_class__Please_make_sure_you_have_a_proper_combat_class_routine_in_your_folder__and_restart_Honorbuddy_", resourceCulture);
             }
         }
 
@@ -536,8 +534,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string Could_not_parse__ElseIf___Condition_code___0___could_not_be_compiled_into_C__code_ {
             get {
-                return ResourceManager.GetString("Could_not_parse__ElseIf___Condition_code___0___could_not_be_compiled_into_C__code" +
-                        "_", resourceCulture);
+                return ResourceManager.GetString("Could_not_parse__ElseIf___Condition_code___0___could_not_be_compiled_into_C__code_", resourceCulture);
             }
         }
 
@@ -978,8 +975,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string Honorbuddy_does_not_support_the_currently_active__gxAPI__please_change_it_to__D3D9_ {
             get {
-                return ResourceManager.GetString("Honorbuddy_does_not_support_the_currently_active__gxAPI__please_change_it_to__D3D" +
-                        "9_", resourceCulture);
+                return ResourceManager.GetString("Honorbuddy_does_not_support_the_currently_active__gxAPI__please_change_it_to__D3D9_", resourceCulture);
             }
         }
 
@@ -1132,8 +1128,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string It_appears_that___0___is_corrupt___If_the_bot_doesn_t_move_in_the_next_few_minutes__exit_Honorbuddy__delete_your_meshes_folder_and_try_again_ {
             get {
-                return ResourceManager.GetString("It_appears_that___0___is_corrupt___If_the_bot_doesn_t_move_in_the_next_few_minute" +
-                        "s__exit_Honorbuddy__delete_your_meshes_folder_and_try_again_", resourceCulture);
+                return ResourceManager.GetString("It_appears_that___0___is_corrupt___If_the_bot_doesn_t_move_in_the_next_few_minutes__exit_Honorbuddy__delete_your_meshes_folder_and_try_again_", resourceCulture);
             }
         }
 
@@ -1494,8 +1489,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string Received_error_code_from_mesh_server_when_attempting_to_download__0__trimesh___1_ {
             get {
-                return ResourceManager.GetString("Received_error_code_from_mesh_server_when_attempting_to_download__0__trimesh___1_" +
-                        "", resourceCulture);
+                return ResourceManager.GetString("Received_error_code_from_mesh_server_when_attempting_to_download__0__trimesh___1_", resourceCulture);
             }
         }
 
@@ -1504,8 +1498,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string Received_error_code_from_mesh_server_when_attempting_to_get_tile_map_for__0____1_ {
             get {
-                return ResourceManager.GetString("Received_error_code_from_mesh_server_when_attempting_to_get_tile_map_for__0____1_" +
-                        "", resourceCulture);
+                return ResourceManager.GetString("Received_error_code_from_mesh_server_when_attempting_to_get_tile_map_for__0____1_", resourceCulture);
             }
         }
 
@@ -1560,8 +1553,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string Script_files_must_have_a__cs_or__vb_extension__for_C__or_Visual_Basic_NET_respectively_ {
             get {
-                return ResourceManager.GetString("Script_files_must_have_a__cs_or__vb_extension__for_C__or_Visual_Basic_NET_respect" +
-                        "ively_", resourceCulture);
+                return ResourceManager.GetString("Script_files_must_have_a__cs_or__vb_extension__for_C__or_Visual_Basic_NET_respectively_", resourceCulture);
             }
         }
 
@@ -1716,8 +1708,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string The_settings_file_does_not_match_the_type_that_is_being_loaded__Root_name_is___0____expected___1___ {
             get {
-                return ResourceManager.GetString("The_settings_file_does_not_match_the_type_that_is_being_loaded__Root_name_is___0_" +
-                        "___expected___1___", resourceCulture);
+                return ResourceManager.GetString("The_settings_file_does_not_match_the_type_that_is_being_loaded__Root_name_is___0____expected___1___", resourceCulture);
             }
         }
 
@@ -2014,8 +2005,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string Warning___Factions__has_been_moved_to_the__GrindArea___Please_reflect_this_change_in_your_profiles_ {
             get {
-                return ResourceManager.GetString("Warning___Factions__has_been_moved_to_the__GrindArea___Please_reflect_this_change" +
-                        "_in_your_profiles_", resourceCulture);
+                return ResourceManager.GetString("Warning___Factions__has_been_moved_to_the__GrindArea___Please_reflect_this_change_in_your_profiles_", resourceCulture);
             }
         }
 
@@ -2033,8 +2023,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string Warning___TargetMaxLevel__has_been_moved_to__GrindArea___Please_reflect_this_change_in_your_profiles_ {
             get {
-                return ResourceManager.GetString("Warning___TargetMaxLevel__has_been_moved_to__GrindArea___Please_reflect_this_chan" +
-                        "ge_in_your_profiles_", resourceCulture);
+                return ResourceManager.GetString("Warning___TargetMaxLevel__has_been_moved_to__GrindArea___Please_reflect_this_change_in_your_profiles_", resourceCulture);
             }
         }
 
@@ -2043,8 +2032,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string Warning___TargetMinLevel__has_been_moved_to__GrindArea___Please_reflect_this_change_in_your_profiles_ {
             get {
-                return ResourceManager.GetString("Warning___TargetMinLevel__has_been_moved_to__GrindArea___Please_reflect_this_chan" +
-                        "ge_in_your_profiles_", resourceCulture);
+                return ResourceManager.GetString("Warning___TargetMinLevel__has_been_moved_to__GrindArea___Please_reflect_this_change_in_your_profiles_", resourceCulture);
             }
         }
 
@@ -2053,8 +2041,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string Warning__Max_polygon_count_exceeded_while_applying_blackspot__0__with_radius__1___2_ {
             get {
-                return ResourceManager.GetString("Warning__Max_polygon_count_exceeded_while_applying_blackspot__0__with_radius__1__" +
-                        "_2_", resourceCulture);
+                return ResourceManager.GetString("Warning__Max_polygon_count_exceeded_while_applying_blackspot__0__with_radius__1___2_", resourceCulture);
             }
         }
 
@@ -2063,8 +2050,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string We_either_outleveled_the_currently_loaded_profile__or_something_has_gone_terribly_wrong__Can_t_find_a_new__sub_profile_to_use_ {
             get {
-                return ResourceManager.GetString("We_either_outleveled_the_currently_loaded_profile__or_something_has_gone_terribly" +
-                        "_wrong__Can_t_find_a_new__sub_profile_to_use_", resourceCulture);
+                return ResourceManager.GetString("We_either_outleveled_the_currently_loaded_profile__or_something_has_gone_terribly_wrong__Can_t_find_a_new__sub_profile_to_use_", resourceCulture);
             }
         }
 
@@ -2145,8 +2131,7 @@ namespace Styx.Resources {
         /// </summary>
         public static string You_have_not_selected_a_mesh_folder__Please_check_your_settings_and_set_a_mesh_folder_before_starting_Honorbuddy_ {
             get {
-                return ResourceManager.GetString("You_have_not_selected_a_mesh_folder__Please_check_your_settings_and_set_a_mesh_fo" +
-                        "lder_before_starting_Honorbuddy_", resourceCulture);
+                return ResourceManager.GetString("You_have_not_selected_a_mesh_folder__Please_check_your_settings_and_set_a_mesh_folder_before_starting_Honorbuddy_", resourceCulture);
             }
         }
 

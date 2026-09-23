@@ -693,6 +693,45 @@ namespace Bots.Grind
             }
         }
 
+        internal static async Task<bool> HandleDeathCoroutine()
+        {
+            if (StyxWoW.Me.IsDead)
+            {
+                ReleaseFromCorpse();
+                if (!await Coroutine.Wait(5000, () => StyxWoW.Me.IsGhost))
+                {
+                    Logging.WriteDiagnostic("Ghost was not released after 5 seconds of waiting! Trying again..");
+                    await Coroutine.Yield();
+                }
+                return true;
+            }
+            if (StyxWoW.Me.IsGhost)
+            {
+                WoWPoint corpsePoint = StyxWoW.Me.CorpsePoint;
+                if (StyxWoW.Me.Location.DistanceSqr(corpsePoint) > 1600f)
+                {
+                    if (!_wasIndoorsOnDeath && (StyxWoW.Me.Mounted || StyxWoW.Me.MovementInfo.CanFly))
+                        Flightor.MoveTo(corpsePoint);
+                    else
+                        Navigator.MoveTo(corpsePoint);
+                    await Coroutine.Yield();
+                    return true;
+                }
+                float corpseRecoveryDelayMs = Lua.GetReturnVal<float>("return GetCorpseRecoveryDelay()", 0U) * 1000f;
+                if (corpseRecoveryDelayMs > 0f)
+                {
+                    Logging.Write("Waiting for corpse recovery delay..");
+                    await Coroutine.Sleep((int)corpseRecoveryDelayMs + 1000);
+                    return true;
+                }
+                Logging.Write("Retrieving corpse");
+                Lua.DoString("RetrieveCorpse()");
+                await Coroutine.Sleep(2000);
+                return true;
+            }
+            return false;
+        }
+
         public static PrioritySelector CreateDeathBehavior()
         {
             return new PrioritySelector(

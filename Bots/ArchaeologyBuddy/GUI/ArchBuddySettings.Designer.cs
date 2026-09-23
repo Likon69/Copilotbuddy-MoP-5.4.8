@@ -43,7 +43,7 @@
             this.cbAutoSolve = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTrainUpto = new System.Windows.Forms.Label();
             this.nudTrainUntil = new System.Windows.Forms.NumericUpDown();
             this.btnForceTrain = new System.Windows.Forms.Button();
             this.cbAutoTrain = new System.Windows.Forms.CheckBox();
@@ -162,17 +162,17 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tabPage3.Controls.Add(this.label1);
+            this.tabPage3.Controls.Add(this.lblTrainUpto);
             this.tabPage3.Controls.Add(this.nudTrainUntil);
             this.tabPage3.Controls.Add(this.btnForceTrain);
             this.tabPage3.Controls.Add(this.cbAutoTrain);
             resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Name = "tabPage3";
             // 
-            // label1
+            // lblTrainUpto
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.lblTrainUpto, "lblTrainUpto");
+            this.lblTrainUpto.Name = "lblTrainUpto";
             // 
             // nudTrainUntil
             // 
@@ -254,7 +254,7 @@
 		private System.Windows.Forms.TabPage tabPage3;
 		private System.Windows.Forms.Button btnForceTrain;
 		private System.Windows.Forms.CheckBox cbAutoTrain;
-		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label lblTrainUpto;
 		private System.Windows.Forms.NumericUpDown nudTrainUntil;
         private System.Windows.Forms.CheckBox cbCrateArtifacts;
 	}

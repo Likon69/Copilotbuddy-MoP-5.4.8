@@ -779,6 +779,7 @@ namespace Bots.DungeonBuddy.Helpers
             return false;
         }
 
+        [Obsolete("Use CommonCoroutines.MoveTo instead")]
         public static async Task<bool> MoveTo(WoWPoint point, string name = "")
         {
             if (MovementLogTimer.IsFinished && !string.IsNullOrEmpty(name))
@@ -987,6 +988,7 @@ namespace Bots.DungeonBuddy.Helpers
         /// </summary>
         /// <param name="location"> The location to move to. </param>
         /// <returns> </returns>
+        [Obsolete("Just use Navigator.MoveTo or ScriptHelpers.MoveTo since the best way to guarentee interuption free movement is block CR from getting called at all. Otherwise the CR can still attempt to face targets or stop moving")]
         public static MoveResult ControlledMoveTo(WoWPoint location)
         {
             bool alreadyHeadingThere = location == _controlledMoveToPoint;
@@ -1170,6 +1172,11 @@ namespace Bots.DungeonBuddy.Helpers
             {
                 Angle = angle;
                 Span = span;
+            }
+
+            public override string ToString()
+            {
+                return $"Angle: {Angle}, Span: {Span}";
             }
         }
 

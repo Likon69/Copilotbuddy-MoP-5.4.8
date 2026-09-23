@@ -14,14 +14,9 @@ namespace Tripper.Navigation
 	/// 1:1 API-shape port of Honorbuddy 5.4.8's <c>Tripper.Navigation.WowNavigator</c>
 	/// (see "hb decompile\.hb 5.4.8\Honorbuddy\Tripper\Navigation\WowNavigator.cs", names
 	/// recovered against the unobfuscated
-	/// "hb decompile\.hb 5.3\Tripper\Navigation\WowNavigator.cs"). Only the members that
-	/// Styx/Pathing/MeshNavigator.cs and Bots/ actually call are ported (verified by the
-	/// caller of this port against every WowNavigator/Nav.* call site) — HB's
-	/// MeshProvider/IMeshProvider, the named-filter store (HasQueryFilter/
-	/// StoreQueryFilter/GetStoredQueryFilter/SetQueryFilterByStored), the
-	/// OnSubTileLoaded/OnMapLoaded events and the static
-	/// GetNewDefaultQueryFilter/GetNewFactionQueryFilter helpers are all intentionally
-	/// left out; every method body below is rewired onto Navigation.dll via
+	/// "hb decompile\.hb 5.3\Tripper\Navigation\WowNavigator.cs"). HB's
+	/// MeshProvider/IMeshProvider is intentionally left out (see below); every other public
+	/// member is ported, with every method body rewired onto Navigation.dll via
 	/// Styx.Pathing.NavigationApi.
 	///
 	/// Deliberate deviations from HB, all authorized up front:
@@ -55,9 +50,20 @@ namespace Tripper.Navigation
 			this.MeshLock = new object();
 			this.GarbageCollectTime = TimeSpan.FromMinutes(1.0);
 			this.Extents = new Vector3(3f, 20f, 3f);
-			this._defaultFilter = BuildDefaultQueryFilter();
+			this._defaultFilter = GetNewDefaultQueryFilter();
 			this._hordeFilter = BuildFactionQueryFilter(true);
 			this._allianceFilter = BuildFactionQueryFilter(false);
+			this._namedFilters["Default"] = this._defaultFilter;
+			this._namedFilters["Horde"] = this._hordeFilter;
+			this._namedFilters["Alliance"] = this._allianceFilter;
+			this._hordeDeathKnightStartFilter = BuildFactionQueryFilter(true);
+			this._hordeDeathKnightStartFilter.ExcludeFlags &= ~Tripper.MeshMisc.AbilityFlags.Transport;
+			this._hordeDeathKnightStartFilter.IncludeFlags |= Tripper.MeshMisc.AbilityFlags.Transport;
+			this._namedFilters["Horde_DeathKnightStart"] = this._hordeDeathKnightStartFilter;
+			this._allianceDeathKnightStartFilter = BuildFactionQueryFilter(false);
+			this._allianceDeathKnightStartFilter.ExcludeFlags &= ~Tripper.MeshMisc.AbilityFlags.Transport;
+			this._allianceDeathKnightStartFilter.IncludeFlags |= Tripper.MeshMisc.AbilityFlags.Transport;
+			this._namedFilters["Alliance_DeathKnightStart"] = this._allianceDeathKnightStartFilter;
 			this.ResetQueryFilter();
 		}
 
@@ -98,6 +104,8 @@ namespace Tripper.Navigation
 			}
 			remove { this._onSubTileLoaded -= value; }
 		}
+
+		public event EventHandler<MapLoadedEventArgs> OnMapLoaded;
 
 		private void InstallTileLoadedThunk()
 		{
@@ -208,6 +216,15 @@ namespace Tripper.Navigation
 						this._mapId = StyxWoW.Me.MapId;
 						this.Mesh = new NavMesh { MapId = this._mapId };
 						this.MeshQuery = new NavMeshQuery { MapId = this._mapId };
+						EventHandler<MapLoadedEventArgs> mapLoadedHandler = this.OnMapLoaded;
+						if (mapLoadedHandler != null)
+						{
+							mapLoadedHandler(this, new MapLoadedEventArgs
+							{
+								Names = this.Maps.ToArray(),
+								IsTiled = true
+							});
+						}
 					}
 					else
 					{
@@ -387,6 +404,49 @@ namespace Tripper.Navigation
 			}
 		}
 
+		public bool HasQueryFilter(string name)
+		{
+			lock (this.MeshLock)
+			{
+				return this._namedFilters.ContainsKey(name);
+			}
+		}
+
+		public void StoreQueryFilter(string name, WowQueryFilter filter)
+		{
+			if (filter == null)
+			{
+				throw new ArgumentNullException("filter");
+			}
+			lock (this.MeshLock)
+			{
+				this._namedFilters[name] = filter;
+			}
+		}
+
+		public WowQueryFilter GetStoredQueryFilter(string name)
+		{
+			lock (this.MeshLock)
+			{
+				WowQueryFilter filter;
+				return this._namedFilters.TryGetValue(name, out filter) ? filter : null;
+			}
+		}
+
+		public bool SetQueryFilterByStored(string name)
+		{
+			lock (this.MeshLock)
+			{
+				WowQueryFilter storedQueryFilter = this.GetStoredQueryFilter(name);
+				if (storedQueryFilter != null)
+				{
+					this._queryFilter = storedQueryFilter;
+					return true;
+				}
+				return false;
+			}
+		}
+
 		/// <summary>
 		/// Rewired: HB's FindPath (5.4.8 decompile lines 441-618) drove Detour directly —
 		/// two FindNearestPolygon calls, InitSlicedFindPath, a manual UpdateSlicedFindPath
@@ -532,6 +592,9 @@ namespace Tripper.Navigation
 				this._defaultFilter.Dispose();
 				this._hordeFilter.Dispose();
 				this._allianceFilter.Dispose();
+				this._hordeDeathKnightStartFilter.Dispose();
+				this._allianceDeathKnightStartFilter.Dispose();
+				this._namedFilters.Clear();
 				this._tileUsage.Clear();
 			}
 		}
@@ -545,13 +608,15 @@ namespace Tripper.Navigation
 			}
 		}
 
-		/// <summary>
-		/// Matches HB's GetNewDefaultQueryFilter + SetDefaultQueryFilterCosts (5.4.8
-		/// decompile lines 849-876). Numeric constants preserved exactly.
-		/// </summary>
-		private static WowQueryFilter BuildDefaultQueryFilter()
+		public static WowQueryFilter GetNewDefaultQueryFilter()
 		{
 			WowQueryFilter filter = new WowQueryFilter(Tripper.MeshMisc.AbilityFlags.All, Tripper.MeshMisc.AbilityFlags.Unwalkable | Tripper.MeshMisc.AbilityFlags.Transport);
+			SetDefaultQueryFilterCosts(filter);
+			return filter;
+		}
+
+		public static void SetDefaultQueryFilterCosts(WowQueryFilter filter)
+		{
 			filter.SetAreaCost(Tripper.MeshMisc.AreaType.HordePortal, 1.66f);
 			filter.SetAreaCost(Tripper.MeshMisc.AreaType.AlliancePortal, 1.66f);
 			filter.SetAreaCost(Tripper.MeshMisc.AreaType.DefendersPortal, 3.16f);
@@ -569,7 +634,11 @@ namespace Tripper.Navigation
 			filter.SetAreaCost(Tripper.MeshMisc.AreaType.Blackspot, 60f);
 			filter.SetAreaCost(Tripper.MeshMisc.AreaType.InteractObject, 1.66f);
 			filter.SetAreaCost(Tripper.MeshMisc.AreaType.InteractUnit, 1.66f);
-			return filter;
+		}
+
+		public static WowQueryFilter GetNewFactionQueryFilter(bool horde)
+		{
+			return BuildFactionQueryFilter(horde);
 		}
 
 		/// <summary>See SetFactionQueryFilter's XML doc for the area-cost deviation this implements.</summary>
@@ -577,7 +646,7 @@ namespace Tripper.Navigation
 
 		private static WowQueryFilter BuildFactionQueryFilter(bool isHorde)
 		{
-			WowQueryFilter filter = BuildDefaultQueryFilter();
+			WowQueryFilter filter = GetNewDefaultQueryFilter();
 			if (isHorde)
 			{
 				filter.SetAreaCost(Tripper.MeshMisc.AreaType.Alliance, ProhibitiveFactionAreaCost);
@@ -664,6 +733,9 @@ namespace Tripper.Navigation
 		private readonly WowQueryFilter _defaultFilter;
 		private readonly WowQueryFilter _hordeFilter;
 		private readonly WowQueryFilter _allianceFilter;
+		private readonly WowQueryFilter _hordeDeathKnightStartFilter;
+		private readonly WowQueryFilter _allianceDeathKnightStartFilter;
+		private readonly Dictionary<string, WowQueryFilter> _namedFilters = new Dictionary<string, WowQueryFilter>();
 		private WowQueryFilter _queryFilter;
 
 		/// <summary>

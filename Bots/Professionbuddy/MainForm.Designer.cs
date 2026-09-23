@@ -529,7 +529,7 @@
 			// 
 			this.TabPageProfile.Controls.Add(this.ActionSplitContainer);
 			this.TabPageProfile.Location = new System.Drawing.Point(4, 22);
-			this.TabPageProfile.Name = "TabPageProfile";
+			this.TabPageProfile.Name = "ProfileEditorTab";
 			this.TabPageProfile.Padding = new System.Windows.Forms.Padding(3);
 			this.TabPageProfile.Size = new System.Drawing.Size(408, 500);
 			this.TabPageProfile.TabIndex = 0;

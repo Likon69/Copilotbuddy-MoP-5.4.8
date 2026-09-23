@@ -2,13 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Styx.Common;
 using Styx.CommonBot;
 using Styx.CommonBot.Profiles;
+using Styx.Resources;
+using Tripper.Navigation;
+using Tripper.RecastManaged.Detour;
 
 namespace Styx.Pathing
 {
     public static class BlackspotManager
     {
+        private const int MaxQueryPolygons = 8192;
+
         private static readonly List<Blackspot> _blackspots = new List<Blackspot>();
 
         public static ReadOnlyCollection<Blackspot> DynamicBlackspots
@@ -19,6 +25,38 @@ namespace Styx.Pathing
         internal static void Initialize()
         {
             BotEvents.Profile.OnNewProfileLoaded += Profile_OnNewProfileLoaded;
+            if (Navigator.NavigationProvider is MeshNavigator meshNavigator)
+            {
+                meshNavigator.Nav.OnTileLoaded += Nav_OnTileLoaded;
+                meshNavigator.Nav.OnMapLoaded += Nav_OnMapLoaded;
+            }
+            Navigator.OnNavigationProviderChanged += Navigator_OnNavigationProviderChanged;
+        }
+
+        private static void Navigator_OnNavigationProviderChanged(object sender, NavigationProviderChangedEventArgs<INavigationProvider> e)
+        {
+            if (e.OldProvider is MeshNavigator oldMeshNavigator)
+            {
+                oldMeshNavigator.Nav.OnTileLoaded -= Nav_OnTileLoaded;
+                oldMeshNavigator.Nav.OnMapLoaded -= Nav_OnMapLoaded;
+            }
+            if (e.NewProvider is MeshNavigator newMeshNavigator)
+            {
+                newMeshNavigator.Nav.OnTileLoaded += Nav_OnTileLoaded;
+                newMeshNavigator.Nav.OnMapLoaded += Nav_OnMapLoaded;
+            }
+        }
+
+        private static void Nav_OnMapLoaded(object sender, MapLoadedEventArgs e)
+        {
+            _blackspots.Clear();
+            if (!e.IsTiled)
+                ApplyBlackspots(GetAllCurrentBlackspots());
+        }
+
+        private static void Nav_OnTileLoaded(object sender, TileLoadedEventArgs e)
+        {
+            ApplyBlackspots(GetAllCurrentBlackspots());
         }
 
         private static IEnumerable<Blackspot> GetBlackspotsForFlags(BlackspotQueryFlags flags)
@@ -53,7 +91,7 @@ namespace Styx.Pathing
 
         private static void Profile_OnNewProfileLoaded(BotEvents.Profile.NewProfileLoadedEventArgs args)
         {
-            _blackspots.Clear();
+            ForceReload("New profile loaded");
         }
 
         public static bool IsBlackspotted(WoWPoint location, float radius = 0f, BlackspotQueryFlags flags = BlackspotQueryFlags.All)
@@ -80,6 +118,7 @@ namespace Styx.Pathing
                 if (!_blackspots.Contains(blackspot))
                     _blackspots.Add(blackspot);
             }
+            ApplyBlackspots(filtered);
         }
 
         public static void RemoveBlackspot(Blackspot spot)
@@ -97,6 +136,40 @@ namespace Styx.Pathing
 
         private static void ForceReload(string reason = "")
         {
+            if (Navigator.NavigationProvider is MeshNavigator meshNavigator)
+            {
+                Logging.WriteDiagnostic("BlackspotManager forcing unload of meshes{0}", string.IsNullOrWhiteSpace(reason) ? "" : " - " + reason);
+                meshNavigator.Nav.UnloadAllTiles();
+            }
+        }
+
+        private static void ApplyBlackspots(IEnumerable<Blackspot> blackspots)
+        {
+            if (blackspots == null || !(Navigator.NavigationProvider is MeshNavigator meshNavigator))
+                return;
+
+            WowNavigator nav = meshNavigator.Nav;
+            lock (nav.MeshLock)
+            {
+                foreach (Blackspot blackspot in blackspots)
+                {
+                    Tripper.Tools.Math.Vector3 center = NavHelper.ToNav(blackspot.Location);
+                    Tripper.Tools.Math.Vector3 extents = new Tripper.Tools.Math.Vector3(blackspot.Radius, blackspot.Height, blackspot.Radius);
+                    Status status = nav.MeshQuery.QueryPolygons(center, extents, nav.QueryFilter.InternalFilter, MaxQueryPolygons, out PolygonReference[] result);
+                    if (status.Failed)
+                    {
+                        Logging.Write("Warning: QueryPolygons failed while applying blackspot {0} with radius {1} (status: {2})", blackspot.Location, blackspot.Radius, status.Flags);
+                        continue;
+                    }
+                    if (result.Length >= MaxQueryPolygons)
+                    {
+                        Logging.Write(StyxResources.Warning__Max_polygon_count_exceeded_while_applying_blackspot__0__with_radius__1___2_, blackspot.Location, blackspot.Radius, blackspot.Radius > 100f ? StyxResources._Consider_using_multiple_blackspots_instead_of_one_very_large_blackspot_ : "");
+                        continue;
+                    }
+                    foreach (PolygonReference polygonReference in result)
+                        nav.Mesh.SetPolyArea(polygonReference, (byte)Tripper.MeshMisc.AreaType.Blackspot);
+                }
+            }
         }
     }
 }
