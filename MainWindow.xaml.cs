@@ -59,6 +59,8 @@ namespace CopilotBuddy
 
             Logging.Write("CopilotBuddy v" + Assembly.GetEntryAssembly().GetName().Version + " started.");
 
+            DevToolsWindow.InstallConsoleKeybind();
+
             HandleSuccess();
         }
 
@@ -135,12 +137,12 @@ namespace CopilotBuddy
                 if (found64Bits)
                 {
                     Logging.Write(Colors.OrangeRed, "We couldn't find a proper WoW to attach. There are 64bit WoW processes running and CopilotBuddy only works with the 32bit version.");
-                    result = System.Windows.MessageBox.Show(Globalization.StartUpError64Bit, "CopilotBuddy Error", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    result = ErrorWindow.Show(Globalization.StartUpError64Bit, "CopilotBuddy Error", MessageBoxButton.OKCancel, System.Drawing.SystemIcons.Error);
                 }
                 else
                 {
                     Logging.Write(Colors.OrangeRed, "We couldn't find a free WoW process to attach. Please make certain your toon is standing in game world and you are running the latest version of CopilotBuddy.");
-                    result = System.Windows.MessageBox.Show(Globalization.StartUpErrorNotInGame, "CopilotBuddy Error", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    result = ErrorWindow.Show(Globalization.StartUpErrorNotInGame, "CopilotBuddy Error", MessageBoxButton.OKCancel, System.Drawing.SystemIcons.Error);
                 }
             }
 
@@ -544,14 +546,9 @@ namespace CopilotBuddy
             pluginsWindow.Show();
         }
 
-        /// <summary>
-        /// HB 5.4.8 opens DevToolsWindow here. No DeveloperToolsWindow/DevToolsWindow class
-        /// exists anywhere in this project, and creating one is out of this task's scope, so
-        /// this reports the fact instead of silently doing nothing.
-        /// </summary>
         private void btnDevTools_Click(object sender, RoutedEventArgs e)
         {
-            Logging.Write(Colors.OrangeRed, "Developer Tools window is not available in this build.");
+            DevToolsWindow.Display(this);
         }
 
         private void EnhancedMode_Unchecked(object sender, RoutedEventArgs e)

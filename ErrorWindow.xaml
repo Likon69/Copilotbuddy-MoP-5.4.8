@@ -1,0 +1,24 @@
+<mah:MetroWindow
+	x:Class="CopilotBuddy.ErrorWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" xmlns:integration="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+	x:Name="Window"
+	Title="ErrorWindow"
+	Width="399"
+	Height="168"
+	Background="{DynamicResource WindowBackgroundBrush}"
+	GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
+	TitleCharacterCasing="Normal"
+	ResizeMode="NoResize"
+	WindowStartupLocation="CenterScreen"
+	Icon="pack://application:,,,/CopilotBuddy.ico">
+	<Grid>
+		<integration:WindowsFormsHost Margin="95,10,10,42" Background="#00FFFFFF">
+			<wf:RichTextBox x:Name="MessageBox" BorderStyle="None" BackColor="57,57,57" ForeColor="White" DetectUrls="True" ReadOnly="True" LinkClicked="MessageBox_OnLinkClicked" />
+		</integration:WindowsFormsHost>
+		<Image x:Name="ErrorWindowIcon" HorizontalAlignment="Left" Height="50" Margin="10,10,0,0" VerticalAlignment="Top" Width="50" />
+		<DockPanel x:Name="ButtonPanel" HorizontalAlignment="Stretch" Height="27" Margin="95,96,69,0" VerticalAlignment="Top" Width="227">
+			<Button x:Name="Button1" Width="75" Height="25" PreviewMouseLeftButtonUp="Button1_OnPreviewMouseLeftButtonUp" />
+			<Button x:Name="Button2" Width="75" Height="25" PreviewMouseLeftButtonUp="Button2_OnPreviewMouseLeftButtonUp" />
+			<Button x:Name="Button3" Width="75" Height="25" PreviewMouseLeftButtonUp="Button3_OnPreviewMouseLeftButtonUp" />
+		</DockPanel>
+	</Grid>
+</mah:MetroWindow>

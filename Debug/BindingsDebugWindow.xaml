@@ -1,0 +1,30 @@
+<mah:MetroWindow
+	x:Class="CopilotBuddy.Debug.BindingsDebugWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:Debug="clr-namespace:CopilotBuddy.Debug"
+	Title=".NET Properties used in Binding Paths"
+	Width="450"
+	Height="450"
+	Background="{DynamicResource WindowBackgroundBrush}"
+	GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
+	TitleCharacterCasing="Normal"
+	WindowStartupLocation="CenterScreen"
+	Icon="pack://application:,,,/CopilotBuddy.ico"
+	DataContext="{Binding RelativeSource={RelativeSource Self}}">
+	<FrameworkElement.Resources>
+		<ResourceDictionary>
+			<DataTemplate x:Key="{DataTemplateKey {x:Type Debug:ReflectPropertyDescriptorInfo}}" DataType="{x:Type Debug:ReflectPropertyDescriptorInfo}">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="{Binding TypeName, Mode=OneTime}" />
+					<TextBlock>.</TextBlock>
+					<TextBlock FontWeight="Bold" Text="{Binding PropertyName, Mode=OneTime}" />
+					<TextBlock Text="{Binding DisplayHandlerCount, Mode=OneTime}" />
+				</StackPanel>
+			</DataTemplate>
+		</ResourceDictionary>
+	</FrameworkElement.Resources>
+	<DockPanel>
+		<Button DockPanel.Dock="Top" Margin="4" Click="RefreshButton_Click">_Refresh</Button>
+		<ScrollViewer Margin="4">
+			<ItemsControl ItemsSource="{Binding ReflectProperties}" />
+		</ScrollViewer>
+	</DockPanel>
+</mah:MetroWindow>

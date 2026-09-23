@@ -29,6 +29,9 @@
 
   <ItemGroup>
     <Resource Include="CopilotBuddy.ico" />
+    <Resource Include="images\HbWasp.ico" />
+    <Resource Include="images\refresh.png" />
+    <Resource Include="images\Copy.png" />
   </ItemGroup>
 
   <ItemGroup>
