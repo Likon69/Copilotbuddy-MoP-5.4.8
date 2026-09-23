@@ -98,6 +98,9 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+  <data name="(Blacklisted)">
+    <value xml:space="preserve">(blacklisted)</value>
+  </data>
   <data name="Draenei">
     <value xml:space="preserve">Draenei</value>
   </data>
@@ -185,6 +188,9 @@
   <data name="Solving">
     <value xml:space="preserve">Solving "{0}"</value>
   </data>
+  <data name="MoveToDigsiteBehavior_Solving">
+    <value xml:space="preserve">Solving '{0}'</value>
+  </data>
   <data name="SolvingArtifact">
     <value xml:space="preserve">Solving artifact</value>
   </data>
@@ -216,10 +222,10 @@
     <value xml:space="preserve">No digsites on the map</value>
   </data>
   <data name="SelectedAsTheNextDigsite">
-    <value xml:space="preserve">Selected "{0}" as the next digsite.</value>
+    <value xml:space="preserve">Selected '{0}' as the next digsite.</value>
   </data>
   <data name="FindDigsiteBehavior_AllCurrentDigsitesAreBlacklistedSelectingClosestDigsiteAsTheNextDigsite">
-    <value xml:space="preserve">All current digsites are blacklisted. Selecting closest digsite "{0}" as the next digsite.</value>
+    <value xml:space="preserve">All current digsites are blacklisted. Selecting closest digsite '{0}' as the next digsite.</value>
   </data>
   <data name="StopAndDismount">
     <value xml:space="preserve">Stop and dismount.</value>

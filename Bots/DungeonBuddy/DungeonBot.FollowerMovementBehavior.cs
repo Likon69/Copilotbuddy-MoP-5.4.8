@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bots.DungeonBuddy.Enums;
 using Bots.DungeonBuddy.Helpers;
+using Buddy.Coroutines;
 using CommonBehaviors.Actions;
 using Styx;
 using Styx.Common;
@@ -30,6 +31,9 @@ namespace Bots.DungeonBuddy
 
         private async Task<bool> ExecuteFollowerMovementBehavior()
         {
+            if (Me.IsGroupLeader)
+                return await PassLeadershipToTank();
+
             if (_followerMovementHook == null)
             {
                 _followerMovementHook = new HookExecutor(
@@ -39,6 +43,22 @@ namespace Bots.DungeonBuddy
             }
 
             return await _followerMovementHook.ExecuteCoroutine();
+        }
+
+        private async Task<bool> PassLeadershipToTank()
+        {
+            if (!Me.IsGroupLeader)
+                return false;
+
+            var tank = GroupMember.GroupMembers.FirstOrDefault(m => m.IsTank);
+            if (tank == null)
+                return false;
+
+            await Coroutine.Sleep(ScriptHelpers.Rnd.Next(1000, 4000));
+            Lua.DoString($"PromoteToLeader(\"{tank.Name.ToFormatedUTF8()}\")");
+            Logger.Write("Passing group leader to a tank");
+            await CommonCoroutines.SleepForLagDuration();
+            return true;
         }
 
         private async Task<bool> MoveFollower()

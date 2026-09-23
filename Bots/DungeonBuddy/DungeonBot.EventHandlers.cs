@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Media;
 using Styx;
 using Styx.Common.Helpers;
+using Styx.CommonBot;
 using Styx.TreeSharp;
 using Styx.WoWInternals.DBC;
 using Tripper.Navigation;
@@ -19,6 +20,14 @@ namespace Bots.DungeonBuddy
     {
         internal void LoadDungeonScriptAndProfile(uint lfgDungeonId)
         {
+            if (lfgDungeonId == 0 && IsFarming)
+            {
+                bool isDungeonFarm = DungeonBuddySettings.Instance.DungeonType == DungeonType.Farm;
+                string reason = string.Format("You have selected to farm {0}s but have not selected a {0} to farm", isDungeonFarm ? "dungeon" : "raid");
+                TreeRoot.Stop(reason);
+                return;
+            }
+
             Dungeon dungeon = null;
             if (DungeonManager.CustomDungeons != null)
             {

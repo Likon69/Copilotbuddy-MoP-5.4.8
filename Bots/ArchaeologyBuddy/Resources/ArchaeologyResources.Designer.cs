@@ -214,7 +214,7 @@ namespace ArchaeologyBuddy.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All current digsites are blacklisted. Selecting closest digsite &quot;{0}&quot; as the next digsite..
+        ///   Looks up a localized string similar to All current digsites are blacklisted. Selecting closest digsite &apos;{0}&apos; as the next digsite..
         /// </summary>
         internal static string FindDigsiteBehavior_AllCurrentDigsitesAreBlacklistedSelectingClosestDigsiteAsTheNextDigsite {
             get {
@@ -404,7 +404,7 @@ namespace ArchaeologyBuddy.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Selected &quot;{0}&quot; as the next digsite..
+        ///   Looks up a localized string similar to Selected &apos;{0}&apos; as the next digsite..
         /// </summary>
         internal static string SelectedAsTheNextDigsite {
             get {
@@ -436,6 +436,15 @@ namespace ArchaeologyBuddy.Resources {
         internal static string Solving {
             get {
                 return ResourceManager.GetString("Solving", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Solving &apos;{0}&apos;.
+        /// </summary>
+        internal static string MoveToDigsiteBehavior_Solving {
+            get {
+                return ResourceManager.GetString("MoveToDigsiteBehavior_Solving", resourceCulture);
             }
         }
         

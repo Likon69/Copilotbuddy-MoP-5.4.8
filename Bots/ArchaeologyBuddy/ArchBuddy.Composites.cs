@@ -500,8 +500,8 @@ namespace Bots.ArchaeologyBuddy
 											}
 										    Navigator.Clear();
 											SolveReport[artifactName]++;
-											new ActivitySetter(ArchaeologyResources.SolvingArtifact); 
-											Log(ArchaeologyResources.Solving, artifactName);
+											new ActivitySetter(ArchaeologyResources.SolvingArtifact);
+											Log(ArchaeologyResources.MoveToDigsiteBehavior_Solving, artifactName);
 											Lua.DoString("SolveArtifact()");
                                             Thread.Sleep(4000);
 

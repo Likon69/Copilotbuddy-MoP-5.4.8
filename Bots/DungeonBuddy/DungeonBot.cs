@@ -74,7 +74,7 @@ namespace Bots.DungeonBuddy
         {
             get
             {
-                return _root ?? (_root = new LockSelector(
+                return _root ?? (_root = new HookExecutor("Dungeonbot_Main", "Dungeonbuddy's main behavior", new LockSelector(
                                              ctx => GlobalSettings.Instance.UseFrameLock,
                                              // Accepting dungeon invites, role checks, resurrects etc.
                                              CreateEventBehavior(),
@@ -97,7 +97,7 @@ namespace Bots.DungeonBuddy
                                              CreateEnqueueBehavior(),
                                              CreateInsideDungeonBehavior(),
                                              CreateOutsideDungeonBehavior(),
-                                             new ActionIdle()));
+                                             new ActionIdle())));
             }
         }
 
@@ -267,90 +267,94 @@ namespace Bots.DungeonBuddy
 
         private void PrintDiagnosticsInfo(Color color)
         {
-            switch (DungeonBuddySettings.Instance.PartyMode)
+            var settings = DungeonBuddySettings.Instance;
+
+            Logger.Write(color, "=== Dungeonbuddy Settings ===");
+            Logger.Write(color, "Party Mode: {0}", settings.PartyMode);
+            Logger.Write(color, "Combat Movement: {0}", settings.CombatMovement);
+            Logger.Write(color, "Kill optional bosses: {0}", settings.KillOptionalBosses);
+            Logger.Write(color, "Tank In Random Groups: {0}", settings.TankInRandomGroups);
+            Logger.Write(color, "Pickup Quests: {0}", settings.PickupQuests);
+            Logger.Write(color, "FollowingDistance: {0}", settings.FollowingDistance);
+            Logger.Write(color, "AbandonLowLevelQuests: {0}", settings.AbandonLowLevelQuests);
+            Logger.Write(color, "Loot Mode: {0}", settings.LootMode);
+            Logger.Write(color, "InsideInstanceRepairPercent: {0}", settings.InsideInstanceRepairPercent);
+            Logger.Write(color, "OutsideInstanceRepairPercent: {0}", settings.OutsideInstanceRepairPercent);
+            Logger.Write(color, "InsideInstanceMinFreeBagSlots: {0}", settings.InsideInstanceMinFreeBagSlots);
+            Logger.Write(color, "OutsideInstanceMinFreeBagSlots: {0}", settings.OutsideInstanceMinFreeBagSlots);
+            Logger.Write(color, "Item Sell Quality: {0}", settings.SellItemQuality);
+            Logger.Write(color, "HearthOnVendorRun: {0}", settings.HearthOnVendorRun);
+            Logger.Write(color, "FreeForAllLoot: {0}", settings.FreeForAllLoot);
+            Logger.Write(color, "Port Outside Instance To Sell: {0}", settings.PortOutsideInstanceToSell);
+            Logger.Write(color, "Port Outside Instance To Buy: {0}", settings.PortOutsideInstanceToBuy);
+            Logger.Write(color, "Port Outside On Ghost Sighting: {0}", settings.PortOutsideOnGhostSighting);
+            Logger.Write(color, "Mail Boe Items: {0}", settings.MailBoeItems);
+            if (settings.MailBoeItems)
+                Logger.Write(color, "Mail Boe Item quality: {0}", settings.MailItemQuality);
+
+            Logger.Write(color, "LeaderName: {0}", MaskString(settings.LeaderName));
+            Logger.Write(color, "Party Members");
+            foreach (var member in settings.PartyMembers)
+                Logger.Write(color, "\t\t{0}", MaskString(member));
+
+            if (settings.Role == DungeonBuddySettings.QueueRole.Auto)
             {
-                case PartyMode.Leader:
-                    Logger.Write(
-                        color,
-                        "Party Mode is on and I'm the Leader. I will attempt to invite {0} others to party before continuing",
-                        DungeonBuddySettings.Instance.PartyMembers.Length);
-                    break;
-                case PartyMode.Follower:
-                    Logger.Write(color, "Party Mode is on and I'm a follower. I will be invited to group by leader");
-                    if (string.IsNullOrWhiteSpace(DungeonBuddySettings.Instance.LeaderName))
-                        Logger.Write(color, "I do not know who my leader is (Leader Name in settings is blank)");
-                    break;
-                case PartyMode.Off:
-                    Logger.Write(color, "Party Mode is off");
-                    break;
+                var queueRole = Me.Specialization.IsTank()
+                    ? DungeonBuddySettings.QueueRole.Tank
+                    : Me.Specialization.IsHealer()
+                        ? DungeonBuddySettings.QueueRole.Healer
+                        : DungeonBuddySettings.QueueRole.Damage;
+                Logger.Write(color, "Role: Automatic based on spec. The {0} role will be used", queueRole);
+            }
+            else
+                Logger.Write(color, "Role: {0}", settings.Role);
+
+            Logger.Write(color, "Dungeon type: {0}", settings.DungeonType);
+            if (settings.DungeonType == DungeonType.Specific || settings.DungeonType == DungeonType.Farm)
+            {
+                Logger.Write(color, "Selected {0} dungeon{1}", settings.SelectedDungeonIds.Length, settings.SelectedDungeonIds.Length > 1 ? "s" : "");
+                foreach (var d in LfgDungeons.Dungeons.Where(d => settings.SelectedDungeonIds.Contains(d.Id)))
+                    Logger.Write(color, "\t\t{0}", d.DifficultyId == 1 ? d.Name : d.Name + " Heroic");
             }
 
-            Logger.Write(color, "I will {0}kill optional bosses.", DungeonBuddySettings.Instance.KillOptionalBosses ? null : "not ");
-            Logger.Write(color, "I will sell items of {0} quality and lower", DungeonBuddySettings.Instance.SellItemQuality);
-            Logger.Write(
-                color,
-                "I will {0}mail Bind-On-Equip items{1}.",
-                DungeonBuddySettings.Instance.MailBoeItems ? null : "not ",
-                DungeonBuddySettings.Instance.MailBoeItems ? string.Format(" of {0} quality and higher", DungeonBuddySettings.Instance.MailItemQuality) : null);
-
-            Logger.Write(color, "I will loot {0}", DungeonBuddySettings.Instance.LootMode == LootMode.Always ? "everything" : "bosses only");
-            Logger.Write(color, "I have FrameLock turned {0}", GlobalSettings.Instance.UseFrameLock ? "on" : "off");
-            Logger.Write(color, "My role is {0}", Me.IsTank() ? "tank" : Me.IsHealer() ? "healer" : Me.IsRange() ? "ranged dps" : "melee dps");
-
-            // Dungeons
-            Logger.Write(color, "Dungeon type is set to {0}", DungeonBuddySettings.Instance.DungeonType);
-            if (DungeonBuddySettings.Instance.DungeonType == DungeonType.Specific)
+            Logger.Write(color, "Raid type: {0}", settings.RaidType);
+            if (settings.RaidType != RaidType.None)
             {
-                if (DungeonBuddySettings.Instance.SelectedDungeonIds.Length > 0)
-                {
-                    Logger.Write(color, "I have selected the following dungeons");
-                    foreach (var d in LfgDungeons.Dungeons.Where(d => DungeonBuddySettings.Instance.SelectedDungeonIds.Contains(d.Id)))
-                        Logger.Write(color, "{0}", d.DifficultyId == 1 ? d.Name : d.Name + " Heroic");
-                }
-                else
-                    Logger.Write(color, "I have not selected any dungeons");
-            }
-            if (DungeonBuddySettings.Instance.DungeonType == DungeonType.Farm)
-            {
-                var dungId = DungeonBuddySettings.Instance.SelectedDungeonIds.FirstOrDefault();
-                if (dungId > 0)
-                    Logger.Write(color, "I have selected to farm  the {0} dungeon", LfgDungeons.FromId(dungId).Name);
-                else
-                    Logger.Write(color, "I have not selected a dungeon to farm");
-            }
-            // Raids
-            Logger.Write(color, "Raid type is set to {0}", DungeonBuddySettings.Instance.RaidType);
-            if (DungeonBuddySettings.Instance.RaidType == RaidType.Specific || DungeonBuddySettings.Instance.RaidType == RaidType.AutoQueueBest)
-            {
-                if (DungeonBuddySettings.Instance.SelectedRaidIds.Length > 0 && DungeonBuddySettings.Instance.RaidType == RaidType.Specific)
-                    Logger.Write(color, "1 have selected to queue for the {0} raid", LfgDungeons.FromId(DungeonBuddySettings.Instance.SelectedRaidIds.FirstOrDefault()).Name);
-                else if (DungeonBuddySettings.Instance.RaidType == RaidType.AutoQueueBest)
-                    Logger.Write(color, "I will automatically queue for the best available raid that hasn't been completed this week.");
-                else
-                    Logger.Write(color, "I have not selected any raids");
+                Logger.Write(color, "Selected {0} raid{1}", settings.SelectedRaidIds.Length, settings.SelectedRaidIds.Length > 1 ? "s" : "");
+                foreach (var d in LfgDungeons.Dungeons.Where(d => settings.SelectedRaidIds.Contains(d.Id)))
+                    Logger.Write(color, "\t\t{0}", d.Name);
             }
 
-            if (DungeonBuddySettings.Instance.RaidType == RaidType.Farm)
+            Logger.Write(color, "Scenario type: {0}", settings.ScenarioType);
+            if (settings.ScenarioType == ScenarioType.None)
+                return;
+
+            if (settings.ScenarioType == ScenarioType.Specific)
             {
-                if (DungeonBuddySettings.Instance.SelectedRaidIds.Length > 0)
-                    Logger.Write(color, "I have selected to farm the {0} raid", LfgDungeons.FromId(DungeonBuddySettings.Instance.SelectedRaidIds.FirstOrDefault()).Name);
-                else
-                    Logger.Write(color, "I have not selected a raid to farm");
+                foreach (var d in LfgDungeons.Dungeons.Where(d => settings.SpecifiedScenariosIds.Contains(d.Id)))
+                    Logger.Write(color, "\t\t{0}", d.Name);
+                return;
             }
 
-            // Scenarios
-            Logger.Write(color, "Scenario type is set to {0}", DungeonBuddySettings.Instance.ScenarioType);
-            if (DungeonBuddySettings.Instance.ScenarioType == ScenarioType.Specific)
+            if (settings.SelectedScenarioId != 0)
             {
-                if (DungeonBuddySettings.Instance.SpecifiedScenariosIds.Length > 0)
-                {
-                    Logger.Write(color, "I have selected the following scenarios");
-                    foreach (var d in LfgDungeons.Scenarios.Where(d => DungeonBuddySettings.Instance.SpecifiedScenariosIds.Contains(d.Id)))
-                        Logger.Write(color, "{0}", d.Name);
-                }
-                else
-                    Logger.Write(color, "I have not selected any scenarios");
+                var lfgDungeons = LfgDungeons.Scenarios.FirstOrDefault(d => d.Id == settings.SelectedScenarioId);
+                if (lfgDungeons != null)
+                    Logger.Write(color, "\t\t{0}", lfgDungeons.Name);
             }
+        }
+
+        private string MaskString(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return "(blank)";
+
+            value = value.Trim();
+            var index = value.IndexOf("-", StringComparison.Ordinal);
+            if (index != -1)
+                return new string('*', index) + '-' + new string('*', value.Length - index - 1);
+
+            return new string('*', value.Length);
         }
 
         private static class BehaviorDebug

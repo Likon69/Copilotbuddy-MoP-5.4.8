@@ -118,10 +118,58 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_cbRandomizeHotspots.AutoSize" type="System.Boolean, mscorlib">
+  <data name="_lblRandomizationFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="_lblRandomizationFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 133</value>
+  </data>
+  <data name="_lblRandomizationFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 13</value>
+  </data>
+  <data name="_lblRandomizationFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="_lblRandomizationFactor.Text" xml:space="preserve">
+    <value>Randomization Factor</value>
+  </data>
+  <data name="&gt;&gt;_lblRandomizationFactor.Name" xml:space="preserve">
+    <value>_lblRandomizationFactor</value>
+  </data>
+  <data name="&gt;&gt;_lblRandomizationFactor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_lblRandomizationFactor.Parent" xml:space="preserve">
+    <value>_tabPaths</value>
+  </data>
+  <data name="&gt;&gt;_lblRandomizationFactor.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudRandomizationFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>186, 131</value>
+  </data>
+  <data name="nudRandomizationFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 20</value>
+  </data>
+  <data name="nudRandomizationFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;nudRandomizationFactor.Name" xml:space="preserve">
+    <value>nudRandomizationFactor</value>
+  </data>
+  <data name="&gt;&gt;nudRandomizationFactor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudRandomizationFactor.Parent" xml:space="preserve">
+    <value>_tabPaths</value>
+  </data>
+  <data name="&gt;&gt;nudRandomizationFactor.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="_cbRandomizeHotspots.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="_cbRandomizeHotspots.Location" type="System.Drawing.Point, System.Drawing">
     <value>73, 104</value>
   </data>
@@ -144,7 +192,7 @@
     <value>_tabPaths</value>
   </data>
   <data name="&gt;&gt;_cbRandomizeHotspots.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="_cbPathingType.Items" xml:space="preserve">
     <value>Bounce</value>
@@ -171,61 +219,61 @@
     <value>_tabPaths</value>
   </data>
   <data name="&gt;&gt;_cbPathingType.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="_lblPathingType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_lblPathingType.Location" type="System.Drawing.Point, System.Drawing">
     <value>70, 71</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_lblPathingType.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 13</value>
   </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+  <data name="_lblPathingType.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
+  <data name="_lblPathingType.Text" xml:space="preserve">
     <value>Pathing Type</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
+  <data name="&gt;&gt;_lblPathingType.Name" xml:space="preserve">
+    <value>_lblPathingType</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;_lblPathingType.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_lblPathingType.Parent" xml:space="preserve">
     <value>_tabPaths</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;_lblPathingType.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="_lblHeightModifier.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_lblHeightModifier.Location" type="System.Drawing.Point, System.Drawing">
     <value>70, 31</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_lblHeightModifier.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 13</value>
   </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+  <data name="_lblHeightModifier.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="_lblHeightModifier.Text" xml:space="preserve">
     <value>Height Modifier</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="&gt;&gt;_lblHeightModifier.Name" xml:space="preserve">
+    <value>_lblHeightModifier</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;_lblHeightModifier.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_lblHeightModifier.Parent" xml:space="preserve">
     <value>_tabPaths</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;_lblHeightModifier.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="nudHeight.Location" type="System.Drawing.Point, System.Drawing">
     <value>154, 29</value>
@@ -246,7 +294,7 @@
     <value>_tabPaths</value>
   </data>
   <data name="&gt;&gt;nudHeight.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="_tabPaths.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -325,7 +373,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_cbFaceNodes.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>_gbGatherOptions</value>
   </data>
   <data name="&gt;&gt;_cbFaceNodes.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -352,7 +400,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_cbNoNinja.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>_gbGatherOptions</value>
   </data>
   <data name="&gt;&gt;_cbNoNinja.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -379,33 +427,33 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_cbIngoreElites.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>_gbGatherOptions</value>
   </data>
   <data name="&gt;&gt;_cbIngoreElites.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_gbGatherOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>56, 54</value>
   </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_gbGatherOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 89</value>
   </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+  <data name="_gbGatherOptions.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
+  <data name="_gbGatherOptions.Text" xml:space="preserve">
     <value>Gather Options</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
+  <data name="&gt;&gt;_gbGatherOptions.Name" xml:space="preserve">
+    <value>_gbGatherOptions</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+  <data name="&gt;&gt;_gbGatherOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_gbGatherOptions.Parent" xml:space="preserve">
     <value>_tabGather</value>
   </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_gbGatherOptions.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="_cbbMining.AutoSize" type="System.Boolean, mscorlib">
@@ -430,7 +478,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_cbbMining.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>_gbGather</value>
   </data>
   <data name="&gt;&gt;_cbbMining.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -457,33 +505,33 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_cbbHerbalism.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>_gbGather</value>
   </data>
   <data name="&gt;&gt;_cbbHerbalism.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_gbGather.Location" type="System.Drawing.Point, System.Drawing">
     <value>56, 6</value>
   </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_gbGather.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 42</value>
   </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="_gbGather.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
+  <data name="_gbGather.Text" xml:space="preserve">
     <value>Gather</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
+  <data name="&gt;&gt;_gbGather.Name" xml:space="preserve">
+    <value>_gbGather</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;_gbGather.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_gbGather.Parent" xml:space="preserve">
     <value>_tabGather</value>
   </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_gbGather.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="_tbMailAlt.Location" type="System.Drawing.Point, System.Drawing">
@@ -505,7 +553,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_tbMailAlt.Parent" xml:space="preserve">
-    <value>_gbbBagsFull</value>
+    <value>_gbBagsFullOptions</value>
   </data>
   <data name="&gt;&gt;_tbMailAlt.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -532,7 +580,7 @@
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_rbMail.Parent" xml:space="preserve">
-    <value>_gbbBagsFull</value>
+    <value>_gbBagsFullOptions</value>
   </data>
   <data name="&gt;&gt;_rbMail.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -559,7 +607,7 @@
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_rbGuildVault.Parent" xml:space="preserve">
-    <value>_gbbBagsFull</value>
+    <value>_gbBagsFullOptions</value>
   </data>
   <data name="&gt;&gt;_rbGuildVault.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -586,33 +634,33 @@
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_rbHearthAndExit.Parent" xml:space="preserve">
-    <value>_gbbBagsFull</value>
+    <value>_gbBagsFullOptions</value>
   </data>
   <data name="&gt;&gt;_rbHearthAndExit.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="_gbbBagsFull.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_gbBagsFullOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>56, 149</value>
   </data>
-  <data name="_gbbBagsFull.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_gbBagsFullOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 121</value>
   </data>
-  <data name="_gbbBagsFull.TabIndex" type="System.Int32, mscorlib">
+  <data name="_gbBagsFullOptions.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="_gbbBagsFull.Text" xml:space="preserve">
+  <data name="_gbBagsFullOptions.Text" xml:space="preserve">
     <value>Bags Full Options</value>
   </data>
-  <data name="&gt;&gt;_gbbBagsFull.Name" xml:space="preserve">
-    <value>_gbbBagsFull</value>
+  <data name="&gt;&gt;_gbBagsFullOptions.Name" xml:space="preserve">
+    <value>_gbBagsFullOptions</value>
   </data>
-  <data name="&gt;&gt;_gbbBagsFull.Type" xml:space="preserve">
+  <data name="&gt;&gt;_gbBagsFullOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_gbbBagsFull.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_gbBagsFullOptions.Parent" xml:space="preserve">
     <value>_tabGather</value>
   </data>
-  <data name="&gt;&gt;_gbbBagsFull.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_gbBagsFullOptions.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="btnForceVendor.Location" type="System.Drawing.Point, System.Drawing">
@@ -688,7 +736,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_cbRepairFromGuild.Parent" xml:space="preserve">
-    <value>_tbManage</value>
+    <value>_tabManage</value>
   </data>
   <data name="&gt;&gt;_cbRepairFromGuild.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -715,7 +763,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_cbLootMobs.Parent" xml:space="preserve">
-    <value>_tbManage</value>
+    <value>_tabManage</value>
   </data>
   <data name="&gt;&gt;_cbLootMobs.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -742,7 +790,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_cbWaitRezSickness.Parent" xml:space="preserve">
-    <value>_tbManage</value>
+    <value>_tabManage</value>
   </data>
   <data name="&gt;&gt;_cbWaitRezSickness.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -769,7 +817,7 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_cbSpiritRez.Parent" xml:space="preserve">
-    <value>_tbManage</value>
+    <value>_tabManage</value>
   </data>
   <data name="&gt;&gt;_cbSpiritRez.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -790,7 +838,7 @@
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_nudBottingHours.Parent" xml:space="preserve">
-    <value>_tbManage</value>
+    <value>_tabManage</value>
   </data>
   <data name="&gt;&gt;_nudBottingHours.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -817,84 +865,36 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_lbStop.Parent" xml:space="preserve">
-    <value>_tbManage</value>
+    <value>_tabManage</value>
   </data>
   <data name="&gt;&gt;_lbStop.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="_tbMountName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>64, 48</value>
-  </data>
-  <data name="_tbMountName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 20</value>
-  </data>
-  <data name="_tbMountName.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;_tbMountName.Name" xml:space="preserve">
-    <value>_tbMountName</value>
-  </data>
-  <data name="&gt;&gt;_tbMountName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_tbMountName.Parent" xml:space="preserve">
-    <value>_tbManage</value>
-  </data>
-  <data name="&gt;&gt;_tbMountName.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="_lblMountName.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="_lblMountName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 32</value>
-  </data>
-  <data name="_lblMountName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
-  </data>
-  <data name="_lblMountName.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="_lblMountName.Text" xml:space="preserve">
-    <value>Mount Name</value>
-  </data>
-  <data name="&gt;&gt;_lblMountName.Name" xml:space="preserve">
-    <value>_lblMountName</value>
-  </data>
-  <data name="&gt;&gt;_lblMountName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_lblMountName.Parent" xml:space="preserve">
-    <value>_tbManage</value>
-  </data>
-  <data name="&gt;&gt;_lblMountName.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="_tbManage.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_tabManage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="_tbManage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="_tabManage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="_tbManage.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_tabManage.Size" type="System.Drawing.Size, System.Drawing">
     <value>302, 305</value>
   </data>
-  <data name="_tbManage.TabIndex" type="System.Int32, mscorlib">
+  <data name="_tabManage.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="_tbManage.Text" xml:space="preserve">
+  <data name="_tabManage.Text" xml:space="preserve">
     <value>Manage</value>
   </data>
-  <data name="&gt;&gt;_tbManage.Name" xml:space="preserve">
-    <value>_tbManage</value>
+  <data name="&gt;&gt;_tabManage.Name" xml:space="preserve">
+    <value>_tabManage</value>
   </data>
-  <data name="&gt;&gt;_tbManage.Type" xml:space="preserve">
+  <data name="&gt;&gt;_tabManage.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_tbManage.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_tabManage.Parent" xml:space="preserve">
     <value>tabGbConfig</value>
   </data>
-  <data name="&gt;&gt;_tbManage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_tabManage.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="btnUnSelectAllMine.Location" type="System.Drawing.Point, System.Drawing">
@@ -993,34 +993,34 @@
   <data name="&gt;&gt;btnSelectAllHerb.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblCollectOnly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblCollectOnly.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblCollectOnly.Location" type="System.Drawing.Point, System.Drawing">
     <value>74, 20</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblCollectOnly.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 13</value>
   </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblCollectOnly.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
+  <data name="lblCollectOnly.Text" xml:space="preserve">
     <value>Collect only selected ones</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
+  <data name="&gt;&gt;lblCollectOnly.Name" xml:space="preserve">
+    <value>lblCollectOnly</value>
   </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblCollectOnly.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblCollectOnly.Parent" xml:space="preserve">
     <value>_tabSelection</value>
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblCollectOnly.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="clbMinerals.Location" type="System.Drawing.Point, System.Drawing">
@@ -1089,6 +1089,33 @@
   <data name="&gt;&gt;_tabSelection.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="cbDiagnosticLogging.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbDiagnosticLogging.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 159</value>
+  </data>
+  <data name="cbDiagnosticLogging.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 17</value>
+  </data>
+  <data name="cbDiagnosticLogging.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="cbDiagnosticLogging.Text" xml:space="preserve">
+    <value>Diagnostic logging</value>
+  </data>
+  <data name="&gt;&gt;cbDiagnosticLogging.Name" xml:space="preserve">
+    <value>cbDiagnosticLogging</value>
+  </data>
+  <data name="&gt;&gt;cbDiagnosticLogging.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbDiagnosticLogging.Parent" xml:space="preserve">
+    <value>_tabAdvanced</value>
+  </data>
+  <data name="&gt;&gt;cbDiagnosticLogging.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1117,7 +1144,7 @@
     <value>_tabAdvanced</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1147,33 +1174,33 @@
     <value>_tabAdvanced</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 32</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
-  </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="label5.Text" xml:space="preserve">
+  <data name="_lblSeconds.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_lblSeconds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>162, 32</value>
+  </data>
+  <data name="_lblSeconds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="_lblSeconds.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="_lblSeconds.Text" xml:space="preserve">
     <value>seconds</value>
   </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
+  <data name="&gt;&gt;_lblSeconds.Name" xml:space="preserve">
+    <value>_lblSeconds</value>
   </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+  <data name="&gt;&gt;_lblSeconds.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>groupBox3</value>
+  <data name="&gt;&gt;_lblSeconds.Parent" xml:space="preserve">
+    <value>_gbBlacklisting</value>
   </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_lblSeconds.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="_nudBlacklistTimer.Location" type="System.Drawing.Point, System.Drawing">
@@ -1192,61 +1219,61 @@
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_nudBlacklistTimer.Parent" xml:space="preserve">
-    <value>groupBox3</value>
+    <value>_gbBlacklisting</value>
   </data>
   <data name="&gt;&gt;_nudBlacklistTimer.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+  <data name="_lblBlacklistANodeAfter.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_lblBlacklistANodeAfter.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 32</value>
   </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_lblBlacklistANodeAfter.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 13</value>
   </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+  <data name="_lblBlacklistANodeAfter.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
+  <data name="_lblBlacklistANodeAfter.Text" xml:space="preserve">
     <value>Blacklist a node after</value>
   </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
+  <data name="&gt;&gt;_lblBlacklistANodeAfter.Name" xml:space="preserve">
+    <value>_lblBlacklistANodeAfter</value>
   </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+  <data name="&gt;&gt;_lblBlacklistANodeAfter.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>groupBox3</value>
+  <data name="&gt;&gt;_lblBlacklistANodeAfter.Parent" xml:space="preserve">
+    <value>_gbBlacklisting</value>
   </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_lblBlacklistANodeAfter.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_gbBlacklisting.Location" type="System.Drawing.Point, System.Drawing">
     <value>39, 64</value>
   </data>
-  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_gbBlacklisting.Size" type="System.Drawing.Size, System.Drawing">
     <value>227, 79</value>
   </data>
-  <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
+  <data name="_gbBlacklisting.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="groupBox3.Text" xml:space="preserve">
+  <data name="_gbBlacklisting.Text" xml:space="preserve">
     <value>Blacklisting</value>
   </data>
-  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
-    <value>groupBox3</value>
+  <data name="&gt;&gt;_gbBlacklisting.Name" xml:space="preserve">
+    <value>_gbBlacklisting</value>
   </data>
-  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
+  <data name="&gt;&gt;_gbBlacklisting.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_gbBlacklisting.Parent" xml:space="preserve">
     <value>_tabAdvanced</value>
   </data>
-  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;_gbBlacklisting.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="_tabAdvanced.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>

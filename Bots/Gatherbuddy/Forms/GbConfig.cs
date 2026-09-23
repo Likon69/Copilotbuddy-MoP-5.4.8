@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using Styx.Common;
 using Styx.CommonBot;
+using Styx.CommonBot.Profiles;
 using Styx.Helpers;
 using Styx;
 
@@ -50,10 +51,11 @@ namespace Bots.Gatherbuddy.GUI
 			_cbRepairFromGuild.CheckedChanged += (sender, args) => GatherbuddySettings.Instance.RepairFromGuildBank = _cbRepairFromGuild.Checked;
             _cbRandomizeHotspots.CheckedChanged += (sender, args) => GatherbuddySettings.Instance.RandomizeHotspots = _cbRandomizeHotspots.Checked;
             _cbFaceNodes.CheckedChanged += (sender, args) => GatherbuddySettings.Instance.FaceNodes = _cbFaceNodes.Checked;
+            nudRandomizationFactor.ValueChanged += (sender, args) => GatherbuddySettings.Instance.RandomizationFactor = (double)nudRandomizationFactor.Value;
+            cbDiagnosticLogging.CheckedChanged += (sender, args) => GatherbuddySettings.Instance.DiagnosticLogging = cbDiagnosticLogging.Checked;
 
             // LevelBot settings.
             _tbMailAlt.TextChanged += (sender, args) => CharacterSettings.Instance.MailRecipient = _tbMailAlt.Text;
-            _tbMountName.TextChanged += (sender, args) => CharacterSettings.Instance.MountName = _tbMountName.Text;
 
             FormClosing += (sender, args) =>
             {
@@ -62,7 +64,16 @@ namespace Bots.Gatherbuddy.GUI
                 CharacterSettings.Instance.Save();
 
                 if (TreeRoot.IsRunning)
-                    Profile.CurrentProfile = new Profile();
+                {
+                    try
+                    {
+                        Profile.CurrentProfile = new Profile();
+                    }
+                    catch (ProfileException ex)
+                    {
+                        Logging.WriteQuiet("Couldn't load new profile: {0}", ex.Message);
+                    }
+                }
             };
         }
 
@@ -86,8 +97,9 @@ namespace Bots.Gatherbuddy.GUI
             _cbRandomizeHotspots.Checked = gbSettings.RandomizeHotspots;
 			_cbRepairFromGuild.Checked = gbSettings.RepairFromGuildBank;
             _cbFaceNodes.Checked = gbSettings.FaceNodes;
+            nudRandomizationFactor.Value = (decimal)gbSettings.RandomizationFactor;
+            cbDiagnosticLogging.Checked = gbSettings.DiagnosticLogging;
             _tbMailAlt.Text = CharacterSettings.Instance.MailRecipient;
-            _tbMountName.Text = CharacterSettings.Instance.FlyingMountName;
 
 			if (StyxWoW.Me == null)
 				return;

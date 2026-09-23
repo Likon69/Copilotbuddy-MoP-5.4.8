@@ -113,7 +113,7 @@ namespace Bots.DungeonBuddy
                                         (!TimeSinceCombatEndTimer.IsFinished && !Targeting.Instance.FirstUnit.IsTargetingMyPartyMember &&
                                          !Targeting.Instance.FirstUnit.TaggedByMe),
                                         new Sequence(
-                                            new ActionClearPoi("No targets in list1"),
+                                            new ActionClearPoi("No targets in list (pull)"),
                                             new DecoratorContinue(
                                                 ret => Me.CurrentTarget != null,
                                                 new Sequence(
@@ -196,7 +196,7 @@ namespace Bots.DungeonBuddy
                                         Targeting.Instance.FirstUnit == null || Targeting.Instance.FirstUnit.IsDead || BotPoi.Current.AsObject == null ||
                                         !BotPoi.Current.AsObject.IsValid,
                                         new Sequence(
-                                            new ActionClearPoi("No targets in list2"),
+                                            new ActionClearPoi("No targets in list (combat)"),
                                             new DecoratorContinue(
                                                 ret => Me.CurrentTarget != null,
                                                 new Sequence(
