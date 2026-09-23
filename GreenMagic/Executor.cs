@@ -567,7 +567,7 @@ namespace GreenMagic
                 HookTypeInfo matchingHookType = HookableFuncs.FirstOrDefault(hookType => hookType.IdentifierBytesMatch(identifierBytes));
                 if (matchingHookType == null)
                 {
-                    throw new Exception("Could not setup Executor; unknown func passed to hook");
+                    throw new Exception("Could not setup Executor; unknown func passed to hook: " + BitConverter.ToString(_mem.ReadBytes(_originalEndscene, 16)));
                 }
                 identifierBytes = identifierBytes.Take(matchingHookType.CopyAmount).ToArray();
                 if (matchingHookType.CopiedBytesTransformer != null)
@@ -719,7 +719,8 @@ namespace GreenMagic
                 }
             },
             new HookTypeInfo("Nvidia coproc manager", 6, new int[] { 0x55, 0x8B, 0xEC, 0x8B, 0x45, 0x08 }),
-            new HookTypeInfo("New D3D9 (Windows 8)", 7, new int[] { 0x6A, 0x14, 0xB8, -1, -1, -1, -1, 0xE8, -1, -1, -1, -1, 0x8B, 0x75, 0x08 })
+            new HookTypeInfo("New D3D9 (Windows 8)", 7, new int[] { 0x6A, 0x14, 0xB8, -1, -1, -1, -1, 0xE8, -1, -1, -1, -1, 0x8B, 0x75, 0x08 }),
+            new HookTypeInfo("New D3D9 (Windows 10)", 7, new int[] { 0x6A, 0x14, 0xB8, -1, -1, -1, -1, 0xE8, -1, -1, -1, -1, 0x8B, 0x7D, 0x08 })
         };
 
         private int _copyBytes;
