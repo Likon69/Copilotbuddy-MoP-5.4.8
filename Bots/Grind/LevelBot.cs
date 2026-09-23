@@ -1884,11 +1884,6 @@ namespace Bots.Grind
             private static Task<bool> CombatBuffCoroutine() { return Routine.CombatBuffBehavior.ExecuteCoroutine(null); }
             private static Task<bool> CombatOnlyCoroutine() { return Routine.CombatBehavior.ExecuteCoroutine(null); }
 
-            // CombatMainCoroutine (constructor's "method_0") and CombatOutOfCombatCoroutine
-            // ("method_1") are NOT PORTED - hidden async bodies, see the porting report. They are
-            // referenced above (constructor) but intentionally not defined, so the two
-            // CoroutineHookExecutor constructions above fail to resolve.
-
             private readonly CoroutineHookExecutor _combatMain;
             private readonly CoroutineHookExecutor _combatOoc;
             private readonly CoroutineHookExecutor _routineRest;
