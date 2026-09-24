@@ -17,6 +17,7 @@
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>CopilotBuddy.ico</ApplicationIcon>
+    <StartupObject>CopilotBuddy.CustomStartup</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -50,6 +51,19 @@
     <None Include="Lib\FASM.DLL" Link="FASM.DLL" CopyToOutputDirectory="PreserveNewest" />
     <None Include="Lib\Data.bin" Link="Data.bin" CopyToOutputDirectory="PreserveNewest" />
     <None Include="Lib\Navigation.dll" Link="Navigation.dll" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Update="CustomStartup.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="SafeLaunch\PsExec.exe" />
+    <EmbeddedResource Include="SafeLaunch\MiniLoader.exe" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Security.Cryptography;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using GreenMagic.Native;
@@ -39,10 +40,8 @@ namespace GreenMagic
             }
             _random = new Random(BitConverter.ToInt32(seed, 0));
             bool createdNew = false;
-            string currentUserName = Environment.UserDomainName + "\\" + Environment.UserName;
             EventWaitHandleSecurity eventWaitHandleSecurity = new EventWaitHandleSecurity();
-            EventWaitHandleAccessRule eventWaitHandleAccessRule = new EventWaitHandleAccessRule(currentUserName, EventWaitHandleRights.FullControl, AccessControlType.Allow);
-            eventWaitHandleSecurity.AddAccessRule(eventWaitHandleAccessRule);
+            eventWaitHandleSecurity.AddAccessRule(new EventWaitHandleAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), EventWaitHandleRights.FullControl, AccessControlType.Allow));
             _injectionWaitingEventName = "Global\\" + GetRandomGuidString();
             _injectionWaitingEvent = EventWaitHandleAcl.Create(false, EventResetMode.AutoReset, _injectionWaitingEventName, out createdNew, eventWaitHandleSecurity);
             if (!createdNew)
@@ -319,7 +318,7 @@ namespace GreenMagic
             {
                 string randomR32 = GetRandomR32();
                 string randomR16 = GetRandomR16();
-                switch (_random.Next(1, 11))
+                switch (_random.Next(1, 12))
                 {
                     case 1:
                         for (int index = _random.Next(1, 4); index > 0; index--)
@@ -342,20 +341,30 @@ namespace GreenMagic
                         _mem.Asm.AddLine("pop {0}", randomR32);
                         break;
                     case 6:
-                        _mem.Asm.AddLine("or {0}, {0}", randomR32);
-                        _mem.Asm.AddLine("and {0}, {0}", randomR32);
-                        break;
-                    case 7:
                         _mem.Asm.AddLine("lea {0}, [{0}]", randomR32);
                         break;
+                    case 7:
+                        _mem.Asm.AddLine("xchg {0}, {0}", randomR32);
+                        break;
                     case 8:
-                        _mem.Asm.AddLine("sub {0}, 0", randomR32);
+                        _mem.Asm.AddLine("pushfd");
+                        _mem.Asm.AddLine("or {0}, {0}", randomR32);
+                        _mem.Asm.AddLine("popfd");
                         break;
                     case 9:
-                        _mem.Asm.AddLine("add {0}, 0", randomR32);
+                        _mem.Asm.AddLine("pushfd");
+                        _mem.Asm.AddLine("sub {0}, 0", randomR32);
+                        _mem.Asm.AddLine("popfd");
                         break;
                     case 10:
+                        _mem.Asm.AddLine("pushfd");
+                        _mem.Asm.AddLine("add {0}, 0", randomR32);
+                        _mem.Asm.AddLine("popfd");
+                        break;
+                    case 11:
+                        _mem.Asm.AddLine("pushfd");
                         _mem.Asm.AddLine("test {0}, {0}", randomR32);
+                        _mem.Asm.AddLine("popfd");
                         break;
                 }
             }

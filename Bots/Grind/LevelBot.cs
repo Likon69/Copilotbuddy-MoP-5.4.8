@@ -1224,9 +1224,9 @@ namespace Bots.Grind
 
             foreach (WoWItem eq in EquipmentManager.EquipmentSets.SelectMany(s => s.Items))
                 protectedIds.Add(eq.Entry);
-            foreach (WoWInternals.Quest.QuestObjective obj in StyxWoW.Me.QuestLog.GetAllQuests().SelectMany(q => q.GetObjectives()))
+            foreach (Styx.WoWInternals.Quest.QuestObjective obj in StyxWoW.Me.QuestLog.GetAllQuests().SelectMany(q => q.GetObjectives()))
             {
-                if (obj.Type == WoWInternals.Quest.QuestObjectiveType.CollectIntermediateItem || obj.Type == WoWInternals.Quest.QuestObjectiveType.CollectItem)
+                if (obj.Type == Styx.WoWInternals.Quest.QuestObjectiveType.CollectIntermediateItem || obj.Type == Styx.WoWInternals.Quest.QuestObjectiveType.CollectItem)
                     protectedIds.Add(obj.ID);
             }
             uint foodId;
@@ -1240,6 +1240,30 @@ namespace Bots.Grind
             else
                 protectedNames.Add(CharacterSettings.Instance.DrinkName.ToLowerInvariant());
 
+            if (Vendors.OnVendorItems != null)
+            {
+                SellItemsEventArgs sellItemsEventArgs = new SellItemsEventArgs();
+                foreach (Delegate d in Vendors.OnVendorItems.GetInvocationList())
+                {
+                    try
+                    {
+                        ((VendorItemsEventHandler)d)(sellItemsEventArgs);
+                    }
+                    catch
+                    {
+                        sellItemsEventArgs.NameExceptions.Clear();
+                        sellItemsEventArgs.IdExceptions.Clear();
+                        continue;
+                    }
+                    foreach (string name in sellItemsEventArgs.NameExceptions)
+                        protectedNames.Add(name.ToLowerInvariant());
+                    foreach (uint id in sellItemsEventArgs.IdExceptions)
+                        protectedIds.Add(id);
+                    sellItemsEventArgs.NameExceptions.Clear();
+                    sellItemsEventArgs.IdExceptions.Clear();
+                }
+            }
+
             List<WoWItem> itemsToSell = new List<WoWItem>();
             foreach (WoWItem item in StyxWoW.Me.BagItems)
             {
@@ -1249,7 +1273,7 @@ namespace Bots.Grind
                     || item.IsConjured || item.ItemInfo.BeginQuestId != 0 || item.ItemInfo.SellPrice == 0
                     || item.ItemInfo.IsAccountBound || item.ItemInfo.IsBattleNetAccountBound)
                     continue;
-                if ((sellQualities & item.Quality) == 0)
+                if ((sellQualities & (ItemQuality)(1 << (int)item.Quality)) == 0)
                     continue;
                 itemsToSell.Add(item);
             }

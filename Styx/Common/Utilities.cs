@@ -146,5 +146,29 @@ namespace Styx.Common
         {
             return Utilities.GetRelativePath(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), path);
         }
+
+        public static void RetryingFileOperation(Action action, int retries, int delayMs)
+        {
+            for (int i = 0; i < retries; i++)
+            {
+                try
+                {
+                    action();
+                    return;
+                }
+                catch (IOException)
+                {
+                    if (i == retries - 1)
+                        throw;
+                    Thread.Sleep(delayMs);
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    if (i == retries - 1)
+                        throw;
+                    Thread.Sleep(delayMs);
+                }
+            }
+        }
     }
 }
