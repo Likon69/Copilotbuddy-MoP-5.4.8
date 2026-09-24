@@ -34,7 +34,7 @@ namespace Levelbot.Actions.Combat
             string name = Me.CurrentTarget.Name;
             if (Me.CurrentTarget.IsDead)
             {
-                Blacklist.Add(Me.CurrentTarget.CurrentTargetGuid, BlacklistFlags.Pull, TimeSpan.FromMinutes(5.0), "Target is dead");
+                Blacklist.Add(Me.CurrentTargetGuid, BlacklistFlags.Pull, TimeSpan.FromMinutes(5.0), "Target is dead");
                 Me.ClearTarget();
                 return RunStatus.Failure;
             }
@@ -42,7 +42,7 @@ namespace Levelbot.Actions.Combat
             if (currentTarget.TaggedByOther && !currentTarget.TaggedByMe && !Me.GroupInfo.IsInParty && !Me.GroupInfo.IsInRaid)
             {
                 Logging.Write(LevelbotResources.ActionPull_Run__0__is_tagged, name);
-                Blacklist.Add(Me.CurrentTargetGuid, BlacklistFlags.Pull, TimeSpan.FromMinutes(5.0), "Target is tagged by somebody else");
+                Blacklist.Add(Me.CurrentTargetGuid, BlacklistFlags.Pull, TimeSpan.FromSeconds(30.0), "Target is tagged by somebody else");
                 Me.ClearTarget();
                 return RunStatus.Failure;
             }

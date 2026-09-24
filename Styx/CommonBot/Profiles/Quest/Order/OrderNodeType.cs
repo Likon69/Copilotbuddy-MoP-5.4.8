@@ -29,6 +29,7 @@ namespace Styx.CommonBot.Profiles.Quest.Order
         SetTargetingDistance,
         SetUseMount,
         SetLootMobs,
-        SetLootRadius
+        SetLootRadius,
+        SetNavType
     }
 }

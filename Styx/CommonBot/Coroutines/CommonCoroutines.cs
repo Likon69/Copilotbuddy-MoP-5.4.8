@@ -24,9 +24,39 @@ namespace Styx.CommonBot.Coroutines
 
         private static WoWPoint _lastMoveToDestination;
 
+        private static readonly Random _random = new Random();
+
         public static Task SleepForLagDuration()
         {
             return Coroutine.Sleep((int)(StyxWoW.WoWClient.Latency + 100));
+        }
+
+        public static Task SleepForRandomReactionTime()
+        {
+            return Coroutine.Sleep((_random.Next(0, 10) == 0) ? _random.Next(600, 1000) : _random.Next(200, 700));
+        }
+
+        public static Task SleepForRandomUiInteractionTime()
+        {
+            return Coroutine.Sleep((_random.Next(0, 10) == 0) ? _random.Next(1500, 3000) : _random.Next(700, 2000));
+        }
+
+        public static async Task<bool> SummonGroundMount()
+        {
+            if (StyxWoW.Me.Mounted)
+                return true;
+            if (StyxWoW.Me.InVehicle || !Mount.UseMount || !Mount.CanMount())
+                return false;
+            if (string.IsNullOrEmpty(Helpers.CharacterSettings.Instance.MountName))
+                return false;
+
+            Mount.MountUp(() => StyxWoW.Me.Location);
+            await Coroutine.Yield();
+            if (!StyxWoW.Me.Mounted)
+            {
+                await Coroutine.Wait(3000, () => StyxWoW.Me.Mounted || StyxWoW.Me.Combat);
+            }
+            return StyxWoW.Me.Mounted;
         }
 
         public static Task<bool> WaitForLuaEvent(string eventName, int maxWaitMs, Func<bool> alternateCondition = null)

@@ -206,7 +206,7 @@ namespace Styx.Pathing
             NavigationProvider provider = NavigationProvider as NavigationProvider;
             if (provider != null)
             {
-                return provider.PathDistance(from, to, float.MaxValue);
+                return provider.PathDistance(from, to, maxDistance);
             }
 
             WoWPoint[] path = GeneratePath(from, to);

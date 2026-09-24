@@ -108,6 +108,9 @@ namespace Styx.CommonBot.Profiles.Quest.Order
                     return OrderNodeType.SetLootMobs;
                 case "lootradius":
                     return OrderNodeType.SetLootRadius;
+                case "navtype":
+                case "setnavtype":
+                    return OrderNodeType.SetNavType;
             }
 
             return null;
@@ -142,7 +145,8 @@ namespace Styx.CommonBot.Profiles.Quest.Order
                                                                                         {OrderNodeType.SetTargetingDistance, SetTargetingDistanceNode.FromXml},
                                                                                         {OrderNodeType.SetUseMount, SetUseMountNode.FromXml},
                                                                                         {OrderNodeType.SetLootMobs, SetLootMobsNode.FromXml},
-                                                                                        {OrderNodeType.SetLootRadius, SetLootRadiusNode.FromXml}
+                                                                                        {OrderNodeType.SetLootRadius, SetLootRadiusNode.FromXml},
+                                                                                        {OrderNodeType.SetNavType, SetNavTypeNode.FromXml}
                                                                                     };
     }
 }

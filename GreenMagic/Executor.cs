@@ -43,19 +43,19 @@ namespace GreenMagic
             EventWaitHandleSecurity eventWaitHandleSecurity = new EventWaitHandleSecurity();
             EventWaitHandleAccessRule eventWaitHandleAccessRule = new EventWaitHandleAccessRule(currentUserName, EventWaitHandleRights.FullControl, AccessControlType.Allow);
             eventWaitHandleSecurity.AddAccessRule(eventWaitHandleAccessRule);
-            _injectionWaitingEventName = "Global\\" + GetRandomString(16, 16);
+            _injectionWaitingEventName = "Global\\" + GetRandomGuidString();
             _injectionWaitingEvent = EventWaitHandleAcl.Create(false, EventResetMode.AutoReset, _injectionWaitingEventName, out createdNew, eventWaitHandleSecurity);
             if (!createdNew)
             {
                 throw new Exception("You should never see this message but the event was opened instead of created! That's bad!");
             }
-            _injectionWaitingCheckReadyEventName = "Global\\" + GetRandomString(16, 16);
+            _injectionWaitingCheckReadyEventName = "Global\\" + GetRandomGuidString();
             _injectionContinueEvent = EventWaitHandleAcl.Create(false, EventResetMode.AutoReset, _injectionWaitingCheckReadyEventName, out createdNew, eventWaitHandleSecurity);
             if (!createdNew)
             {
                 throw new Exception("You should never see this message but the event was opened instead of created! That's bad!");
             }
-            _injectionFinishedEventName = "Global\\" + GetRandomString(16, 16);
+            _injectionFinishedEventName = "Global\\" + GetRandomGuidString();
             _injectionFinishedEvent = EventWaitHandleAcl.Create(false, EventResetMode.AutoReset, _injectionFinishedEventName, out createdNew, eventWaitHandleSecurity);
             if (!createdNew)
             {
@@ -319,7 +319,7 @@ namespace GreenMagic
             {
                 string randomR32 = GetRandomR32();
                 string randomR16 = GetRandomR16();
-                switch (_random.Next(1, 6))
+                switch (_random.Next(1, 11))
                 {
                     case 1:
                         for (int index = _random.Next(1, 4); index > 0; index--)
@@ -341,6 +341,22 @@ namespace GreenMagic
                         _mem.Asm.AddLine("push {0}", randomR32);
                         _mem.Asm.AddLine("pop {0}", randomR32);
                         break;
+                    case 6:
+                        _mem.Asm.AddLine("or {0}, {0}", randomR32);
+                        _mem.Asm.AddLine("and {0}, {0}", randomR32);
+                        break;
+                    case 7:
+                        _mem.Asm.AddLine("lea {0}, [{0}]", randomR32);
+                        break;
+                    case 8:
+                        _mem.Asm.AddLine("sub {0}, 0", randomR32);
+                        break;
+                    case 9:
+                        _mem.Asm.AddLine("add {0}, 0", randomR32);
+                        break;
+                    case 10:
+                        _mem.Asm.AddLine("test {0}, {0}", randomR32);
+                        break;
                 }
             }
         }
@@ -352,7 +368,7 @@ namespace GreenMagic
             {
                 throw new Exception("Process is not open for memory manipulation");
             }
-            int pageSize = _clearBytes.Length;
+            int pageSize = _clearBytes.Length + _random.Next(0, 16) * 256;
             _waitForSingleObject = _mem.GetProcAddress("kernel32.dll", "WaitForSingleObject");
             _createEventA = _mem.GetProcAddress("kernel32.dll", "CreateEventA");
             _resetEvent = _mem.GetProcAddress("kernel32.dll", "ResetEvent");
@@ -653,6 +669,27 @@ namespace GreenMagic
             {
                 stringBuilder.Append(charPool[_random.Next(charPool.Length)]);
             }
+            return stringBuilder.ToString();
+        }
+
+        protected string GetRandomGuidString()
+        {
+            char[] hexPool = "0123456789abcdef".ToCharArray();
+            StringBuilder stringBuilder = new StringBuilder(38);
+            int[] groupLengths = new int[] { 8, 4, 4, 4, 12 };
+            stringBuilder.Append('{');
+            for (int groupIndex = 0; groupIndex < groupLengths.Length; groupIndex++)
+            {
+                if (groupIndex > 0)
+                {
+                    stringBuilder.Append('-');
+                }
+                for (int charIndex = 0; charIndex < groupLengths[groupIndex]; charIndex++)
+                {
+                    stringBuilder.Append(hexPool[_random.Next(hexPool.Length)]);
+                }
+            }
+            stringBuilder.Append('}');
             return stringBuilder.ToString();
         }
 

@@ -22,6 +22,7 @@ using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
 using Styx.CommonBot.Inventory;
 using Styx.CommonBot.POI;
+using Styx.CommonBot.ObjectDatabase;
 using Styx.CommonBot.Profiles;
 using Styx.CommonBot.Routines;
 using Styx.Helpers;
@@ -1009,7 +1010,8 @@ namespace Bots.Grind
                 Vendors.ForceMail = false;
                 return false;
             }
-            if (ProfileManager.CurrentProfile.MailboxManager.GetClosestMailbox() == null)
+            if (ProfileManager.CurrentProfile.MailboxManager.GetClosestMailbox() == null
+                && Query.GetNearestMailbox(StyxWoW.Me.MapId, StyxWoW.Me.Location) == null)
             {
                 Logging.WriteDiagnostic("Cannot mail because no nearby mailbox could be found");
                 Vendors.ForceMail = false;
@@ -1193,12 +1195,74 @@ namespace Bots.Grind
             return await VendorMainHookExecutor.ExecuteCoroutine();
         }
 
+        private static readonly Random _vendorRandom = new Random();
+
         private static async Task<bool> SellAllItemsCoroutine()
         {
-            uint freeSlotsBefore = StyxWoW.Me.FreeNormalBagSlots;
-            Vendors.SellAllItems();
-            await Coroutine.Wait(15000, () => StyxWoW.Me.FreeNormalBagSlots > freeSlotsBefore);
-            await Coroutine.Sleep(1000);
+            MerchantFrame merchant = MerchantFrame.Instance;
+            if (!merchant.IsVisible)
+            {
+                Vendors.SellAllItems();
+                return true;
+            }
+
+            Profile currentProfile = ProfileManager.CurrentProfile;
+            ItemQuality sellQualities = ItemQuality.None;
+            if (currentProfile != null)
+            {
+                if (currentProfile.SellGrey) sellQualities |= ItemQuality.Poor;
+                if (currentProfile.SellWhite) sellQualities |= ItemQuality.Common;
+                if (currentProfile.SellGreen) sellQualities |= ItemQuality.Uncommon;
+                if (currentProfile.SellBlue) sellQualities |= ItemQuality.Rare;
+                if (currentProfile.SellPurple) sellQualities |= ItemQuality.Epic;
+            }
+            if (sellQualities == ItemQuality.None)
+                return true;
+
+            HashSet<string> protectedNames = new HashSet<string>(ProtectedItemsManager.GetAllItemNames().Select(n => n.ToLowerInvariant()));
+            HashSet<uint> protectedIds = new HashSet<uint>(ProtectedItemsManager.GetAllItemIds());
+
+            foreach (WoWItem eq in EquipmentManager.EquipmentSets.SelectMany(s => s.Items))
+                protectedIds.Add(eq.Entry);
+            foreach (WoWInternals.Quest.QuestObjective obj in StyxWoW.Me.QuestLog.GetAllQuests().SelectMany(q => q.GetObjectives()))
+            {
+                if (obj.Type == WoWInternals.Quest.QuestObjectiveType.CollectIntermediateItem || obj.Type == WoWInternals.Quest.QuestObjectiveType.CollectItem)
+                    protectedIds.Add(obj.ID);
+            }
+            uint foodId;
+            if (uint.TryParse(CharacterSettings.Instance.FoodName, out foodId))
+                protectedIds.Add(foodId);
+            else
+                protectedNames.Add(CharacterSettings.Instance.FoodName.ToLowerInvariant());
+            uint drinkId;
+            if (uint.TryParse(CharacterSettings.Instance.DrinkName, out drinkId))
+                protectedIds.Add(drinkId);
+            else
+                protectedNames.Add(CharacterSettings.Instance.DrinkName.ToLowerInvariant());
+
+            List<WoWItem> itemsToSell = new List<WoWItem>();
+            foreach (WoWItem item in StyxWoW.Me.BagItems)
+            {
+                if (protectedIds.Contains(item.Entry) || protectedNames.Contains(item.Name.ToLowerInvariant()))
+                    continue;
+                if (item.ItemInfo.Bond == WoWItemBondType.Quest || item.ItemInfo.ItemClass == WoWItemClass.Key
+                    || item.IsConjured || item.ItemInfo.BeginQuestId != 0 || item.ItemInfo.SellPrice == 0
+                    || item.ItemInfo.IsAccountBound || item.ItemInfo.IsBattleNetAccountBound)
+                    continue;
+                if ((sellQualities & item.Quality) == 0)
+                    continue;
+                itemsToSell.Add(item);
+            }
+
+            foreach (WoWItem item in itemsToSell)
+            {
+                if (!merchant.IsVisible)
+                    break;
+                merchant.SellItem(item);
+                await Coroutine.Sleep(_vendorRandom.Next(180, 650));
+            }
+            await Coroutine.Sleep(_vendorRandom.Next(400, 900));
+            Vendors.ForceSell = false;
             return true;
         }
 
@@ -1429,8 +1493,18 @@ namespace Bots.Grind
 
             if (NeedsToMail())
             {
-                BotPoi.Current = new BotPoi(ProfileManager.CurrentProfile.MailboxManager.GetClosestMailbox());
-                return true;
+                Mailbox closestMailbox = ProfileManager.CurrentProfile.MailboxManager.GetClosestMailbox();
+                if (closestMailbox == null)
+                {
+                    MailboxResult queryMailbox = Query.GetNearestMailbox(StyxWoW.Me.MapId, StyxWoW.Me.Location);
+                    if (queryMailbox != null)
+                        closestMailbox = new Mailbox(queryMailbox.Location);
+                }
+                if (closestMailbox != null)
+                {
+                    BotPoi.Current = new BotPoi(closestMailbox);
+                    return true;
+                }
             }
 
             PoiType? sellOrRepair = NeedsToSell() ? PoiType.Sell : (NeedsToRepair() ? PoiType.Repair : (PoiType?)null);

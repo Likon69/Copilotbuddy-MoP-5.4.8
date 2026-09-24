@@ -1714,6 +1714,11 @@ namespace Styx.WoWInternals.WoWObjects
             get { return HasFlag(UnitFlags.PlayerControlled); }
         }
 
+        public bool IsEvadeRunningBack
+        {
+            get { return HasFlag(UnitFlags.EvadeRunningBack); }
+        }
+
         public bool IsTagged
         {
             get { return HasFlag(UnitDynamicFlags.TaggedByOther); }

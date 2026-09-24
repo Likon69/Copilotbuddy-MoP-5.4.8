@@ -215,8 +215,9 @@ namespace Styx.Pathing
 					pathFindResult.End,
 					MeshNavigator.GetTimeString(pathFindResult.Elapsed)
 				});
+				return MoveResult.PathGenerationFailed;
 			}
-			else if (pathFindResult.Elapsed.TotalMilliseconds > 50.0)
+			if (pathFindResult.Elapsed.TotalMilliseconds > 50.0)
 			{
 				Styx.Common.Logging.WriteDiagnostic("Successfully generated path from {0} to {1} in {2}", new object[]
 				{
@@ -747,6 +748,8 @@ namespace Styx.Pathing
 			{
 				if (++path.Index >= path.Path.Points.Length || (path.Path.Flags[path.Index - 1] & StraightPathFlags.OffmeshConnection) != 0)
 				{
+					if (path.Index >= path.Path.Points.Length && path.Path.IsPartialPath)
+						return MoveResult.Failed;
 					return MoveResult.Moved;
 				}
 				this.StuckHandler.Reset();

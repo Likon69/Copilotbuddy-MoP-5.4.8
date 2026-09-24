@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Styx.Common;
+using Styx.Common.Helpers;
 using Styx.CommonBot.AreaManagement;
 using Styx.CommonBot.POI;
 using Styx.CommonBot.Profiles;
@@ -32,6 +33,8 @@ namespace Styx.CommonBot
         private bool _temporarilyIgnoreEventSettings;
 
         private bool _includeWorldPlayers = true;
+
+        private static readonly WaitTimer _mountedGracePeriod = new WaitTimer(TimeSpan.FromSeconds(4.0));
 
         private TimeCachedValue<List<Styx.WoWInternals.Quest.QuestObjective>> _questObjectivesCache;
 
@@ -596,6 +599,12 @@ namespace Styx.CommonBot
                 return true;
             }
 
+            if (unit.IsEvadeRunningBack)
+            {
+                LogRemoval(obj, "Evade running back");
+                return true;
+            }
+
             WoWPoint location = unit.Location;
 
             if (!isInCombat && BlackspotManager.IsBlackspotted(location, 0f, BlackspotQueryFlags.All))
@@ -638,6 +647,9 @@ namespace Styx.CommonBot
             bool isFlying = StyxWoW.Me.IsFlying;
             WoWUnit activeMover = WoWMovement.ActiveMover;
             bool isMoving = activeMover != null && activeMover.IsMoving;
+            if (mounted && isMoving)
+                _mountedGracePeriod.Reset();
+            bool skipNonPriority = (mounted && isMoving) || !_mountedGracePeriod.IsFinished;
             Profile currentProfile = ProfileManager.CurrentProfile;
 
             HashSet<uint> factionIds = new HashSet<uint>();
@@ -700,7 +712,7 @@ namespace Styx.CommonBot
                         continue;
                     }
 
-                    if ((mobIds.Contains((int)unit.Entry) || factionIds.Contains(unit.FactionId) || !mounted || !isMoving
+                    if ((mobIds.Contains((int)unit.Entry) || factionIds.Contains(unit.FactionId) || !skipNonPriority
                             || (GlobalSettings.Instance.KillBetweenHotspots && unit.Difficulty != DifficultyColor.Gray))
                         && !unit.IsCritter)
                     {

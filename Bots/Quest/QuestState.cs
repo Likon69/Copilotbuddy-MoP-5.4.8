@@ -35,6 +35,13 @@ namespace Bots.Quest
 				return;
 			}
 
+			if (Order.CurrentBehavior != null)
+			{
+				Order.CurrentBehavior.OnFinished();
+				Order.CurrentBehavior.Dispose();
+				Order.CurrentBehavior = null;
+			}
+
 			Order.Nodes = new OrderNodeCollection(profile.QuestOrder.Count);
 			Order.Nodes.AddRange(profile.QuestOrder);
 			Order.Nodes.IgnoreCheckpoints = profile.QuestOrder.IgnoreCheckpoints;
@@ -44,7 +51,6 @@ namespace Bots.Quest
 
 			ObjectManager.Update();
 			Order.UpdateNodes();
-			Order.CurrentBehavior = null;
 		}
 
 		public QuestOrder.QuestOrder Order { get; private set; }

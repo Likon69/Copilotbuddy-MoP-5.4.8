@@ -24,6 +24,7 @@ namespace Styx
         Sitting = 0x1,
         Influenced = 0x4,
         PlayerControlled = 0x8,
+        EvadeRunningBack = 0x10,
         Preparation = 0x20,
         PlusMob = 0x40,
         NotAttackable = 0x100,

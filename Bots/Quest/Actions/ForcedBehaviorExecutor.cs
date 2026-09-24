@@ -486,6 +486,14 @@ namespace Bots.Quest.Actions
 						Logging.WriteDiagnostic("LootRadius setting of the profile has been changed to {0}", setLootRadius.LootRadius);
 					});
 					break;
+				case OrderNodeType.SetNavType:
+					SetNavTypeNode setNavType = (SetNavTypeNode)node;
+					behavior = new ForcedSingleton(delegate
+					{
+						Styx.CommonBot.Vendors.NavType = setNavType.NavType;
+						Logging.WriteDiagnostic("NavType setting has been changed to {0}", setNavType.NavType);
+					});
+					break;
 				default:
 					behavior = null;
 					break;
