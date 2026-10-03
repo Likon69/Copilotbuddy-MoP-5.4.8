@@ -57,7 +57,7 @@ namespace Bots.Quest
 		private static bool FindBestHeightOfPool(Vector3 myLoc, Vector3 endLoc, IList<float> heightPool, out float height)
 		{
 			height = 0f;
-			if (heightPool.Count <= 0)
+			if (heightPool == null || heightPool.Count <= 0)
 				return false;
 
 			float bestHeightDist = float.MaxValue;

@@ -21,7 +21,13 @@ namespace Styx.Common
 
         private void Load(params Assembly[] assemblies)
         {
-            foreach (Type t in assemblies.SelectMany(asm => asm.GetTypes().Where(t => !t.IsAbstract && (t.IsAssignableFrom(typeof(T)) || t.IsSubclassOf(typeof(T)) || t.GetInterfaces().Any(i => i == typeof(T))))))
+            foreach (Type t in assemblies.SelectMany(asm =>
+            {
+                Type[] types;
+                try { types = asm.GetTypes(); }
+                catch (System.Reflection.ReflectionTypeLoadException ex) { types = ex.Types.Where(t => t != null).ToArray(); }
+                return types.Where(t => !t.IsAbstract && (t.IsAssignableFrom(typeof(T)) || t.IsSubclassOf(typeof(T)) || t.GetInterfaces().Any(i => i == typeof(T))));
+            }))
             {
                 // If we already have a class of this type, ignore it.
                 if (this.Any(type =>

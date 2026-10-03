@@ -127,7 +127,7 @@ namespace Styx.Pathing
 					{
 						if (Flightor._indoorLandingSpot.DistanceSqr(myLoc) < 16f)
 						{
-							IEnumerable<float> enumerable = Navigator.FindHeights(StyxWoW.Me.X, StyxWoW.Me.Y).Where(h => h <= StyxWoW.Me.Z);
+							IEnumerable<float> enumerable = (Navigator.FindHeights(StyxWoW.Me.X, StyxWoW.Me.Y) ?? new List<float>()).Where(h => h <= StyxWoW.Me.Z);
 							float num2 = enumerable.OrderByDescending(h => h).FirstOrDefault();
 							WoWPoint woWPoint2 = new WoWPoint(StyxWoW.Me.X, StyxWoW.Me.Y, num2);
 							if (Math.Abs(num2 - Flightor._indoorLandingSpot.Z) < 3f && Navigator.CanNavigateWithin(Flightor._indoorLandingSpot, woWPoint2, 5f))
@@ -162,7 +162,7 @@ namespace Styx.Pathing
 								for (int i = 0; i < 360; i += 90)
 								{
 									WoWPoint testPoint = Styx.Helpers.WoWMathHelper.GetPointAt(destination, (float)num4, Styx.Helpers.WoWMathHelper.DegreesToRadians((float)i), 0f);
-									float num5 = Navigator.FindHeights(testPoint.X, testPoint.Y)
+									float num5 = (Navigator.FindHeights(testPoint.X, testPoint.Y) ?? new List<float>())
 										.OrderBy(h => Math.Abs(h - testPoint.Z))
 										.FirstOrDefault(h =>
 										{
@@ -199,7 +199,7 @@ namespace Styx.Pathing
 						}
 						float x = myLoc.X;
 						float y = myLoc.Y;
-						IEnumerable<float> enumerable4 = Navigator.FindHeights(myLoc.X, myLoc.Y).Where(h => h <= myLoc.Z);
+						IEnumerable<float> enumerable4 = (Navigator.FindHeights(myLoc.X, myLoc.Y) ?? new List<float>()).Where(h => h <= myLoc.Z);
 						WoWPoint woWPoint4 = new WoWPoint(x, y, enumerable4.OrderBy(h => myLoc.Z - h).FirstOrDefault());
 						if (Navigator.CanNavigateWithin(woWPoint4, destination, Navigator.PathPrecision))
 						{
@@ -266,7 +266,7 @@ namespace Styx.Pathing
 						for (int k = 0; k < 360; k += 90)
 						{
 							WoWPoint testPoint2 = Styx.Helpers.WoWMathHelper.GetPointAt(myLoc, (float)num7, Styx.Helpers.WoWMathHelper.DegreesToRadians((float)k), 0f);
-							float num8 = Navigator.FindHeights(testPoint2.X, testPoint2.Y)
+							float num8 = (Navigator.FindHeights(testPoint2.X, testPoint2.Y) ?? new List<float>())
 								.OrderBy(h => Math.Abs(h - testPoint2.Z))
 								.FirstOrDefault(h =>
 								{

@@ -287,7 +287,7 @@ namespace Bots.BGBuddy
 
                 var zValues = Navigator.FindHeights(endLocation.X, endLocation.Y);
 
-                if (zValues.Count == 0)
+                if (zValues == null || zValues.Count == 0)
                     continue;
 
                 var newZ = zValues.OrderBy(v => Math.Abs(v - endLocation.Z)).First();

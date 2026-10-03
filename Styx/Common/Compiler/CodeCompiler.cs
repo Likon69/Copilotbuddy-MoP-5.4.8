@@ -92,6 +92,7 @@ namespace Styx.Common.Compiler
             }
 
             AddReference(Path.Combine(Utilities.AssemblyDirectory, "Tripper.Tools.dll"));
+            AddReference(Path.Combine(Utilities.AssemblyDirectory, "System.Data.SQLite.dll"));
 
             string trustedPlatformAssemblies = AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") as string;
             if (trustedPlatformAssemblies != null)

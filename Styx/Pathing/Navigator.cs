@@ -285,7 +285,7 @@ namespace Styx.Pathing
         public static bool FindHeight(float x, float y, out float z)
         {
             List<float> heights = FindHeights(x, y);
-            if (heights.Count == 0)
+            if (heights == null || heights.Count == 0)
             {
                 z = 0;
                 return false;

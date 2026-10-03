@@ -136,7 +136,7 @@ namespace Styx.CommonBot.Coroutines
                         }
 
                         List<float> heights = Navigator.FindHeights(currentPos.X, currentPos.Y);
-                        WoWPoint underneathSpot = heights
+                        WoWPoint underneathSpot = (heights ?? new List<float>())
                             .Select(h => new WoWPoint(currentPos.X, currentPos.Y, h))
                             .OrderBy(p => Math.Abs(p.Z - currentPos.Z))
                             .FirstOrDefault(p => GameWorld.TraceLine(p.Add(0f, 0f, 2f), p.Add(0f, 0f, -2f), TraceLineHitFlags.WmoCollision | TraceLineHitFlags.Terrain));

@@ -199,6 +199,9 @@ namespace Bots.Professionbuddy
 
 		private static Composite FromXml(XElement xml, Composite comp)
 		{
+			if (ProfessionbuddyBot.Instance.PBComponents == null)
+				return comp;
+
 			var pbComponentTypes = (from pbComponent in ProfessionbuddyBot.Instance.PBComponents
 				select new {Type = pbComponent.GetType(), EleAttr = pbComponent.GetType().GetCustomAttribute<PBXmlElementAttribute>()}
 				into t

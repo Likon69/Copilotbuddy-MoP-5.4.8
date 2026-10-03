@@ -761,7 +761,11 @@ namespace Bots.Professionbuddy
 			bool codeIsModified = DynamicCodeCompiler.CodeIsModified;
 			try
 			{
-				return (from type in AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes())
+				return (from type in AppDomain.CurrentDomain.GetAssemblies().SelectMany(a =>
+					{
+						try { return a.GetTypes(); }
+						catch (System.Reflection.ReflectionTypeLoadException ex) { return ex.Types.Where(t => t != null); }
+					})
 					where typeof(IPBComponent).IsAssignableFrom(type) && !type.IsAbstract
 					select (IPBComponent)Activator.CreateInstance(type)).ToArray();
 			}

@@ -29,7 +29,7 @@ namespace Bots.ArchaeologyBuddy
             string ZoneID = StyxWoW.Me.ZoneId.ToString();
             string ContinentID = StyxWoW.Me.MapId.ToString();
             string OutDoors = gameObject.IsOutdoors ? "1" : "0";
-            string HigherZExists = Navigator.FindHeights(gameObject.X, gameObject.Y).Any(p => p > gameObject.Z + 3) ? "1" : "0";
+            string HigherZExists = (Navigator.FindHeights(gameObject.X, gameObject.Y)?.Any(p => p > gameObject.Z + 3) ?? false) ? "1" : "0";
             string Type = "";
             switch (gameObject.Entry)
             {

@@ -468,7 +468,8 @@ namespace CopilotBuddy
             {
                 DefaultExt = ".xml",
                 Filter = "Profile XML|*.xml",
-                Title = Globalization.LoadAHonorbuddyProfile
+                Title = Globalization.LoadAHonorbuddyProfile,
+                InitialDirectory = Path.Combine(Utilities.AssemblyDirectory, "Default Profiles")
             };
 
             if (ofd.ShowDialog() == true)

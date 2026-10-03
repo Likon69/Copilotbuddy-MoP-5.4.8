@@ -17,7 +17,7 @@ namespace Styx
     {
         private Dictionary<int, Spell> _spellStrings;
 
-        private static string FilePath = Path.Combine(Application.StartupPath, @"Spells.bin");
+        private static string FilePath = Path.Combine(Utilities.AssemblyDirectory, @"Spells.bin");
 
         public static DbHelper Instance { get; private set; }
 

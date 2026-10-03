@@ -17,7 +17,7 @@ namespace Styx.CommonBot.Profiles
                 case "findlowest":
                 case "findhighest":
                     List<float> heights = Navigator.FindHeights(x, y);
-                    if (heights.Count > 0)
+                    if (heights != null && heights.Count > 0)
                     {
                         val = lower == "findlowest" ? heights.Min() : heights.Max();
                         return true;

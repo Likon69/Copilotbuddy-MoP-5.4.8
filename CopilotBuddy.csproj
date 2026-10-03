@@ -111,4 +111,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <Target Name="CopySQLiteInterop" AfterTargets="Build">
+    <Copy SourceFiles="$(OutputPath)runtimes\win-x86\native\SQLite.Interop.dll" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
+  </Target>
+
 </Project>

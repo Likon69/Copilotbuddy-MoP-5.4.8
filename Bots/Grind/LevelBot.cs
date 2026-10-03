@@ -1939,7 +1939,10 @@ namespace Bots.Grind
 
                 foreach (WoWPoint candidate in candidates)
                 {
-                    float height = Navigator.FindHeights(candidate.X, candidate.Y).OrderBy(h => Math.Abs(h - candidate.Z)).FirstOrDefault();
+                    List<float> heights = Navigator.FindHeights(candidate.X, candidate.Y);
+                    if (heights == null || heights.Count == 0)
+                        continue;
+                    float height = heights.OrderBy(h => Math.Abs(h - candidate.Z)).FirstOrDefault();
                     if (height != 0f)
                     {
                         var groundedCandidate = new WoWPoint(candidate.X, candidate.Y, height);
