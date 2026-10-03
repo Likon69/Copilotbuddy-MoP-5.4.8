@@ -414,7 +414,7 @@ namespace Tripper.Navigation
 				}
 				else
 				{
-					this.FixPathWalkabilityOnly(ref points, ref polygons, ref flags, 2f);
+					this.FixPathWalkabilityOnly(ref points, ref polygons, ref flags, 0f);
 				}
 
 				for (int i = 0; i < points.Length; i++)
