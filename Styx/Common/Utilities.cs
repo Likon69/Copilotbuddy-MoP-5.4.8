@@ -144,7 +144,7 @@ namespace Styx.Common
 
         public static string GetRelativePath(string path)
         {
-            return Utilities.GetRelativePath(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), path);
+            return Utilities.GetRelativePath(Utilities.AssemblyDirectory, path);
         }
 
         public static void RetryingFileOperation(Action action, int retries, int delayMs)

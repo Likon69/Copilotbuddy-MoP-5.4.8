@@ -49,7 +49,7 @@ namespace Styx.Helpers
         {
             get
             {
-                string ret = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Settings");
+                string ret = Path.Combine(Utilities.AssemblyDirectory, "Settings");
                 if (!Directory.Exists(ret))
                 {
                     Directory.CreateDirectory(ret);
@@ -64,7 +64,7 @@ namespace Styx.Helpers
             {
                 try
                 {
-                    string fet = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Settings");
+                    string fet = Path.Combine(Utilities.AssemblyDirectory, "Settings");
                     string ret = Path.Combine(Path.Combine(fet, StyxWoW.Me.RealmName), StyxWoW.Me.Name);
                     if (!Directory.Exists(ret))
                     {
@@ -75,7 +75,7 @@ namespace Styx.Helpers
                 catch (Exception ex)
                 {
                     Logging.WriteException(ex);
-                    return Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Settings");
+                    return Path.Combine(Utilities.AssemblyDirectory, "Settings");
                 }
             }
         }
