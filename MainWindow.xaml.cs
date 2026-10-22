@@ -30,10 +30,15 @@ namespace CopilotBuddy
 {
     public partial class MainWindow : MetroWindow
     {
+        // Bot version, shown in the title bar and in the log. Mirrored by FileVersion in
+        // CopilotBuddy.csproj; AssemblyVersion cannot be used, setting it crashes BAML on .NET 10.
+        private const string BotVersion = "1.0.0.0";
 
         public MainWindow()
         {
             InitializeComponent();
+
+            Title = "CopilotBuddy v" + BotVersion;
 
             StyxWoW.InitOffsets();
 
@@ -50,7 +55,7 @@ namespace CopilotBuddy
                 return;
             }
 
-            Logging.Write("CopilotBuddy v" + Assembly.GetEntryAssembly().GetName().Version + " started.");
+            Logging.Write("CopilotBuddy v{0} started. Original Honorbuddy by Apoc, raphus, highvoltz, bobby53, xanathos, chinajade, Natfoth. Ported to MoP 5.4.8 by Likon69.", BotVersion);
 
             DevToolsWindow.InstallConsoleKeybind();
 
@@ -86,7 +91,7 @@ namespace CopilotBuddy
                     SetFormLocation();
                     HotkeysManager.Initialize(StyxWoW.Memory.Process.MainWindowHandle);
 
-                    Logging.Write("CopilotBuddy v{0} started!", Assembly.GetEntryAssembly().GetName().Version);
+                    Logging.Write("CopilotBuddy v{0} started!", BotVersion);
                     Logging.WriteDiagnostic("Using WoW with process ID {0}", StyxWoW.Memory.Process.Id);
                     Logging.WriteDiagnostic("Platform: {0}", Environment.OSVersion);
                     Logging.WriteDiagnostic("Executable Path: {0}", Assembly.GetEntryAssembly().Location);
