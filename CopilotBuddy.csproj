@@ -18,6 +18,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>CopilotBuddy.ico</ApplicationIcon>
     <StartupObject>CopilotBuddy.CustomStartup</StartupObject>
+    <!-- FileVersion = right-click Properties → Details. AssemblyVersion intentionally omitted (BAML crash on .NET 10) -->
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
